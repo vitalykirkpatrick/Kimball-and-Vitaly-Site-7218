@@ -10,12 +10,12 @@ import ImageModal from '../components/ImageModal';
 import Footer from '../components/Footer';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen } = FiIcons;
+const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiBook } = FiIcons;
 
 const Home = () => {
   const [showSignup, setShowSignup] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  
+
   const heartColors = [
     'text-red-500',
     'text-orange-500',
@@ -47,13 +47,8 @@ const Home = () => {
         {heartColors.map((color, index) => (
           <motion.div
             key={index}
-            className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${
-              index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)
-            } w-16 h-16 ${color} opacity-20`}
-            animate={{
-              rotate: [0, 10, 0, -10, 0],
-              y: [0, -10, 0, 10, 0]
-            }}
+            className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
+            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 15 + index * 2 }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -65,10 +60,7 @@ const Home = () => {
         {/* Floating flowers */}
         <motion.div
           className="absolute top-60 left-1/4 w-20 h-20 opacity-30"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
           transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
@@ -76,10 +68,7 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-40 right-1/5 w-16 h-16 opacity-20"
-          animate={{
-            rotate: -360,
-            scale: [1, 0.9, 1, 1.1, 1]
-          }}
+          animate={{ rotate: -360, scale: [1, 0.9, 1, 1.1, 1] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
           <div className="text-4xl">🌺</div>
@@ -88,10 +77,7 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute top-1/4 right-10 w-16 h-24 opacity-30"
-          animate={{
-            y: [0, -20, 0, -10, 0],
-            rotate: [0, 5, 0, -5, 0]
-          }}
+          animate={{ y: [0, -20, 0, -10, 0], rotate: [0, 5, 0, -5, 0] }}
           transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
@@ -114,10 +100,7 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-1/3 left-16 w-20 h-30 opacity-20"
-          animate={{
-            y: [0, -15, 0, -10, 0],
-            rotate: [0, 3, 0, -3, 0]
-          }}
+          animate={{ y: [0, -15, 0, -10, 0], rotate: [0, 3, 0, -3, 0] }}
           transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
@@ -154,8 +137,8 @@ const Home = () => {
                 onClick={() => openImageModal("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob")}
               >
                 <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-                  <img 
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob" 
+                  <img
+                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
                     alt="Kimball & Vitaly"
                     className="w-full h-full object-cover"
                     style={{
@@ -199,7 +182,7 @@ const Home = () => {
                   title="Our Love Story"
                   src="https://play.gumlet.io/embed/6764e9935c9461e1db824f52"
                   style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
-                  allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
                 ></iframe>
               </div>
             </motion.div>
@@ -213,11 +196,9 @@ const Home = () => {
               <p className="text-lg text-stone-600 max-w-2xl mx-auto">
                 Nearly 20 years ago, we met online and then went together to our first movie night—"She's the Man" at a $1 theater in Provo (because we were broke college students who knew how to budget for romance). We also attended Family Home Evening with Affirmation, a group for gay Mormon people navigating faith and identity. That connection on May 15, 2006 would become the foundation of our journey together.
               </p>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  to="/story"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
-                >
+                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors">
                   <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
@@ -248,13 +229,8 @@ const Home = () => {
         {heartColors.map((color, index) => (
           <motion.div
             key={`heart-${index}`}
-            className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${
-              index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)
-            } w-16 h-16 ${color} opacity-20`}
-            animate={{
-              rotate: [0, 10, 0, -10, 0],
-              y: [0, -10, 0, 10, 0]
-            }}
+            className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
+            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 15 + index * 2 }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -266,10 +242,7 @@ const Home = () => {
         {/* Floating flowers */}
         <motion.div
           className="absolute top-1/3 right-1/4 w-24 h-24 opacity-20"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
           transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
@@ -277,10 +250,7 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-1/3 left-1/4 w-20 h-20 opacity-20"
-          animate={{
-            rotate: -360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
+          animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
           <div className="text-4xl">🌺</div>
@@ -289,10 +259,7 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute bottom-1/4 left-1/5 w-20 h-30 opacity-20"
-          animate={{
-            y: [0, -15, 0, -10, 0],
-            rotate: [0, 3, 0, -3, 0]
-          }}
+          animate={{ y: [0, -15, 0, -10, 0], rotate: [0, 3, 0, -3, 0] }}
           transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
@@ -329,32 +296,41 @@ const Home = () => {
               <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
                 From a Ukrainian orphanage to the mountains of Utah, ours is a story of slow-building, everyday courage. Love, for us, was not an easy answer. It meant translating pain into poetry—sometimes in broken English, always from the heart. (And yes, we still argue about proper Ukrainian pronunciation.)
               </p>
+              
+              {/* New CTA button */}
+              <div className="pt-4">
+                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
+                  <SafeIcon icon={FiCheckCircle} className="w-5 h-5" />
+                  <span className="font-medium">Review Our Journey</span>
+                  <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
+                </Link>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {/* All cards with equal height and fixed text length */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 h-[500px] flex flex-col"
+                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col"
+                style={{ height: "500px" }}
               >
                 <SafeIcon icon={FiHeart} className="w-8 h-8 text-red-500 mx-auto" />
                 <p className="text-stone-700 italic flex-grow text-center leading-relaxed">
                   In the silent echoes of the orphanage, I learned that survival meant invisibility. But with Kimball, I discovered the courage to be seen. He celebrated my voice—first halting, then confident—and created space for the stories I'd never told anyone. Together we crafted a language of belonging that transcended words.
                 </p>
-                <div 
-                  className="h-48 rounded-lg overflow-hidden cursor-pointer"
-                  onClick={() => openImageModal({
-                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
-                    title: "Finding Courage Together",
-                    description: "2008 - From strangers to soulmates, our journey has been anything but ordinary."
-                  })}
-                >
-                  <img 
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg" 
-                    alt="Engagement photo" 
-                    className="w-full h-full object-cover"
+                <div className="h-48 rounded-lg overflow-hidden cursor-pointer relative">
+                  <img
+                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg"
+                    alt="Engagement photo"
+                    className="w-full h-full object-contain md:object-cover"
+                    onClick={() => openImageModal({
+                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
+                      title: "Finding Courage Together",
+                      description: "2008 - From strangers to soulmates, our journey has been anything but ordinary."
+                    })}
                   />
                 </div>
               </motion.div>
@@ -364,24 +340,23 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 h-[500px] flex flex-col"
+                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col"
+                style={{ height: "500px" }}
               >
                 <SafeIcon icon={FiHome} className="w-8 h-8 text-yellow-500 mx-auto" />
                 <p className="text-stone-700 italic flex-grow text-center leading-relaxed">
-                  When we first met, I was still writing poems in Ukrainian and translating them awkwardly into English. Kimball would listen intently, finding beauty in my stumbling words. "I want to hear your heart in any language," he said. Now we share a vocabulary of inside jokes and half-sentences that need no translation, a dialect only we understand.
+                  When we first met, I was still writing poems in Ukrainian and translating them awkwardly into English. Kimball would listen intently, finding beauty in my stumbling words. When I first said "Я тебя люблю" to him, he surprised me by saying it back in Russian. Now we share a vocabulary of inside jokes and half-sentences that need no translation.
                 </p>
-                <div 
-                  className="h-48 rounded-lg overflow-hidden cursor-pointer"
-                  onClick={() => openImageModal({
-                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
-                    title: "Our Shared Language",
-                    description: "2008 - Building a vocabulary of love that transcends borders and languages."
-                  })}
-                >
-                  <img 
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg" 
-                    alt="Engagement photo" 
-                    className="w-full h-full object-cover"
+                <div className="h-48 rounded-lg overflow-hidden cursor-pointer relative">
+                  <img
+                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg"
+                    alt="Engagement photo"
+                    className="w-full h-full object-contain md:object-cover"
+                    onClick={() => openImageModal({
+                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
+                      title: "Our Shared Language",
+                      description: "2008 - Building a vocabulary of love that transcends borders and languages."
+                    })}
                   />
                 </div>
               </motion.div>
@@ -391,24 +366,23 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 h-[500px] flex flex-col"
+                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col"
+                style={{ height: "500px" }}
               >
                 <SafeIcon icon={FiHeart} className="w-8 h-8 text-blue-500 mx-auto" />
                 <p className="text-stone-700 italic flex-grow text-center leading-relaxed">
                   There's a Ukrainian proverb: "When you're drowning, you'll clutch at a straw." But we never just clutched—we built. From fragile beginnings came something sturdy enough to shelter us through immigration battles, health crises, and the daily weight of being outsiders. Our love wasn't just salvation; it was creation.
                 </p>
-                <div 
-                  className="h-48 rounded-lg overflow-hidden cursor-pointer"
-                  onClick={() => openImageModal({
-                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
-                    title: "Building Together",
-                    description: "2008 - From fragile beginnings came something sturdy enough to shelter us through life's challenges."
-                  })}
-                >
-                  <img 
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg" 
-                    alt="Engagement photo" 
-                    className="w-full h-full object-cover"
+                <div className="h-48 rounded-lg overflow-hidden cursor-pointer relative">
+                  <img
+                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg"
+                    alt="Engagement photo"
+                    className="w-full h-full object-contain md:object-cover"
+                    onClick={() => openImageModal({
+                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
+                      title: "Building Together",
+                      description: "2008 - From fragile beginnings came something sturdy enough to shelter us through life's challenges."
+                    })}
                   />
                 </div>
               </motion.div>
@@ -424,6 +398,15 @@ const Home = () => {
               <p className="text-lg text-stone-700 italic">
                 <em>What no one tells you: Victory isn't always loud. Sometimes it's just showing up, again, with open arms and a soft place to land. Sometimes it's enjoying each other's presence while having separate beds—and Vitaly's cheesy choice of booking hotel rooms with one king bed because he loves cuddles, while Kimball loves independence and quiet sleep without nighttime disturbances.</em>
               </p>
+              
+              {/* New Read Our Book CTA button */}
+              <div className="mt-6">
+                <Link to="/book" className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
+                  <SafeIcon icon={FiBook} className="w-5 h-5" />
+                  <span className="font-medium">Read Our Book</span>
+                  <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
+                </Link>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -434,10 +417,7 @@ const Home = () => {
         {/* Decorative Elements */}
         <motion.div
           className="absolute top-20 right-20 w-20 h-20 opacity-20"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
           transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
@@ -445,10 +425,7 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-10 left-1/4 w-16 h-16 opacity-30"
-          animate={{
-            rotate: [0, 10, 0, -10, 0],
-            y: [0, -10, 0, 10, 0]
-          }}
+          animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 15 }}
         >
           <SafeIcon icon={FiHeart} className="w-full h-full text-green-500" />
@@ -457,10 +434,7 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute top-1/4 left-20 w-16 h-24 opacity-20"
-          animate={{
-            y: [0, -15, 0, -5, 0],
-            rotate: [0, 5, 0, -5, 0]
-          }}
+          animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
           transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
@@ -507,6 +481,7 @@ const Home = () => {
                 <p className="text-lg text-stone-700 leading-relaxed">
                   The world tried to define us by its politics and paperwork. We were the couple whose love was once illegal, then invisible, then unstoppable. We became experts at explaining ourselves—though we still haven't figured out how to explain why Kimball would choose pizza for every meal if he could, and how he uses guilt to convince me to make his favorite thick-crust pizzas loaded with pepperoni and mushrooms.
                 </p>
+
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-purple-500 rounded-full mt-3 flex-shrink-0" />
@@ -514,18 +489,21 @@ const Home = () => {
                       The family that learned to dance between languages, holidays, and heartbreak, choosing authenticity over acceptance every time. Always looking for new reasons to vacation together at least twice a year—maybe on a cruise and then a city retreat.
                     </p>
                   </div>
+
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-stone-600 italic">
                       Wounded, and then stronger—weathering surgeries, betrayals, bankruptcies, and the creeping loneliness that comes with living in translation. We survived financial disasters that would make Dave Ramsey weep.
                     </p>
                   </div>
+
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-stone-600 italic">
                       Once Vitaly mastered English, his quick wit and clever jokes brought vibrant life to Kimball's world. There's a reason Kimball calls him "Witty" or "Wisey" (a name that stuck after a misread MBA nametag led to the question: "What does Wisey mean?")
                     </p>
                   </div>
+
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-pink-500 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-stone-600 italic">
@@ -547,18 +525,17 @@ const Home = () => {
                     Our greatest milestones were not always victory parades. Sometimes they were therapy sessions, forgiveness over cold leftovers, and hands clasped tight in hospital waiting rooms—celebrating that we still had each other. We learned that "for better or worse" sometimes means "for better or for when Vitaly decides to stay up all night at the computer while Kimball goes to bed at 10pm sharp with his library book."
                   </p>
                 </div>
-                <div 
-                  className="h-64 rounded-lg overflow-hidden cursor-pointer"
-                  onClick={() => openImageModal({
-                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
-                    title: "Everyday Victories",
-                    description: "2008 - Our greatest milestones were not always victory parades, but the quiet moments of choosing each other again and again."
-                  })}
-                >
-                  <img 
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg" 
-                    alt="Engagement photo" 
-                    className="w-full h-full object-cover"
+
+                <div className="h-64 rounded-lg overflow-hidden cursor-pointer relative">
+                  <img
+                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg"
+                    alt="Engagement photo"
+                    className="w-full h-full object-contain md:object-cover"
+                    onClick={() => openImageModal({
+                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
+                      title: "Everyday Victories",
+                      description: "2008 - Our greatest milestones were not always victory parades, but the quiet moments of choosing each other again and again."
+                    })}
                   />
                 </div>
               </motion.div>
@@ -576,13 +553,8 @@ const Home = () => {
         {heartColors.map((color, index) => (
           <motion.div
             key={`signup-heart-${index}`}
-            className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${
-              index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)
-            } w-16 h-16 ${color} opacity-20`}
-            animate={{
-              rotate: [0, 10, 0, -10, 0],
-              y: [0, -10, 0, 10, 0]
-            }}
+            className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
+            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 15 + index * 2 }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -593,10 +565,7 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-20 right-20 w-20 h-20 opacity-20"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
           transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
@@ -605,10 +574,7 @@ const Home = () => {
         {/* Rainbow balloon */}
         <motion.div
           className="absolute top-1/3 right-1/4 w-16 h-24 opacity-20"
-          animate={{
-            y: [0, -10, 0, -5, 0],
-            rotate: [0, 3, 0, -3, 0]
-          }}
+          animate={{ y: [0, -10, 0, -5, 0], rotate: [0, 3, 0, -3, 0] }}
           transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
@@ -640,9 +606,11 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-serif text-stone-800">
               <span className="text-indigo-600 italic">Join Our Celebration</span>
             </h2>
+
             <p className="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
               We're celebrating our 18th wedding anniversary on August 15, 2026. We'd love for you to join us! (Warning: There will be Ukrainian food, terrible dad jokes, and probably someone crying happy tears.)
             </p>
+
             <button
               onClick={() => setShowSignup(true)}
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
@@ -669,26 +637,22 @@ const Home = () => {
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed italic">
                 <em>Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)</em>
               </p>
+
               <h3 className="text-2xl md:text-3xl font-serif text-stone-800">
                 <strong>Join us in celebrating our journey of radical, resilient, ordinary love.</strong>
               </h3>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <Link
-                to="/gallery"
-                className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              >
+              <Link to="/gallery" className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <div className="space-y-3">
                   <SafeIcon icon={FiHeart} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
                   <h4 className="font-semibold text-stone-800">Our Journey</h4>
                   <p className="text-sm text-stone-600">View our journey in photos, letters, and kitchen-table memories</p>
                 </div>
               </Link>
-              <Link
-                to="/story"
-                className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-              >
+
+              <Link to="/story" className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <div className="space-y-3">
                   <SafeIcon icon={FiArrowRight} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
                   <h4 className="font-semibold text-stone-800">Read Our Story</h4>
@@ -709,10 +673,7 @@ const Home = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <ImageModal 
-          image={selectedImage} 
-          onClose={() => setSelectedImage(null)} 
-        />
+        <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );

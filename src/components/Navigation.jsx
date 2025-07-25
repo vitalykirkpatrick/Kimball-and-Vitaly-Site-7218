@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiMenu, FiX } = FiIcons;
+const { FiMenu, FiX, FiBook } = FiIcons;
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +14,7 @@ const Navigation = () => {
     { path: '/', label: 'Home' },
     { path: '/story', label: 'Our Story' },
     { path: '/gallery', label: 'Gallery' },
+    { path: '/book', label: 'Our Book', icon: FiBook },
     { path: '/messages', label: 'Messages' }
   ];
 
@@ -24,15 +25,11 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-4 text-stone-800 hover:text-rose-600 transition-colors">
             <div className="w-10 h-10 flex items-center justify-center">
-              <img 
-                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753381012282-bonkers_image_design_a_logo%20%282%29.webp" 
-                alt="Kimball & Vitaly Logo" 
-                className="w-full h-full object-contain"
-              />
+              <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753388758441-bonkers_image_design_a_logo%20%281%29.webp" alt="Kimball & Vitaly Logo" className="w-full h-full object-contain" />
             </div>
             <span 
               className="text-xl font-bold tracking-wider" 
-              style={{ 
+              style={{
                 fontFamily: "'Great Vibes', 'Pacifico', 'Brush Script MT', cursive",
                 fontSize: "1.9rem",
                 letterSpacing: "0.05em",
@@ -46,16 +43,17 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <Link 
-                key={item.path} 
+              <Link
+                key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-colors ${
-                  location.pathname === item.path 
-                    ? 'text-indigo-600 border-b-2 border-indigo-600' 
+                className={`text-sm font-medium transition-colors flex items-center space-x-1 ${
+                  location.pathname === item.path
+                    ? 'text-indigo-600 border-b-2 border-indigo-600'
                     : 'text-stone-600 hover:text-stone-900'
                 }`}
               >
-                {item.label}
+                {item.icon && <SafeIcon icon={item.icon} className="w-4 h-4" />}
+                <span>{item.label}</span>
               </Link>
             ))}
           </div>
@@ -85,13 +83,14 @@ const Navigation = () => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     location.pathname === item.path
                       ? 'text-indigo-600 bg-indigo-50'
                       : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
                   }`}
                 >
-                  {item.label}
+                  {item.icon && <SafeIcon icon={item.icon} className="w-5 h-5" />}
+                  <span>{item.label}</span>
                 </Link>
               ))}
             </div>

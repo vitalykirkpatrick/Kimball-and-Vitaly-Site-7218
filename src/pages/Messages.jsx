@@ -30,12 +30,12 @@ const Messages = () => {
       alert('Maximum 5 photos allowed (we only have so much server space!)');
       return;
     }
-    
+
     const newPhotos = files.map(file => ({
       file,
       preview: URL.createObjectURL(file)
     }));
-    
+
     setFormData(prevData => ({
       ...prevData,
       photos: [...prevData.photos, ...newPhotos]
@@ -55,13 +55,13 @@ const Messages = () => {
       alert('Please complete the verification first!');
       return;
     }
-    
+
     console.log('Message submitted:', formData);
     setSubmitted(true);
     setFormData({ name: '', email: '', message: '', photos: [] });
     setIsVerified(false);
   };
-  
+
   const openImageModal = (image) => {
     setSelectedImage({
       src: image.src || image,
@@ -83,7 +83,7 @@ const Messages = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 relative overflow-hidden">
       <Navigation />
-      
+
       {/* Decorative Elements */}
       {heartColors.map((color, index) => (
         <motion.div
@@ -102,14 +102,11 @@ const Messages = () => {
           </svg>
         </motion.div>
       ))}
-      
+
       {/* Floating flowers */}
       <motion.div
         className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
-        animate={{
-          rotate: 360,
-          scale: [1, 1.1, 1, 0.9, 1]
-        }}
+        animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
         transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
       >
         <div className="text-4xl">🌸</div>
@@ -117,15 +114,12 @@ const Messages = () => {
 
       <motion.div
         className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
-        animate={{
-          rotate: -360,
-          scale: [1, 1.1, 1, 0.9, 1]
-        }}
+        animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
         transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
       >
         <div className="text-4xl">🌺</div>
       </motion.div>
-      
+
       {/* Rainbow balloons */}
       <motion.div
         className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
@@ -152,7 +146,7 @@ const Messages = () => {
           </svg>
         </div>
       </motion.div>
-      
+
       <motion.div
         className="absolute top-1/4 left-1/4 w-20 h-30 opacity-20"
         animate={{
@@ -179,23 +173,22 @@ const Messages = () => {
         </div>
       </motion.div>
 
-      <div className="pt-32 pb-16">
-        {/* Gold rings separator */}
-        <div className="flex justify-center mb-8">
-          <div className="relative w-40 h-20 opacity-80">
-            <div className="absolute left-5 top-1/2 transform -translate-y-1/2 w-20 h-20 rounded-full border-4 border-yellow-500 shadow-lg" style={{
-              background: "linear-gradient(135deg, #ffd700, #b8860b)",
-              boxShadow: "inset 0 0 10px rgba(0,0,0,0.3), 0 0 15px rgba(255,215,0,0.5)",
-              transform: "perspective(500px) rotateY(20deg)"
-            }}></div>
-            <div className="absolute right-5 top-1/2 transform -translate-y-1/2 w-20 h-20 rounded-full border-4 border-yellow-500 shadow-lg" style={{
-              background: "linear-gradient(135deg, #ffd700, #b8860b)",
-              boxShadow: "inset 0 0 10px rgba(0,0,0,0.3), 0 0 15px rgba(255,215,0,0.5)",
-              transform: "perspective(500px) rotateY(-20deg)"
-            }}></div>
+      <div className="pt-28 pb-16">
+        {/* Profile Image */}
+        <div className="flex justify-center mb-12">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
+            <img
+              src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
+              alt="Kimball & Vitaly"
+              className="w-full h-full object-cover"
+              style={{
+                maskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')",
+                WebkitMaskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')"
+              }}
+            />
           </div>
         </div>
-        
+
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
@@ -229,7 +222,7 @@ const Messages = () => {
                   </div>
                   Leave a Note
                 </h2>
-                
+
                 {submitted && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -239,7 +232,7 @@ const Messages = () => {
                     Thank you for sharing! Your message means the world to us. We'll treasure it alongside our collection of terrible puns and dad jokes.
                   </motion.div>
                 )}
-                
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
@@ -260,6 +253,7 @@ const Messages = () => {
                         />
                       </div>
                     </div>
+
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-2">
                         Email (optional)
@@ -278,7 +272,7 @@ const Messages = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-2">
                       Your Message
@@ -294,7 +288,7 @@ const Messages = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-stone-700 mb-2">
                       Share Photos (Optional, max 5)
@@ -303,7 +297,10 @@ const Messages = () => {
                       <div className="space-y-1 text-center">
                         <SafeIcon icon={FiImage} className="mx-auto h-12 w-12 text-gray-400" />
                         <div className="flex text-sm text-gray-600">
-                          <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                          <label
+                            htmlFor="file-upload"
+                            className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                          >
                             <span>Upload photos</span>
                             <input
                               id="file-upload"
@@ -322,12 +319,16 @@ const Messages = () => {
                         <p className="text-xs text-gray-500">Share your favorite memories with us! (Embarrassing photos welcome)</p>
                       </div>
                     </div>
-                    
+
                     {formData.photos.length > 0 && (
                       <div className="mt-4 grid grid-cols-3 gap-2">
                         {formData.photos.map((photo, index) => (
                           <div key={index} className="relative">
-                            <img src={photo.preview} alt={`Preview ${index + 1}`} className="h-20 w-full object-cover rounded-md" />
+                            <img
+                              src={photo.preview}
+                              alt={`Preview ${index + 1}`}
+                              className="h-20 w-full object-cover rounded-md"
+                            />
                             <button
                               type="button"
                               className="absolute top-1 right-1 bg-black/50 rounded-full p-1"
@@ -340,9 +341,9 @@ const Messages = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <SpamProtection onVerify={setIsVerified} isVerified={isVerified} />
-                  
+
                   <button
                     type="submit"
                     disabled={!isVerified}
@@ -353,7 +354,7 @@ const Messages = () => {
                   </button>
                 </form>
               </div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -365,7 +366,7 @@ const Messages = () => {
                 </p>
               </motion.div>
             </motion.div>
-            
+
             {/* Gallery Section */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -376,25 +377,22 @@ const Messages = () => {
               <h2 className="text-2xl font-serif text-stone-800 mb-6">
                 Photo Gallery
               </h2>
-              <div 
+
+              <div
                 className="h-[600px] bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer"
                 onClick={() => openImageModal({
-                  src: "https://photos.google.com/share/AF1QipMCXarRpg2hMw7wy7QRbAwp8Ky9QvbO7D-us2YJNlYEzqMOuqgjQBwG-fvnpB-Fgw/photo/AF1QipNktBGAbUBvKuF8Hh7o_LXIx5Iq-nkpVfNADpqq?key=UGZ0eG1rbmFSdXRkZVFwTUthTi1BaUhOcGlPZHVR",
+                  src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
                   title: "Kimball & Vitaly",
-                  description: "A special moment from our journey together."
+                  description: "Our wedding rings - a symbol of our commitment and love."
                 })}
               >
-                <img 
-                  src="https://photos.google.com/share/AF1QipMCXarRpg2hMw7wy7QRbAwp8Ky9QvbO7D-us2YJNlYEzqMOuqgjQBwG-fvnpB-Fgw/photo/AF1QipNktBGAbUBvKuF8Hh7o_LXIx5Iq-nkpVfNADpqq?key=UGZ0eG1rbmFSdXRkZVFwTUthTi1BaUhOcGlPZHVR" 
-                  alt="Kimball and Vitaly" 
+                <img
+                  src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG"
+                  alt="Kimball and Vitaly's Wedding Rings"
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    // Fallback if Google Photos link doesn't work
-                    e.target.onerror = null;
-                    e.target.src = "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753381025367-blob";
-                  }}
                 />
               </div>
+
               <div className="bg-white p-6 rounded-2xl text-center border-2 border-indigo-100">
                 <div className="flex justify-center space-x-2 mb-3">
                   {heartColors.map((color, index) => (
@@ -408,7 +406,7 @@ const Messages = () => {
               </div>
             </motion.div>
           </div>
-          
+
           {/* Call to Action */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
@@ -448,14 +446,14 @@ const Messages = () => {
           </motion.section>
         </div>
       </div>
-      
+
       <Footer />
-      
+
       {/* Image Modal */}
       {selectedImage && (
-        <ImageModal 
-          image={selectedImage} 
-          onClose={() => setSelectedImage(null)} 
+        <ImageModal
+          image={selectedImage}
+          onClose={() => setSelectedImage(null)}
         />
       )}
     </div>

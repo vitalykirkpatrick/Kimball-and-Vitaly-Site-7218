@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Story from './pages/Story';
 import Gallery from './pages/Gallery';
 import Messages from './pages/Messages';
+import Book from './pages/Book';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/story" element={<Story />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/book" element={<Book />} />
         </Routes>
       </div>
     </Router>

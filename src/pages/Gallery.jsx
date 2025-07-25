@@ -5,6 +5,7 @@ import CountdownTimer from '../components/CountdownTimer';
 import SafeIcon from '../common/SafeIcon';
 import Footer from '../components/Footer';
 import AnniversarySignup from '../components/AnniversarySignup';
+import ImageModal from '../components/ImageModal';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiX, FiChevronLeft, FiChevronRight, FiHeart, FiHome, FiCalendar, FiMapPin, FiUsers, FiArrowRight } = FiIcons;
@@ -24,31 +25,52 @@ const Gallery = () => {
     'text-violet-500'
   ];
 
+  // Process image source if it's a Google Photos or Drive link
+  const getProcessedImageSrc = (src) => {
+    // For Google Photos links
+    if (typeof src === 'string' && src.includes('photos.app.goo.gl')) {
+      // Return a placeholder image until user provides direct URLs
+      return "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob";
+    }
+    // For Google Drive links
+    else if (typeof src === 'string' && src.includes('drive.google.com/file')) {
+      // Extract file ID
+      const fileIdMatch = src.match(/\/d\/([^/]+)/);
+      if (fileIdMatch && fileIdMatch[1]) {
+        const fileId = fileIdMatch[1];
+        return `https://drive.google.com/uc?export=view&id=${fileId}`;
+      }
+      return "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob";
+    }
+    // Return the original URL for other cases
+    return src;
+  };
+
   const photos = [
     {
       id: 1,
-      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
+      src: getProcessedImageSrc("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg"),
       title: "Our Engagement",
       description: "2008 - Engagement photos in preparation for our San Diego ceremony. The excitement and nervousness shows on our faces!",
       year: "2008"
     },
     {
       id: 2,
-      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
+      src: getProcessedImageSrc("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg"),
       title: "Forever Together",
       description: "2008 - Another shot from our engagement photoshoot. We were still learning how to pose naturally for photos.",
       year: "2008"
     },
     {
       id: 3,
-      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
+      src: getProcessedImageSrc("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg"),
       title: "Just Us Two",
       description: "2008 - A quiet moment during our engagement photoshoot. Little did we know what adventures lay ahead.",
       year: "2008"
     },
     {
       id: 4,
-      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
+      src: getProcessedImageSrc("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg"),
       title: "Making Memories",
       description: "2008 - One of our favorite shots from the engagement session, capturing our connection.",
       year: "2008"
@@ -69,7 +91,7 @@ const Gallery = () => {
     },
     {
       id: 7,
-      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob",
+      src: getProcessedImageSrc("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"),
       title: "Anniversary Celebration",
       description: "Celebrating another year together - each one more precious than the last.",
       year: "2022"
@@ -104,22 +126,6 @@ const Gallery = () => {
     setCurrentIndex(prevIndex);
   };
 
-  // Additional decorative elements for more visual interest throughout the page
-  const decorativeElements = [
-    { type: "flower", position: "top-1/5 right-1/6", size: "w-16 h-16", animation: "animate-spin-slow", emoji: "🌸" },
-    { type: "flower", position: "bottom-1/5 left-1/3", size: "w-14 h-14", animation: "animate-spin-medium", emoji: "🌺" },
-    { type: "flower", position: "top-2/5 right-1/3", size: "w-20 h-20", animation: "animate-spin-slow", emoji: "🌸" },
-    { type: "flower", position: "bottom-2/5 left-1/6", size: "w-12 h-12", animation: "animate-spin-medium", emoji: "🌺" },
-    { type: "heart", position: "top-1/3 left-10", color: "text-red-500", animation: "animate-float-slow" },
-    { type: "heart", position: "bottom-1/3 right-10", color: "text-yellow-500", animation: "animate-float-medium" },
-    { type: "heart", position: "top-2/3 right-1/4", color: "text-green-500", animation: "animate-float-fast" },
-    { type: "heart", position: "bottom-1/4 left-1/4", color: "text-blue-500", animation: "animate-float-medium" },
-    { type: "balloon", position: "top-1/6 right-1/5", gradient: "rainbow-balloon-gallery3", animation: "animate-float-slow" },
-    { type: "balloon", position: "bottom-1/6 left-1/5", gradient: "rainbow-balloon-gallery4", animation: "animate-float-medium" },
-    { type: "balloon", position: "top-3/5 right-1/10", gradient: "rainbow-balloon-gallery5", animation: "animate-float-fast" },
-    { type: "balloon", position: "bottom-3/5 left-1/10", gradient: "rainbow-balloon-gallery6", animation: "animate-float-slow" },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 relative overflow-hidden">
       <Navigation />
@@ -144,71 +150,64 @@ const Gallery = () => {
       ))}
 
       {/* Additional decorative elements */}
-      {decorativeElements.map((elem, idx) => {
-        if (elem.type === "flower") {
-          return (
-            <motion.div
-              key={`decor-${idx}`}
-              className={`absolute ${elem.position} ${elem.size} opacity-20`}
-              animate={{
-                rotate: 360,
-                scale: [1, 1.1, 1, 0.9, 1]
-              }}
-              transition={{ repeat: Infinity, duration: 20 + idx * 2, ease: "linear" }}
-            >
-              <div className="text-4xl">{elem.emoji}</div>
-            </motion.div>
-          );
-        } else if (elem.type === "heart") {
-          return (
-            <motion.div
-              key={`decor-${idx}`}
-              className={`absolute ${elem.position} w-14 h-14 ${elem.color} opacity-20`}
-              animate={{
-                rotate: [0, 10, 0, -10, 0],
-                y: [0, -10, 0, 10, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 15 + idx, ease: "easeInOut" }}
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
-              </svg>
-            </motion.div>
-          );
-        } else if (elem.type === "balloon") {
-          return (
-            <motion.div
-              key={`decor-${idx}`}
-              className={`absolute ${elem.position} w-16 h-24 opacity-20`}
-              animate={{
-                y: [0, -10, 0, -5, 0],
-                rotate: [0, 5, 0, -5, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
-            >
-              <div className="w-full h-full">
-                <svg viewBox="0 0 24 24" className="w-full h-full">
-                  <defs>
-                    <linearGradient id={elem.gradient} x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#86007D" />
-                      <stop offset="16%" stopColor="#0000F9" />
-                      <stop offset="32%" stopColor="#008018" />
-                      <stop offset="48%" stopColor="#FFFF41" />
-                      <stop offset="66%" stopColor="#FFA52C" />
-                      <stop offset="83%" stopColor="#FF0018" />
-                      <stop offset="100%" stopColor="#86007D" />
-                    </linearGradient>
-                  </defs>
-                  <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill={`url(#${elem.gradient})`} />
-                </svg>
-              </div>
-            </motion.div>
-          );
-        }
-        return null;
-      })}
+      <motion.div
+        className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
+        animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
+        transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+      >
+        <div className="text-4xl">🌸</div>
+      </motion.div>
 
-      <div className="pt-24 pb-16">
+      <motion.div
+        className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
+        animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
+        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+      >
+        <div className="text-4xl">🌺</div>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
+        animate={{
+          y: [0, -15, 0, -5, 0],
+          rotate: [0, 5, 0, -5, 0]
+        }}
+        transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
+      >
+        <div className="w-full h-full">
+          <svg viewBox="0 0 24 24" className="w-full h-full">
+            <defs>
+              <linearGradient id="rainbow-balloon-gallery" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#FF0018" />
+                <stop offset="16%" stopColor="#FFA52C" />
+                <stop offset="32%" stopColor="#FFFF41" />
+                <stop offset="48%" stopColor="#008018" />
+                <stop offset="66%" stopColor="#0000F9" />
+                <stop offset="83%" stopColor="#86007D" />
+                <stop offset="100%" stopColor="#FF0018" />
+              </linearGradient>
+            </defs>
+            <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon-gallery)" />
+          </svg>
+        </div>
+      </motion.div>
+
+      <div className="pt-28 pb-16">
+        {/* Profile Image */}
+        <div className="flex justify-center mb-12">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
+            <img
+              src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
+              alt="Kimball & Vitaly"
+              className="w-full h-full object-cover"
+              style={{
+                maskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')",
+                WebkitMaskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')"
+              }}
+            />
+          </div>
+        </div>
+
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
@@ -242,7 +241,7 @@ const Gallery = () => {
                     <img
                       src={photo.src}
                       alt={photo.title}
-                      className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-64 object-contain md:object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -272,7 +271,11 @@ const Gallery = () => {
             viewport={{ once: true }}
             className="mt-20"
           >
-            <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
+            <CountdownTimer
+              targetDate="August 15, 2026"
+              title="Celebrating Our 18th Wedding Anniversary"
+              showCta={true}
+            />
           </motion.section>
 
           {/* Memory Cards */}
@@ -359,19 +362,27 @@ const Gallery = () => {
                   {selectedImage.year}
                 </span>
               </div>
+
               {/* Navigation */}
               <button
-                onClick={prevImage}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevImage();
+                }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
               >
                 <SafeIcon icon={FiChevronLeft} className="w-6 h-6" />
               </button>
               <button
-                onClick={nextImage}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextImage();
+                }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
               >
                 <SafeIcon icon={FiChevronRight} className="w-6 h-6" />
               </button>
+
               {/* Close Button */}
               <button
                 onClick={closeImage}

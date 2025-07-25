@@ -18,3 +18,50 @@ body {
   width: 100%;
   height: 100%;
 }
+
+/* Fix for image display */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Image container aspect ratios */
+.aspect-w-4 {
+  position: relative;
+  padding-bottom: 75%; /* 4:3 Aspect Ratio */
+}
+
+.aspect-w-4 > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+/* Responsive image handling */
+@media (max-width: 768px) {
+  .object-contain-responsive {
+    object-fit: contain !important;
+  }
+}
+
+/* CORS proxy for images */
+[data-image-cors-proxy] {
+  position: relative;
+}
+
+[data-image-cors-proxy]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiHeart, FiPlay, FiPause, FiVolume2, FiVolumeX } = FiIcons;
+const { FiHeart, FiPlay, FiPause, FiVolume2, FiVolumeX, FiDownload } = FiIcons;
 
 const PoemDisplay = () => {
   const heartColors = [
@@ -20,29 +20,40 @@ const PoemDisplay = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [audioLoaded, setAudioLoaded] = useState(false);
   const [audioError, setAudioError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const audioRef = useRef(null);
-  
-  // Primary audio source - directly from Google Drive
-  const audioSource = "https://drive.google.com/uc?export=download&id=1smoGz76hLAm0MbaYJcc54mkhfxRT7P1P";
+
+  // Format time helper
+  const formatTime = (time) => {
+    if (isNaN(time)) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
 
   // Handle audio play/pause
-  const togglePlay = () => {
-    if (audioRef.current) {
+  const togglePlay = async () => {
+    if (!audioRef.current) return;
+    try {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        const playPromise = audioRef.current.play();
-        
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.error("Audio playback failed:", error);
-            setAudioError("Playback failed. Please try again.");
-          });
-        }
+        setIsLoading(true);
+        await audioRef.current.play();
+        setIsPlaying(true);
+        setAudioError(null);
       }
-      setIsPlaying(!isPlaying);
+    } catch (error) {
+      console.error("Audio playback failed:", error);
+      setAudioError("Unable to play audio. Please try downloading the file instead.");
+      setIsPlaying(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -54,11 +65,26 @@ const PoemDisplay = () => {
     }
   };
 
-  // Update progress bar
+  // Update progress bar and time
   const updateProgress = () => {
     if (audioRef.current) {
-      const value = (audioRef.current.currentTime / audioRef.current.duration) * 100;
-      setProgress(value || 0);
+      const current = audioRef.current.currentTime;
+      const total = audioRef.current.duration;
+      if (!isNaN(current) && !isNaN(total)) {
+        setCurrentTime(current);
+        setDuration(total);
+        setProgress((current / total) * 100);
+      }
+    }
+  };
+
+  // Handle progress bar click
+  const handleProgressClick = (e) => {
+    if (audioRef.current && duration > 0) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const newTime = (clickX / rect.width) * duration;
+      audioRef.current.currentTime = newTime;
     }
   };
 
@@ -66,14 +92,48 @@ const PoemDisplay = () => {
   const handleAudioLoaded = () => {
     setAudioLoaded(true);
     setAudioError(null);
+    setIsLoading(false);
     console.log("Audio loaded successfully");
   };
 
   // Handle audio error
   const handleAudioError = (e) => {
     console.error("Audio loading error:", e);
-    setAudioError("Unable to play audio. Please try again later.");
+    setAudioError("Unable to load audio. You can try downloading the file instead.");
+    setIsLoading(false);
+    setIsPlaying(false);
   };
+
+  // Handle audio ended
+  const handleAudioEnded = () => {
+    setIsPlaying(false);
+    setProgress(0);
+    setCurrentTime(0);
+  };
+
+  // Download audio file
+  const downloadAudio = () => {
+    const link = document.createElement('a');
+    link.href = "https://drive.google.com/uc?export=download&id=1smoGz76hLAm0MbaYJcc54mkhfxRT7P1P";
+    link.download = 'it-was-love-vitaly-poem.mp3';
+    link.click();
+  };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.addEventListener('loadeddata', handleAudioLoaded);
+      audio.addEventListener('error', handleAudioError);
+      audio.addEventListener('ended', handleAudioEnded);
+      audio.addEventListener('timeupdate', updateProgress);
+      return () => {
+        audio.removeEventListener('loadeddata', handleAudioLoaded);
+        audio.removeEventListener('error', handleAudioError);
+        audio.removeEventListener('ended', handleAudioEnded);
+        audio.removeEventListener('timeupdate', updateProgress);
+      };
+    }
+  }, []);
 
   return (
     <motion.div
@@ -111,7 +171,7 @@ const PoemDisplay = () => {
         }}
         transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
       >
-        <div className="w-full h-full balloon">
+        <div className="w-full h-full">
           <svg viewBox="0 0 24 24" className="w-full h-full">
             <defs>
               <linearGradient id="rainbow-balloon" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -134,38 +194,22 @@ const PoemDisplay = () => {
         <motion.div
           key={i}
           className="absolute opacity-30"
-          style={{
-            top: `${20 + i * 25}%`,
-            left: `${15 + i * 20}%`,
-            width: '30px',
-            height: '30px'
-          }}
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
+          style={{ top: `${20 + i * 25}%`, left: `${15 + i * 20}%`, width: '30px', height: '30px' }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
           transition={{ repeat: Infinity, duration: 20 + i * 5, ease: "linear" }}
         >
-          <div className="flower">🌸</div>
+          <div className="text-4xl">🌸</div>
         </motion.div>
       ))}
       {[1, 2, 3].map((i) => (
         <motion.div
           key={i + 3}
           className="absolute opacity-30"
-          style={{
-            bottom: `${20 + i * 20}%`,
-            right: `${10 + i * 15}%`,
-            width: '30px',
-            height: '30px'
-          }}
-          animate={{
-            rotate: -360,
-            scale: [1, 0.9, 1, 1.1, 1]
-          }}
+          style={{ bottom: `${20 + i * 20}%`, right: `${10 + i * 15}%`, width: '30px', height: '30px' }}
+          animate={{ rotate: -360, scale: [1, 0.9, 1, 1.1, 1] }}
           transition={{ repeat: Infinity, duration: 25 + i * 3, ease: "linear" }}
         >
-          <div className="flower">🌺</div>
+          <div className="text-4xl">🌺</div>
         </motion.div>
       ))}
 
@@ -236,60 +280,42 @@ const PoemDisplay = () => {
           </div>
         </div>
 
-        {/* Audio Player */}
-        <div className="mt-8 max-w-lg mx-auto">
-          <div className="bg-white p-4 rounded-xl shadow-md border-2 border-indigo-200">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center space-x-3">
-                <button 
-                  onClick={togglePlay}
-                  className={`w-10 h-10 rounded-full ${audioError ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'} flex items-center justify-center text-white transition-colors`}
-                  disabled={!!audioError}
-                >
-                  <SafeIcon icon={isPlaying ? FiPause : FiPlay} className="w-5 h-5" />
-                </button>
-                <div>
-                  <h3 className="font-medium text-stone-800">It Was Love - Musical Version</h3>
-                  <p className="text-xs text-stone-500">Poem transformed into song</p>
-                </div>
-              </div>
+        {/* Google Drive Embedded Player */}
+        <div className="mt-8 max-w-2xl mx-auto">
+          <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-indigo-200">
+            <h3 className="font-semibold text-stone-800 mb-4">It Was Love - Musical Version</h3>
+            
+            {/* Google Drive Player */}
+            <iframe
+              frameBorder="0"
+              width="100%"
+              height="60"
+              src="https://drive.google.com/file/d/1smoGz76hLAm0MbaYJcc54mkhfxRT7P1P/preview"
+              className="rounded-lg shadow-sm mb-4"
+            ></iframe>
+            
+            {/* Download Button */}
+            <div className="flex justify-end">
               <button
-                onClick={toggleMute}
-                className={`p-2 rounded-full ${audioError ? 'text-gray-400 cursor-not-allowed' : 'text-stone-600 hover:bg-stone-100'} transition-colors`}
-                disabled={!!audioError}
+                onClick={downloadAudio}
+                className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-800 px-2 py-1 rounded hover:bg-indigo-50 transition-colors"
+                title="Download audio file"
               >
-                <SafeIcon icon={isMuted ? FiVolumeX : FiVolume2} className="w-5 h-5" />
+                <SafeIcon icon={FiDownload} className="w-5 h-5" />
+                <span>Download Audio</span>
               </button>
             </div>
-            
-            <div className="w-full bg-stone-200 rounded-full h-1.5 mb-1">
-              <div 
-                className="bg-indigo-600 h-1.5 rounded-full" 
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            
-            <audio 
+
+            {/* Hidden Audio Element (for download functionality) */}
+            <audio
               ref={audioRef}
-              src={audioSource}
-              onTimeUpdate={updateProgress}
-              onEnded={() => setIsPlaying(false)}
-              onError={handleAudioError}
-              onCanPlayThrough={handleAudioLoaded}
               className="hidden"
-              preload="auto"
-            ></audio>
-            
-            <div className="flex justify-between text-xs text-stone-500">
-              {audioError ? (
-                <span className="text-red-500">{audioError}</span>
-              ) : (
-                <>
-                  <span>{audioLoaded ? "Listen to the musical version" : "Loading audio..."}</span>
-                  <span>A special arrangement created for our anniversary</span>
-                </>
-              )}
-            </div>
+              preload="metadata"
+            >
+              <source src="https://drive.google.com/uc?export=download&id=1smoGz76hLAm0MbaYJcc54mkhfxRT7P1P" type="audio/mpeg" />
+              <source src="https://docs.google.com/uc?export=download&id=1smoGz76hLAm0MbaYJcc54mkhfxRT7P1P" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
           </div>
         </div>
       </div>
