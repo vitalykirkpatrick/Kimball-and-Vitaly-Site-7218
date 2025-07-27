@@ -20,12 +20,30 @@ const Footer = () => {
     <footer className="bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 text-white py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-4">
-          <div className="flex justify-center space-x-2">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 flex items-center justify-center">
+              <img 
+                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" 
+                alt="Kimball & Vitaly Logo" 
+                className="w-full h-full object-contain opacity-90"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center space-x-2">
             {heartColors.map((color, i) => (
               <motion.div
                 key={i}
-                animate={{ scale: [1, 1.2, 1], rotate: [0, 5, 0, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                animate={{
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 5, 0, -5, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.3
+                }}
                 className={`w-6 h-6 ${color}`}
               >
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -34,9 +52,10 @@ const Footer = () => {
               </motion.div>
             ))}
           </div>
+
           <h3 
-            className="text-xl font-bold tracking-wider" 
-            style={{ 
+            className="text-xl font-bold tracking-wider"
+            style={{
               fontFamily: "'Great Vibes', 'Pacifico', 'Brush Script MT', cursive",
               fontSize: "1.9rem",
               letterSpacing: "0.05em",
@@ -45,7 +64,11 @@ const Footer = () => {
           >
             Kimball & Vitaly
           </h3>
-          <p className="text-indigo-200">Celebrating our journey of love, resilience, and finding home in each other</p>
+
+          <p className="text-indigo-200">
+            Celebrating our journey of love, resilience, and finding home in each other
+          </p>
+
           <div className="flex justify-center pt-2">
             <svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
               <rect width="36" height="4" fill="#FF0000"/>
@@ -56,6 +79,7 @@ const Footer = () => {
               <rect y="20" width="36" height="4" fill="#800080"/>
             </svg>
           </div>
+
           <p className="text-sm text-indigo-300 mt-6">May 15, 2006 - Forever</p>
           <p className="text-xs text-indigo-400">© 2025 • Designed with love (and a lot of coffee)</p>
         </div>

@@ -18,7 +18,7 @@ const Book = () => {
 
   // Book content pages with cartoon illustrations and colorful backgrounds
   const pages = [
-    // Cover Page
+    // Cover Page - UPDATED with Ukrainian and American flags
     {
       content: (
         <div className="h-full w-full bg-gradient-to-br from-indigo-200 to-purple-200 p-8 flex flex-col items-center justify-center relative overflow-hidden">
@@ -28,9 +28,9 @@ const Book = () => {
           <div className="absolute top-1/4 right-10 w-16 h-16 text-4xl animate-bounce">🎈</div>
           <div className="absolute bottom-1/4 left-10 w-16 h-16 text-4xl animate-spin-slow">🎀</div>
           
-          {/* Cover content - with cartoon illustration background */}
+          {/* Cover content - with Ukrainian and American flags */}
           <div className="absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
-            {/* Custom cartoon illustration for cover - matching the style of other chapters */}
+            {/* Custom cartoon illustration for cover with flags */}
             <svg viewBox="0 0 800 600" className="w-full h-full">
               {/* Sky background */}
               <defs>
@@ -56,32 +56,80 @@ const Book = () => {
                 <ellipse cx="650" cy="160" rx="60" ry="20" fill="white" />
               </g>
               
-              {/* Rainbow */}
-              <path d="M100,500 Q400,300 700,500" fill="none" stroke="#FF0000" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M120,500 Q400,320 680,500" fill="none" stroke="#FF7F00" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M140,500 Q400,340 660,500" fill="none" stroke="#FFFF00" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M160,500 Q400,360 640,500" fill="none" stroke="#00FF00" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M180,500 Q400,380 620,500" fill="none" stroke="#0000FF" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M200,500 Q400,400 600,500" fill="none" stroke="#4B0082" strokeWidth="15" strokeOpacity="0.7" />
+              {/* Ukrainian Flag - Left Side */}
+              <rect x="50" y="150" width="300" height="100" fill="#0057B7" /> {/* Blue */}
+              <rect x="50" y="250" width="300" height="100" fill="#FFD700" /> {/* Yellow */}
+              
+              {/* American Flag - Right Side */}
+              <rect x="450" y="150" width="300" height="200" fill="#B22234" /> {/* Red */}
+              
+              {/* White stripes on American flag */}
+              <rect x="450" y="150" width="300" height="15.38" fill="#FFFFFF" />
+              <rect x="450" y="180.76" width="300" height="15.38" fill="#FFFFFF" />
+              <rect x="450" y="211.52" width="300" height="15.38" fill="#FFFFFF" />
+              <rect x="450" y="242.28" width="300" height="15.38" fill="#FFFFFF" />
+              <rect x="450" y="273.04" width="300" height="15.38" fill="#FFFFFF" />
+              <rect x="450" y="303.8" width="300" height="15.38" fill="#FFFFFF" />
+              <rect x="450" y="334.56" width="300" height="15.38" fill="#FFFFFF" />
+              
+              {/* Blue field on American flag */}
+              <rect x="450" y="150" width="120" height="107.66" fill="#3C3B6E" />
+              
+              {/* Stars on American flag (simplified) */}
+              <g fill="#FFFFFF">
+                <circle cx="460" cy="160" r="3" />
+                <circle cx="480" cy="160" r="3" />
+                <circle cx="500" cy="160" r="3" />
+                <circle cx="520" cy="160" r="3" />
+                <circle cx="540" cy="160" r="3" />
+                <circle cx="560" cy="160" r="3" />
+                
+                <circle cx="470" cy="175" r="3" />
+                <circle cx="490" cy="175" r="3" />
+                <circle cx="510" cy="175" r="3" />
+                <circle cx="530" cy="175" r="3" />
+                <circle cx="550" cy="175" r="3" />
+                
+                <circle cx="460" cy="190" r="3" />
+                <circle cx="480" cy="190" r="3" />
+                <circle cx="500" cy="190" r="3" />
+                <circle cx="520" cy="190" r="3" />
+                <circle cx="540" cy="190" r="3" />
+                <circle cx="560" cy="190" r="3" />
+                
+                <circle cx="470" cy="205" r="3" />
+                <circle cx="490" cy="205" r="3" />
+                <circle cx="510" cy="205" r="3" />
+                <circle cx="530" cy="205" r="3" />
+                <circle cx="550" cy="205" r="3" />
+                
+                <circle cx="460" cy="220" r="3" />
+                <circle cx="480" cy="220" r="3" />
+                <circle cx="500" cy="220" r="3" />
+                <circle cx="520" cy="220" r="3" />
+                <circle cx="540" cy="220" r="3" />
+                <circle cx="560" cy="220" r="3" />
+                
+                <circle cx="470" cy="235" r="3" />
+                <circle cx="490" cy="235" r="3" />
+                <circle cx="510" cy="235" r="3" />
+                <circle cx="530" cy="235" r="3" />
+                <circle cx="550" cy="235" r="3" />
+              </g>
+              
+              {/* Rainbow connecting the flags */}
+              <path d="M150,500 Q400,300 650,500" fill="none" stroke="#FF0000" strokeWidth="15" strokeOpacity="0.7" />
+              <path d="M170,500 Q400,320 630,500" fill="none" stroke="#FF7F00" strokeWidth="15" strokeOpacity="0.7" />
+              <path d="M190,500 Q400,340 610,500" fill="none" stroke="#FFFF00" strokeWidth="15" strokeOpacity="0.7" />
+              <path d="M210,500 Q400,360 590,500" fill="none" stroke="#00FF00" strokeWidth="15" strokeOpacity="0.7" />
+              <path d="M230,500 Q400,380 570,500" fill="none" stroke="#0000FF" strokeWidth="15" strokeOpacity="0.7" />
+              <path d="M250,500 Q400,400 550,500" fill="none" stroke="#4B0082" strokeWidth="15" strokeOpacity="0.7" />
               
               {/* Ground */}
               <rect x="0" y="500" width="800" height="100" fill="#8BC34A" />
               
-              {/* Houses */}
-              <rect x="100" y="400" width="150" height="100" fill="#FFCDD2" stroke="#B71C1C" strokeWidth="2" />
-              <rect x="150" y="450" width="40" height="50" fill="#795548" stroke="#3E2723" strokeWidth="2" />
-              <polygon points="100,400 175,320 250,400" fill="#EF9A9A" stroke="#B71C1C" strokeWidth="2" />
-              <rect x="120" y="420" width="30" height="30" fill="#BBDEFB" stroke="#0D47A1" strokeWidth="2" />
-              <rect x="200" y="420" width="30" height="30" fill="#BBDEFB" stroke="#0D47A1" strokeWidth="2" />
-              
-              <rect x="550" y="380" width="170" height="120" fill="#B2EBF2" stroke="#006064" strokeWidth="2" />
-              <rect x="600" y="450" width="50" height="50" fill="#795548" stroke="#3E2723" strokeWidth="2" />
-              <polygon points="550,380 635,300 720,380" fill="#80DEEA" stroke="#006064" strokeWidth="2" />
-              <rect x="575" y="410" width="35" height="35" fill="#BBDEFB" stroke="#0D47A1" strokeWidth="2" />
-              <rect x="655" y="410" width="35" height="35" fill="#BBDEFB" stroke="#0D47A1" strokeWidth="2" />
-              
-              {/* Character 1 - Vitaly */}
-              <g transform="translate(300, 420)">
+              {/* Character 1 - Vitaly - positioned in the center-left */}
+              <g transform="translate(320,420)">
                 <circle cx="0" cy="0" r="40" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Head */}
                 <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
                 <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
@@ -90,11 +138,11 @@ const Book = () => {
                 <rect x="-30" y="100" width="25" height="40" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Left leg */}
                 <rect x="5" y="100" width="25" height="40" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Right leg */}
                 <rect x="-60" y="50" width="30" height="10" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Left arm */}
-                <rect x="30" y="50" width="30" height="10" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Right arm */}
+                <rect x="30" y="50" width="30" height="20" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Right arm extended to hold hands */}
               </g>
               
-              {/* Character 2 - Kimball */}
-              <g transform="translate(450, 420)">
+              {/* Character 2 - Kimball - positioned in the center-right */}
+              <g transform="translate(480,420)">
                 <circle cx="0" cy="0" r="40" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Head */}
                 <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
                 <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
@@ -102,14 +150,22 @@ const Book = () => {
                 <rect x="-30" y="40" width="60" height="60" rx="10" fill="#4CAF50" stroke="#1B5E20" strokeWidth="2" /> {/* Body */}
                 <rect x="-30" y="100" width="25" height="40" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Left leg */}
                 <rect x="5" y="100" width="25" height="40" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Right leg */}
-                <rect x="-60" y="50" width="30" height="10" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Left arm */}
+                <rect x="-60" y="50" width="30" height="20" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Left arm extended to hold hands */}
                 <rect x="30" y="50" width="30" height="10" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Right arm */}
               </g>
               
-              {/* Hearts */}
-              <g transform="translate(375, 350) scale(0.8)">
+              {/* Holding hands in the middle */}
+              <circle cx="400" cy="470" r="15" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Joined hands */}
+              
+              {/* Hearts around the couple */}
+              <g transform="translate(350,350) scale(0.6)">
                 <path d="M-30,0 C-40,-20 -70,0 -30,40 C10,0 -20,-20 -30,0 Z" fill="#E91E63" fillOpacity="0.7" />
+              </g>
+              <g transform="translate(450,350) scale(0.6)">
                 <path d="M30,0 C40,-20 70,0 30,40 C-10,0 20,-20 30,0 Z" fill="#E91E63" fillOpacity="0.7" />
+              </g>
+              <g transform="translate(400,300) scale(0.6)">
+                <path d="M0,0 C-10,-20 -40,0 0,40 C40,0 10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
               </g>
             </svg>
           </div>
@@ -118,7 +174,7 @@ const Book = () => {
           <div className="bg-white/40 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-pink-300 relative z-10 max-w-md mt-32">
             <div className="mx-auto mb-4 w-24 h-24">
               <img 
-                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753410215809-bonkers_image_design_a_logo%20%281%29.webp" 
+                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" 
                 alt="KV Logo" 
                 className="w-full h-full object-contain"
               />
@@ -178,7 +234,7 @@ const Book = () => {
                 <circle cx="265" cy="215" r="3" fill="#5E35B1" /> {/* Sprinkle */}
                 
                 {/* Character 1 - Vitaly */}
-                <g transform="translate(130, 120)">
+                <g transform="translate(130,120)">
                   <circle cx="0" cy="0" r="40" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Head */}
                   <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
                   <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
@@ -191,7 +247,7 @@ const Book = () => {
                 </g>
                 
                 {/* Character 2 - Kimball */}
-                <g transform="translate(270, 120)">
+                <g transform="translate(270,120)">
                   <circle cx="0" cy="0" r="40" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Head */}
                   <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
                   <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
@@ -204,7 +260,7 @@ const Book = () => {
                 </g>
                 
                 {/* Heart between them */}
-                <g transform="translate(200, 80) scale(0.8)">
+                <g transform="translate(200,80) scale(0.8)">
                   <path d="M0,40 C-40,-20 -80,20 -20,60 C40,100 0,-20 0,40 Z" fill="#E91E63" fillOpacity="0.7" />
                   <path d="M0,40 C40,-20 80,20 20,60 C-40,100 0,-20 0,40 Z" fill="#E91E63" fillOpacity="0.7" />
                 </g>
@@ -997,7 +1053,7 @@ const Book = () => {
       )
     },
     
-    // Conclusion with updated hearts and ring visual
+    // Conclusion with updated HAPPY COUPLE and logo - UPDATED
     {
       content: (
         <div className="h-full w-full bg-gradient-to-br from-indigo-200 to-purple-200 p-8 flex flex-col items-center justify-center relative">
@@ -1032,10 +1088,10 @@ const Book = () => {
               </div>
             </div>
             
-            {/* Right side - Final illustration with rainbow hearts and ring */}
+            {/* Right side - Final illustration with happy gay couple and rainbow */}
             <div className="flex flex-col items-center justify-center">
               <div className="relative w-full h-80">
-                {/* Final illustration with rainbow hearts and ring */}
+                {/* Final illustration with rainbow hearts and logo */}
                 <svg viewBox="0 0 400 300" className="w-full h-full">
                   {/* Sky background */}
                   <defs>
@@ -1061,11 +1117,6 @@ const Book = () => {
                       <stop offset="83.3%" stopColor="#4B0082" />
                       <stop offset="100%" stopColor="#9400D3" />
                     </linearGradient>
-                    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#FFD700" />
-                      <stop offset="50%" stopColor="#FFC125" />
-                      <stop offset="100%" stopColor="#DAA520" />
-                    </linearGradient>
                   </defs>
                   
                   {/* Sky */}
@@ -1080,23 +1131,50 @@ const Book = () => {
                   {/* Rainbow */}
                   <path d="M50,250 Q200,100 350,250" fill="none" stroke="url(#rainbow-grad-1)" strokeWidth="10" strokeLinecap="round" />
                   
-                  {/* Two Rainbow Hearts joined by Ring */}
-                  <g transform="translate(200, 150) scale(1.2)">
-                    {/* Left heart */}
-                    <path d="M-30,0 C-40,-10 -50,0 -40,10 C-30,20 -15,25 0,40 C15,25 30,20 40,10 C50,0 40,-10 30,0 C20,10 10,10 0,0 C-10,10 -20,10 -30,0 Z" 
-                      fill="url(#rainbow-grad-1)" stroke="#FFFFFF" strokeWidth="1" />
-                    
-                    {/* Right heart */}
-                    <path d="M30,0 C40,-10 50,0 40,10 C30,20 15,25 0,40 C-15,25 -30,20 -40,10 C-50,0 -40,-10 -30,0 C-20,10 -10,10 0,0 C10,10 20,10 30,0 Z" 
-                      fill="url(#rainbow-grad-2)" stroke="#FFFFFF" strokeWidth="1" />
-                    
-                    {/* Gold wedding ring connecting the hearts */}
-                    <circle cx="0" cy="0" r="25" fill="none" stroke="url(#gold-grad)" strokeWidth="6" />
-                  </g>
-                  
                   {/* Home */}
                   <path d="M50,200 L50,150 L100,120 L150,150 L150,200 Z" fill="#D2B48C" stroke="#000000" strokeWidth="2" />
                   <rect x="85" y="170" width="30" height="30" fill="#8B4513" stroke="#000000" strokeWidth="1" />
+                  
+                  {/* Happy gay couple holding hands */}
+                  {/* Character 1 - Vitaly */}
+                  <g transform="translate(160, 220)">
+                    <circle cx="0" cy="0" r="25" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Head */}
+                    <ellipse cx="-10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Left eye */}
+                    <ellipse cx="10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Right eye */}
+                    <path d="M-10,5 Q0,15 10,5" fill="none" stroke="#E65100" strokeWidth="2" strokeLinecap="round" /> {/* Smile */}
+                    <rect x="-20" y="25" width="40" height="50" rx="8" fill="#3F51B5" stroke="#1A237E" strokeWidth="2" /> {/* Body */}
+                    <rect x="-20" y="75" width="17" height="30" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Left leg */}
+                    <rect x="3" y="75" width="17" height="30" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Right leg */}
+                    <rect x="-40" y="35" width="20" height="8" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Left arm */}
+                    <rect x="20" y="35" width="25" height="8" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Right arm extended */}
+                  </g>
+                  
+                  {/* Character 2 - Kimball */}
+                  <g transform="translate(240, 220)">
+                    <circle cx="0" cy="0" r="25" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Head */}
+                    <ellipse cx="-10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Left eye */}
+                    <ellipse cx="10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Right eye */}
+                    <path d="M-10,5 Q0,15 10,5" fill="none" stroke="#E65100" strokeWidth="2" strokeLinecap="round" /> {/* Smile */}
+                    <rect x="-20" y="25" width="40" height="50" rx="8" fill="#4CAF50" stroke="#1B5E20" strokeWidth="2" /> {/* Body */}
+                    <rect x="-20" y="75" width="17" height="30" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Left leg */}
+                    <rect x="3" y="75" width="17" height="30" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Right leg */}
+                    <rect x="-45" y="35" width="25" height="8" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Left arm extended */}
+                    <rect x="20" y="35" width="20" height="8" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Right arm */}
+                  </g>
+                  
+                  {/* Joined hands in the middle */}
+                  <circle cx="200" cy="255" r="10" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" />
+                  
+                  {/* Hearts around the couple */}
+                  <g transform="translate(160, 180) scale(0.5)">
+                    <path d="M0,0 C-10,-20 -40,0 0,40 C40,0 10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
+                  </g>
+                  <g transform="translate(240, 180) scale(0.5)">
+                    <path d="M0,0 C10,-20 40,0 0,40 C-40,0 -10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
+                  </g>
+                  <g transform="translate(200, 150) scale(0.5)">
+                    <path d="M0,0 C-10,-20 -40,0 0,40 C40,0 10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
+                  </g>
                   
                   {/* Stars */}
                   <text x="70" y="100" fill="#FFD700" fontSize="20">★</text>
@@ -1112,8 +1190,8 @@ const Book = () => {
                 </p>
                 <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto mt-4">
                   <img
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
-                    alt="Kimball & Vitaly"
+                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob"
+                    alt="KV Logo"
                     className="w-full h-full object-cover"
                   />
                 </div>

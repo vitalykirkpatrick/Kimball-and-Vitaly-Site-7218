@@ -1,9 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <g>
-    <!-- First heart (left) -->
-    <path d="M35,25 C25,25 18,32 18,40 C18,52 35,70 35,70 C35,70 52,52 52,40 C52,32 45,25 35,25 Z" fill="none" stroke="#dc2626" stroke-width="3"/>
-    
-    <!-- Second heart (right, overlapping) -->
-    <path d="M50,25 C40,25 33,32 33,40 C33,52 50,70 50,70 C50,70 67,52 67,40 C67,32 60,25 50,25 Z" fill="none" stroke="#dc2626" stroke-width="3"/>
+    <!-- Updated favicon with new logo style -->
+    <rect x="0" y="0" width="100" height="100" fill="#4F46E5" rx="20"/>
+    <text x="50" y="70" font-family="serif" font-size="60" fill="white" text-anchor="middle" font-weight="bold">KV</text>
   </g>
 </svg>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import {motion} from 'framer-motion';
 import Navigation from '../components/Navigation';
 import SafeIcon from '../common/SafeIcon';
 import PoemDisplay from '../components/PoemDisplay';
@@ -10,7 +10,7 @@ import ImageModal from '../components/ImageModal';
 import Footer from '../components/Footer';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiBook } = FiIcons;
+const {FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiBook} = FiIcons;
 
 const Home = () => {
   const [showSignup, setShowSignup] = useState(false);
@@ -48,8 +48,14 @@ const Home = () => {
           <motion.div
             key={index}
             className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 15 + index * 2 }}
+            animate={{
+              rotate: [0, 10, 0, -10, 0],
+              y: [0, -10, 0, 10, 0]
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 15 + index * 2
+            }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -60,16 +66,30 @@ const Home = () => {
         {/* Floating flowers */}
         <motion.div
           className="absolute top-60 left-1/4 w-20 h-20 opacity-30"
-          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1, 0.9, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 20,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
 
         <motion.div
           className="absolute bottom-40 right-1/5 w-16 h-16 opacity-20"
-          animate={{ rotate: -360, scale: [1, 0.9, 1, 1.1, 1] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          animate={{
+            rotate: -360,
+            scale: [1, 0.9, 1, 1.1, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 25,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">🌺</div>
         </motion.div>
@@ -77,8 +97,15 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute top-1/4 right-10 w-16 h-24 opacity-30"
-          animate={{ y: [0, -20, 0, -10, 0], rotate: [0, 5, 0, -5, 0] }}
-          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+          animate={{
+            y: [0, -20, 0, -10, 0],
+            rotate: [0, 5, 0, -5, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 15,
+            ease: "easeInOut"
+          }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -100,8 +127,15 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-1/3 left-16 w-20 h-30 opacity-20"
-          animate={{ y: [0, -15, 0, -10, 0], rotate: [0, 3, 0, -3, 0] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
+          animate={{
+            y: [0, -15, 0, -10, 0],
+            rotate: [0, 3, 0, -3, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 20,
+            ease: "easeInOut"
+          }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -152,6 +186,7 @@ const Home = () => {
               <h1 className="text-4xl md:text-6xl font-serif text-stone-800 leading-tight">
                 Finding Home in <span className="block text-indigo-600 italic">Love's Echo</span>
               </h1>
+
               <div className="flex items-center justify-center space-x-2 text-stone-600">
                 <SafeIcon icon={FiCalendar} className="w-5 h-5" />
                 <span className="text-lg">May 15, 2006 - Present</span>
@@ -203,6 +238,7 @@ const Home = () => {
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
+
                 <button
                   onClick={() => setShowSignup(true)}
                   className="inline-flex items-center space-x-2 bg-white text-indigo-600 border-2 border-indigo-500 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors"
@@ -230,8 +266,14 @@ const Home = () => {
           <motion.div
             key={`heart-${index}`}
             className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 15 + index * 2 }}
+            animate={{
+              rotate: [0, 10, 0, -10, 0],
+              y: [0, -10, 0, 10, 0]
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 15 + index * 2
+            }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -242,16 +284,30 @@ const Home = () => {
         {/* Floating flowers */}
         <motion.div
           className="absolute top-1/3 right-1/4 w-24 h-24 opacity-20"
-          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1, 0.9, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 30,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
 
         <motion.div
           className="absolute bottom-1/3 left-1/4 w-20 h-20 opacity-20"
-          animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+          animate={{
+            rotate: -360,
+            scale: [1, 1.1, 1, 0.9, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 25,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">🌺</div>
         </motion.div>
@@ -259,8 +315,15 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute bottom-1/4 left-1/5 w-20 h-30 opacity-20"
-          animate={{ y: [0, -15, 0, -10, 0], rotate: [0, 3, 0, -3, 0] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
+          animate={{
+            y: [0, -15, 0, -10, 0],
+            rotate: [0, 3, 0, -3, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 20,
+            ease: "easeInOut"
+          }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -290,100 +353,116 @@ const Home = () => {
           >
             <div className="space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif text-stone-800">
-                <strong>Home Was Never a Place—</strong>
-                <span className="block text-indigo-600 italic">It Was a Person</span>
+                <strong>Home Was Never a Place—</strong> <span className="block text-indigo-600 italic">It Was a Person</span>
               </h2>
               <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
                 From a Ukrainian orphanage to the mountains of Utah, ours is a story of slow-building, everyday courage. Love, for us, was not an easy answer. It meant translating pain into poetry—sometimes in broken English, always from the heart. (And yes, we still argue about proper Ukrainian pronunciation.)
               </p>
-              
-              {/* New CTA button */}
-              <div className="pt-4">
-                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
-                  <SafeIcon icon={FiCheckCircle} className="w-5 h-5" />
-                  <span className="font-medium">Review Our Journey</span>
-                  <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
-                </Link>
-              </div>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {/* All cards with equal height and fixed text length */}
+              {/* Card 1 - Fixed height with proper image sizing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col"
+                className="bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col overflow-hidden"
                 style={{ height: "500px" }}
               >
-                <SafeIcon icon={FiHeart} className="w-8 h-8 text-red-500 mx-auto" />
-                <p className="text-stone-700 italic flex-grow text-center leading-relaxed">
-                  In the silent echoes of the orphanage, I learned that survival meant invisibility. But with Kimball, I discovered the courage to be seen. He celebrated my voice—first halting, then confident—and created space for the stories I'd never told anyone. Together we crafted a language of belonging that transcended words.
-                </p>
-                <div className="h-48 rounded-lg overflow-hidden cursor-pointer relative">
-                  <img
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg"
-                    alt="Engagement photo"
-                    className="w-full h-full object-contain md:object-cover"
-                    onClick={() => openImageModal({
-                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
-                      title: "Finding Courage Together",
-                      description: "2008 - From strangers to soulmates, our journey has been anything but ordinary."
-                    })}
-                  />
+                <div className="p-6 flex flex-col flex-grow">
+                  <SafeIcon icon={FiHeart} className="w-8 h-8 text-red-500 mx-auto mb-4" />
+                  <div className="flex-grow flex flex-col justify-between">
+                    <p className="text-stone-700 italic text-center leading-relaxed text-sm">
+                      In the silent echoes of the orphanage, I learned that survival meant invisibility. But with Kimball, I discovered the courage to be seen. He celebrated my voice—first halting, then confident—and created space for the stories I'd never told anyone. Together we crafted a language of belonging that transcended words.
+                    </p>
+                    <div 
+                      className="mt-4 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                      style={{ height: "160px", minHeight: "160px" }}
+                      onClick={() => openImageModal({
+                        src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
+                        title: "Finding Courage Together",
+                        description: "2008 - From strangers to soulmates, our journey has been anything but ordinary."
+                      })}
+                    >
+                      <img
+                        src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg"
+                        alt="Engagement photo"
+                        className="max-w-full max-h-full object-contain"
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
 
+              {/* Card 2 - Fixed height with proper image sizing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col"
+                className="bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col overflow-hidden"
                 style={{ height: "500px" }}
               >
-                <SafeIcon icon={FiHome} className="w-8 h-8 text-yellow-500 mx-auto" />
-                <p className="text-stone-700 italic flex-grow text-center leading-relaxed">
-                  When we first met, I was still writing poems in Ukrainian and translating them awkwardly into English. Kimball would listen intently, finding beauty in my stumbling words. When I first said "Я тебя люблю" to him, he surprised me by saying it back in Russian. Now we share a vocabulary of inside jokes and half-sentences that need no translation.
-                </p>
-                <div className="h-48 rounded-lg overflow-hidden cursor-pointer relative">
-                  <img
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg"
-                    alt="Engagement photo"
-                    className="w-full h-full object-contain md:object-cover"
-                    onClick={() => openImageModal({
-                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
-                      title: "Our Shared Language",
-                      description: "2008 - Building a vocabulary of love that transcends borders and languages."
-                    })}
-                  />
+                <div className="p-6 flex flex-col flex-grow">
+                  <SafeIcon icon={FiHome} className="w-8 h-8 text-yellow-500 mx-auto mb-4" />
+                  <div className="flex-grow flex flex-col justify-between">
+                    <p className="text-stone-700 italic text-center leading-relaxed text-sm">
+                      When we first met, I was still writing poems in Ukrainian and translating them awkwardly into English. Kimball would listen intently, finding beauty in my stumbling words. When I first said "Я тебя люблю" to him, he surprised me by saying it back in Russian. Now we share a vocabulary of inside jokes and half-sentences that need no translation.
+                    </p>
+                    <div 
+                      className="mt-4 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                      style={{ height: "160px", minHeight: "160px" }}
+                      onClick={() => openImageModal({
+                        src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
+                        title: "Our Shared Language",
+                        description: "2008 - Building a vocabulary of love that transcends borders and languages."
+                      })}
+                    >
+                      <img
+                        src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg"
+                        alt="Engagement photo"
+                        className="max-w-full max-h-full object-contain"
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
 
+              {/* Card 3 - Fixed height with proper image sizing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="space-y-4 p-6 bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col"
+                className="bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col overflow-hidden"
                 style={{ height: "500px" }}
               >
-                <SafeIcon icon={FiHeart} className="w-8 h-8 text-blue-500 mx-auto" />
-                <p className="text-stone-700 italic flex-grow text-center leading-relaxed">
-                  There's a Ukrainian proverb: "When you're drowning, you'll clutch at a straw." But we never just clutched—we built. From fragile beginnings came something sturdy enough to shelter us through immigration battles, health crises, and the daily weight of being outsiders. Our love wasn't just salvation; it was creation.
-                </p>
-                <div className="h-48 rounded-lg overflow-hidden cursor-pointer relative">
-                  <img
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg"
-                    alt="Engagement photo"
-                    className="w-full h-full object-contain md:object-cover"
-                    onClick={() => openImageModal({
-                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
-                      title: "Building Together",
-                      description: "2008 - From fragile beginnings came something sturdy enough to shelter us through life's challenges."
-                    })}
-                  />
+                <div className="p-6 flex flex-col flex-grow">
+                  <SafeIcon icon={FiHeart} className="w-8 h-8 text-blue-500 mx-auto mb-4" />
+                  <div className="flex-grow flex flex-col justify-between">
+                    <p className="text-stone-700 italic text-center leading-relaxed text-sm">
+                      There's a Ukrainian proverb: "When you're drowning, you'll clutch at a straw." But we never just clutched—we built. From fragile beginnings came something sturdy enough to shelter us through immigration battles, health crises, and the daily weight of being outsiders. Our love wasn't just salvation; it was creation.
+                    </p>
+                    <div 
+                      className="mt-4 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                      style={{ height: "160px", minHeight: "160px" }}
+                      onClick={() => openImageModal({
+                        src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
+                        title: "Building Together",
+                        description: "2008 - From fragile beginnings came something sturdy enough to shelter us through life's challenges."
+                      })}
+                    >
+                      <img
+                        src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg"
+                        alt="Engagement photo"
+                        className="max-w-full max-h-full object-contain"
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -398,10 +477,13 @@ const Home = () => {
               <p className="text-lg text-stone-700 italic">
                 <em>What no one tells you: Victory isn't always loud. Sometimes it's just showing up, again, with open arms and a soft place to land. Sometimes it's enjoying each other's presence while having separate beds—and Vitaly's cheesy choice of booking hotel rooms with one king bed because he loves cuddles, while Kimball loves independence and quiet sleep without nighttime disturbances.</em>
               </p>
-              
+
               {/* New Read Our Book CTA button */}
               <div className="mt-6">
-                <Link to="/book" className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
+                <Link
+                  to="/book"
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
+                >
                   <SafeIcon icon={FiBook} className="w-5 h-5" />
                   <span className="font-medium">Read Our Book</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
@@ -417,16 +499,29 @@ const Home = () => {
         {/* Decorative Elements */}
         <motion.div
           className="absolute top-20 right-20 w-20 h-20 opacity-20"
-          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1, 0.9, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 20,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
 
         <motion.div
           className="absolute bottom-10 left-1/4 w-16 h-16 opacity-30"
-          animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 15 }}
+          animate={{
+            rotate: [0, 10, 0, -10, 0],
+            y: [0, -10, 0, 10, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 15
+          }}
         >
           <SafeIcon icon={FiHeart} className="w-full h-full text-green-500" />
         </motion.div>
@@ -434,8 +529,15 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute top-1/4 left-20 w-16 h-24 opacity-20"
-          animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
-          transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
+          animate={{
+            y: [0, -15, 0, -5, 0],
+            rotate: [0, 5, 0, -5, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 18,
+            ease: "easeInOut"
+          }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -465,8 +567,7 @@ const Home = () => {
           >
             <div className="text-center space-y-6">
               <h2 className="text-3xl md:text-4xl font-serif text-stone-800">
-                <strong>We Did Not Just Survive—</strong>
-                <span className="block text-indigo-600 italic">We Chose Each Other, Again and Again</span>
+                <strong>We Did Not Just Survive—</strong> <span className="block text-indigo-600 italic">We Chose Each Other, Again and Again</span>
               </h2>
             </div>
 
@@ -526,16 +627,20 @@ const Home = () => {
                   </p>
                 </div>
 
-                <div className="h-64 rounded-lg overflow-hidden cursor-pointer relative">
+                <div 
+                  className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                  style={{ height: "256px" }}
+                  onClick={() => openImageModal({
+                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
+                    title: "Everyday Victories",
+                    description: "2008 - Our greatest milestones were not always victory parades, but the quiet moments of choosing each other again and again."
+                  })}
+                >
                   <img
                     src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg"
                     alt="Engagement photo"
-                    className="w-full h-full object-contain md:object-cover"
-                    onClick={() => openImageModal({
-                      src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
-                      title: "Everyday Victories",
-                      description: "2008 - Our greatest milestones were not always victory parades, but the quiet moments of choosing each other again and again."
-                    })}
+                    className="max-w-full max-h-full object-contain"
+                    style={{ width: "100%", height: "100%" }}
                   />
                 </div>
               </motion.div>
@@ -554,8 +659,14 @@ const Home = () => {
           <motion.div
             key={`signup-heart-${index}`}
             className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 15 + index * 2 }}
+            animate={{
+              rotate: [0, 10, 0, -10, 0],
+              y: [0, -10, 0, 10, 0]
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 15 + index * 2
+            }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -565,8 +676,15 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-20 right-20 w-20 h-20 opacity-20"
-          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1, 0.9, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 20,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
@@ -574,8 +692,15 @@ const Home = () => {
         {/* Rainbow balloon */}
         <motion.div
           className="absolute top-1/3 right-1/4 w-16 h-24 opacity-20"
-          animate={{ y: [0, -10, 0, -5, 0], rotate: [0, 3, 0, -3, 0] }}
-          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+          animate={{
+            y: [0, -10, 0, -5, 0],
+            rotate: [0, 3, 0, -3, 0]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 15,
+            ease: "easeInOut"
+          }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">

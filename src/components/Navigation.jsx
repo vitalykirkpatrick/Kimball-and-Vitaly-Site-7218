@@ -25,10 +25,14 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-4 text-stone-800 hover:text-rose-600 transition-colors">
             <div className="w-10 h-10 flex items-center justify-center">
-              <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753388758441-bonkers_image_design_a_logo%20%281%29.webp" alt="Kimball & Vitaly Logo" className="w-full h-full object-contain" />
+              <img 
+                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" 
+                alt="Kimball & Vitaly Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <span 
-              className="text-xl font-bold tracking-wider" 
+              className="text-xl font-bold tracking-wider"
               style={{
                 fontFamily: "'Great Vibes', 'Pacifico', 'Brush Script MT', cursive",
                 fontSize: "1.9rem",
