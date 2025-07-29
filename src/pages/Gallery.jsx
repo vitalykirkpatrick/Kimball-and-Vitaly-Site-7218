@@ -134,14 +134,15 @@ const Gallery = () => {
       {heartColors.map((color, index) => (
         <motion.div
           key={`heart-${index}`}
-          className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${
-            index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)
-          } w-16 h-16 ${color} opacity-20`}
+          className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
           animate={{
             rotate: [0, 10, 0, -10, 0],
             y: [0, -10, 0, 10, 0]
           }}
-          transition={{ repeat: Infinity, duration: 15 + index * 2 }}
+          transition={{
+            repeat: Infinity,
+            duration: 15 + index * 2
+          }}
         >
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -152,27 +153,46 @@ const Gallery = () => {
       {/* Additional decorative elements */}
       <motion.div
         className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
-        animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-        transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+        animate={{
+          rotate: 360,
+          scale: [1, 1.1, 1, 0.9, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 30,
+          ease: "linear"
+        }}
       >
         <div className="text-4xl">🌸</div>
       </motion.div>
 
       <motion.div
         className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
-        animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+        animate={{
+          rotate: -360,
+          scale: [1, 1.1, 1, 0.9, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 25,
+          ease: "linear"
+        }}
       >
         <div className="text-4xl">🌺</div>
       </motion.div>
 
+      {/* Rainbow balloons */}
       <motion.div
         className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
         animate={{
           y: [0, -15, 0, -5, 0],
           rotate: [0, 5, 0, -5, 0]
         }}
-        transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
+        transition={{
+          repeat: Infinity,
+          duration: 20,
+          ease: "easeInOut"
+        }}
       >
         <div className="w-full h-full">
           <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -193,28 +213,13 @@ const Gallery = () => {
       </motion.div>
 
       <div className="pt-28 pb-16">
-        {/* Profile Image */}
-        <div className="flex justify-center mb-12">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-            <img
-              src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
-              alt="Kimball & Vitaly"
-              className="w-full h-full object-cover"
-              style={{
-                maskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')",
-                WebkitMaskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')"
-              }}
-            />
-          </div>
-        </div>
-
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center space-y-8 mb-16"
+            className="text-center space-y-8 mb-8"
           >
             <h1 className="text-4xl md:text-6xl font-serif text-stone-800">
               Our <span className="text-indigo-600 italic">Journey</span>
@@ -224,7 +229,22 @@ const Gallery = () => {
             </p>
           </motion.div>
 
-          {/* Photo Grid */}
+          {/* Rings image with decorative lines */}
+          <div className="flex items-center justify-center my-8 px-4">
+            <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
+            <div className="mx-4">
+              <div className="w-32 h-32 flex items-center justify-center">
+                <img
+                  src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png"
+                  alt="Kimball & Vitaly"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+            <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
+          </div>
+
+          {/* Photo Grid - UPDATED for consistent image sizing */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {photos.map((photo, index) => (
               <motion.div
@@ -237,11 +257,13 @@ const Gallery = () => {
                 onClick={() => openImage(photo, index)}
               >
                 <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1 border-2 border-indigo-100">
-                  <div className="aspect-w-4 aspect-h-3 relative">
+                  {/* Fixed size image container - UPDATED */}
+                  <div className="relative bg-gray-100 flex items-center justify-center" style={{ height: "256px" }}>
                     <img
                       src={photo.src}
                       alt={photo.title}
-                      className="w-full h-64 object-contain md:object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                      style={{ maxWidth: "100%", maxHeight: "100%" }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -249,14 +271,16 @@ const Gallery = () => {
                       <p className="text-sm text-stone-200">{photo.year}</p>
                     </div>
                   </div>
-                  <div className="p-6">
+                  
+                  {/* Text content - UPDATED for consistent sizing */}
+                  <div className="p-4" style={{ minHeight: "120px" }}>
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-stone-800 text-lg">{photo.title}</h3>
-                      <span className="text-sm text-indigo-500 border border-indigo-300 px-2 py-1 rounded-full">
+                      <h3 className="font-semibold text-stone-800 text-lg truncate">{photo.title}</h3>
+                      <span className="text-sm text-indigo-500 border border-indigo-300 px-2 py-1 rounded-full flex-shrink-0">
                         {photo.year}
                       </span>
                     </div>
-                    <p className="text-stone-600 text-sm leading-relaxed">{photo.description}</p>
+                    <p className="text-stone-600 text-sm leading-relaxed line-clamp-3">{photo.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -271,11 +295,7 @@ const Gallery = () => {
             viewport={{ once: true }}
             className="mt-20"
           >
-            <CountdownTimer
-              targetDate="August 15, 2026"
-              title="Celebrating Our 18th Wedding Anniversary"
-              showCta={true}
-            />
+            <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
           </motion.section>
 
           {/* Memory Cards */}
@@ -297,6 +317,7 @@ const Gallery = () => {
                   <em>"Our old recipe book, pages stained with years of experiments. Half the notes are in Ukrainian, half in English, all written with love. The borscht recipe on page three has been modified so many times it's barely recognizable from the original—just like us. (And yes, we still argue about the proper amount of dill.)"</em>
                 </p>
               </div>
+
               <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-indigo-100">
                 <SafeIcon icon={FiCalendar} className="w-8 h-8 text-orange-500 mb-4" />
                 <h3 className="text-xl font-semibold text-stone-800 mb-4">The Wedding Photo</h3>
@@ -304,6 +325,7 @@ const Gallery = () => {
                   <em>"Still tacked to the fridge after all these years, slightly faded but never forgotten. Two young faces full of hope, not knowing the journey ahead but ready for anything as long as we were together. (We look so young! When did we get so old?)"</em>
                 </p>
               </div>
+
               <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-indigo-100">
                 <SafeIcon icon={FiHome} className="w-8 h-8 text-green-500 mb-4" />
                 <h3 className="text-xl font-semibold text-stone-800 mb-4">The First Townhome</h3>
@@ -311,6 +333,7 @@ const Gallery = () => {
                   <em>"Our first townhome at 1174 W 230 S in Orem wasn't just a property—it was a declaration of permanence. As an immigrant on an H-1B visa, owning a piece of America felt like an impossible dream. But together, we made it happen. (And learned that homeownership means fixing things constantly.)"</em>
                 </p>
               </div>
+
               <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-indigo-100">
                 <SafeIcon icon={FiMapPin} className="w-8 h-8 text-blue-500 mb-4" />
                 <h3 className="text-xl font-semibold text-stone-800 mb-4">The Late-Night Conversations</h3>
@@ -319,6 +342,7 @@ const Gallery = () => {
                 </p>
               </div>
             </div>
+
             <div className="text-center mt-12">
               <button
                 onClick={() => setShowSignup(true)}
@@ -355,6 +379,7 @@ const Gallery = () => {
                 alt={selectedImage.title}
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
               />
+
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
                 <h3 className="text-white text-xl font-semibold mb-2">{selectedImage.title}</h3>
                 <p className="text-stone-200">{selectedImage.description}</p>
@@ -365,19 +390,14 @@ const Gallery = () => {
 
               {/* Navigation */}
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  prevImage();
-                }}
+                onClick={(e) => { e.stopPropagation(); prevImage(); }}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
               >
                 <SafeIcon icon={FiChevronLeft} className="w-6 h-6" />
               </button>
+
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  nextImage();
-                }}
+                onClick={(e) => { e.stopPropagation(); nextImage(); }}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
               >
                 <SafeIcon icon={FiChevronRight} className="w-6 h-6" />

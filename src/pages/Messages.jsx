@@ -21,7 +21,7 @@ const Messages = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({...formData, [e.target.name]: e.target.value});
   };
 
   const handleFileChange = (e) => {
@@ -58,7 +58,12 @@ const Messages = () => {
 
     console.log('Message submitted:', formData);
     setSubmitted(true);
-    setFormData({ name: '', email: '', message: '', photos: [] });
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+      photos: []
+    });
     setIsVerified(false);
   };
 
@@ -88,14 +93,15 @@ const Messages = () => {
       {heartColors.map((color, index) => (
         <motion.div
           key={`heart-${index}`}
-          className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${
-            index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)
-          } w-16 h-16 ${color} opacity-20`}
+          className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
           animate={{
             rotate: [0, 10, 0, -10, 0],
             y: [0, -10, 0, 10, 0]
           }}
-          transition={{ repeat: Infinity, duration: 15 + index * 2 }}
+          transition={{
+            repeat: Infinity,
+            duration: 15 + index * 2
+          }}
         >
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -106,16 +112,30 @@ const Messages = () => {
       {/* Floating flowers */}
       <motion.div
         className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
-        animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-        transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+        animate={{
+          rotate: 360,
+          scale: [1, 1.1, 1, 0.9, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 30,
+          ease: "linear"
+        }}
       >
         <div className="text-4xl">🌸</div>
       </motion.div>
 
       <motion.div
         className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
-        animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+        animate={{
+          rotate: -360,
+          scale: [1, 1.1, 1, 0.9, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 25,
+          ease: "linear"
+        }}
       >
         <div className="text-4xl">🌺</div>
       </motion.div>
@@ -127,7 +147,11 @@ const Messages = () => {
           y: [0, -15, 0, -5, 0],
           rotate: [0, 5, 0, -5, 0]
         }}
-        transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
+        transition={{
+          repeat: Infinity,
+          duration: 20,
+          ease: "easeInOut"
+        }}
       >
         <div className="w-full h-full">
           <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -153,7 +177,11 @@ const Messages = () => {
           y: [0, -10, 0, -5, 0],
           rotate: [0, 3, 0, -3, 0]
         }}
-        transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
+        transition={{
+          repeat: Infinity,
+          duration: 18,
+          ease: "easeInOut"
+        }}
       >
         <div className="w-full h-full">
           <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -174,28 +202,13 @@ const Messages = () => {
       </motion.div>
 
       <div className="pt-28 pb-16">
-        {/* Profile Image */}
-        <div className="flex justify-center mb-12">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-            <img
-              src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
-              alt="Kimball & Vitaly"
-              className="w-full h-full object-cover"
-              style={{
-                maskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')",
-                WebkitMaskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')"
-              }}
-            />
-          </div>
-        </div>
-
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center space-y-8 mb-16"
+            className="text-center space-y-8 mb-8"
           >
             <h1 className="text-4xl md:text-6xl font-serif text-stone-800">
               Share Your <span className="text-indigo-600 italic">Story</span>
@@ -204,6 +217,21 @@ const Messages = () => {
               Tell us how you found your home in love's echo. Your story matters, and we'd love to hear it. (Plus, we love a good story—especially if it involves embarrassing moments we can laugh about later.)
             </p>
           </motion.div>
+
+          {/* Rings image with decorative lines */}
+          <div className="flex items-center justify-center my-8 px-4">
+            <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
+            <div className="mx-4">
+              <div className="w-32 h-32 flex items-center justify-center">
+                <img
+                  src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png"
+                  alt="Kimball & Vitaly"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+            <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
+          </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Message Form */}
@@ -324,11 +352,7 @@ const Messages = () => {
                       <div className="mt-4 grid grid-cols-3 gap-2">
                         {formData.photos.map((photo, index) => (
                           <div key={index} className="relative">
-                            <img
-                              src={photo.preview}
-                              alt={`Preview ${index + 1}`}
-                              className="h-20 w-full object-cover rounded-md"
-                            />
+                            <img src={photo.preview} alt={`Preview ${index + 1}`} className="h-20 w-full object-cover rounded-md" />
                             <button
                               type="button"
                               className="absolute top-1 right-1 bg-black/50 rounded-full p-1"
@@ -354,17 +378,6 @@ const Messages = () => {
                   </button>
                 </form>
               </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="bg-white p-8 rounded-2xl border-2 border-indigo-100"
-              >
-                <p className="text-lg text-stone-700 italic leading-relaxed">
-                  <em>"Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)"</em>
-                </p>
-              </motion.div>
             </motion.div>
 
             {/* Gallery Section */}
@@ -407,26 +420,58 @@ const Messages = () => {
             </motion.div>
           </div>
 
-          {/* Call to Action */}
+          {/* Call to Action - UPDATED: Now side by side with animated hearts above */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mt-20 text-center"
+            className="mt-20"
           >
-            <div className="bg-white p-12 rounded-2xl border-2 border-indigo-300">
-              <div className="flex justify-center space-x-2 mb-6">
-                {heartColors.map((color, index) => (
-                  <SafeIcon key={index} icon={FiHeart} className={`w-6 h-6 ${color}`} />
-                ))}
+            {/* Animated hearts above the boxes */}
+            <div className="flex justify-center space-x-4 mb-6">
+              {heartColors.map((color, index) => (
+                <motion.div
+                  key={`cta-heart-${index}`}
+                  animate={{
+                    y: [0, -10, 0],
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 10, 0, -10, 0]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3,
+                    delay: index * 0.2
+                  }}
+                  className={`${color}`}
+                >
+                  <SafeIcon icon={FiHeart} className="w-8 h-8" />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Side by side boxes */}
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              {/* Box 1 */}
+              <div className="bg-white p-8 rounded-2xl border-2 border-indigo-100">
+                <p className="text-lg text-stone-700 italic leading-relaxed">
+                  <em>"Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)"</em>
+                </p>
               </div>
-              <h2 className="text-2xl md:text-3xl font-serif mb-6 text-stone-800">
-                Every Love Story Matters
-              </h2>
-              <p className="text-lg text-stone-700 max-w-2xl mx-auto leading-relaxed mb-8">
-                Whether your love story is just beginning or has been unfolding for decades, whether it's been easy or filled with obstacles—it matters. Thank you for being part of our extended family of love. (And for putting up with our terrible puns all these years.)
-              </p>
+
+              {/* Box 2 */}
+              <div className="bg-white p-8 rounded-2xl border-2 border-indigo-300">
+                <h2 className="text-2xl font-serif mb-4 text-stone-800">
+                  Every Love Story Matters
+                </h2>
+                <p className="text-stone-700 leading-relaxed">
+                  Whether your love story is just beginning or has been unfolding for decades, whether it's been easy or filled with obstacles—it matters. Thank you for being part of our extended family of love. (And for putting up with our terrible puns all these years.)
+                </p>
+              </div>
+            </div>
+
+            {/* Button centered below both boxes */}
+            <div className="flex justify-center mt-6">
               <button
                 onClick={() => {
                   const signupSection = document.getElementById('signup-section');
@@ -451,10 +496,7 @@ const Messages = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <ImageModal
-          image={selectedImage}
-          onClose={() => setSelectedImage(null)}
-        />
+        <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );

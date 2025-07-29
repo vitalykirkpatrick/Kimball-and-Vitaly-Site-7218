@@ -18,180 +18,110 @@ const Book = () => {
 
   // Book content pages with cartoon illustrations and colorful backgrounds
   const pages = [
-    // Cover Page - UPDATED with Ukrainian and American flags
+    // Cover Page - FIXED with smaller, centered title box and more decorative layout
     {
       content: (
-        <div className="h-full w-full bg-gradient-to-br from-indigo-200 to-purple-200 p-8 flex flex-col items-center justify-center relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-4 left-4 w-16 h-16 text-4xl">🌈</div>
-          <div className="absolute bottom-4 right-4 w-16 h-16 text-4xl">🌟</div>
-          <div className="absolute top-1/4 right-10 w-16 h-16 text-4xl animate-bounce">🎈</div>
-          <div className="absolute bottom-1/4 left-10 w-16 h-16 text-4xl animate-spin-slow">🎀</div>
-          
-          {/* Cover content - with Ukrainian and American flags */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100">
-            {/* Custom cartoon illustration for cover with flags */}
-            <svg viewBox="0 0 800 600" className="w-full h-full">
-              {/* Sky background */}
-              <defs>
-                <linearGradient id="sky-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#C7D2FE" />
-                  <stop offset="100%" stopColor="#E0E7FF" />
-                </linearGradient>
-              </defs>
-              <rect x="0" y="0" width="800" height="600" fill="url(#sky-gradient)" />
-              
-              {/* Sun */}
-              <circle cx="650" cy="100" r="60" fill="#FFD700" />
-              <circle cx="650" cy="100" r="45" fill="#FFF176" />
-              
-              {/* Clouds */}
-              <g opacity="0.8">
-                <ellipse cx="200" cy="120" rx="70" ry="40" fill="white" />
-                <ellipse cx="250" cy="100" rx="60" ry="35" fill="white" />
-                <ellipse cx="300" cy="130" rx="65" ry="30" fill="white" />
-                
-                <ellipse cx="600" cy="150" rx="70" ry="30" fill="white" />
-                <ellipse cx="550" cy="140" rx="50" ry="25" fill="white" />
-                <ellipse cx="650" cy="160" rx="60" ry="20" fill="white" />
-              </g>
-              
-              {/* Ukrainian Flag - Left Side */}
-              <rect x="50" y="150" width="300" height="100" fill="#0057B7" /> {/* Blue */}
-              <rect x="50" y="250" width="300" height="100" fill="#FFD700" /> {/* Yellow */}
-              
-              {/* American Flag - Right Side */}
-              <rect x="450" y="150" width="300" height="200" fill="#B22234" /> {/* Red */}
-              
-              {/* White stripes on American flag */}
-              <rect x="450" y="150" width="300" height="15.38" fill="#FFFFFF" />
-              <rect x="450" y="180.76" width="300" height="15.38" fill="#FFFFFF" />
-              <rect x="450" y="211.52" width="300" height="15.38" fill="#FFFFFF" />
-              <rect x="450" y="242.28" width="300" height="15.38" fill="#FFFFFF" />
-              <rect x="450" y="273.04" width="300" height="15.38" fill="#FFFFFF" />
-              <rect x="450" y="303.8" width="300" height="15.38" fill="#FFFFFF" />
-              <rect x="450" y="334.56" width="300" height="15.38" fill="#FFFFFF" />
-              
-              {/* Blue field on American flag */}
-              <rect x="450" y="150" width="120" height="107.66" fill="#3C3B6E" />
-              
-              {/* Stars on American flag (simplified) */}
-              <g fill="#FFFFFF">
-                <circle cx="460" cy="160" r="3" />
-                <circle cx="480" cy="160" r="3" />
-                <circle cx="500" cy="160" r="3" />
-                <circle cx="520" cy="160" r="3" />
-                <circle cx="540" cy="160" r="3" />
-                <circle cx="560" cy="160" r="3" />
-                
-                <circle cx="470" cy="175" r="3" />
-                <circle cx="490" cy="175" r="3" />
-                <circle cx="510" cy="175" r="3" />
-                <circle cx="530" cy="175" r="3" />
-                <circle cx="550" cy="175" r="3" />
-                
-                <circle cx="460" cy="190" r="3" />
-                <circle cx="480" cy="190" r="3" />
-                <circle cx="500" cy="190" r="3" />
-                <circle cx="520" cy="190" r="3" />
-                <circle cx="540" cy="190" r="3" />
-                <circle cx="560" cy="190" r="3" />
-                
-                <circle cx="470" cy="205" r="3" />
-                <circle cx="490" cy="205" r="3" />
-                <circle cx="510" cy="205" r="3" />
-                <circle cx="530" cy="205" r="3" />
-                <circle cx="550" cy="205" r="3" />
-                
-                <circle cx="460" cy="220" r="3" />
-                <circle cx="480" cy="220" r="3" />
-                <circle cx="500" cy="220" r="3" />
-                <circle cx="520" cy="220" r="3" />
-                <circle cx="540" cy="220" r="3" />
-                <circle cx="560" cy="220" r="3" />
-                
-                <circle cx="470" cy="235" r="3" />
-                <circle cx="490" cy="235" r="3" />
-                <circle cx="510" cy="235" r="3" />
-                <circle cx="530" cy="235" r="3" />
-                <circle cx="550" cy="235" r="3" />
-              </g>
-              
-              {/* Rainbow connecting the flags */}
-              <path d="M150,500 Q400,300 650,500" fill="none" stroke="#FF0000" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M170,500 Q400,320 630,500" fill="none" stroke="#FF7F00" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M190,500 Q400,340 610,500" fill="none" stroke="#FFFF00" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M210,500 Q400,360 590,500" fill="none" stroke="#00FF00" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M230,500 Q400,380 570,500" fill="none" stroke="#0000FF" strokeWidth="15" strokeOpacity="0.7" />
-              <path d="M250,500 Q400,400 550,500" fill="none" stroke="#4B0082" strokeWidth="15" strokeOpacity="0.7" />
-              
-              {/* Ground */}
-              <rect x="0" y="500" width="800" height="100" fill="#8BC34A" />
-              
-              {/* Character 1 - Vitaly - positioned in the center-left */}
-              <g transform="translate(320,420)">
-                <circle cx="0" cy="0" r="40" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Head */}
-                <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
-                <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
-                <path d="M-15,10 Q0,25 15,10" fill="none" stroke="#E65100" strokeWidth="3" strokeLinecap="round" /> {/* Smile */}
-                <rect x="-30" y="40" width="60" height="60" rx="10" fill="#3F51B5" stroke="#1A237E" strokeWidth="2" /> {/* Body */}
-                <rect x="-30" y="100" width="25" height="40" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Left leg */}
-                <rect x="5" y="100" width="25" height="40" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Right leg */}
-                <rect x="-60" y="50" width="30" height="10" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Left arm */}
-                <rect x="30" y="50" width="30" height="20" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Right arm extended to hold hands */}
-              </g>
-              
-              {/* Character 2 - Kimball - positioned in the center-right */}
-              <g transform="translate(480,420)">
-                <circle cx="0" cy="0" r="40" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Head */}
-                <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
-                <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
-                <path d="M-15,15 Q0,25 15,15" fill="none" stroke="#E65100" strokeWidth="3" strokeLinecap="round" /> {/* Smile */}
-                <rect x="-30" y="40" width="60" height="60" rx="10" fill="#4CAF50" stroke="#1B5E20" strokeWidth="2" /> {/* Body */}
-                <rect x="-30" y="100" width="25" height="40" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Left leg */}
-                <rect x="5" y="100" width="25" height="40" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Right leg */}
-                <rect x="-60" y="50" width="30" height="20" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Left arm extended to hold hands */}
-                <rect x="30" y="50" width="30" height="10" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Right arm */}
-              </g>
-              
-              {/* Holding hands in the middle */}
-              <circle cx="400" cy="470" r="15" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Joined hands */}
-              
-              {/* Hearts around the couple */}
-              <g transform="translate(350,350) scale(0.6)">
-                <path d="M-30,0 C-40,-20 -70,0 -30,40 C10,0 -20,-20 -30,0 Z" fill="#E91E63" fillOpacity="0.7" />
-              </g>
-              <g transform="translate(450,350) scale(0.6)">
-                <path d="M30,0 C40,-20 70,0 30,40 C-10,0 20,-20 30,0 Z" fill="#E91E63" fillOpacity="0.7" />
-              </g>
-              <g transform="translate(400,300) scale(0.6)">
-                <path d="M0,0 C-10,-20 -40,0 0,40 C40,0 10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
-              </g>
-            </svg>
-          </div>
-          
-          {/* More transparent overlay with text - positioned to not obscure faces */}
-          <div className="bg-white/40 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-pink-300 relative z-10 max-w-md mt-32">
-            <div className="mx-auto mb-4 w-24 h-24">
-              <img 
-                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" 
-                alt="KV Logo" 
-                className="w-full h-full object-contain"
-              />
+        <div className="h-full w-full bg-gradient-to-br from-indigo-200 to-purple-200 p-4 md:p-8 flex relative overflow-hidden">
+          {/* Enhanced decorative elements */}
+          <div className="absolute top-4 left-4 w-12 h-12 text-3xl opacity-60 animate-bounce">🌈</div>
+          <div className="absolute bottom-4 right-4 w-12 h-12 text-3xl opacity-60 animate-pulse">🌟</div>
+          <div className="absolute top-1/4 right-10 w-12 h-12 text-3xl animate-bounce opacity-40">🎈</div>
+          <div className="absolute bottom-1/4 left-10 w-12 h-12 text-3xl animate-spin-slow opacity-40">🎀</div>
+          <div className="absolute top-1/2 left-4 w-8 h-8 text-2xl opacity-30 animate-pulse">✨</div>
+          <div className="absolute top-1/3 right-4 w-8 h-8 text-2xl opacity-30 animate-bounce">💫</div>
+          <div className="absolute bottom-1/3 right-1/4 w-10 h-10 text-2xl opacity-40 animate-spin-slow">🦋</div>
+          <div className="absolute top-3/4 left-1/4 w-10 h-10 text-2xl opacity-40 animate-pulse">🌺</div>
+
+          {/* Two-column layout */}
+          <div className="flex w-full h-full items-center justify-center">
+            {/* Left side - SMALLER title box centered in the middle of the page */}
+            <div className="w-1/2 flex items-center justify-center px-4 md:px-6">
+              <div className="w-4/5 max-w-sm bg-blue-100/90 backdrop-blur-sm rounded-xl border-4 border-yellow-300 p-8 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                {/* Decorative border inside */}
+                <div className="border-2 border-dashed border-indigo-300 rounded-lg p-6 text-center">
+                  {/* Main Title */}
+                  <h1 
+                    className="font-bold text-indigo-700 leading-tight text-center mb-4" 
+                    style={{
+                      fontFamily: "'Fredoka One','Baloo 2','Bree Serif',cursive",
+                      fontSize: "clamp(1.2rem, 4vw, 1.8rem)"
+                    }}
+                  >
+                    THE ADVENTURES OF<br />
+                    VITALY & KIMBALL
+                  </h1>
+
+                  {/* Subtitle */}
+                  <h2 
+                    className="italic text-amber-800 leading-relaxed mb-4 text-center" 
+                    style={{
+                      fontFamily: "'Chewy','Comic Sans MS',cursive",
+                      fontSize: "clamp(0.9rem, 2.5vw, 1.3rem)"
+                    }}
+                  >
+                    Two Boys, One Big Closet<br />
+                    (And a Whole Lot of Pizza)
+                  </h2>
+
+                  {/* Heart icon */}
+                  <div className="mb-4">
+                    <SafeIcon icon={FiHeart} className="w-8 h-8 text-rose-500 mx-auto animate-pulse" />
+                  </div>
+
+                  {/* Tagline */}
+                  <h3 
+                    className="text-stone-700 leading-relaxed mb-4 text-center" 
+                    style={{
+                      fontFamily: "'Century Schoolbook','Quicksand',sans-serif",
+                      fontSize: "clamp(0.8rem, 2vw, 1rem)"
+                    }}
+                  >
+                    A True Love Story for Anyone Who Knows Home is a Person, Not a Place
+                  </h3>
+
+                  {/* Dedication */}
+                  <p 
+                    className="italic text-gray-600 text-center border-t-2 border-indigo-200 pt-4" 
+                    style={{
+                      fontFamily: "'Georgia',serif",
+                      fontSize: "clamp(0.8rem, 1.8vw, 1rem)",
+                      fontStyle: "italic"
+                    }}
+                  >
+                    For Kimball, on our wedding anniversary
+                  </p>
+                </div>
+              </div>
             </div>
-            <h1 className="text-4xl font-bold text-center mb-4 text-indigo-700 font-['Comic Neue','Comic Sans MS',cursive] text-shadow-lg">THE ADVENTURES OF</h1>
-            <h2 className="text-3xl font-bold text-center mb-6 text-indigo-600 font-['Comic Neue','Comic Sans MS',cursive] text-shadow-lg">VITALY & KIMBALL</h2>
-            <h3 className="text-xl italic text-center mb-6 text-amber-800 font-['Comic Neue','Comic Sans MS',cursive] text-shadow-sm">Two Boys, One Big Closet<br />(And a Whole Lot of Pizza)</h3>
-            <p className="italic text-sm text-center mt-6 text-gray-600 font-['Comic Neue','Comic Sans MS',cursive]">For Kimball, on our wedding anniversary</p>
-            <div className="mt-4 flex justify-center">
-              <SafeIcon icon={FiHeart} className="w-12 h-12 text-rose-500" />
+
+            {/* Right side - Photo in decorative frame */}
+            <div className="w-1/2 flex items-center justify-center p-2">
+              <div className="h-full w-full max-w-lg bg-white/90 rounded-2xl border-4 border-blue-300 p-4 shadow-2xl transform hover:scale-105 transition-transform duration-300 overflow-hidden">
+                {/* Decorative frame inside */}
+                <div className="h-full w-full border-4 border-dashed border-purple-300 rounded-xl p-2 overflow-hidden">
+                  {/* New cover image with smart crop to focus on heads and tryzub */}
+                  <div className="relative w-full h-full overflow-hidden rounded-lg">
+                    <img 
+                      src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753679015604-IMG_1882.JPG" 
+                      alt="Vitaly and Kimball" 
+                      className="object-cover w-full h-full"
+                      style={{
+                        objectPosition: "center 30%", // Smart crop to focus on heads and tryzub
+                      }}
+                    />
+                    {/* Photo overlay with sparkles */}
+                    <div className="absolute top-2 right-2 w-6 h-6 text-xl animate-pulse opacity-80">✨</div>
+                    <div className="absolute bottom-2 left-2 w-6 h-6 text-xl animate-bounce opacity-80">💖</div>
+                    <div className="absolute top-1/2 left-2 w-5 h-5 text-lg animate-pulse opacity-60">⭐</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )
     },
-    
-    // Dedication Page
+    // Dedication Page - Updated with consistent rounded corners styling to match cover
     {
       content: (
         <div className="h-full w-full bg-gradient-to-br from-rose-200 to-pink-200 p-8 flex flex-col items-center justify-center relative">
@@ -200,1000 +130,1028 @@ const Book = () => {
           <div className="absolute bottom-6 right-6 w-20 h-20 text-5xl">🌺</div>
           <div className="absolute top-1/3 right-12 w-16 h-16 text-4xl animate-bounce">💕</div>
           <div className="absolute bottom-1/3 left-12 w-16 h-16 text-4xl animate-spin-slow">🎀</div>
-          
-          {/* Container to ensure equal sizing between image and text */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-            {/* Updated dedication image - square format with cartoon style */}
-            <div className="w-full aspect-square bg-white rounded-2xl shadow-xl border-4 border-rose-300 overflow-hidden flex items-center justify-center">
-              {/* Custom cartoon illustration for dedication - matching the style of other chapters */}
-              <svg viewBox="0 0 400 400" className="w-full h-full">
-                {/* Background */}
-                <rect x="0" y="0" width="400" height="400" fill="#FFF8E1" />
-                
-                {/* Table with ice cream and donuts */}
-                <rect x="50" y="250" width="300" height="20" fill="#8D6E63" /> {/* Table top */}
-                <rect x="70" y="270" width="20" height="100" fill="#6D4C41" /> {/* Table leg left */}
-                <rect x="310" y="270" width="20" height="100" fill="#6D4C41" /> {/* Table leg right */}
-                
-                {/* Ice cream in bowl */}
-                <ellipse cx="150" cy="230" rx="40" ry="15" fill="#BCAAA4" /> {/* Bowl rim */}
-                <ellipse cx="150" cy="235" rx="35" ry="12" fill="#EFEBE9" /> {/* Bowl inside */}
-                <path d="M120,230 Q150,180 180,230" fill="#F48FB1" /> {/* Ice cream scoop */}
-                <circle cx="150" cy="210" r="25" fill="#F8BBD0" /> {/* Ice cream scoop */}
-                <circle cx="130" cy="200" r="8" fill="#E91E63" /> {/* Cherry */}
-                <rect x="127" y="185" width="5" height="15" fill="#795548" /> {/* Cherry stem */}
-                
-                {/* Donuts */}
-                <circle cx="250" cy="220" r="30" fill="#FFB74D" /> {/* Donut base */}
-                <circle cx="250" cy="220" r="15" fill="#FFF8E1" /> {/* Donut hole */}
-                <path d="M230,210 Q250,200 270,210" stroke="#C2185B" strokeWidth="4" fill="none" /> {/* Frosting */}
-                <circle cx="240" cy="205" r="3" fill="#EC407A" /> {/* Sprinkle */}
-                <circle cx="260" cy="205" r="3" fill="#42A5F5" /> {/* Sprinkle */}
-                <circle cx="250" cy="200" r="3" fill="#FBC02D" /> {/* Sprinkle */}
-                <circle cx="235" cy="215" r="3" fill="#7CB342" /> {/* Sprinkle */}
-                <circle cx="265" cy="215" r="3" fill="#5E35B1" /> {/* Sprinkle */}
-                
-                {/* Character 1 - Vitaly */}
-                <g transform="translate(130,120)">
-                  <circle cx="0" cy="0" r="40" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Head */}
-                  <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
-                  <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
-                  <path d="M-15,10 Q0,25 15,10" fill="none" stroke="#E65100" strokeWidth="3" strokeLinecap="round" /> {/* Smile */}
-                  <rect x="-30" y="40" width="60" height="60" rx="10" fill="#3F51B5" stroke="#1A237E" strokeWidth="2" /> {/* Body */}
-                  <rect x="-30" y="100" width="25" height="40" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Left leg */}
-                  <rect x="5" y="100" width="25" height="40" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Right leg */}
-                  <rect x="-60" y="50" width="30" height="10" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Left arm */}
-                  <rect x="30" y="50" width="30" height="10" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Right arm */}
-                </g>
-                
-                {/* Character 2 - Kimball */}
-                <g transform="translate(270,120)">
-                  <circle cx="0" cy="0" r="40" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Head */}
-                  <ellipse cx="-15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Left eye */}
-                  <ellipse cx="15" cy="-10" rx="5" ry="7" fill="#3E2723" /> {/* Right eye */}
-                  <path d="M-15,15 Q0,25 15,15" fill="none" stroke="#E65100" strokeWidth="3" strokeLinecap="round" /> {/* Smile */}
-                  <rect x="-30" y="40" width="60" height="60" rx="10" fill="#4CAF50" stroke="#1B5E20" strokeWidth="2" /> {/* Body */}
-                  <rect x="-30" y="100" width="25" height="40" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Left leg */}
-                  <rect x="5" y="100" width="25" height="40" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Right leg */}
-                  <rect x="-60" y="50" width="30" height="10" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Left arm */}
-                  <rect x="30" y="50" width="30" height="10" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Right arm */}
-                </g>
-                
-                {/* Heart between them */}
-                <g transform="translate(200,80) scale(0.8)">
-                  <path d="M0,40 C-40,-20 -80,20 -20,60 C40,100 0,-20 0,40 Z" fill="#E91E63" fillOpacity="0.7" />
-                  <path d="M0,40 C40,-20 80,20 20,60 C-40,100 0,-20 0,40 Z" fill="#E91E63" fillOpacity="0.7" />
-                </g>
-              </svg>
+
+          {/* Container to ensure equal sizing between text and image */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            {/* Left side - Dedication text in matching rounded corners style */}
+            <div className="bg-blue-100/90 backdrop-blur-sm rounded-xl p-6 shadow-2xl border-4 border-blue-300 flex flex-col justify-center items-center transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border to match cover */}
+              <div className="border-2 border-dashed border-purple-300 rounded-lg p-6 w-full">
+                {/* FIXED: Dedication title with correct font and styling */}
+                <h2 
+                  className="font-bold text-center mb-6 text-blue-700" 
+                  style={{
+                    fontFamily: "'Chewy','Comic Sans MS',cursive",
+                    fontSize: "clamp(1.15rem, 4vw, 1.8rem)"
+                  }}
+                >
+                  DEDICATION
+                </h2>
+                <div className="prose prose-lg max-w-md mx-auto">
+                  {/* FIXED: Dedication text with correct font and no bullets */}
+                  <div 
+                    className="text-center space-y-4 text-gray-700" 
+                    style={{
+                      fontFamily: "'Comic Neue','Comic Sans MS',Arial,sans-serif",
+                      fontSize: "clamp(1.08rem, 3vw, 1.4rem)",
+                      lineHeight: "1.6"
+                    }}
+                  >
+                    <p>For Kimball, on our anniversary—</p>
+                    <p>the only man who can outlast me in World of Warcraft,</p>
+                    <p>out-snore me through a fireworks show in July,</p>
+                    <p>and out-eat me… a whole gallon of ice cream in one sitting.</p>
+                    <p>A love so competitive, it's only fair we keep score—even when I lose.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            {/* Dedication text box - matching dimensions with the image */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-4 border-rose-300 w-full aspect-square flex flex-col justify-center">
-              <h2 className="text-3xl font-bold text-center mb-6 text-rose-700 font-['Comic Neue','Comic Sans MS',cursive]">DEDICATION</h2>
-              <div className="prose prose-lg max-w-md mx-auto">
-                <p className="text-center italic text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  For Kimball, on our anniversary—<br /><br />
-                  the only man who can outlast me in World of Warcraft,<br />
-                  out-snore me through a fireworks show in July,<br />
-                  and out-eat me… a whole gallon of ice cream in one sitting.<br />
-                  A love so competitive, it's only fair we keep score—even when I lose.
-                </p>
+
+            {/* Right side - Using the old cover illustration with matching styling */}
+            <div className="w-full bg-white/90 rounded-xl shadow-2xl border-4 border-blue-300 overflow-hidden flex items-center justify-center p-4 transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="w-full h-full border-2 border-dashed border-indigo-300 rounded-lg p-2">
+                {/* Previous cover illustration now moved to dedication page */}
+                <div className="w-full h-full">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    {/* Background with soft geometric shapes */}
+                    <defs>
+                      <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFF8DC" />
+                        <stop offset="100%" stopColor="#F0E68C" />
+                      </linearGradient>
+                      <filter id="soft-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#00000020"/>
+                      </filter>
+                    </defs>
+                    
+                    {/* Background - fill entire right side */}
+                    <rect x="0" y="0" width="400" height="400" fill="url(#bg-gradient)" />
+                    
+                    {/* Soft geometric shapes in background */}
+                    <circle cx="80" cy="80" r="30" fill="#E6E6FA" opacity="0.3" />
+                    <circle cx="320" cy="100" r="25" fill="#FFE4E1" opacity="0.3" />
+                    <rect x="300" y="300" width="40" height="40" fill="#F0FFFF" opacity="0.3" rx="8" />
+                    <rect x="50" y="320" width="35" height="35" fill="#FFEFD5" opacity="0.3" rx="6" />
+                    <path d="M240,60 Q280,80 260,120 Q240,140 200,120 Z" fill="#FFE4E1" opacity="0.2" />
+                    <path d="M100,200 Q140,220 120,260 Q100,280 60,260 Z" fill="#E6E6FA" opacity="0.2" />
+                    
+                    {/* Bench */}
+                    <rect x="120" y="280" width="160" height="20" fill="#8B4513" filter="url(#soft-shadow)" rx="4" />
+                    <rect x="130" y="300" width="15" height="60" fill="#654321" rx="3" />
+                    <rect x="255" y="300" width="15" height="60" fill="#654321" rx="3" />
+                    
+                    {/* Large pink heart above characters */}
+                    <g transform="translate(200,120) scale(1.2)">
+                      <path d="M0,20 C-15,-10 -40,5 -15,35 C10,65 0,-10 0,20 Z" fill="#FFB6C1" opacity="0.8" filter="url(#soft-shadow)" />
+                      <path d="M0,20 C15,-10 40,5 15,35 C-10,65 0,-10 0,20 Z" fill="#FFB6C1" opacity="0.8" filter="url(#soft-shadow)" />
+                    </g>
+                    
+                    {/* Vitaly - Left character in yellow with trident */}
+                    <g transform="translate(160,220)">
+                      {/* Head - medium-dark skin, rounded */}
+                      <circle cx="0" cy="0" r="30" fill="#D2B48C" stroke="#8B7355" strokeWidth="2" filter="url(#soft-shadow)" />
+                      
+                      {/* Eyes */}
+                      <ellipse cx="-12" cy="-8" rx="4" ry="6" fill="#2F4F4F" />
+                      <ellipse cx="12" cy="-8" rx="4" ry="6" fill="#2F4F4F" />
+                      <circle cx="-12" cy="-8" r="2" fill="#FFFFFF" />
+                      <circle cx="12" cy="-8" r="2" fill="#FFFFFF" />
+                      
+                      {/* Smile - rounded */}
+                      <path d="M-12,8 Q0,18 12,8" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - yellow outfit */}
+                      <rect x="-25" y="30" width="50" height="50" rx="8" fill="#FFD700" stroke="#DAA520" strokeWidth="2" filter="url(#soft-shadow)" />
+                      
+                      {/* Ukrainian Trident (Tryzub) logo centered on chest */}
+                      <g transform="translate(0,55) scale(0.8)" fill="#0057B7">
+                        <path d="M0,-15 L-8,-5 L-8,5 L-4,5 L-4,15 L4,15 L4,5 L8,5 L8,-5 Z" />
+                        <path d="M-12,-10 L-12,0 L-8,0 L-8,-10 Z" />
+                        <path d="M12,-10 L12,0 L8,0 L8,-10 Z" />
+                      </g>
+                      
+                      {/* Arms */}
+                      <rect x="-45" y="40" width="20" height="12" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" rx="6" />
+                      <rect x="25" y="40" width="20" height="12" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" rx="6" />
+                      
+                      {/* Legs */}
+                      <rect x="-20" y="80" width="15" height="35" fill="#B8860B" stroke="#DAA520" strokeWidth="1" rx="4" />
+                      <rect x="5" y="80" width="15" height="35" fill="#B8860B" stroke="#DAA520" strokeWidth="1" rx="4" />
+                    </g>
+                    
+                    {/* Kimball - Right character in blue (same as tryzub), lighter skin */}
+                    <g transform="translate(240,220)">
+                      {/* Head - lighter skin, rounded */}
+                      <circle cx="0" cy="0" r="30" fill="#FDBCB4" stroke="#CD853F" strokeWidth="2" filter="url(#soft-shadow)" />
+                      
+                      {/* Eyes */}
+                      <ellipse cx="-12" cy="-8" rx="4" ry="6" fill="#2F4F4F" />
+                      <ellipse cx="12" cy="-8" rx="4" ry="6" fill="#2F4F4F" />
+                      <circle cx="-12" cy="-8" r="2" fill="#FFFFFF" />
+                      <circle cx="12" cy="-8" r="2" fill="#FFFFFF" />
+                      
+                      {/* Smile */}
+                      <path d="M-12,8 Q0,18 12,8" fill="none" stroke="#CD853F" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - blue outfit (same color as tryzub) */}
+                      <rect x="-25" y="30" width="50" height="50" rx="8" fill="#0057B7" stroke="#003785" strokeWidth="2" filter="url(#soft-shadow)" />
+                      
+                      {/* Arms */}
+                      <rect x="-45" y="40" width="20" height="12" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" rx="6" />
+                      <rect x="25" y="40" width="20" height="12" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" rx="6" />
+                      
+                      {/* Legs */}
+                      <rect x="-20" y="80" width="15" height="35" fill="#004494" stroke="#003785" strokeWidth="1" rx="4" />
+                      <rect x="5" y="80" width="15" height="35" fill="#004494" stroke="#003785" strokeWidth="1" rx="4" />
+                    </g>
+                    
+                    {/* Small decorative hearts around the couple */}
+                    <g fill="#FFB6C1" opacity="0.6">
+                      <g transform="translate(120,180) scale(0.3)">
+                        <path d="M0,20 C-15,-10 -40,5 -15,35 C10,65 0,-10 0,20 Z" />
+                        <path d="M0,20 C15,-10 40,5 15,35 C-10,65 0,-10 0,20 Z" />
+                      </g>
+                      <g transform="translate(280,180) scale(0.3)">
+                        <path d="M0,20 C-15,-10 -40,5 -15,35 C10,65 0,-10 0,20 Z" />
+                        <path d="M0,20 C15,-10 40,5 15,35 C-10,65 0,-10 0,20 Z" />
+                      </g>
+                      <g transform="translate(200,320) scale(0.25)">
+                        <path d="M0,20 C-15,-10 -40,5 -15,35 C10,65 0,-10 0,20 Z" />
+                        <path d="M0,20 C15,-10 40,5 15,35 C-10,65 0,-10 0,20 Z" />
+                      </g>
+                    </g>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )
     },
-    
-    // Chapter One - The Boy With Three Dollars
+    // Chapter One Spread 1 - The Boy With Three Dollars - REDESIGNED
     {
       content: (
         <div className="h-full w-full bg-gradient-to-br from-sky-200 to-blue-200 p-8 flex flex-col items-center justify-center relative">
-          {/* Decorative elements */}
+          {/* Decorative elements matching dedication page */}
           <div className="absolute top-8 right-8 w-16 h-16 text-4xl">✈️</div>
           <div className="absolute bottom-8 left-8 w-16 h-16 text-4xl">🌍</div>
           <div className="absolute top-1/4 left-12 w-12 h-12 text-3xl animate-bounce">💼</div>
           <div className="absolute bottom-1/4 right-12 w-12 h-12 text-3xl animate-spin-slow">🎭</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-blue-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-blue-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER ONE:<br />THE BOY WITH THREE DOLLARS
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Once upon a time, in a country far, far away (Ukraine!), there lived a boy named Vitaly who dreamed of freedom.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">He packed his life into:</p>
-                <ul className="list-disc pl-6 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <li>Two suitcases</li>
-                  <li>Three American dollars</li>
-                  <li>A head full of questions</li>
-                </ul>
-                <p className="italic text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  "Will Americans give me food?"<br />
-                  "Will my Bandura survive the airport?"<br />
-                  "Why are all the houses square and lined up like math class?"
-                </p>
+
+          {/* Container matching dedication page layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            {/* Left side - Text in matching rounded corners style */}
+            <div className="bg-blue-100/90 backdrop-blur-sm rounded-xl p-6 shadow-2xl border-4 border-blue-300 flex flex-col justify-center transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="border-2 border-dashed border-indigo-300 rounded-lg p-6 w-full">
+                {/* Chapter title with correct font and styling */}
+                <h2 
+                  className="font-bold text-center mb-6 text-blue-700" 
+                  style={{
+                    fontFamily: "'Chewy','Comic Sans MS',cursive",
+                    fontSize: "clamp(1.15rem, 4vw, 1.8rem)"
+                  }}
+                >
+                  CHAPTER 1:<br />THE BOY WITH THREE DOLLARS
+                </h2>
+                
+                {/* Story text with proper styling */}
+                <div 
+                  className="text-gray-700 text-left space-y-4" 
+                  style={{
+                    fontFamily: "'Comic Neue','Comic Sans MS',Arial,sans-serif",
+                    fontSize: "clamp(1.08rem, 3vw, 1.4rem)",
+                    lineHeight: "1.6"
+                  }}
+                >
+                  <p>Once upon a time in Ukraine, a boy named Vitaly dared to dream.</p>
+                  <p>He packed two suitcases, three American dollars, and a head full of questions.</p>
+                  
+                  <div className="space-y-2">
+                    <p className="italic">"Will Americans give me food?"</p>
+                    <p className="italic">"Will my Bandura survive the flight?"</p>
+                    <p className="italic">"Why are all the houses square like math problems?"</p>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            {/* Right side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Cartoon drawing of a boy with suitcases looking at an airplane */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  <defs>
-                    <radialGradient id="sky" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-                      <stop offset="0%" stopColor="#87CEEB" />
-                      <stop offset="100%" stopColor="#1E90FF" />
-                    </radialGradient>
-                  </defs>
-                  
-                  {/* Background */}
-                  <rect x="0" y="0" width="400" height="300" fill="url(#sky)" />
-                  
-                  {/* Sun */}
-                  <circle cx="350" cy="50" r="30" fill="#FFD700" />
-                  
-                  {/* Airplane */}
-                  <path d="M320,100 L250,120 L260,130 L320,120 L350,110 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  <path d="M250,120 L230,140 L260,130 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  <path d="M270,125 L260,150 L280,145 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Ground */}
-                  <rect x="0" y="230" width="400" height="70" fill="#8B4513" />
-                  <rect x="0" y="220" width="400" height="10" fill="#228B22" />
-                  
-                  {/* Character */}
-                  <circle cx="100" cy="180" r="25" fill="#FFE7D6" stroke="#000000" strokeWidth="2" /> {/* Head */}
-                  <path d="M90,170 L95,170" stroke="#000000" strokeWidth="2" /> {/* Left eye */}
-                  <path d="M110,170 L105,170" stroke="#000000" strokeWidth="2" /> {/* Right eye */}
-                  <path d="M95,190 L105,190" stroke="#000000" strokeWidth="2" /> {/* Smile */}
-                  <path d="M100,195 L100,220" stroke="#000000" strokeWidth="2" /> {/* Neck */}
-                  <path d="M70,220 L130,220 L120,270 L80,270 Z" fill="#4169E1" stroke="#000000" strokeWidth="2" /> {/* Body */}
-                  
-                  {/* Arms */}
-                  <path d="M70,230 L50,250" stroke="#000000" strokeWidth="2" />
-                  <path d="M130,230 L150,250" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Legs */}
-                  <path d="M90,270 L85,300" stroke="#000000" strokeWidth="2" />
-                  <path d="M110,270 L115,300" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Suitcases */}
-                  <rect x="30" y="250" width="30" height="25" fill="#8B4513" stroke="#000000" strokeWidth="2" />
-                  <rect x="150" y="250" width="30" height="25" fill="#8B4513" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Money */}
-                  <rect x="100" cy="150" width="20" height="10" fill="#90EE90" stroke="#000000" strokeWidth="1" transform="rotate(15, 100, 150)" />
-                  
-                  {/* Thought bubble */}
-                  <circle cx="150" cy="100" r="5" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <circle cx="160" cy="90" r="8" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <circle cx="175" cy="75" r="15" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <path d="M165,70 L185,70" stroke="#000000" strokeWidth="1" /> {/* Question mark */}
-                  <path d="M185,70 L185,80" stroke="#000000" strokeWidth="1" />
-                  <circle cx="185" cy="85" r="1" fill="#000000" />
-                </svg>
+
+            {/* Right side - Illustration in matching style */}
+            <div className="w-full bg-white/90 rounded-xl shadow-2xl border-4 border-blue-300 overflow-hidden flex items-center justify-center p-4 transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="w-full h-full border-2 border-dashed border-indigo-300 rounded-lg p-2">
+                {/* Illustration of young Vitaly with suitcases and thought bubbles */}
+                <div className="w-full h-full">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="pastel-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#E8F4FD" />
+                        <stop offset="100%" stopColor="#B8E6FF" />
+                      </linearGradient>
+                      <filter id="drop-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="1" dy="1" stdDeviation="2" floodColor="#00000030"/>
+                      </filter>
+                    </defs>
+                    
+                    {/* Flat pastel background */}
+                    <rect x="0" y="0" width="400" height="400" fill="url(#pastel-bg)" />
+                    
+                    {/* Ground line */}
+                    <rect x="0" y="320" width="400" height="80" fill="#C8E6C9" opacity="0.6" />
+                    
+                    {/* Young Vitaly character */}
+                    <g transform="translate(200,250)">
+                      {/* Head - medium-dark skin, rounded, cheerful */}
+                      <circle cx="0" cy="0" r="28" fill="#D2B48C" stroke="#8B7355" strokeWidth="2" filter="url(#drop-shadow)" />
+                      
+                      {/* Cheerful eyes */}
+                      <ellipse cx="-10" cy="-8" rx="3" ry="5" fill="#2F4F4F" />
+                      <ellipse cx="10" cy="-8" rx="3" ry="5" fill="#2F4F4F" />
+                      <circle cx="-10" cy="-8" r="1.5" fill="#FFFFFF" />
+                      <circle cx="10" cy="-8" r="1.5" fill="#FFFFFF" />
+                      
+                      {/* Big cheerful smile */}
+                      <path d="M-15,8 Q0,20 15,8" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - yellow shirt with blue trident */}
+                      <rect x="-22" y="28" width="44" height="45" rx="6" fill="#FFD700" stroke="#DAA520" strokeWidth="2" filter="url(#drop-shadow)" />
+                      
+                      {/* Centered blue trident on chest */}
+                      <g transform="translate(0,50) scale(0.7)" fill="#0057B7">
+                        <path d="M0,-12 L-6,-4 L-6,4 L-3,4 L-3,12 L3,12 L3,4 L6,4 L6,-4 Z" />
+                        <path d="M-9,-8 L-9,0 L-6,0 L-6,-8 Z" />
+                        <path d="M9,-8 L9,0 L6,0 L6,-8 Z" />
+                      </g>
+                      
+                      {/* Arms */}
+                      <rect x="-35" y="35" width="13" height="8" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" rx="4" />
+                      <rect x="22" y="35" width="13" height="8" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" rx="4" />
+                      
+                      {/* Legs */}
+                      <rect x="-15" y="73" width="12" height="30" fill="#4169E1" stroke="#1E3A8A" strokeWidth="1" rx="3" />
+                      <rect x="3" y="73" width="12" height="30" fill="#4169E1" stroke="#1E3A8A" strokeWidth="1" rx="3" />
+                    </g>
+                    
+                    {/* Left suitcase */}
+                    <rect x="120" y="290" width="35" height="25" fill="#8B4513" stroke="#654321" strokeWidth="2" rx="3" filter="url(#drop-shadow)" />
+                    <rect x="125" y="295" width="25" height="15" fill="#A0522D" stroke="#654321" strokeWidth="1" rx="2" />
+                    <circle cx="137" cy="302" r="2" fill="#FFD700" />
+                    
+                    {/* Right suitcase */}
+                    <rect x="245" y="290" width="35" height="25" fill="#8B4513" stroke="#654321" strokeWidth="2" rx="3" filter="url(#drop-shadow)" />
+                    <rect x="250" y="295" width="25" height="15" fill="#A0522D" stroke="#654321" strokeWidth="1" rx="2" />
+                    <circle cx="262" cy="302" r="2" fill="#FFD700" />
+                    
+                    {/* Bandura (Ukrainian string instrument) */}
+                    <g transform="translate(180,280)">
+                      <ellipse cx="0" cy="0" rx="18" ry="25" fill="#DEB887" stroke="#8B7355" strokeWidth="2" filter="url(#drop-shadow)" />
+                      <rect x="-2" y="-25" width="4" height="20" fill="#654321" />
+                      <line x1="-12" y1="-15" x2="12" y2="-15" stroke="#8B7355" strokeWidth="1" />
+                      <line x1="-12" y1="-8" x2="12" y2="-8" stroke="#8B7355" strokeWidth="1" />
+                      <line x1="-12" y1="-1" x2="12" y2="-1" stroke="#8B7355" strokeWidth="1" />
+                      <line x1="-12" y1="6" x2="12" y2="6" stroke="#8B7355" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Thought bubbles */}
+                    {/* Bubble 1 - American food */}
+                    <g transform="translate(120,120)">
+                      <circle cx="0" cy="0" r="35" fill="#FFFFFF" stroke="#000000" strokeWidth="2" opacity="0.9" />
+                      <circle cx="-15" cy="25" r="8" fill="#FFFFFF" stroke="#000000" strokeWidth="1" opacity="0.7" />
+                      <circle cx="-8" cy="35" r="4" fill="#FFFFFF" stroke="#000000" strokeWidth="1" opacity="0.5" />
+                      
+                      {/* Hamburger */}
+                      <ellipse cx="0" cy="-5" rx="12" ry="4" fill="#D2691E" />
+                      <ellipse cx="0" cy="0" rx="15" ry="6" fill="#32CD32" />
+                      <ellipse cx="0" cy="5" rx="12" ry="4" fill="#D2691E" />
+                      
+                      {/* French fries */}
+                      <rect x="8" y="-8" width="2" height="12" fill="#FFD700" />
+                      <rect x="11" y="-6" width="2" height="10" fill="#FFD700" />
+                      <rect x="14" y="-9" width="2" height="13" fill="#FFD700" />
+                    </g>
+                    
+                    {/* Bubble 2 - Bandura on plane */}
+                    <g transform="translate(280,100)">
+                      <circle cx="0" cy="0" r="32" fill="#FFFFFF" stroke="#000000" strokeWidth="2" opacity="0.9" />
+                      <circle cx="15" cy="22" r="6" fill="#FFFFFF" stroke="#000000" strokeWidth="1" opacity="0.7" />
+                      <circle cx="8" cy="30" r="3" fill="#FFFFFF" stroke="#000000" strokeWidth="1" opacity="0.5" />
+                      
+                      {/* Small airplane */}
+                      <path d="M-10,-5 L10,-2 L15,2 L10,6 L-10,3 Z" fill="#87CEEB" stroke="#4682B4" strokeWidth="1" />
+                      <path d="M-5,-2 L-15,-8 L-10,-2 Z" fill="#87CEEB" stroke="#4682B4" strokeWidth="1" />
+                      <path d="M5,2 L8,12 L12,8 Z" fill="#87CEEB" stroke="#4682B4" strokeWidth="1" />
+                      
+                      {/* Small bandura in plane */}
+                      <ellipse cx="0" cy="8" rx="6" ry="8" fill="#DEB887" stroke="#8B7355" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Bubble 3 - Square houses */}
+                    <g transform="translate(200,80)">
+                      <circle cx="0" cy="0" r="30" fill="#FFFFFF" stroke="#000000" strokeWidth="2" opacity="0.9" />
+                      <circle cx="-12" cy="20" r="5" fill="#FFFFFF" stroke="#000000" strokeWidth="1" opacity="0.7" />
+                      <circle cx="-6" cy="27" r="2" fill="#FFFFFF" stroke="#000000" strokeWidth="1" opacity="0.5" />
+                      
+                      {/* Three blocky square houses */}
+                      <rect x="-18" y="-5" width="12" height="12" fill="#FFB6C1" stroke="#000000" strokeWidth="1" />
+                      <rect x="-6" y="-8" width="12" height="15" fill="#98FB98" stroke="#000000" strokeWidth="1" />
+                      <rect x="6" y="-3" width="12" height="10" fill="#87CEEB" stroke="#000000" strokeWidth="1" />
+                      
+                      {/* Square windows */}
+                      <rect x="-15" y="-2" width="3" height="3" fill="#87CEEB" stroke="#000000" strokeWidth="0.5" />
+                      <rect x="-10" y="-2" width="3" height="3" fill="#87CEEB" stroke="#000000" strokeWidth="0.5" />
+                      <rect x="-3" y="-5" width="3" height="3" fill="#FFB6C1" stroke="#000000" strokeWidth="0.5" />
+                      <rect x="2" y="-5" width="3" height="3" fill="#FFB6C1" stroke="#000000" strokeWidth="0.5" />
+                      <rect x="9" y="0" width="3" height="3" fill="#98FB98" stroke="#000000" strokeWidth="0.5" />
+                      <rect x="14" y="0" width="3" height="3" fill="#98FB98" stroke="#000000" strokeWidth="0.5" />
+                    </g>
+                  </svg>
+                </div>
               </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                He survived the landing, mastered pancakes (sort of—Deb helped), 
-                and learned Walmart was not, in fact, a wonderland.
-              </p>
             </div>
           </div>
         </div>
       )
     },
-    
-    // Chapter Two - American Ninja (UPDATED TITLE)
+    // Chapter One Spread 2 - UPDATED with new text and Walmart greeter illustration
+    {
+      content: (
+        <div className="h-full w-full bg-gradient-to-br from-green-200 to-emerald-200 p-8 flex flex-col items-center justify-center relative">
+          {/* Decorative elements */}
+          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">🛬</div>
+          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">🏠</div>
+          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">🍽️</div>
+          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">🎵</div>
+
+          {/* Container matching dedication page layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            {/* Left side - Text in matching rounded corners style */}
+            <div className="bg-blue-100/90 backdrop-blur-sm rounded-xl p-6 shadow-2xl border-4 border-blue-300 flex flex-col justify-center transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="border-2 border-dashed border-indigo-300 rounded-lg p-6 w-full">
+                {/* Chapter title with correct font and styling */}
+                <h2 
+                  className="font-bold text-center mb-6 text-blue-700" 
+                  style={{
+                    fontFamily: "'Chewy','Comic Sans MS',cursive",
+                    fontSize: "clamp(1.15rem, 4vw, 1.8rem)"
+                  }}
+                >
+                  CHAPTER 1:<br />THE BOY WITH THREE DOLLARS
+                </h2>
+                
+                {/* UPDATED Story text with proper styling */}
+                <div 
+                  className="text-gray-700 text-left space-y-4" 
+                  style={{
+                    fontFamily: "'Comic Neue','Comic Sans MS',Arial,sans-serif",
+                    fontSize: "clamp(1.08rem, 3vw, 1.4rem)",
+                    lineHeight: "1.6"
+                  }}
+                >
+                  <p>He survived the landing, aced his Computer Science and didn't get deported (thank you, midnight algorithms)... and learned that Walmart greeters treat you like the crowned champion of the snack aisle.</p>
+                  <p className="italic">Pro tip: In America, the greeter is paid to smile—you just have to try not to hug them.</p>
+                  <p>But the real jackpot? A new nickname! Some kids get "Buddy," some get "Champ."</p>
+                  <p>I got "Vittles." Thanks, Kerry and Madds.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side - NEW Walmart greeter illustration */}
+            <div className="w-full bg-white/90 rounded-xl shadow-2xl border-4 border-blue-300 overflow-hidden flex items-center justify-center p-4 transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="w-full h-full border-2 border-dashed border-indigo-300 rounded-lg p-2">
+                {/* NEW Walmart greeter illustration */}
+                <div className="w-full h-full">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="store-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#F0F9FF" />
+                        <stop offset="100%" stopColor="#DCFCE7" />
+                      </linearGradient>
+                      <filter id="store-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="1" dy="1" stdDeviation="2" floodColor="#00000030"/>
+                      </filter>
+                    </defs>
+                    
+                    {/* Store background */}
+                    <rect x="0" y="0" width="400" height="400" fill="url(#store-bg)" />
+                    
+                    {/* Store floor */}
+                    <rect x="0" y="320" width="400" height="80" fill="#E5E7EB" />
+                    <line x1="0" y1="320" x2="400" y2="320" stroke="#D1D5DB" strokeWidth="2" />
+                    
+                    {/* Store shelves in background - snack aisle */}
+                    <rect x="20" y="100" width="80" height="220" fill="#94A3B8" stroke="#64748B" strokeWidth="2" />
+                    <rect x="30" y="110" width="60" height="30" fill="#FEF3C7" />
+                    <rect x="30" y="150" width="60" height="30" fill="#FEE2E2" />
+                    <rect x="30" y="190" width="60" height="30" fill="#DBEAFE" />
+                    <rect x="30" y="230" width="60" height="30" fill="#D1FAE5" />
+                    <rect x="30" y="270" width="60" height="30" fill="#FDE68A" />
+                    
+                    <rect x="300" y="100" width="80" height="220" fill="#94A3B8" stroke="#64748B" strokeWidth="2" />
+                    <rect x="310" y="110" width="60" height="30" fill="#FEF3C7" />
+                    <rect x="310" y="150" width="60" height="30" fill="#FEE2E2" />
+                    <rect x="310" y="190" width="60" height="30" fill="#DBEAFE" />
+                    <rect x="310" y="230" width="60" height="30" fill="#D1FAE5" />
+                    <rect x="310" y="270" width="60" height="30" fill="#FDE68A" />
+                    
+                    {/* Store sign */}
+                    <rect x="140" y="40" width="120" height="40" rx="5" fill="#0369A1" filter="url(#store-shadow)" />
+                    <text x="200" y="65" fontFamily="Arial" fontSize="16" fill="white" textAnchor="middle" fontWeight="bold">SNACK AISLE</text>
+                    
+                    {/* Walmart Greeter - older lady with vest */}
+                    <g transform="translate(150, 230)">
+                      {/* Head */}
+                      <circle cx="0" cy="0" r="25" fill="#FFE4C4" stroke="#8B7355" strokeWidth="2" filter="url(#store-shadow)" />
+                      
+                      {/* Gray hair */}
+                      <path d="M-25,-5 Q-20,-25 0,-25 Q20,-25 25,-5" fill="#D3D3D3" stroke="#A9A9A9" strokeWidth="1" />
+                      
+                      {/* Eyes with glasses */}
+                      <rect x="-18" y="-8" width="14" height="8" rx="4" fill="none" stroke="#5D4037" strokeWidth="1.5" />
+                      <rect x="4" y="-8" width="14" height="8" rx="4" fill="none" stroke="#5D4037" strokeWidth="1.5" />
+                      <line x1="-4" y1="-4" x2="4" y2="-4" stroke="#5D4037" strokeWidth="1.5" />
+                      <circle cx="-12" cy="-4" r="3" fill="#2F4F4F" />
+                      <circle cx="12" cy="-4" r="3" fill="#2F4F4F" />
+                      
+                      {/* Big welcoming smile */}
+                      <path d="M-15,10 Q0,20 15,10" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body with blue vest */}
+                      <rect x="-30" y="25" width="60" height="65" rx="10" fill="#0B5CD3" stroke="#083D8F" strokeWidth="2" filter="url(#store-shadow)" />
+                      
+                      {/* White shirt under vest */}
+                      <rect x="-25" y="30" width="50" height="55" rx="8" fill="#FFFFFF" />
+                      
+                      {/* Name tag */}
+                      <rect x="-20" y="35" width="40" height="15" rx="3" fill="#FFEB3B" stroke="#FBC02D" strokeWidth="1" />
+                      <text x="0" y="46" fontFamily="Arial" fontSize="10" fill="#000000" textAnchor="middle" fontWeight="bold">GREETER</text>
+                      
+                      {/* Arms */}
+                      <rect x="-45" y="40" width="15" height="10" rx="5" fill="#FFE4C4" stroke="#8B7355" strokeWidth="1" />
+                      <rect x="30" y="40" width="15" height="10" rx="5" fill="#FFE4C4" stroke="#8B7355" strokeWidth="1" />
+                      
+                      {/* Legs */}
+                      <rect x="-20" y="90" width="15" height="30" rx="3" fill="#1F2937" stroke="#111827" strokeWidth="1" />
+                      <rect x="5" y="90" width="15" height="30" rx="3" fill="#1F2937" stroke="#111827" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Vitaly character - yellow shirt with trident */}
+                    <g transform="translate(250, 240)">
+                      {/* Head */}
+                      <circle cx="0" cy="0" r="22" fill="#D2B48C" stroke="#8B7355" strokeWidth="2" filter="url(#store-shadow)" />
+                      
+                      {/* Eyes - wide with surprise/excitement */}
+                      <circle cx="-8" cy="-4" r="4" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
+                      <circle cx="8" cy="-4" r="4" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
+                      <circle cx="-8" cy="-4" r="2" fill="#2F4F4F" />
+                      <circle cx="8" cy="-4" r="2" fill="#2F4F4F" />
+                      
+                      {/* Big excited smile */}
+                      <path d="M-10,8 Q0,16 10,8" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - yellow shirt with blue trident */}
+                      <rect x="-20" y="22" width="40" height="50" rx="6" fill="#FFD700" stroke="#DAA520" strokeWidth="2" filter="url(#store-shadow)" />
+                      
+                      {/* Ukrainian Trident (Tryzub) logo centered on chest */}
+                      <g transform="translate(0,45) scale(0.6)" fill="#0057B7">
+                        <path d="M0,-15 L-8,-5 L-8,5 L-4,5 L-4,15 L4,15 L4,5 L8,5 L8,-5 Z" />
+                        <path d="M-12,-10 L-12,0 L-8,0 L-8,-10 Z" />
+                        <path d="M12,-10 L12,0 L8,0 L8,-10 Z" />
+                      </g>
+                      
+                      {/* Arms */}
+                      <rect x="-30" y="35" width="10" height="8" rx="4" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" />
+                      <rect x="20" y="35" width="10" height="8" rx="4" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" />
+                      
+                      {/* Legs */}
+                      <rect x="-15" y="72" width="12" height="28" rx="3" fill="#1E40AF" stroke="#1E3A8A" strokeWidth="1" />
+                      <rect x="3" y="72" width="12" height="28" rx="3" fill="#1E40AF" stroke="#1E3A8A" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Speech bubble with "Vittles!" */}
+                    <g transform="translate(200, 130)">
+                      <path d="M0,0 L-40,50 L-30,50 L-10,80 L10,50 L60,50 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
+                      <text x="10" y="30" fontFamily="Comic Sans MS, cursive" fontSize="24" fill="#FF0000" fontWeight="bold">Vittles!</text>
+                    </g>
+                    
+                    {/* Shopping cart */}
+                    <g transform="translate(310, 310)">
+                      <rect x="-20" y="-15" width="40" height="25" rx="2" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1" />
+                      <circle cx="-12" cy="15" r="5" fill="#4B5563" stroke="#374151" strokeWidth="1" />
+                      <circle cx="12" cy="15" r="5" fill="#4B5563" stroke="#374151" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Store decorations - snack packages */}
+                    <g transform="translate(120, 330)">
+                      <rect x="-15" y="-10" width="30" height="20" rx="3" fill="#EF4444" stroke="#B91C1C" strokeWidth="1" />
+                      <text x="0" y="3" fontFamily="Arial" fontSize="6" fill="#FFFFFF" textAnchor="middle" fontWeight="bold">CHIPS</text>
+                    </g>
+                    
+                    <g transform="translate(280, 330)">
+                      <rect x="-15" y="-10" width="30" height="20" rx="3" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1" />
+                      <text x="0" y="3" fontFamily="Arial" fontSize="6" fill="#FFFFFF" textAnchor="middle" fontWeight="bold">COOKIES</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    // Chapter Two Spread 1 - NEW with theater illustration
     {
       content: (
         <div className="h-full w-full bg-gradient-to-br from-purple-200 to-indigo-200 p-8 flex flex-col items-center justify-center relative">
           {/* Decorative elements */}
-          <div className="absolute top-6 right-10 w-16 h-16 text-4xl">🎬</div>
-          <div className="absolute bottom-6 left-10 w-16 h-16 text-4xl">🍿</div>
-          <div className="absolute top-1/3 left-6 w-12 h-12 text-3xl animate-bounce">💌</div>
-          <div className="absolute bottom-1/3 right-6 w-12 h-12 text-3xl animate-spin-slow">❤️</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Cartoon drawing of two people at a movie theater */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* Theater background */}
-                  <rect x="0" y="0" width="400" height="300" fill="#1A0536" />
-                  
-                  {/* Movie screen */}
-                  <rect x="50" y="30" width="300" height="150" fill="#FFFFFF" />
-                  <rect x="70" y="50" width="260" height="110" fill="#ADD8E6" />
-                  
-                  {/* Theater seats */}
-                  <rect x="50" y="200" width="300" height="80" fill="#8B0000" />
-                  <rect x="80" y="210" width="40" height="60" fill="#A52A2A" />
-                  <rect x="130" y="210" width="40" height="60" fill="#A52A2A" />
-                  <rect x="180" y="210" width="40" height="60" fill="#A52A2A" />
-                  <rect x="230" y="210" width="40" height="60" fill="#A52A2A" />
-                  <rect x="280" y="210" width="40" height="60" fill="#A52A2A" />
-                  
-                  {/* Characters */}
-                  {/* Character 1 - Vitaly */}
-                  <circle cx="150" cy="230" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <path d="M145,225 L148,225" stroke="#000000" strokeWidth="1" />
-                  <path d="M155,225 L152,225" stroke="#000000" strokeWidth="1" />
-                  <path d="M145,235 L155,235" stroke="#000000" strokeWidth="1" transform="translate(150, 235) scale(1, 0.5) rotate(180) translate(-150, -235)" />
-                  <rect x="135" y="245" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Character 2 - Kimball */}
-                  <circle cx="200" cy="230" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <path d="M195,225 L198,225" stroke="#000000" strokeWidth="1" />
-                  <path d="M205,225 L202,225" stroke="#000000" strokeWidth="1" />
-                  <path d="M195,235 L205,235" stroke="#000000" strokeWidth="1" />
-                  <rect x="185" y="245" width="30" height="25" rx="5" fill="#228B22" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Popcorn */}
-                  <path d="M175,260 L185,260 L183,270 L177,270 Z" fill="#F5DEB3" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Hearts */}
-                  <path d="M170,200 C173,195 180,195 180,202 C180,208 170,215 170,215 C170,215 160,208 160,202 C160,195 167,195 170,200 Z" fill="#FF69B4" opacity="0.6" />
-                </svg>
+          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">🎬</div>
+          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">🎭</div>
+          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">🍿</div>
+          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">🎞️</div>
+
+          {/* Container matching dedication page layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            {/* Left side - Text in matching rounded corners style */}
+            <div className="bg-blue-100/90 backdrop-blur-sm rounded-xl p-6 shadow-2xl border-4 border-blue-300 flex flex-col justify-center transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="border-2 border-dashed border-indigo-300 rounded-lg p-6 w-full">
+                {/* Chapter title with correct font and styling */}
+                <h2 
+                  className="font-bold text-center mb-6 text-blue-700" 
+                  style={{
+                    fontFamily: "'Chewy','Comic Sans MS',cursive",
+                    fontSize: "clamp(1.15rem, 4vw, 1.8rem)"
+                  }}
+                >
+                  CHAPTER 2:<br />VITALY MEETS HIS AMERICAN NINJA
+                </h2>
+                
+                {/* Story text with proper styling */}
+                <div 
+                  className="text-gray-700 text-left space-y-4" 
+                  style={{
+                    fontFamily: "'Comic Neue','Comic Sans MS',Arial,sans-serif",
+                    fontSize: "clamp(1.08rem, 3vw, 1.4rem)",
+                    lineHeight: "1.6"
+                  }}
+                >
+                  <p>And then—Kimball logged on: calm, curious, endlessly patient (I did all the talking).</p>
+                  <p>Our first meetup was at his old $1 Orem theater. He showed up so early I half-expected him to mop the floors—luckily he left the Swiffer at home and handed me two $1 tickets.</p>
+                  <p>A buck might be pocket change for some, but for a new Ukrainian, it felt like gold.</p>
+                  <p>We sat. We watched Amanda Bynes in She's the Man. We coded our feelings in awkward jokes.</p>
+                </div>
               </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                Our first meeting was at a movie theater. Naturally, Kimball arrived 17 minutes early to disinfect every surface in a 12-mile radius.
-              </p>
             </div>
-            
-            {/* Right side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-purple-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-purple-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER TWO:<br />VITALY MEETS HIS U.S. SAMURAI
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  And then—a wild Kimball appeared in the digital ether!
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  He was cool, quiet, suspiciously punctual, and had an aura of gymnastic mystery.
-                </p>
-                <p className="italic text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  I thought: <em>Who is this blue-jacketed American sealing my fate?</em>
-                </p>
-                <p className="italic text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  He thought: <em>Who is this Ukrainian with enough emotional energy to power a Tesla?</em>
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  I told him <em>I loved him</em> on the first night.<br />
-                  He called it "infatuation."<br />
-                  I called it "Ukrainian efficiency."
-                </p>
+
+            {/* Right side - Theater illustration */}
+            <div className="w-full bg-white/90 rounded-xl shadow-2xl border-4 border-blue-300 overflow-hidden flex items-center justify-center p-4 transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="w-full h-full border-2 border-dashed border-indigo-300 rounded-lg p-2">
+                {/* Illustration of Vitaly and Kimball at the theater */}
+                <div className="w-full h-full">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="theater-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#F5F3FF" />
+                        <stop offset="100%" stopColor="#E0E7FF" />
+                      </linearGradient>
+                      <filter id="theater-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="1" dy="1" stdDeviation="2" floodColor="#00000030"/>
+                      </filter>
+                    </defs>
+                    
+                    {/* Pastel background */}
+                    <rect x="0" y="0" width="400" height="400" fill="url(#theater-bg)" />
+                    
+                    {/* Theater building */}
+                    <rect x="100" y="100" width="200" height="180" rx="5" fill="#D1D5DB" stroke="#9CA3AF" strokeWidth="2" filter="url(#theater-shadow)" />
+                    
+                    {/* Theater entrance */}
+                    <rect x="150" y="200" width="100" height="80" rx="5" fill="#4B5563" stroke="#374151" strokeWidth="2" />
+                    
+                    {/* Theater sign */}
+                    <rect x="125" y="60" width="150" height="40" rx="5" fill="#6366F1" stroke="#4F46E5" strokeWidth="2" filter="url(#theater-shadow)" />
+                    <text x="200" y="85" fontFamily="Arial" fontSize="18" fontWeight="bold" fill="white" textAnchor="middle">$1 THEATER</text>
+                    
+                    {/* Movie poster */}
+                    <rect x="270" y="150" width="40" height="60" rx="2" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
+                    <text x="290" y="180" fontFamily="Arial" fontSize="6" fill="#000000" textAnchor="middle" transform="rotate(-90, 290, 180)">SHE'S THE MAN</text>
+                    
+                    {/* Swiffer leaning against wall */}
+                    <line x="310" y1="220" x2="315" y2="280" stroke="#A8A29E" strokeWidth="3" />
+                    <rect x="308" y="220" width="8" height="15" fill="#34D399" stroke="#10B981" strokeWidth="1" />
+                    
+                    {/* Vitaly character - yellow outfit with tryzub */}
+                    <g transform="translate(180, 250)">
+                      {/* Head - medium-dark skin, rounded */}
+                      <circle cx="0" cy="0" r="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="2" filter="url(#theater-shadow)" />
+                      
+                      {/* Eyes */}
+                      <ellipse cx="-8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <ellipse cx="8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <circle cx="-8" cy="-5" r="1" fill="#FFFFFF" />
+                      <circle cx="8" cy="-5" r="1" fill="#FFFFFF" />
+                      
+                      {/* Smile */}
+                      <path d="M-8,6 Q0,12 8,6" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - yellow outfit */}
+                      <rect x="-15" y="20" width="30" height="40" rx="6" fill="#FFD700" stroke="#DAA520" strokeWidth="2" filter="url(#theater-shadow)" />
+                      
+                      {/* Ukrainian Trident (Tryzub) logo centered on chest */}
+                      <g transform="translate(0,40) scale(0.5)" fill="#0057B7">
+                        <path d="M0,-15 L-8,-5 L-8,5 L-4,5 L-4,15 L4,15 L4,5 L8,5 L8,-5 Z" />
+                        <path d="M-12,-10 L-12,0 L-8,0 L-8,-10 Z" />
+                        <path d="M12,-10 L12,0 L8,0 L8,-10 Z" />
+                      </g>
+                      
+                      {/* Arms */}
+                      <rect x="-25" y="30" width="10" height="8" rx="4" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" />
+                      <rect x="15" y="30" width="10" height="8" rx="4" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" />
+                      
+                      {/* Legs */}
+                      <rect x="-12" y="60" width="10" height="25" rx="3" fill="#4B5563" stroke="#374151" strokeWidth="1" />
+                      <rect x="2" y="60" width="10" height="25" rx="3" fill="#4B5563" stroke="#374151" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Kimball character - blue outfit (same as tryzub) */}
+                    <g transform="translate(230, 250)">
+                      {/* Head - lighter skin, rounded */}
+                      <circle cx="0" cy="0" r="20" fill="#FDBCB4" stroke="#CD853F" strokeWidth="2" filter="url(#theater-shadow)" />
+                      
+                      {/* Eyes */}
+                      <ellipse cx="-8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <ellipse cx="8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <circle cx="-8" cy="-5" r="1" fill="#FFFFFF" />
+                      <circle cx="8" cy="-5" r="1" fill="#FFFFFF" />
+                      
+                      {/* Smile */}
+                      <path d="M-8,6 Q0,10 8,6" fill="none" stroke="#CD853F" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - blue outfit (same color as tryzub) */}
+                      <rect x="-15" y="20" width="30" height="40" rx="6" fill="#0057B7" stroke="#003785" strokeWidth="2" filter="url(#theater-shadow)" />
+                      
+                      {/* Arms */}
+                      <rect x="-25" y="30" width="10" height="8" rx="4" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" />
+                      <rect x="15" y="30" width="10" height="8" rx="4" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" />
+                      
+                      {/* Legs */}
+                      <rect x="-12" y="60" width="10" height="25" rx="3" fill="#4B5563" stroke="#374151" strokeWidth="1" />
+                      <rect x="2" y="60" width="10" height="25" rx="3" fill="#4B5563" stroke="#374151" strokeWidth="1" />
+                      
+                      {/* Tickets in hand */}
+                      <g transform="translate(-20, 30)">
+                        <rect x="-8" y="0" width="12" height="6" rx="1" fill="#FFFFFF" stroke="#000000" strokeWidth="0.5" />
+                        <rect x="-7" y="-1" width="10" height="6" rx="1" fill="#FFFFFF" stroke="#000000" strokeWidth="0.5" />
+                        <text x="-2" y="4" fontFamily="Arial" fontSize="4" fill="#FF0000" textAnchor="middle">$1</text>
+                      </g>
+                    </g>
+                    
+                    {/* Decorative elements */}
+                    <circle cx="120" cy="150" r="10" fill="#FEF3C7" opacity="0.5" />
+                    <circle cx="280" cy="120" r="15" fill="#DBEAFE" opacity="0.5" />
+                    <rect x="90" y="310" width="20" height="20" rx="4" fill="#F3E8FF" opacity="0.5" />
+                    <rect x="300" y="330" width="25" height="25" rx="4" fill="#ECFDF5" opacity="0.5" />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )
     },
-    
-    // Chapter Three - The Great Escape
+    // Chapter Two Spread 2 - NEW with couch/nose-breathing illustration
     {
       content: (
-        <div className="h-full w-full bg-gradient-to-br from-green-200 to-emerald-200 p-8 flex flex-col items-center justify-center relative">
+        <div className="h-full w-full bg-gradient-to-br from-indigo-200 to-pink-200 p-8 flex flex-col items-center justify-center relative">
           {/* Decorative elements */}
-          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">🏠</div>
-          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">📱</div>
-          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">🔑</div>
-          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">📝</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-green-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-green-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER THREE:<br />THE GREAT ESCAPE<br />(FROM CLOSET TO BASEMENT)
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">There were:</p>
-                <ul className="list-disc pl-6 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <li>Secret meetings</li>
-                  <li>Coded texts</li>
-                  <li>Mormon Family Home Evenings (twice the drama, half the fun)</li>
-                  <li>Long Sunday nights where the phone was lifeline, confession booth, and proof of love</li>
-                </ul>
-                <p className="italic text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Kimball went to Colorado for church things.<br />
-                  We counted weeks with military precision.<br />
-                  He quit church.<br />
-                  I quit hiding.<br />
-                  Together we unlearned shame, one world-class borscht at a time.
-                </p>
+          <div className="absolute top-6 right-10 w-16 h-16 text-4xl">💕</div>
+          <div className="absolute bottom-6 left-10 w-16 h-16 text-4xl">🦋</div>
+          <div className="absolute top-1/3 left-6 w-12 h-12 text-3xl animate-bounce">💘</div>
+          <div className="absolute bottom-1/3 right-6 w-12 h-12 text-3xl animate-spin-slow">💫</div>
+
+          {/* Container matching dedication page layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            {/* Left side - Text in matching rounded corners style */}
+            <div className="bg-blue-100/90 backdrop-blur-sm rounded-xl p-6 shadow-2xl border-4 border-blue-300 flex flex-col justify-center transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="border-2 border-dashed border-indigo-300 rounded-lg p-6 w-full">
+                {/* Chapter title with correct font and styling */}
+                <h2 
+                  className="font-bold text-center mb-6 text-blue-700" 
+                  style={{
+                    fontFamily: "'Chewy','Comic Sans MS',cursive",
+                    fontSize: "clamp(1.15rem, 4vw, 1.8rem)"
+                  }}
+                >
+                  CHAPTER 2:<br />VITALY MEETS HIS AMERICAN NINJA
+                </h2>
+                
+                {/* Story text with proper styling */}
+                <div 
+                  className="text-gray-700 text-left space-y-4" 
+                  style={{
+                    fontFamily: "'Comic Neue','Comic Sans MS',Arial,sans-serif",
+                    fontSize: "clamp(1.08rem, 3vw, 1.4rem)",
+                    lineHeight: "1.6"
+                  }}
+                >
+                  <p>I laughed so hard I nearly cried—Kimball just watched, smiling at every snort.</p>
+                  <p>Later at his place, tangled in our first make-out, he murmured, "Just breathe through your nose."</p>
+                  <p>I thought it was a kissing trick. Turns out—it was the ultimate marriage survival tip: butterflies fade, but nose-breathing lasts a lifetime.</p>
+                  <p>I told him I loved him on that first night.</p>
+                  <p>He called it "infatuation."</p>
+                  <p>I called it "Ukrainian efficiency."</p>
+                </div>
               </div>
             </div>
-            
-            {/* Right side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Cartoon drawing of two people on phone and moving in */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* House background with basement */}
-                  <rect x="50" y="50" width="300" height="150" fill="#D2B48C" stroke="#000000" strokeWidth="2" />
-                  <rect x="50" y="200" width="300" height="80" fill="#A0522D" stroke="#000000" strokeWidth="2" />
-                  <line x1="50" y1="200" x2="350" y2="200" stroke="#000000" strokeWidth="3" />
-                  
-                  {/* Door */}
-                  <rect x="175" y="120" width="50" height="80" fill="#8B4513" stroke="#000000" strokeWidth="2" />
-                  <circle cx="215" cy="160" r="5" fill="#FFD700" />
-                  
-                  {/* Windows */}
-                  <rect x="80" y="80" width="40" height="40" fill="#87CEEB" stroke="#000000" strokeWidth="2" />
-                  <line x1="100" y1="80" x2="100" y2="120" stroke="#000000" strokeWidth="2" />
-                  <line x1="80" y1="100" x2="120" y2="100" stroke="#000000" strokeWidth="2" />
-                  
-                  <rect x="280" y="80" width="40" height="40" fill="#87CEEB" stroke="#000000" strokeWidth="2" />
-                  <line x1="300" y1="80" x2="300" y2="120" stroke="#000000" strokeWidth="2" />
-                  <line x1="280" y1="100" x2="320" y2="100" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Basement window */}
-                  <rect x="100" y="220" width="30" height="20" fill="#87CEEB" stroke="#000000" strokeWidth="2" />
-                  <rect x="270" y="220" width="30" height="20" fill="#87CEEB" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Characters */}
-                  {/* Character with suitcase */}
-                  <circle cx="150" cy="240" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="135" y="255" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <rect x="120" y="250" width="20" height="25" fill="#8B4513" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Character on phone */}
-                  <circle cx="250" cy="240" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="235" y="255" width="30" height="25" rx="5" fill="#228B22" stroke="#000000" strokeWidth="1" />
-                  <rect x="260" y="235" width="10" height="20" fill="#000000" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Hearts */}
-                  <path d="M200,230 C203,225 210,225 210,232 C210,238 200,245 200,245 C200,245 190,238 190,232 C190,225 197,225 200,230 Z" fill="#FF69B4" opacity="0.6" />
-                </svg>
+
+            {/* Right side - Couch scene with speech bubble */}
+            <div className="w-full bg-white/90 rounded-xl shadow-2xl border-4 border-blue-300 overflow-hidden flex items-center justify-center p-4 transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="w-full h-full border-2 border-dashed border-indigo-300 rounded-lg p-2">
+                {/* Illustration of couch scene with speech bubble */}
+                <div className="w-full h-full">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="couch-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#DBEAFE" />
+                        <stop offset="100%" stopColor="#FCE7F3" />
+                      </linearGradient>
+                      <filter id="couch-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="1" dy="1" stdDeviation="2" floodColor="#00000030"/>
+                      </filter>
+                    </defs>
+                    
+                    {/* Pastel gradient background */}
+                    <rect x="0" y="0" width="400" height="400" fill="url(#couch-bg)" />
+                    
+                    {/* Decorative geometric patterns */}
+                    <circle cx="80" cy="80" r="20" fill="#E0E7FF" opacity="0.5" />
+                    <circle cx="320" cy="100" r="25" fill="#FEE2E2" opacity="0.5" />
+                    <rect x="300" y="300" width="30" height="30" fill="#F0FFFF" opacity="0.5" rx="6" />
+                    <rect x="70" y="320" width="25" height="25" fill="#FDF2F8" opacity="0.5" rx="5" />
+                    
+                    {/* Decorative hearts and butterflies */}
+                    <g transform="translate(50, 150) rotate(-15)">
+                      <path d="M0,0 C-5,-10 -15,-5 -5,10 C5,25 0,-10 0,0 Z" fill="#FDA4AF" opacity="0.6" />
+                      <path d="M0,0 C5,-10 15,-5 5,10 C-5,25 0,-10 0,0 Z" fill="#FDA4AF" opacity="0.6" />
+                    </g>
+                    
+                    <g transform="translate(350, 180) rotate(15)">
+                      <path d="M0,0 C-5,-10 -15,-5 -5,10 C5,25 0,-10 0,0 Z" fill="#A5B4FC" opacity="0.6" />
+                      <path d="M0,0 C5,-10 15,-5 5,10 C-5,25 0,-10 0,0 Z" fill="#A5B4FC" opacity="0.6" />
+                    </g>
+                    
+                    <g transform="translate(330, 250) rotate(30)">
+                      <path d="M0,0 C-5,-5 -5,5 0,10 C5,5 5,-5 0,0 Z" fill="#BAE6FD" opacity="0.6" />
+                      <path d="M0,0 C-10,0 -10,10 0,10 C10,10 10,0 0,0 Z" fill="#BAE6FD" opacity="0.6" />
+                    </g>
+                    
+                    {/* Couch */}
+                    <rect x="100" y="240" width="200" height="80" rx="10" fill="#9CA3AF" stroke="#6B7280" strokeWidth="2" filter="url(#couch-shadow)" />
+                    <rect x="90" y="220" width="220" height="40" rx="8" fill="#9CA3AF" stroke="#6B7280" strokeWidth="2" />
+                    <rect x="100" y="230" width="200" height="20" rx="5" fill="#6B7280" />
+                    <rect x="100" y="250" width="200" height="60" rx="5" fill="#6B7280" />
+                    
+                    {/* Left side - Vitaly laughing */}
+                    <g transform="translate(150, 210)">
+                      {/* Head - medium-dark skin, rounded, laughing */}
+                      <circle cx="0" cy="0" r="25" fill="#D2B48C" stroke="#8B7355" strokeWidth="2" filter="url(#couch-shadow)" />
+                      
+                      {/* Eyes - squinting with laughter */}
+                      <path d="M-12,-5 Q-8,-10 -4,-5" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      <path d="M4,-5 Q8,-10 12,-5" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Big laugh */}
+                      <path d="M-15,8 Q0,20 15,8" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - yellow shirt with trident */}
+                      <rect x="-20" y="25" width="40" height="45" rx="6" fill="#FFD700" stroke="#DAA520" strokeWidth="2" filter="url(#couch-shadow)" />
+                      
+                      {/* Ukrainian Trident (Tryzub) logo centered on chest */}
+                      <g transform="translate(0, 48) scale(0.5)" fill="#0057B7">
+                        <path d="M0,-15 L-8,-5 L-8,5 L-4,5 L-4,15 L4,15 L4,5 L8,5 L8,-5 Z" />
+                        <path d="M-12,-10 L-12,0 L-8,0 L-8,-10 Z" />
+                        <path d="M12,-10 L12,0 L8,0 L8,-10 Z" />
+                      </g>
+                    </g>
+                    
+                    {/* Right side - Kimball calm */}
+                    <g transform="translate(250, 210)">
+                      {/* Head - lighter skin, rounded */}
+                      <circle cx="0" cy="0" r="25" fill="#FDBCB4" stroke="#CD853F" strokeWidth="2" filter="url(#couch-shadow)" />
+                      
+                      {/* Eyes */}
+                      <ellipse cx="-10" cy="-5" rx="3" ry="5" fill="#2F4F4F" />
+                      <ellipse cx="10" cy="-5" rx="3" ry="5" fill="#2F4F4F" />
+                      <circle cx="-10" cy="-5" r="1" fill="#FFFFFF" />
+                      <circle cx="10" cy="-5" r="1" fill="#FFFFFF" />
+                      
+                      {/* Calm smile */}
+                      <path d="M-10,8 Q0,12 10,8" fill="none" stroke="#CD853F" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - blue outfit (same color as tryzub) */}
+                      <rect x="-20" y="25" width="40" height="45" rx="6" fill="#0057B7" stroke="#003785" strokeWidth="2" filter="url(#couch-shadow)" />
+                    </g>
+                    
+                    {/* Speech bubble with nose-breathing advice */}
+                    <g transform="translate(290, 150)">
+                      <path d="M0,0 L-20,40 L-10,40 L0,60 L10,40 L40,40 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="1.5" />
+                      <text x="10" y="25" fontFamily="Comic Sans MS, cursive" fontSize="10" fill="#000000" textAnchor="middle">Just breathe</text>
+                      <text x="10" y="38" fontFamily="Comic Sans MS, cursive" fontSize="10" fill="#000000" textAnchor="middle">through your nose</text>
+                    </g>
+                    
+                    {/* Small floating hearts */}
+                    <g transform="translate(200, 140)">
+                      <path d="M0,0 C-3,-6 -8,-3 -3,5 C2,13 0,-5 0,0 Z" fill="#FB7185" opacity="0.7" />
+                      <path d="M0,0 C3,-6 8,-3 3,5 C-2,13 0,-5 0,0 Z" fill="#FB7185" opacity="0.7" />
+                    </g>
+                    
+                    <g transform="translate(170, 120) scale(0.7)">
+                      <path d="M0,0 C-3,-6 -8,-3 -3,5 C2,13 0,-5 0,0 Z" fill="#FB7185" opacity="0.5" />
+                      <path d="M0,0 C3,-6 8,-3 3,5 C-2,13 0,-5 0,0 Z" fill="#FB7185" opacity="0.5" />
+                    </g>
+                    
+                    <g transform="translate(230, 130) scale(0.8)">
+                      <path d="M0,0 C-3,-6 -8,-3 -3,5 C2,13 0,-5 0,0 Z" fill="#FB7185" opacity="0.6" />
+                      <path d="M0,0 C3,-6 8,-3 3,5 C-2,13 0,-5 0,0 Z" fill="#FB7185" opacity="0.6" />
+                    </g>
+                  </svg>
+                </div>
               </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                Secret phone calls, basement moves, and a journey toward authentic living together.
-              </p>
             </div>
           </div>
         </div>
       )
     },
-    
-    // Chapter Four - Things No One Tells You
-    {
-      content: (
-        <div className="h-full w-full bg-gradient-to-br from-red-200 to-rose-200 p-8 flex flex-col items-center justify-center relative">
-          {/* Decorative elements */}
-          <div className="absolute top-6 right-10 w-16 h-16 text-4xl">🍕</div>
-          <div className="absolute bottom-6 left-10 w-16 h-16 text-4xl">🍦</div>
-          <div className="absolute top-1/3 left-6 w-12 h-12 text-3xl animate-bounce">😴</div>
-          <div className="absolute bottom-1/3 right-6 w-12 h-12 text-3xl animate-spin-slow">💤</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Cartoon drawing of pizza and ice cream scene */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* Kitchen background */}
-                  <rect x="0" y="0" width="400" height="300" fill="#F5F5DC" />
-                  
-                  {/* Kitchen counter */}
-                  <rect x="50" y="150" width="300" height="50" fill="#8B4513" stroke="#000000" strokeWidth="2" />
-                  <rect x="50" y="200" width="300" height="100" fill="#A0522D" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Pizza */}
-                  <circle cx="150" cy="130" r="50" fill="#FFA500" stroke="#8B0000" strokeWidth="3" />
-                  <circle cx="150" cy="130" r="45" fill="#FF6347" stroke="#8B0000" strokeWidth="1" />
-                  <circle cx="130" cy="120" r="8" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <circle cx="160" cy="110" r="8" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <circle cx="170" cy="140" r="8" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <circle cx="140" cy="150" r="8" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Ice cream */}
-                  <rect x="250" y="120" width="50" height="70" rx="5" fill="#B0E0E6" stroke="#000000" strokeWidth="2" />
-                  <path d="M250,120 Q275,80 300,120" fill="#FFC0CB" stroke="#000000" strokeWidth="2" />
-                  <circle cx="275" cy="100" r="10" fill="#FF0000" />
-                  
-                  {/* Character 1 with pizza */}
-                  <circle cx="100" cy="250" r="20" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="80" y="270" width="40" height="30" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <path d="M105,240 L108,240" stroke="#000000" strokeWidth="1" />
-                  <path d="M95,240 L92,240" stroke="#000000" strokeWidth="1" />
-                  <path d="M95,250 L105,250" stroke="#000000" strokeWidth="1" transform="translate(100, 250) scale(1, 0.5) rotate(180) translate(-100, -250)" />
-                  <path d="M90,260 L110,260" stroke="#000000" strokeWidth="2" />
-                  <path d="M90,260 Q100,270 110,260" fill="none" stroke="#FF0000" strokeWidth="2" />
-                  
-                  {/* Character 2 with ice cream */}
-                  <circle cx="300" cy="250" r="20" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="280" y="270" width="40" height="30" rx="5" fill="#228B22" stroke="#000000" strokeWidth="1" />
-                  <path d="M305,240 L308,240" stroke="#000000" strokeWidth="1" />
-                  <path d="M295,240 L292,240" stroke="#000000" strokeWidth="1" />
-                  <path d="M295,255 L305,255" stroke="#000000" strokeWidth="1" />
-                  <path d="M290,260 L310,260" stroke="#000000" strokeWidth="2" />
-                </svg>
-              </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                If one spouse loves pizza, the other becomes a master of dough—flour on the ceiling, sweat on the brow.
-              </p>
-            </div>
-            
-            {/* Right side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-red-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-red-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER FOUR:<br />THE THINGS NO ONE TELLS YOU<br />ABOUT GAY MARRIAGE
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <strong>If one spouse loves pizza</strong>, the other becomes a master of dough. Behind Costco bags of broccoli and beef (Kimball's daily power-up), there's always a secret stash: ice cream hiding behind the frozen peas, and the Costco chocolate chip cookies tucked away on the highest shelf.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <strong>Kimball once ate an entire gallon of ice cream</strong> in one glorious, heroic sitting. No regrets, just a perfectly chilled stomachache and a look of triumph as he collapsed on the couch.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <strong>If one snores</strong>, you invest in an Intellibed. One for sex, two for sleep, three for those nights when a pizza party turns the bedroom into a "guess who farted?" arena.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    
-    // Chapter Five - The Epic Battles
+    // Chapter Three Spread 1 - NEW with church/hymnbook illustration
     {
       content: (
         <div className="h-full w-full bg-gradient-to-br from-amber-200 to-yellow-200 p-8 flex flex-col items-center justify-center relative">
           {/* Decorative elements */}
-          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">🎾</div>
-          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">🎮</div>
-          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">🏆</div>
-          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">⚔️</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-amber-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-amber-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER FIVE:<br />THE EPIC BATTLES
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <strong>On the tennis court</strong>, every serve is a test of marriage.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  If it's below 60 degrees, Kimball won't play, citing Utah law.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  He claims victory, but I know the scoring system (and his calculator watch) are rigged.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <strong>In World of Warcraft</strong>, Kimball raids dungeons, I raid his attention.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  He knows every expansion release date; he does not know his parents' birthdays.
-                </p>
-              </div>
-            </div>
-            
-            {/* Right side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Split illustration: Tennis court and WoW gaming */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* Top half - Tennis */}
-                  <rect x="0" y="0" width="400" height="150" fill="#90EE90" />
-                  
-                  {/* Tennis court */}
-                  <rect x="50" y="20" width="300" height="110" fill="#228B22" stroke="#FFFFFF" strokeWidth="2" />
-                  <line x1="200" y1="20" x2="200" y2="130" stroke="#FFFFFF" strokeWidth="2" />
-                  <rect x="195" y="65" width="10" height="20" fill="none" stroke="#FFFFFF" strokeWidth="1" />
-                  
-                  {/* Tennis net */}
-                  <line x1="200" y1="20" x2="200" y2="130" stroke="#000000" strokeWidth="1" />
-                  <line x1="200" y1="40" x2="200" y2="120" stroke="#FFFFFF" strokeWidth="3" strokeDasharray="5,5" />
-                  
-                  {/* Character 1 with racket */}
-                  <circle cx="100" cy="80" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="85" y="95" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <path d="M70,80 Q60,70 70,60 Q80,50 90,60 Q100,70 90,80 Q80,90 70,80 Z" fill="#D2B48C" stroke="#000000" strokeWidth="1" />
-                  <line x1="85" y1="70" x2="65" y2="90" stroke="#000000" strokeWidth="1" />
-                  <line x1="65" y1="70" x2="85" y2="90" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Character 2 with racket */}
-                  <circle cx="300" cy="80" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="285" y="95" width="30" height="25" rx="5" fill="#228B22" stroke="#000000" strokeWidth="1" />
-                  <path d="M330,80 Q340,70 330,60 Q320,50 310,60 Q300,70 310,80 Q320,90 330,80 Z" fill="#D2B48C" stroke="#000000" strokeWidth="1" />
-                  <line x1="315" y1="70" x2="335" y2="90" stroke="#000000" strokeWidth="1" />
-                  <line x1="335" y1="70" x2="315" y2="90" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Tennis ball */}
-                  <circle cx="200" cy="80" r="5" fill="#FFFF00" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Bottom half - Gaming */}
-                  <rect x="0" y="150" width="400" height="150" fill="#1A0536" />
-                  
-                  {/* Computer screen */}
-                  <rect x="150" y="170" width="100" height="80" fill="#000000" stroke="#333333" strokeWidth="2" />
-                  <rect x="160" y="180" width="80" height="60" fill="#0000CD" stroke="#333333" strokeWidth="1" />
-                  
-                  {/* WoW character on screen */}
-                  <circle cx="200" cy="210" r="10" fill="#FFD700" stroke="#000000" strokeWidth="1" />
-                  <rect x="195" y="220" width="10" height="15" fill="#FF0000" stroke="#000000" strokeWidth="1" />
-                  <path d="M190,220 L210,220" stroke="#000000" strokeWidth="1" />
-                  <path d="M200,225 L190,235" stroke="#000000" strokeWidth="1" />
-                  <path d="M200,225 L210,235" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Character at computer */}
-                  <circle cx="250" cy="210" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="235" y="225" width="30" height="25" rx="5" fill="#228B22" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Character watching */}
-                  <circle cx="300" cy="210" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="285" y="225" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <path d="M305,205 L308,205" stroke="#000000" strokeWidth="1" />
-                  <path d="M295,205 L292,205" stroke="#000000" strokeWidth="1" />
-                  <path d="M295,215 L305,215" stroke="#000000" strokeWidth="1" transform="translate(300, 215) scale(1, 0.5) rotate(180) translate(-300, -215)" />
-                  
-                  {/* ZZZ from watching character */}
-                  <text x="320" y="195" fill="#FFFFFF" fontSize="15" fontWeight="bold">💤</text>
-                </svg>
-              </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                On tennis courts and in Azeroth, our battles are legendary (and hilarious).
-              </p>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    
-    // Chapter Six - The Great Animal Scam
-    {
-      content: (
-        <div className="h-full w-full bg-gradient-to-br from-blue-200 to-cyan-200 p-8 flex flex-col items-center justify-center relative">
-          {/* Decorative elements */}
-          <div className="absolute top-6 right-10 w-16 h-16 text-4xl">🐱</div>
-          <div className="absolute bottom-6 left-10 w-16 h-16 text-4xl">🐶</div>
-          <div className="absolute top-1/3 left-6 w-12 h-12 text-3xl animate-bounce">🧶</div>
-          <div className="absolute bottom-1/3 right-6 w-12 h-12 text-3xl animate-spin-slow">🐾</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Cartoon drawing of cat adoption and return */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* Living room background */}
-                  <rect x="0" y="0" width="400" height="300" fill="#F5F5DC" />
-                  
-                  {/* Couch */}
-                  <rect x="50" y="150" width="300" height="100" rx="10" fill="#A0522D" stroke="#000000" strokeWidth="2" />
-                  <rect x="50" y="150" width="300" height="30" rx="5" fill="#8B4513" stroke="#000000" strokeWidth="2" />
-                  <rect x="60" y="160" width="280" height="10" rx="5" fill="#D2B48C" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Window */}
-                  <rect x="150" y="50" width="100" height="80" fill="#87CEEB" stroke="#000000" strokeWidth="2" />
-                  <line x1="200" y1="50" x2="200" y2="130" stroke="#000000" strokeWidth="2" />
-                  <line x1="150" y1="90" x2="250" y2="90" stroke="#000000" strokeWidth="2" />
-                  
-                  {/* Cats */}
-                  <ellipse cx="100" cy="200" rx="20" ry="15" fill="#808080" stroke="#000000" strokeWidth="1" />
-                  <circle cx="85" cy="190" r="10" fill="#808080" stroke="#000000" strokeWidth="1" />
-                  <path d="M80,185 L85,180" stroke="#000000" strokeWidth="1" />
-                  <path d="M90,185 L95,180" stroke="#000000" strokeWidth="1" />
-                  <ellipse cx="82" cy="187" rx="2" ry="3" fill="#000000" />
-                  <ellipse cx="88" cy="187" rx="2" ry="3" fill="#000000" />
-                  
-                  <ellipse cx="150" cy="200" rx="20" ry="15" fill="#D2B48C" stroke="#000000" strokeWidth="1" />
-                  <circle cx="135" cy="190" r="10" fill="#D2B48C" stroke="#000000" strokeWidth="1" />
-                  <path d="M130,185 L135,180" stroke="#000000" strokeWidth="1" />
-                  <path d="M140,185 L145,180" stroke="#000000" strokeWidth="1" />
-                  <ellipse cx="132" cy="187" rx="2" ry="3" fill="#000000" />
-                  <ellipse cx="138" cy="187" rx="2" ry="3" fill="#000000" />
-                  
-                  {/* Scratches on couch */}
-                  <path d="M250,170 L270,190" stroke="#8B4513" strokeWidth="2" />
-                  <path d="M260,170 L280,190" stroke="#8B4513" strokeWidth="2" />
-                  <path d="M270,170 L290,190" stroke="#8B4513" strokeWidth="2" />
-                  
-                  {/* Characters */}
-                  <circle cx="320" cy="220" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="305" y="235" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <path d="M315,215 L318,215" stroke="#000000" strokeWidth="1" />
-                  <path d="M325,215 L322,215" stroke="#000000" strokeWidth="1" />
-                  <path d="M315,225 L325,225" stroke="#000000" strokeWidth="1" transform="translate(320, 225) scale(1, 0.5) rotate(180) translate(-320, -225)" />
-                  
-                  {/* Speech bubble */}
-                  <path d="M320,190 Q330,180 340,190 Q350,200 340,210 Q330,220 320,210 Q310,200 320,190 Z" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <text x="320" y="205" fill="#000000" fontSize="12" fontWeight="bold" textAnchor="middle">🐶❓</text>
-                </svg>
-              </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                We don't have animals, just the <em>idea</em> of animals. The kittens left their mark on our precious leather couch.
-              </p>
-            </div>
-            
-            {/* Right side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-blue-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-blue-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER SIX:<br />THE GREAT ANIMAL SCAM
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  We don't have animals, just the <em>idea</em> of animals.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  We adopted adult cats more than once—and, yes, even brother kittens one time.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Proud for six days, twelve days, two weeks.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  The kittens left their mark: tiny claw signatures on our precious leather couch
-                  (but nobody ever peed—blessed be the patron saint of Macy's).
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Vitaly still dreams of a wild, muddy, loyal dog.
-                  Kimball, caretaker of clean floors and balance sheets, replies:
-                  <br /><em>"Only if it can file taxes and never poop."</em>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    
-    // Chapter Seven - Troubles Turned Upside Down
-    {
-      content: (
-        <div className="h-full w-full bg-gradient-to-br from-indigo-200 to-violet-200 p-8 flex flex-col items-center justify-center relative">
-          {/* Decorative elements */}
-          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">💼</div>
-          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">💰</div>
-          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">📊</div>
-          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">🔄</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-indigo-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-indigo-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER SEVEN:<br />TROUBLES TURNED UPSIDE DOWN
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Some couples scrapbook joyful memories.
-                  Our scrapbook is a stand-up comedy set.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <strong>Therapy sessions?</strong> We showed up, armed for battle. But it wasn't about "winning" the homework. It was about learning (slowly, painfully, finally) that sometimes, Vitaly just needed to listen when Kimball speaks.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <strong>A failed startup</strong>—six figures lost, not in hryvnias, because in hryvnias it would be seven figures. Turns out, the American Dream can bounce a check.
-                </p>
-              </div>
-            </div>
-            
-            {/* Right side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Cartoon drawing of therapy session and business troubles */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* Top half - Therapy */}
-                  <rect x="0" y="0" width="400" height="150" fill="#F0F8FF" />
-                  
-                  {/* Therapy office */}
-                  <rect x="50" y="20" width="300" height="110" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  <rect x="100" y="50" width="200" height="60" rx="10" fill="#F5F5DC" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Therapist */}
-                  <circle cx="200" cy="70" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="185" y="85" width="30" height="25" rx="5" fill="#800080" stroke="#000000" strokeWidth="1" />
-                  <path d="M195,65 L198,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M205,65 L202,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M195,75 L205,75" stroke="#000000" strokeWidth="1" />
-                  <ellipse cx="200" cy="100" rx="40" ry="5" fill="#333333" opacity="0.3" />
-                  
-                  {/* Character 1 */}
-                  <circle cx="150" cy="70" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="135" y="85" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <path d="M145,65 L148,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M155,65 L152,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M145,75 L155,75" stroke="#000000" strokeWidth="1" transform="translate(150, 75) scale(1, 0.5) rotate(180) translate(-150, -75)" />
-                  <ellipse cx="150" cy="100" rx="40" ry="5" fill="#333333" opacity="0.3" />
-                  
-                  {/* Character 2 */}
-                  <circle cx="250" cy="70" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="235" y="85" width="30" height="25" rx="5" fill="#228B22" stroke="#000000" strokeWidth="1" />
-                  <path d="M245,65 L248,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M255,65 L252,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M245,75 L255,75" stroke="#000000" strokeWidth="1" />
-                  <ellipse cx="250" cy="100" rx="40" ry="5" fill="#333333" opacity="0.3" />
-                  
-                  {/* Bottom half - Business troubles */}
-                  <rect x="0" y="150" width="400" height="150" fill="#F5F5F5" />
-                  
-                  {/* Office desk */}
-                  <rect x="100" y="200" width="200" height="60" fill="#8B4513" stroke="#000000" strokeWidth="2" />
-                  <rect x="150" y="170" width="100" height="30" fill="#A9A9A9" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Computer screen with declining chart */}
-                  <rect x="160" y="175" width="80" height="20" fill="#000000" stroke="#333333" strokeWidth="1" />
-                  <path d="M165,185 L175,180 L185,190 L195,185 L205,187 L215,180 L225,195" fill="none" stroke="#FF0000" strokeWidth="2" />
-                  
-                  {/* Character with hands on head */}
-                  <circle cx="200" cy="240" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="185" y="255" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <path d="M185,235 L175,225" stroke="#000000" strokeWidth="1" />
-                  <path d="M215,235 L225,225" stroke="#000000" strokeWidth="1" />
-                  <path d="M195,240 L205,240" stroke="#000000" strokeWidth="1" transform="translate(200, 240) scale(1, -0.5) rotate(180) translate(-200, -240)" />
-                  
-                  {/* Money flying away */}
-                  <text x="240" y="200" fill="#000000" fontSize="20" fontWeight="bold">💸</text>
-                  <text x="270" y="180" fill="#000000" fontSize="20" fontWeight="bold">💸</text>
-                  <text x="300" y="210" fill="#000000" fontSize="20" fontWeight="bold">💸</text>
-                </svg>
-              </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                From therapy battles to financial misadventures, we've weathered it all together.
-              </p>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    
-    // Chapter Eight - Gratitude
-    {
-      content: (
-        <div className="h-full w-full bg-gradient-to-br from-green-200 to-emerald-200 p-8 flex flex-col items-center justify-center relative">
-          {/* Decorative elements */}
-          <div className="absolute top-6 right-10 w-16 h-16 text-4xl">🙏</div>
-          <div className="absolute bottom-6 left-10 w-16 h-16 text-4xl">💝</div>
-          <div className="absolute top-1/3 left-6 w-12 h-12 text-3xl animate-bounce">✨</div>
-          <div className="absolute bottom-1/3 right-6 w-12 h-12 text-3xl animate-spin-slow">🌟</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Cartoon illustration */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Cartoon drawing of gratitude moments */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* Background with divided panels */}
-                  <rect x="0" y="0" width="200" height="150" fill="#FFE4E1" />
-                  <rect x="200" y="0" width="200" height="150" fill="#E0FFFF" />
-                  <rect x="0" y="150" width="200" height="150" fill="#FAFAD2" />
-                  <rect x="200" y="150" width="200" height="150" fill="#E6E6FA" />
-                  
-                  {/* Panel 1: Washing pans */}
-                  <rect x="20" y="20" width="160" height="110" rx="10" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  <rect x="60" y="50" width="80" height="40" rx="5" fill="#C0C0C0" stroke="#000000" strokeWidth="1" />
-                  <ellipse cx="100" cy="50" rx="30" ry="10" fill="#87CEEB" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Character washing */}
-                  <circle cx="50" cy="80" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="35" y="95" width="30" height="25" rx="5" fill="#228B22" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Panel 2: Ketchup on face */}
-                  <rect x="220" y="20" width="160" height="110" rx="10" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  <circle cx="300" cy="70" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <rect x="285" y="85" width="30" height="25" rx="5" fill="#4169E1" stroke="#000000" strokeWidth="1" />
-                  <path d="M295,65 L298,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M305,65 L302,65" stroke="#000000" strokeWidth="1" />
-                  <path d="M295,75 L305,75" stroke="#000000" strokeWidth="1" />
-                  <path d="M290,70 L295,70" stroke="#FF0000" strokeWidth="4" strokeLinecap="round" />
-                  
-                  {/* Pizza slice */}
-                  <path d="M320,80 L330,100 L310,100 Z" fill="#FFA500" stroke="#8B0000" strokeWidth="1" />
-                  <path d="M320,80 L330,100 L310,100 Z" fill="#FF6347" stroke="none" strokeWidth="0" />
-                  
-                  {/* Panel 3: Tank tops */}
-                  <rect x="20" y="170" width="160" height="110" rx="10" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  <path d="M70,200 Q100,190 130,200 L130,250 L70,250 Z" fill="#1E90FF" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Characters with tank top */}
-                  <circle cx="150" cy="220" r="15" fill="#FFE7D6" stroke="#000000" strokeWidth="1" />
-                  <path d="M145,215 L148,215" stroke="#000000" strokeWidth="1" />
-                  <path d="M155,215 L152,215" stroke="#000000" strokeWidth="1" />
-                  <path d="M145,225 L155,225" stroke="#000000" strokeWidth="1" transform="translate(150, 225) scale(1, 0.5) rotate(180) translate(-150, -225)" />
-                  
-                  {/* Panel 4: Pizza and sushi */}
-                  <rect x="220" y="170" width="160" height="110" rx="10" fill="#FFFFFF" stroke="#000000" strokeWidth="2" />
-                  <circle cx="260" cy="210" r="30" fill="#FFA500" stroke="#8B0000" strokeWidth="2" />
-                  <circle cx="260" cy="210" r="25" fill="#FF6347" stroke="#8B0000" strokeWidth="1" />
-                  
-                  {/* Sushi */}
-                  <rect x="320" y="200" width="40" height="20" rx="5" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <rect x="325" y="205" width="30" height="10" fill="#FFE4B5" stroke="#000000" strokeWidth="1" />
-                  <rect x="335" y="205" width="10" height="10" fill="#90EE90" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* $5 sign */}
-                  <circle cx="340" cy="190" r="10" fill="#FFFFFF" stroke="#000000" strokeWidth="1" />
-                  <text x="340" y="195" fill="#000000" fontSize="15" fontWeight="bold" textAnchor="middle">$5</text>
-                </svg>
-              </div>
-              
-              <p className="text-center text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                The little things we're grateful for: clean pans, ketchup warnings, borrowed tank tops, and $5 sushi bars.
-              </p>
-            </div>
-            
-            {/* Right side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-green-300 flex flex-col justify-center">
-              <h2 className="text-2xl font-bold text-center mb-4 text-green-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                CHAPTER EIGHT:<br />GRATITUDE (AND ABSURDITIES)
-              </h2>
-              <div className="prose prose-md max-w-md mx-auto">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">Thank you for—</p>
-                <ul className="list-disc pl-6 font-['Comic Neue','Comic Sans MS',cursive]">
-                  <li>washing my pans when I make a mess.</li>
-                  <li>telling me I have ketchup from eating pizza or ice cream on my face, like a baby racing a half-gallon to catch up with Kimball.</li>
-                  <li>stealing my tank tops and saying they're too tight—when really, they just look better on a two-time Classic Physique 1st Place medalist (me, not you!).</li>
-                  <li>occasional pizza nights and $5 sushi bars.</li>
-                </ul>
-                <p className="text-gray-700 mt-4 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Thank you for every wild therapy session, pandemic night game, and all the financial messes we unknotted—sometimes wielding sarcasm, sometimes just brute force.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  And for laughter: every time you laugh at my jokes, science says we're both getting healthier—because even one good laugh can send stress packing and add real minutes to your life.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    },
-    
-    // Conclusion with updated HAPPY COUPLE and logo - UPDATED
-    {
-      content: (
-        <div className="h-full w-full bg-gradient-to-br from-indigo-200 to-purple-200 p-8 flex flex-col items-center justify-center relative">
-          {/* Decorative elements */}
-          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">🌈</div>
-          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">🎊</div>
-          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">💖</div>
-          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">🌟</div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            {/* Left side - Text */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-indigo-300 flex flex-col justify-center">
-              <h2 className="text-3xl font-bold text-center mb-4 text-indigo-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                TOGETHER, WE WON
-              </h2>
-              <div className="prose prose-lg max-w-md mx-auto text-center">
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Not at tennis.<br />
-                  Not in World of Warcraft.<br />
-                  Not at fashion (let's be honest).
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">But at the only game that matters.</p>
-                <p className="text-2xl font-bold text-indigo-600 font-['Comic Neue','Comic Sans MS',cursive]">
-                  Love is love.
-                </p>
-                <p className="text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  And that's something worth celebrating, every day.
-                </p>
-                <div className="mt-6 flex justify-center">
-                  <SafeIcon icon={FiHeart} className="w-12 h-12 text-rose-500" />
+          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">🙏</div>
+          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">📝</div>
+          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">💌</div>
+          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">📆</div>
+
+          {/* Container matching dedication page layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            {/* Left side - Text in matching rounded corners style */}
+            <div className="bg-blue-100/90 backdrop-blur-sm rounded-xl p-6 shadow-2xl border-4 border-blue-300 flex flex-col justify-center transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="border-2 border-dashed border-indigo-300 rounded-lg p-6 w-full">
+                {/* Chapter title with correct font and styling */}
+                <h2 
+                  className="font-bold text-center mb-6 text-blue-700" 
+                  style={{
+                    fontFamily: "'Chewy','Comic Sans MS',cursive",
+                    fontSize: "clamp(1.15rem, 4vw, 1.8rem)"
+                  }}
+                >
+                  CHAPTER 3:<br />THE GREAT ESCAPE (FROM CLOSET TO BASEMENT)
+                </h2>
+                
+                {/* Story text with proper styling */}
+                <div 
+                  className="text-gray-700 text-left space-y-4" 
+                  style={{
+                    fontFamily: "'Comic Neue','Comic Sans MS',Arial,sans-serif",
+                    fontSize: "clamp(1.08rem, 3vw, 1.4rem)",
+                    lineHeight: "1.6"
+                  }}
+                >
+                  <p>There were:</p>
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li>Secret meetings</li>
+                    <li>Coded texts</li>
+                    <li>Twice the drama—half the guilt—while sneaking kisses behind hymnbooks. Take that, Joseph Smith.</li>
+                    <li>Mormon girls signed up for "Find the One." I signed up for "Already Found!"</li>
+                  </ul>
+                  <p className="italic">Below: Kimball went to Colorado for church things. We counted weeks with military precision. He quit church. I quit hiding and became his Matthew.</p>
                 </div>
               </div>
             </div>
-            
-            {/* Right side - Final illustration with happy gay couple and rainbow */}
-            <div className="flex flex-col items-center justify-center">
-              <div className="relative w-full h-80">
-                {/* Final illustration with rainbow hearts and logo */}
-                <svg viewBox="0 0 400 300" className="w-full h-full">
-                  {/* Sky background */}
-                  <defs>
-                    <linearGradient id="sky-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#87CEEB" />
-                      <stop offset="100%" stopColor="#E0FFFF" />
-                    </linearGradient>
-                    <linearGradient id="rainbow-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#FF0018" />
-                      <stop offset="16.6%" stopColor="#FFA52C" />
-                      <stop offset="33.3%" stopColor="#FFFF00" />
-                      <stop offset="50%" stopColor="#00FF00" />
-                      <stop offset="66.6%" stopColor="#0000FF" />
-                      <stop offset="83.3%" stopColor="#4B0082" />
-                      <stop offset="100%" stopColor="#9400D3" />
-                    </linearGradient>
-                    <linearGradient id="rainbow-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#FF0018" />
-                      <stop offset="16.6%" stopColor="#FFA52C" />
-                      <stop offset="33.3%" stopColor="#FFFF00" />
-                      <stop offset="50%" stopColor="#00FF00" />
-                      <stop offset="66.6%" stopColor="#0000FF" />
-                      <stop offset="83.3%" stopColor="#4B0082" />
-                      <stop offset="100%" stopColor="#9400D3" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Sky */}
-                  <rect x="0" y="0" width="400" height="300" fill="url(#sky-grad)" />
-                  
-                  {/* Sun */}
-                  <circle cx="350" cy="50" r="30" fill="#FFD700" />
-                  
-                  {/* Grass */}
-                  <rect x="0" y="250" width="400" height="50" fill="#228B22" />
-                  
-                  {/* Rainbow */}
-                  <path d="M50,250 Q200,100 350,250" fill="none" stroke="url(#rainbow-grad-1)" strokeWidth="10" strokeLinecap="round" />
-                  
-                  {/* Home */}
-                  <path d="M50,200 L50,150 L100,120 L150,150 L150,200 Z" fill="#D2B48C" stroke="#000000" strokeWidth="2" />
-                  <rect x="85" y="170" width="30" height="30" fill="#8B4513" stroke="#000000" strokeWidth="1" />
-                  
-                  {/* Happy gay couple holding hands */}
-                  {/* Character 1 - Vitaly */}
-                  <g transform="translate(160, 220)">
-                    <circle cx="0" cy="0" r="25" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Head */}
-                    <ellipse cx="-10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Left eye */}
-                    <ellipse cx="10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Right eye */}
-                    <path d="M-10,5 Q0,15 10,5" fill="none" stroke="#E65100" strokeWidth="2" strokeLinecap="round" /> {/* Smile */}
-                    <rect x="-20" y="25" width="40" height="50" rx="8" fill="#3F51B5" stroke="#1A237E" strokeWidth="2" /> {/* Body */}
-                    <rect x="-20" y="75" width="17" height="30" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Left leg */}
-                    <rect x="3" y="75" width="17" height="30" fill="#7986CB" stroke="#1A237E" strokeWidth="2" /> {/* Right leg */}
-                    <rect x="-40" y="35" width="20" height="8" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Left arm */}
-                    <rect x="20" y="35" width="25" height="8" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" /> {/* Right arm extended */}
-                  </g>
-                  
-                  {/* Character 2 - Kimball */}
-                  <g transform="translate(240, 220)">
-                    <circle cx="0" cy="0" r="25" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Head */}
-                    <ellipse cx="-10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Left eye */}
-                    <ellipse cx="10" cy="-5" rx="3" ry="4" fill="#3E2723" /> {/* Right eye */}
-                    <path d="M-10,5 Q0,15 10,5" fill="none" stroke="#E65100" strokeWidth="2" strokeLinecap="round" /> {/* Smile */}
-                    <rect x="-20" y="25" width="40" height="50" rx="8" fill="#4CAF50" stroke="#1B5E20" strokeWidth="2" /> {/* Body */}
-                    <rect x="-20" y="75" width="17" height="30" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Left leg */}
-                    <rect x="3" y="75" width="17" height="30" fill="#81C784" stroke="#1B5E20" strokeWidth="2" /> {/* Right leg */}
-                    <rect x="-45" y="35" width="25" height="8" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Left arm extended */}
-                    <rect x="20" y="35" width="20" height="8" fill="#FFECB3" stroke="#E65100" strokeWidth="2" /> {/* Right arm */}
-                  </g>
-                  
-                  {/* Joined hands in the middle */}
-                  <circle cx="200" cy="255" r="10" fill="#FFE0B2" stroke="#E65100" strokeWidth="2" />
-                  
-                  {/* Hearts around the couple */}
-                  <g transform="translate(160, 180) scale(0.5)">
-                    <path d="M0,0 C-10,-20 -40,0 0,40 C40,0 10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
-                  </g>
-                  <g transform="translate(240, 180) scale(0.5)">
-                    <path d="M0,0 C10,-20 40,0 0,40 C-40,0 -10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
-                  </g>
-                  <g transform="translate(200, 150) scale(0.5)">
-                    <path d="M0,0 C-10,-20 -40,0 0,40 C40,0 10,-20 0,0 Z" fill="#E91E63" fillOpacity="0.7" />
-                  </g>
-                  
-                  {/* Stars */}
-                  <text x="70" y="100" fill="#FFD700" fontSize="20">★</text>
-                  <text x="300" y="120" fill="#FFD700" fontSize="20">★</text>
-                  <text x="320" y="180" fill="#FFD700" fontSize="20">★</text>
-                </svg>
-              </div>
-              
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border-4 border-purple-300">
-                <p className="text-center text-gray-700 font-['Comic Neue','Comic Sans MS',cursive]">
-                  The end.<br />
-                  <em>(Until the next craving—for pizza, or kittens, or just a little more laughter together.)</em>
-                </p>
-                <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg mx-auto mt-4">
-                  <img
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob"
-                    alt="KV Logo"
-                    className="w-full h-full object-cover"
-                  />
+
+            {/* Right side - Church/hymnbook illustration */}
+            <div className="w-full bg-white/90 rounded-xl shadow-2xl border-4 border-blue-300 overflow-hidden flex items-center justify-center p-4 transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="w-full h-full border-2 border-dashed border-indigo-300 rounded-lg p-2">
+                {/* Illustration of church scene with hymnbooks */}
+                <div className="w-full h-full">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="church-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FEF9C3" />
+                        <stop offset="100%" stopColor="#FEF3C7" />
+                      </linearGradient>
+                      <filter id="church-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="1" dy="1" stdDeviation="2" floodColor="#00000030"/>
+                      </filter>
+                      <linearGradient id="light-beam" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FEF9C3" stopOpacity="0.7" />
+                        <stop offset="100%" stopColor="#FEF9C3" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Church background */}
+                    <rect x="0" y="0" width="400" height="400" fill="url(#church-bg)" />
+                    
+                    {/* Church pews */}
+                    <rect x="80" y="250" width="240" height="20" rx="2" fill="#8B4513" stroke="#654321" strokeWidth="1" />
+                    <rect x="80" y="270" width="240" height="50" rx="2" fill="#A0522D" stroke="#654321" strokeWidth="1" />
+                    <rect x="80" y="320" width="240" height="20" rx="2" fill="#8B4513" stroke="#654321" strokeWidth="1" />
+                    
+                    <rect x="80" y="180" width="240" height="20" rx="2" fill="#8B4513" stroke="#654321" strokeWidth="1" />
+                    <rect x="80" y="200" width="240" height="50" rx="2" fill="#A0522D" stroke="#654321" strokeWidth="1" />
+                    
+                    {/* Church windows with light beams */}
+                    <rect x="60" y="60" width="40" height="100" rx="20" fill="#B7E1F3" stroke="#87CEEB" strokeWidth="1" />
+                    <path d="M80,60 L120,200" fill="url(#light-beam)" stroke="none" opacity="0.6" />
+                    
+                    <rect x="300" y="60" width="40" height="100" rx="20" fill="#B7E1F3" stroke="#87CEEB" strokeWidth="1" />
+                    <path d="M320,60 L280,200" fill="url(#light-beam)" stroke="none" opacity="0.6" />
+                    
+                    {/* Vitaly character - yellow outfit with tryzub, peeking behind hymnbook */}
+                    <g transform="translate(170, 230)">
+                      {/* Head - medium-dark skin, rounded, peeking */}
+                      <circle cx="0" cy="0" r="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="2" filter="url(#church-shadow)" />
+                      
+                      {/* Eyes - looking to the side */}
+                      <ellipse cx="-8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <ellipse cx="8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <circle cx="-7" cy="-5" r="1" fill="#FFFFFF" />
+                      <circle cx="9" cy="-5" r="1" fill="#FFFFFF" />
+                      
+                      {/* Smirk */}
+                      <path d="M-8,6 Q0,10 8,4" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - yellow outfit with tryzub */}
+                      <rect x="-15" y="20" width="30" height="40" rx="6" fill="#FFD700" stroke="#DAA520" strokeWidth="2" filter="url(#church-shadow)" />
+                      
+                      {/* Ukrainian Trident (Tryzub) logo centered on chest */}
+                      <g transform="translate(0, 40) scale(0.4)" fill="#0057B7">
+                        <path d="M0,-15 L-8,-5 L-8,5 L-4,5 L-4,15 L4,15 L4,5 L8,5 L8,-5 Z" />
+                        <path d="M-12,-10 L-12,0 L-8,0 L-8,-10 Z" />
+                        <path d="M12,-10 L12,0 L8,0 L8,-10 Z" />
+                      </g>
+                      
+                      {/* Hands holding hymnbook */}
+                      <rect x="15" y="30" width="8" height="7" rx="3" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Kimball character - blue outfit, peeking behind hymnbook */}
+                    <g transform="translate(230, 230)">
+                      {/* Head - lighter skin, rounded, peeking */}
+                      <circle cx="0" cy="0" r="20" fill="#FDBCB4" stroke="#CD853F" strokeWidth="2" filter="url(#church-shadow)" />
+                      
+                      {/* Eyes - looking to the side */}
+                      <ellipse cx="-8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <ellipse cx="8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <circle cx="-9" cy="-5" r="1" fill="#FFFFFF" />
+                      <circle cx="7" cy="-5" r="1" fill="#FFFFFF" />
+                      
+                      {/* Smile */}
+                      <path d="M-8,4 Q0,10 8,6" fill="none" stroke="#CD853F" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - blue outfit */}
+                      <rect x="-15" y="20" width="30" height="40" rx="6" fill="#0057B7" stroke="#003785" strokeWidth="2" filter="url(#church-shadow)" />
+                      
+                      {/* Hands holding hymnbook */}
+                      <rect x="-23" y="30" width="8" height="7" rx="3" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Hymnbook between them */}
+                    <g transform="translate(200, 230)">
+                      <rect x="-20" y="25" width="40" height="30" rx="2" fill="#8B0000" stroke="#800000" strokeWidth="2" filter="url(#church-shadow)" />
+                      <rect x="-15" y="30" width="30" height="20" rx="1" fill="#F5F5DC" stroke="#800000" strokeWidth="1" />
+                      <text x="0" y="43" fontFamily="Arial" fontSize="6" fill="#000000" textAnchor="middle" fontWeight="bold">HYMNS</text>
+                    </g>
+                    
+                    {/* Calendar pages and phone below */}
+                    <g transform="translate(120, 330)">
+                      <rect x="-30" y="-20" width="60" height="50" rx="2" fill="#FFFFFF" stroke="#000000" strokeWidth="1" filter="url(#church-shadow)" />
+                      <line x1="-30" y1="-5" x2="30" y2="-5" stroke="#000000" strokeWidth="1" />
+                      <text x="0" y="-10" fontFamily="Arial" fontSize="8" fill="#000000" textAnchor="middle" fontWeight="bold">JULY</text>
+                      <text x="0" y="15" fontFamily="Arial" fontSize="20" fill="#FF0000" textAnchor="middle" fontWeight="bold">14</text>
+                      <circle cx="-15" cy="-12" r="3" fill="#FF0000" />
+                    </g>
+                    
+                    <g transform="translate(280, 330)">
+                      <rect x="-20" y="-25" width="40" height="60" rx="5" fill="#000000" stroke="#333333" strokeWidth="1" filter="url(#church-shadow)" />
+                      <rect x="-17" y="-22" width="34" height="45" rx="2" fill="#87CEEB" />
+                      <circle cx="0" cy="30" r="5" fill="#FFFFFF" stroke="#333333" strokeWidth="1" />
+                      <text x="0" y="0" fontFamily="Arial" fontSize="6" fill="#FFFFFF" textAnchor="middle">❤️ MSG</text>
+                    </g>
+                    
+                    {/* Small heart between them */}
+                    <g transform="translate(200, 210)">
+                      <path d="M0,0 C-3,-6 -8,-3 -3,5 C2,13 0,-5 0,0 Z" fill="#FF6B6B" opacity="0.8" />
+                      <path d="M0,0 C3,-6 8,-3 3,5 C-2,13 0,-5 0,0 Z" fill="#FF6B6B" opacity="0.8" />
+                    </g>
+                  </svg>
                 </div>
               </div>
             </div>
@@ -1201,6 +1159,198 @@ const Book = () => {
         </div>
       )
     },
+    // Chapter Three Spread 2 - NEW with borscht cooking illustration
+    {
+      content: (
+        <div className="h-full w-full bg-gradient-to-br from-red-200 to-rose-200 p-8 flex flex-col items-center justify-center relative">
+          {/* Decorative elements */}
+          <div className="absolute top-6 left-10 w-16 h-16 text-4xl">🍲</div>
+          <div className="absolute bottom-6 right-10 w-16 h-16 text-4xl">🏡</div>
+          <div className="absolute top-1/3 right-6 w-12 h-12 text-3xl animate-bounce">❤️</div>
+          <div className="absolute bottom-1/3 left-6 w-12 h-12 text-3xl animate-spin-slow">🌿</div>
+
+          {/* Container matching dedication page layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+            {/* Left side - Text in matching rounded corners style */}
+            <div className="bg-blue-100/90 backdrop-blur-sm rounded-xl p-6 shadow-2xl border-4 border-blue-300 flex flex-col justify-center transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="border-2 border-dashed border-indigo-300 rounded-lg p-6 w-full">
+                {/* Chapter title with correct font and styling */}
+                <h2 
+                  className="font-bold text-center mb-6 text-blue-700" 
+                  style={{
+                    fontFamily: "'Chewy','Comic Sans MS',cursive",
+                    fontSize: "clamp(1.15rem, 4vw, 1.8rem)"
+                  }}
+                >
+                  CHAPTER 3:<br />THE GREAT ESCAPE (FROM CLOSET TO BASEMENT)
+                </h2>
+                
+                {/* Story text with proper styling */}
+                <div 
+                  className="text-gray-700 text-left space-y-4" 
+                  style={{
+                    fontFamily: "'Comic Neue','Comic Sans MS',Arial,sans-serif",
+                    fontSize: "clamp(1.08rem, 3vw, 1.4rem)",
+                    lineHeight: "1.6"
+                  }}
+                >
+                  <p>He led, I followed, and somewhere along the line, we both lost our reservations (and our good standing).</p>
+                  <p>We made borscht bold enough to cure homesickness and ward off judgmental neighbors.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side - Borscht cooking illustration */}
+            <div className="w-full bg-white/90 rounded-xl shadow-2xl border-4 border-blue-300 overflow-hidden flex items-center justify-center p-4 transform hover:scale-105 transition-transform duration-300">
+              {/* Inner decorative border */}
+              <div className="w-full h-full border-2 border-dashed border-indigo-300 rounded-lg p-2">
+                {/* Illustration of cooking borscht */}
+                <div className="w-full h-full">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    <defs>
+                      <linearGradient id="kitchen-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FEE2E2" />
+                        <stop offset="100%" stopColor="#FECDD3" />
+                      </linearGradient>
+                      <filter id="kitchen-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="1" dy="1" stdDeviation="2" floodColor="#00000030"/>
+                      </filter>
+                      <radialGradient id="steam-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+                      </radialGradient>
+                    </defs>
+                    
+                    {/* Kitchen background */}
+                    <rect x="0" y="0" width="400" height="400" fill="url(#kitchen-bg)" />
+                    
+                    {/* Kitchen counter */}
+                    <rect x="50" y="250" width="300" height="150" fill="#E5E7EB" />
+                    <rect x="50" y="250" width="300" height="20" fill="#D1D5DB" />
+                    
+                    {/* Kitchen wall tiles */}
+                    <rect x="50" y="50" width="300" height="200" fill="#F9FAFB" />
+                    <line x1="50" y1="100" x2="350" y2="100" stroke="#E5E7EB" strokeWidth="1" />
+                    <line x1="50" y1="150" x2="350" y2="150" stroke="#E5E7EB" strokeWidth="1" />
+                    <line x1="50" y1="200" x2="350" y2="200" stroke="#E5E7EB" strokeWidth="1" />
+                    <line x1="100" y1="50" x2="100" y2="250" stroke="#E5E7EB" strokeWidth="1" />
+                    <line x1="150" y1="50" x2="150" y2="250" stroke="#E5E7EB" strokeWidth="1" />
+                    <line x1="200" y1="50" x2="200" y2="250" stroke="#E5E7EB" strokeWidth="1" />
+                    <line x1="250" y1="50" x2="250" y2="250" stroke="#E5E7EB" strokeWidth="1" />
+                    <line x1="300" y1="50" x2="300" y2="250" stroke="#E5E7EB" strokeWidth="1" />
+                    
+                    {/* Stove */}
+                    <rect x="120" y="250" width="160" height="10" fill="#9CA3AF" />
+                    <rect x="130" y="260" width="140" height="40" rx="5" fill="#4B5563" stroke="#374151" strokeWidth="2" />
+                    
+                    {/* Borscht pot with steam */}
+                    <ellipse cx="200" cy="260" rx="50" ry="10" fill="#4B5563" filter="url(#kitchen-shadow)" />
+                    <rect x="155" y="210" width="90" height="50" rx="5" fill="#B91C1C" stroke="#7F1D1D" strokeWidth="2" filter="url(#kitchen-shadow)" />
+                    <ellipse cx="200" cy="210" rx="45" ry="10" fill="#EC4899" />
+                    
+                    {/* Steam */}
+                    <g opacity="0.7">
+                      <path d="M180,200 Q175,180 185,170 Q195,160 190,150 Q185,140 195,135" fill="none" stroke="url(#steam-gradient)" strokeWidth="8" strokeLinecap="round" />
+                      <path d="M200,195 Q205,175 195,160 Q185,145 200,130" fill="none" stroke="url(#steam-gradient)" strokeWidth="8" strokeLinecap="round" />
+                      <path d="M220,200 Q230,180 225,165 Q220,150 230,140" fill="none" stroke="url(#steam-gradient)" strokeWidth="8" strokeLinecap="round" />
+                    </g>
+                    
+                    {/* Vitaly character - yellow outfit with tryzub, in apron */}
+                    <g transform="translate(150, 180)">
+                      {/* Head - medium-dark skin, rounded */}
+                      <circle cx="0" cy="0" r="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="2" filter="url(#kitchen-shadow)" />
+                      
+                      {/* Eyes */}
+                      <ellipse cx="-8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <ellipse cx="8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <circle cx="-8" cy="-5" r="1" fill="#FFFFFF" />
+                      <circle cx="8" cy="-5" r="1" fill="#FFFFFF" />
+                      
+                      {/* Smile */}
+                      <path d="M-8,6 Q0,12 8,6" fill="none" stroke="#8B7355" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - yellow with apron */}
+                      <rect x="-15" y="20" width="30" height="40" rx="6" fill="#FFD700" stroke="#DAA520" strokeWidth="2" filter="url(#kitchen-shadow)" />
+                      <rect x="-12" y="20" width="24" height="35" rx="2" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+                      
+                      {/* Ukrainian Trident (Tryzub) logo visible under apron */}
+                      <g transform="translate(0, 40) scale(0.3)" fill="#0057B7">
+                        <path d="M0,-15 L-8,-5 L-8,5 L-4,5 L-4,15 L4,15 L4,5 L8,5 L8,-5 Z" />
+                        <path d="M-12,-10 L-12,0 L-8,0 L-8,-10 Z" />
+                        <path d="M12,-10 L12,0 L8,0 L8,-10 Z" />
+                      </g>
+                      
+                      {/* Arms */}
+                      <rect x="-25" y="30" width="10" height="8" rx="4" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" />
+                      <rect x="15" y="30" width="10" height="8" rx="4" fill="#D2B48C" stroke="#8B7355" strokeWidth="1" />
+                      
+                      {/* Legs */}
+                      <rect x="-12" y="60" width="10" height="20" rx="3" fill="#1E40AF" stroke="#1E3A8A" strokeWidth="1" />
+                      <rect x="2" y="60" width="10" height="20" rx="3" fill="#1E40AF" stroke="#1E3A8A" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Kimball character - blue outfit, in apron */}
+                    <g transform="translate(250, 180)">
+                      {/* Head - lighter skin, rounded */}
+                      <circle cx="0" cy="0" r="20" fill="#FDBCB4" stroke="#CD853F" strokeWidth="2" filter="url(#kitchen-shadow)" />
+                      
+                      {/* Eyes */}
+                      <ellipse cx="-8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <ellipse cx="8" cy="-5" rx="3" ry="4" fill="#2F4F4F" />
+                      <circle cx="-8" cy="-5" r="1" fill="#FFFFFF" />
+                      <circle cx="8" cy="-5" r="1" fill="#FFFFFF" />
+                      
+                      {/* Smile */}
+                      <path d="M-8,6 Q0,10 8,6" fill="none" stroke="#CD853F" strokeWidth="2" strokeLinecap="round" />
+                      
+                      {/* Body - blue with apron */}
+                      <rect x="-15" y="20" width="30" height="40" rx="6" fill="#0057B7" stroke="#003785" strokeWidth="2" filter="url(#kitchen-shadow)" />
+                      <rect x="-12" y="20" width="24" height="35" rx="2" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+                      
+                      {/* Arms */}
+                      <rect x="-25" y="30" width="10" height="8" rx="4" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" />
+                      <rect x="15" y="30" width="10" height="8" rx="4" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" />
+                      
+                      {/* Legs */}
+                      <rect x="-12" y="60" width="10" height="20" rx="3" fill="#1F2937" stroke="#111827" strokeWidth="1" />
+                      <rect x="2" y="60" width="10" height="20" rx="3" fill="#1F2937" stroke="#111827" strokeWidth="1" />
+                    </g>
+                    
+                    {/* Neighbor peeking through window */}
+                    <rect x="330" y="100" width="40" height="60" rx="2" fill="#B7E1F3" stroke="#87CEEB" strokeWidth="1" />
+                    <g transform="translate(350, 120)">
+                      <circle cx="0" cy="0" r="15" fill="#FDBCB4" stroke="#CD853F" strokeWidth="1" />
+                      <ellipse cx="-5" cy="-2" rx="2" ry="3" fill="#2F4F4F" />
+                      <ellipse cx="5" cy="-2" rx="2" ry="3" fill="#2F4F4F" />
+                      <path d="M-7,5 Q0,2 7,5" fill="none" stroke="#CD853F" strokeWidth="1" strokeLinecap="round" />
+                      <path d="M-8,-8 Q0,-12 8,-8" fill="none" stroke="#CD853F" strokeWidth="1" strokeLinecap="round" />
+                    </g>
+                    
+                    {/* Hearts and steam swirls */}
+                    <g transform="translate(200, 120)">
+                      <path d="M0,0 C-5,-10 -15,-5 -5,10 C5,25 0,-10 0,0 Z" fill="#FB7185" opacity="0.6" />
+                      <path d="M0,0 C5,-10 15,-5 5,10 C-5,25 0,-10 0,0 Z" fill="#FB7185" opacity="0.6" />
+                    </g>
+                    
+                    <g transform="translate(150, 100) scale(0.7)">
+                      <path d="M0,0 C-5,-10 -15,-5 -5,10 C5,25 0,-10 0,0 Z" fill="#FB7185" opacity="0.5" />
+                      <path d="M0,0 C5,-10 15,-5 5,10 C-5,25 0,-10 0,0 Z" fill="#FB7185" opacity="0.5" />
+                    </g>
+                    
+                    <g transform="translate(250, 90) scale(0.8)">
+                      <path d="M0,0 C-5,-10 -15,-5 -5,10 C5,25 0,-10 0,0 Z" fill="#FB7185" opacity="0.7" />
+                      <path d="M0,0 C5,-10 15,-5 5,10 C-5,25 0,-10 0,0 Z" fill="#FB7185" opacity="0.7" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    // Remaining pages would continue here...
   ];
 
   // Calculate dimensions on mount and resize
@@ -1325,20 +1475,18 @@ const Book = () => {
                 onClick={goToPrevPage}
                 disabled={currentPage === 0 || isFlipping}
                 className={`flex items-center space-x-2 px-6 py-3 rounded-full ${
-                  currentPage === 0
-                    ? 'text-gray-400 cursor-not-allowed'
-                    : 'bg-amber-500 text-white hover:bg-amber-600'
+                  currentPage === 0 ? 'text-gray-400 cursor-not-allowed' : 'bg-amber-500 text-white hover:bg-amber-600'
                 }`}
               >
                 <SafeIcon icon={FiArrowLeft} className="w-5 h-5" />
                 <span className="font-['Comic Neue','Comic Sans MS',cursive]">Previous Page</span>
               </button>
-              
+
               <div className="flex items-center space-x-4">
                 <span className="text-gray-600 bg-white px-4 py-2 rounded-lg shadow-md font-['Comic Neue','Comic Sans MS',cursive]">
                   Page {currentPage + 1} of {pages.length}
                 </span>
-                <button 
+                <button
                   onClick={toggleFullscreen}
                   className="p-3 rounded-full bg-indigo-500 text-white hover:bg-indigo-600"
                   title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
@@ -1346,14 +1494,12 @@ const Book = () => {
                   <SafeIcon icon={isFullscreen ? FiMinimize2 : FiMaximize2} className="w-5 h-5" />
                 </button>
               </div>
-              
+
               <button
                 onClick={goToNextPage}
                 disabled={currentPage === pages.length - 1 || isFlipping}
                 className={`flex items-center space-x-2 px-6 py-3 rounded-full ${
-                  currentPage === pages.length - 1
-                    ? 'text-gray-400 cursor-not-allowed'
-                    : 'bg-amber-500 text-white hover:bg-amber-600'
+                  currentPage === pages.length - 1 ? 'text-gray-400 cursor-not-allowed' : 'bg-amber-500 text-white hover:bg-amber-600'
                 }`}
               >
                 <span className="font-['Comic Neue','Comic Sans MS',cursive]">Next Page</span>
@@ -1362,13 +1508,15 @@ const Book = () => {
             </div>
 
             {/* Book */}
-            <div 
-              className={`relative overflow-hidden bg-transparent shadow-2xl rounded-2xl ${isFullscreen ? 'w-full h-full' : ''}`}
+            <div
+              className={`relative overflow-hidden bg-transparent shadow-2xl rounded-2xl ${
+                isFullscreen ? 'w-full h-full' : ''
+              }`}
               style={!isFullscreen ? { width: dimensions.width, height: dimensions.height } : {}}
               ref={bookRef}
             >
               <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                   className="w-full h-full overflow-hidden rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.2)]"
                   key={`page-${currentPage}`}
                   initial={{ opacity: 0, x: 100 }}
@@ -1379,7 +1527,7 @@ const Book = () => {
                   {pages[currentPage]?.content}
                 </motion.div>
               </AnimatePresence>
-              
+
               {/* Page turn buttons */}
               {currentPage > 0 && (
                 <button
@@ -1390,7 +1538,7 @@ const Book = () => {
                   <SafeIcon icon={FiArrowLeft} className="w-6 h-6 text-gray-700" />
                 </button>
               )}
-              
+
               {currentPage < pages.length - 1 && (
                 <button
                   onClick={goToNextPage}
@@ -1408,21 +1556,16 @@ const Book = () => {
                 onClick={goToPrevPage}
                 disabled={currentPage === 0 || isFlipping}
                 className={`p-4 rounded-full ${
-                  currentPage === 0
-                    ? 'bg-gray-100 text-gray-400'
-                    : 'bg-amber-500 text-white'
+                  currentPage === 0 ? 'bg-gray-100 text-gray-400' : 'bg-amber-500 text-white'
                 }`}
               >
                 <SafeIcon icon={FiArrowLeft} className="w-6 h-6" />
               </button>
-              
               <button
                 onClick={goToNextPage}
                 disabled={currentPage === pages.length - 1 || isFlipping}
                 className={`p-4 rounded-full ${
-                  currentPage === pages.length - 1
-                    ? 'bg-gray-100 text-gray-400'
-                    : 'bg-amber-500 text-white'
+                  currentPage === pages.length - 1 ? 'bg-gray-100 text-gray-400' : 'bg-amber-500 text-white'
                 }`}
               >
                 <SafeIcon icon={FiArrowRight} className="w-6 h-6" />
@@ -1441,7 +1584,10 @@ const Book = () => {
                 "The Adventures of Vitaly & Kimball" is a fun, illustrated storybook capturing our journey together - from first meeting to building a life together, complete with all the quirks, challenges, and joys along the way. It's our love story told with humor and honesty, celebrating the beautiful chaos that happens when two very different people find home in each other.
               </p>
               <div className="mt-6 flex justify-center">
-                <Link to="/" className="inline-flex items-center space-x-2 bg-amber-500 text-white px-6 py-3 rounded-full hover:bg-amber-600 transition-colors font-['Comic Neue','Comic Sans MS',cursive]">
+                <Link
+                  to="/"
+                  className="inline-flex items-center space-x-2 bg-amber-500 text-white px-6 py-3 rounded-full hover:bg-amber-600 transition-colors font-['Comic Neue','Comic Sans MS',cursive]"
+                >
                   <SafeIcon icon={FiHome} className="w-5 h-5" />
                   <span>Return to our home page</span>
                 </Link>

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import {motion} from 'framer-motion';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Navigation from '../components/Navigation';
 import SafeIcon from '../common/SafeIcon';
 import PoemDisplay from '../components/PoemDisplay';
@@ -10,7 +10,7 @@ import ImageModal from '../components/ImageModal';
 import Footer from '../components/Footer';
 import * as FiIcons from 'react-icons/fi';
 
-const {FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiBook} = FiIcons;
+const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiBook } = FiIcons;
 
 const Home = () => {
   const [showSignup, setShowSignup] = useState(false);
@@ -163,33 +163,33 @@ const Home = () => {
             className="space-y-8"
           >
             <div className="space-y-4">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-                className="flex justify-center cursor-pointer"
-                onClick={() => openImageModal("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob")}
-              >
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-                  <img
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
-                    alt="Kimball & Vitaly"
-                    className="w-full h-full object-cover"
-                    style={{
-                      maskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')",
-                      WebkitMaskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')"
-                    }}
-                  />
-                </div>
-              </motion.div>
-
               <h1 className="text-4xl md:text-6xl font-serif text-stone-800 leading-tight">
                 Finding Home in <span className="block text-indigo-600 italic">Love's Echo</span>
               </h1>
-
               <div className="flex items-center justify-center space-x-2 text-stone-600">
                 <SafeIcon icon={FiCalendar} className="w-5 h-5" />
                 <span className="text-lg">May 15, 2006 - Present</span>
+              </div>
+
+              {/* Rings image with decorative lines */}
+              <div className="flex items-center justify-center my-6 px-4">
+                <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                  className="mx-4 cursor-pointer"
+                  onClick={() => openImageModal("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png")}
+                >
+                  <div className="w-32 h-32 flex items-center justify-center">
+                    <img
+                      src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png"
+                      alt="Kimball & Vitaly"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </motion.div>
+                <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
               </div>
             </div>
 
@@ -216,8 +216,15 @@ const Home = () => {
                   loading="lazy"
                   title="Our Love Story"
                   src="https://play.gumlet.io/embed/6764e9935c9461e1db824f52"
-                  style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
+                  style={{
+                    border: 'none',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                 ></iframe>
               </div>
             </motion.div>
@@ -233,7 +240,10 @@ const Home = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors">
+                <Link
+                  to="/story"
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
+                >
                   <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
@@ -259,7 +269,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Our Epic Ordinary Love Section */}
+      {/* Our Epic Ordinary Love Section - UPDATED with consistent image sizing */}
       <section className="py-20 bg-gradient-to-br from-blue-50 to-yellow-50 relative overflow-hidden">
         {/* Decorative Elements */}
         {heartColors.map((color, index) => (
@@ -353,7 +363,8 @@ const Home = () => {
           >
             <div className="space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif text-stone-800">
-                <strong>Home Was Never a Place—</strong> <span className="block text-indigo-600 italic">It Was a Person</span>
+                <strong>Home Was Never a Place—</strong>
+                <span className="block text-indigo-600 italic">It Was a Person</span>
               </h2>
               <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
                 From a Ukrainian orphanage to the mountains of Utah, ours is a story of slow-building, everyday courage. Love, for us, was not an easy answer. It meant translating pain into poetry—sometimes in broken English, always from the heart. (And yes, we still argue about proper Ukrainian pronunciation.)
@@ -361,7 +372,7 @@ const Home = () => {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {/* Card 1 - Fixed height with proper image sizing */}
+              {/* Card 1 - UPDATED with fixed height and consistent image sizing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -373,11 +384,11 @@ const Home = () => {
                 <div className="p-6 flex flex-col flex-grow">
                   <SafeIcon icon={FiHeart} className="w-8 h-8 text-red-500 mx-auto mb-4" />
                   <div className="flex-grow flex flex-col justify-between">
-                    <p className="text-stone-700 italic text-center leading-relaxed text-sm">
+                    <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
                       In the silent echoes of the orphanage, I learned that survival meant invisibility. But with Kimball, I discovered the courage to be seen. He celebrated my voice—first halting, then confident—and created space for the stories I'd never told anyone. Together we crafted a language of belonging that transcended words.
                     </p>
                     <div 
-                      className="mt-4 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                      className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
                       style={{ height: "160px", minHeight: "160px" }}
                       onClick={() => openImageModal({
                         src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
@@ -388,15 +399,15 @@ const Home = () => {
                       <img
                         src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg"
                         alt="Engagement photo"
-                        className="max-w-full max-h-full object-contain"
-                        style={{ width: "100%", height: "100%" }}
+                        className="w-full h-full object-contain"
+                        style={{ maxWidth: "100%", maxHeight: "100%" }}
                       />
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Card 2 - Fixed height with proper image sizing */}
+              {/* Card 2 - UPDATED with fixed height and consistent image sizing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -408,11 +419,11 @@ const Home = () => {
                 <div className="p-6 flex flex-col flex-grow">
                   <SafeIcon icon={FiHome} className="w-8 h-8 text-yellow-500 mx-auto mb-4" />
                   <div className="flex-grow flex flex-col justify-between">
-                    <p className="text-stone-700 italic text-center leading-relaxed text-sm">
+                    <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
                       When we first met, I was still writing poems in Ukrainian and translating them awkwardly into English. Kimball would listen intently, finding beauty in my stumbling words. When I first said "Я тебя люблю" to him, he surprised me by saying it back in Russian. Now we share a vocabulary of inside jokes and half-sentences that need no translation.
                     </p>
                     <div 
-                      className="mt-4 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                      className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
                       style={{ height: "160px", minHeight: "160px" }}
                       onClick={() => openImageModal({
                         src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
@@ -423,15 +434,15 @@ const Home = () => {
                       <img
                         src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg"
                         alt="Engagement photo"
-                        className="max-w-full max-h-full object-contain"
-                        style={{ width: "100%", height: "100%" }}
+                        className="w-full h-full object-contain"
+                        style={{ maxWidth: "100%", maxHeight: "100%" }}
                       />
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Card 3 - Fixed height with proper image sizing */}
+              {/* Card 3 - UPDATED with fixed height and consistent image sizing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -443,11 +454,11 @@ const Home = () => {
                 <div className="p-6 flex flex-col flex-grow">
                   <SafeIcon icon={FiHeart} className="w-8 h-8 text-blue-500 mx-auto mb-4" />
                   <div className="flex-grow flex flex-col justify-between">
-                    <p className="text-stone-700 italic text-center leading-relaxed text-sm">
+                    <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
                       There's a Ukrainian proverb: "When you're drowning, you'll clutch at a straw." But we never just clutched—we built. From fragile beginnings came something sturdy enough to shelter us through immigration battles, health crises, and the daily weight of being outsiders. Our love wasn't just salvation; it was creation.
                     </p>
                     <div 
-                      className="mt-4 rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                      className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
                       style={{ height: "160px", minHeight: "160px" }}
                       onClick={() => openImageModal({
                         src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
@@ -458,8 +469,8 @@ const Home = () => {
                       <img
                         src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg"
                         alt="Engagement photo"
-                        className="max-w-full max-h-full object-contain"
-                        style={{ width: "100%", height: "100%" }}
+                        className="w-full h-full object-contain"
+                        style={{ maxWidth: "100%", maxHeight: "100%" }}
                       />
                     </div>
                   </div>
@@ -494,7 +505,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Resilience Section */}
+      {/* Resilience Section - UPDATED with consistent image sizing */}
       <section className="py-20 bg-white relative overflow-hidden">
         {/* Decorative Elements */}
         <motion.div
@@ -567,7 +578,8 @@ const Home = () => {
           >
             <div className="text-center space-y-6">
               <h2 className="text-3xl md:text-4xl font-serif text-stone-800">
-                <strong>We Did Not Just Survive—</strong> <span className="block text-indigo-600 italic">We Chose Each Other, Again and Again</span>
+                <strong>We Did Not Just Survive—</strong>
+                <span className="block text-indigo-600 italic">We Chose Each Other, Again and Again</span>
               </h2>
             </div>
 
@@ -639,8 +651,8 @@ const Home = () => {
                   <img
                     src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg"
                     alt="Engagement photo"
-                    className="max-w-full max-h-full object-contain"
-                    style={{ width: "100%", height: "100%" }}
+                    className="w-full h-full object-contain"
+                    style={{ maxWidth: "100%", maxHeight: "100%" }}
                   />
                 </div>
               </motion.div>
@@ -731,11 +743,9 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-serif text-stone-800">
               <span className="text-indigo-600 italic">Join Our Celebration</span>
             </h2>
-
             <p className="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
               We're celebrating our 18th wedding anniversary on August 15, 2026. We'd love for you to join us! (Warning: There will be Ukrainian food, terrible dad jokes, and probably someone crying happy tears.)
             </p>
-
             <button
               onClick={() => setShowSignup(true)}
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
@@ -762,14 +772,16 @@ const Home = () => {
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed italic">
                 <em>Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)</em>
               </p>
-
               <h3 className="text-2xl md:text-3xl font-serif text-stone-800">
                 <strong>Join us in celebrating our journey of radical, resilient, ordinary love.</strong>
               </h3>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <Link to="/gallery" className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Link
+                to="/gallery"
+                className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              >
                 <div className="space-y-3">
                   <SafeIcon icon={FiHeart} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
                   <h4 className="font-semibold text-stone-800">Our Journey</h4>
@@ -777,7 +789,10 @@ const Home = () => {
                 </div>
               </Link>
 
-              <Link to="/story" className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Link
+                to="/story"
+                className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              >
                 <div className="space-y-3">
                   <SafeIcon icon={FiArrowRight} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
                   <h4 className="font-semibold text-stone-800">Read Our Story</h4>

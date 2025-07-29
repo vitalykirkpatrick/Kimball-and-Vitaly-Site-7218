@@ -25,26 +25,21 @@ const Story = () => {
     'text-violet-500'
   ];
 
-  // Convert Google Photos and Drive links to direct image URLs
-  const getDirectImageUrl = (url) => {
-    // For Google Photos links
-    if (url.includes('photos.app.goo.gl')) {
-      // Return a placeholder image until user provides direct URLs
-      return "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob";
-    }
-    // For Google Drive links
-    else if (url.includes('drive.google.com/file')) {
-      // Extract file ID
-      const fileIdMatch = url.match(/\/d\/([^/]+)/);
-      if (fileIdMatch && fileIdMatch[1]) {
-        const fileId = fileIdMatch[1];
-        return `https://drive.google.com/uc?export=view&id=${fileId}`;
-      }
-      return "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob";
-    }
-    // Return the original URL for other cases
-    return url;
-  };
+  // Placeholder images for milestones
+  const placeholderImages = [
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
+    "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "https://images.unsplash.com/photo-1531953736293-0119c712d84a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png",
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob",
+    "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob"
+  ];
 
   const milestones = [
     {
@@ -54,7 +49,7 @@ const Story = () => {
       description: "We met online and then went together to our first movie night—'She's the Man' at a $1 theater in Provo (because we were broke college students). We also attended Family Home Evening with Affirmation, a group for gay Mormon people navigating faith and identity.",
       icon: FiHeart,
       color: "red",
-      image: getDirectImageUrl("https://photos.app.goo.gl/zLgdpGM58e9jGamS7")
+      image: placeholderImages[0]
     },
     {
       year: "2006",
@@ -63,7 +58,7 @@ const Story = () => {
       description: "I moved into the basement room at 746 E 30 N in Orem while Kimball was away in Colorado for the summer. When he returned, we officially began living together. (And learned that sharing a bathroom requires serious negotiation skills.)",
       icon: FiHome,
       color: "orange",
-      image: getDirectImageUrl("https://drive.google.com/file/d/1GgX8O3Ry2g8lPSveAaz1gyNwlktz4rCQ/view?usp=sharing")
+      image: placeholderImages[1]
     },
     {
       year: "2008",
@@ -72,7 +67,7 @@ const Story = () => {
       description: "On Valentine's Day, Kimball proposed. Despite the legal barriers at the time, we committed to building a life together. (I said yes, obviously, though I was so nervous I probably said it in Ukrainian first.)",
       icon: FiHeart,
       color: "yellow",
-      image: getDirectImageUrl("https://drive.google.com/file/d/1FJSxhbK4eKiommADAUWR0XqJ8UCGrl-0/view?usp=sharing")
+      image: placeholderImages[2]
     },
     {
       year: "2008",
@@ -81,7 +76,7 @@ const Story = () => {
       description: "On August 15, 2008, we held our commitment ceremony in San Diego. Though not legally recognized at the time, we exchanged vows and rings in front of our closest friends. (And I managed to get through my poem without crying... much.)",
       icon: FiStar,
       color: "green",
-      image: getDirectImageUrl("https://photos.app.goo.gl/PZDmsfjzbuKhzNiVA")
+      image: placeholderImages[3]
     },
     {
       year: "2009",
@@ -90,7 +85,7 @@ const Story = () => {
       description: "A major milestone for me: graduating from Utah Valley University with a degree in Computer Science. Kimball supported me through endless late-night coding sessions and practice presentations. This degree opened doors that seemed impossible for an orphan immigrant.",
       icon: FiBookOpen,
       color: "blue",
-      image: getDirectImageUrl("https://drive.google.com/file/d/1HcxyH-5NraA8Ef1rkz7yVgxKsBPF90LK/view?usp=sharing")
+      image: placeholderImages[4]
     },
     {
       year: "2008",
@@ -99,7 +94,7 @@ const Story = () => {
       description: "We bought our first townhome together at 1174 W 230 S in Orem, building equity and establishing our future. It was a huge step for me as an immigrant on an H-1B visa. (And we learned that homeownership means everything breaks at the worst possible time.)",
       icon: FiHome,
       color: "blue",
-      image: getDirectImageUrl("https://photos.app.goo.gl/mXWTmQ2KrjPZwAfSA")
+      image: placeholderImages[5]
     },
     {
       year: "2015",
@@ -108,7 +103,7 @@ const Story = () => {
       description: "When the Supreme Court legalized same-sex marriage nationwide, our commitment was finally recognized legally after years of fighting for equal rights. (Only took the government 7 years to catch up to what we already knew.)",
       icon: FiHeart,
       color: "indigo",
-      image: getDirectImageUrl("https://photos.app.goo.gl/m8ZSGww5KNPtegQu8")
+      image: placeholderImages[6]
     },
     {
       year: "2016",
@@ -117,7 +112,7 @@ const Story = () => {
       description: "Another educational milestone: completing my MBA at the University of Utah. This achievement represented not just academic growth but the culmination of years adapting to a new culture and language. It was during this program that my nickname 'Wisey' was born from a misread nametag.",
       icon: FiAward,
       color: "red",
-      image: getDirectImageUrl("https://photos.app.goo.gl/yjybTz5CgDuU36NG9")
+      image: placeholderImages[7]
     },
     {
       year: "2016",
@@ -126,7 +121,7 @@ const Story = () => {
       description: "We purchased a townhome in Salt Lake City, marking a new chapter in our lives and expanding our horizons beyond Utah County. (Bigger city, bigger dreams, same terrible jokes.)",
       icon: FiMapPin,
       color: "violet",
-      image: getDirectImageUrl("https://photos.app.goo.gl/YTMBAvgyNn92hj3J9")
+      image: placeholderImages[8]
     },
     {
       year: "2017",
@@ -135,7 +130,7 @@ const Story = () => {
       description: "After years of paperwork, interviews, and uncertainty, I finally became a U.S. citizen. From orphan to immigrant to citizen - a journey made possible by love, perseverance, and Kimball's unwavering support through the complex immigration process.",
       icon: FiGlobe,
       color: "indigo",
-      image: "https://images.unsplash.com/photo-1531953736293-0119c712d84a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      image: placeholderImages[9]
     },
     {
       year: "2020",
@@ -144,7 +139,7 @@ const Story = () => {
       description: "Through financial crises, pandemic isolation, and personal setbacks, our bond grew even stronger as we faced challenges together. As the world locked down during COVID-19, we found ourselves playing the actual Pandemic board game while living through a real one - a strange coincidence that became our coping mechanism during those uncertain times.",
       icon: FiGlobe,
       color: "red",
-      image: getDirectImageUrl("https://photos.app.goo.gl/DWfb2ytqTG7uawZLA")
+      image: placeholderImages[10]
     },
     {
       year: "2026",
@@ -153,7 +148,7 @@ const Story = () => {
       description: "We'll be celebrating two decades of choosing each other every day, through every triumph and challenge. (And we're still not tired of each other's company. Much.)",
       icon: FiHeart,
       color: "red",
-      image: getDirectImageUrl("https://photos.app.goo.gl/N84yR82sUDQCewD57")
+      image: placeholderImages[11]
     }
   ];
 
@@ -177,14 +172,15 @@ const Story = () => {
       {heartColors.map((color, index) => (
         <motion.div
           key={`heart-${index}`}
-          className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${
-            index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)
-          } w-16 h-16 ${color} opacity-20 z-10`}
+          className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20 z-10`}
           animate={{
             rotate: [0, 10, 0, -10, 0],
             y: [0, -10, 0, 10, 0]
           }}
-          transition={{ repeat: Infinity, duration: 15 + index * 2 }}
+          transition={{
+            repeat: Infinity,
+            duration: 15 + index * 2
+          }}
         >
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -195,16 +191,30 @@ const Story = () => {
       {/* Additional decorative elements */}
       <motion.div
         className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
-        animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-        transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+        animate={{
+          rotate: 360,
+          scale: [1, 1.1, 1, 0.9, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 30,
+          ease: "linear"
+        }}
       >
         <div className="text-4xl">🌸</div>
       </motion.div>
 
       <motion.div
         className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
-        animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
-        transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+        animate={{
+          rotate: -360,
+          scale: [1, 1.1, 1, 0.9, 1]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 25,
+          ease: "linear"
+        }}
       >
         <div className="text-4xl">🌺</div>
       </motion.div>
@@ -215,7 +225,11 @@ const Story = () => {
           y: [0, -15, 0, -5, 0],
           rotate: [0, 5, 0, -5, 0]
         }}
-        transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
+        transition={{
+          repeat: Infinity,
+          duration: 20,
+          ease: "easeInOut"
+        }}
       >
         <div className="w-full h-full">
           <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -236,28 +250,13 @@ const Story = () => {
       </motion.div>
 
       <div className="pt-28 pb-16 relative z-30">
-        {/* Profile Image */}
-        <div className="flex justify-center mb-12">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-            <img
-              src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob"
-              alt="Kimball & Vitaly"
-              className="w-full h-full object-cover"
-              style={{
-                maskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')",
-                WebkitMaskImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"50\" /></svg>')"
-              }}
-            />
-          </div>
-        </div>
-
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center space-y-8 mb-16 relative z-40"
+            className="text-center space-y-8 mb-8 relative z-40"
           >
             <h1 className="text-4xl md:text-6xl font-serif text-stone-800">
               Our <span className="text-indigo-600 italic">Story</span>
@@ -266,6 +265,21 @@ const Story = () => {
               A journey of love that transcended continents, cultures, and countless obstacles to find home in each other. (Plus some really questionable fashion choices from the 2000s.)
             </p>
           </motion.div>
+
+          {/* Rings image with decorative lines */}
+          <div className="flex items-center justify-center my-8 px-4">
+            <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
+            <div className="mx-4">
+              <div className="w-32 h-32 flex items-center justify-center">
+                <img
+                  src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png"
+                  alt="Kimball & Vitaly"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+            <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
+          </div>
 
           {/* Story Content */}
           <div className="space-y-16 relative z-40">
@@ -322,27 +336,41 @@ const Story = () => {
                       <div className="md:w-1/2 relative">
                         <div
                           onClick={() => handleMilestoneClick(milestone)}
-                          className="bg-white/95 backdrop-blur-sm p-8 rounded-2xl text-center cursor-pointer transform transition-all hover:-translate-y-1 hover:shadow-md border-2 border-indigo-100 relative z-40"
+                          className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl text-center cursor-pointer transform transition-all hover:-translate-y-1 hover:shadow-md border-2 border-indigo-100 relative z-40 flex flex-col"
+                          style={{ minHeight: "360px" }}
                         >
-                          <div
-                            className="relative h-48 mb-4 overflow-hidden rounded-lg cursor-pointer"
+                          {/* Fixed size image container - UPDATED for consistent sizing */}
+                          <div 
+                            className="relative overflow-hidden rounded-lg cursor-pointer bg-gray-100 flex items-center justify-center mb-4"
+                            style={{ height: "180px", minHeight: "180px" }}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleImageClick(milestone.image);
                             }}
                           >
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
-                            <img
-                              src={milestone.image}
-                              alt={milestone.title}
-                              className="w-full h-full object-contain md:object-cover"
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10"></div>
+                            <img 
+                              src={milestone.image} 
+                              alt={milestone.title} 
+                              className="w-full h-full object-contain"
+                              style={{ maxWidth: "100%", maxHeight: "100%" }}
+                              onError={(e) => {
+                                e.target.onerror = null; 
+                                e.target.src = "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png";
+                              }}
                             />
-                            <div className="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md z-20">
-                              <SafeIcon icon={milestone.icon} className="w-6 h-6 text-indigo-500" />
+                            <div className="absolute top-2 right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md z-20">
+                              <SafeIcon icon={milestone.icon} className="w-4 h-4 text-indigo-500" />
                             </div>
                           </div>
-                          <h3 className="text-2xl font-bold text-stone-800 mb-2">{milestone.date}</h3>
-                          <h4 className="text-lg font-semibold text-stone-700">{milestone.title}</h4>
+                          
+                          {/* Text content - UPDATED for consistent sizing */}
+                          <div className="flex-grow flex flex-col justify-between">
+                            <div>
+                              <h3 className="text-lg font-bold text-stone-800 mb-1">{milestone.date}</h3>
+                              <h4 className="text-md font-semibold text-stone-700 mb-2">{milestone.title}</h4>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
@@ -351,11 +379,11 @@ const Story = () => {
                         <div
                           className="w-12 h-12 rounded-full bg-white border-2 border-indigo-400 flex items-center justify-center shadow-lg"
                           style={{
-                            background: `linear-gradient(135deg, ${
+                            background: `linear-gradient(135deg,${
                               index < 7
                                 ? ['#FF0018', '#FFA52C', '#FFFF41', '#008018', '#0000F9', '#86007D', '#FF0018'][index]
                                 : ['#FFA52C', '#FFFF41', '#008018', '#0000F9', '#86007D'][index - 7]
-                            }, rgba(255,255,255,0.8))`
+                            },rgba(255,255,255,0.8))`
                           }}
                         >
                           <SafeIcon icon={milestone.icon} className="w-6 h-6 text-white" />
@@ -364,7 +392,7 @@ const Story = () => {
 
                       <div className="md:w-1/2">
                         <div className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-md border-2 border-indigo-100 relative z-40">
-                          <p className="text-stone-700 leading-relaxed">{milestone.description}</p>
+                          <p className="text-stone-700 leading-relaxed text-sm">{milestone.description}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -385,11 +413,7 @@ const Story = () => {
 
             {/* Anniversary Countdown */}
             <section className="py-12 bg-white/95 backdrop-blur-sm rounded-2xl shadow-md relative z-40">
-              <CountdownTimer
-                targetDate="August 15, 2026"
-                title="Celebrating Our 18th Wedding Anniversary"
-                showCta={true}
-              />
+              <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
             </section>
 
             {/* Closing Reflection */}
@@ -424,29 +448,25 @@ const Story = () => {
 
       {/* Milestone Modal */}
       {selectedMilestone && (
-        <div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedMilestone(null)}
-        >
-          <div
-            className="bg-white rounded-xl max-w-2xl w-full p-6 relative"
-            onClick={e => e.stopPropagation()}
-          >
-            <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              onClick={() => setSelectedMilestone(null)}
-            >
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4" onClick={() => setSelectedMilestone(null)}>
+          <div className="bg-white rounded-xl max-w-2xl w-full p-6 relative" onClick={e => e.stopPropagation()}>
+            <button className="absolute top-4 right-4 text-gray-400 hover:text-gray-600" onClick={() => setSelectedMilestone(null)}>
               <SafeIcon icon={FiX} className="w-5 h-5" />
             </button>
             <div className="space-y-4">
-              <div
-                className="h-64 relative rounded-lg overflow-hidden cursor-pointer"
+              <div 
+                className="relative rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
+                style={{ height: "256px" }}
                 onClick={() => handleImageClick(selectedMilestone.image)}
               >
-                <img
-                  src={selectedMilestone.image}
-                  alt={selectedMilestone.title}
-                  className="w-full h-full object-contain md:object-cover"
+                <img 
+                  src={selectedMilestone.image} 
+                  alt={selectedMilestone.title} 
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.target.onerror = null; 
+                    e.target.src = "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png";
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div className="absolute bottom-4 left-4">
@@ -472,10 +492,7 @@ const Story = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <ImageModal
-          image={selectedImage}
-          onClose={() => setSelectedImage(null)}
-        />
+        <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );
