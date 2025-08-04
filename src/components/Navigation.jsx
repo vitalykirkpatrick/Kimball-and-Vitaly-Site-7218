@@ -4,19 +4,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiMenu, FiX, FiBook } = FiIcons;
+const { FiMenu, FiX, FiHome, FiBookOpen, FiImage, FiMessageSquare } = FiIcons;
 
-const Navigation = () => {
+const Navigation = ({ openGalleryLightbox }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/story', label: 'Our Story' },
-    { path: 'https://gallery.kimballandvitaly.com', label: 'Gallery', external: true },
-    { path: '/book', label: 'Our Book', icon: FiBook },
-    { path: '/messages', label: 'Messages' }
+    { path: '/', label: 'Home', icon: FiHome },
+    { path: '/story', label: 'Our Story', icon: FiBookOpen },
+    { path: 'https://gallery.kimballandvitaly.com/', label: 'Gallery', icon: FiImage, external: true },
+    { path: '/messages', label: 'Messages', icon: FiMessageSquare }
   ];
+
+  const handleNavItemClick = (item, e) => {
+    if (item.action) {
+      e.preventDefault();
+      item.action();
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200">
@@ -25,21 +32,9 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-4 text-stone-800 hover:text-rose-600 transition-colors">
             <div className="w-10 h-10 flex items-center justify-center">
-              <img 
-                src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" 
-                alt="Kimball & Vitaly Logo" 
-                className="w-full h-full object-contain" 
-              />
+              <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" alt="Kimball & Vitaly Logo" className="w-full h-full object-contain" />
             </div>
-            <span 
-              className="text-xl font-bold tracking-wider" 
-              style={{
-                fontFamily: "'Great Vibes','Pacifico','Brush Script MT',cursive",
-                fontSize: "1.9rem",
-                letterSpacing: "0.05em",
-                fontWeight: "400"
-              }}
-            >
+            <span className="text-xl font-bold tracking-wider" style={{fontFamily: "'Great Vibes','Pacifico','Brush Script MT',cursive", fontSize: "1.9rem", letterSpacing: "0.05em", fontWeight: "400"}}>
               Kimball & Vitaly
             </span>
           </Link>
@@ -54,7 +49,21 @@ const Navigation = () => {
                     href={item.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium transition-colors flex items-center space-x-1 text-stone-600 hover:text-stone-900"
+                    className="text-sm font-medium transition-colors flex items-center space-x-2 text-stone-600 hover:text-stone-900"
+                  >
+                    {item.icon && <SafeIcon icon={item.icon} className="w-4 h-4" />}
+                    <span>{item.label}</span>
+                  </a>
+                );
+              }
+              
+              if (item.action) {
+                return (
+                  <a
+                    key={item.path}
+                    href={item.path}
+                    onClick={(e) => handleNavItemClick(item, e)}
+                    className="text-sm font-medium transition-colors flex items-center space-x-2 text-stone-600 hover:text-stone-900"
                   >
                     {item.icon && <SafeIcon icon={item.icon} className="w-4 h-4" />}
                     <span>{item.label}</span>
@@ -66,7 +75,7 @@ const Navigation = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-sm font-medium transition-colors flex items-center space-x-1 ${
+                  className={`text-sm font-medium transition-colors flex items-center space-x-2 ${
                     location.pathname === item.path
                       ? 'text-indigo-600 border-b-2 border-indigo-600'
                       : 'text-stone-600 hover:text-stone-900'
@@ -115,7 +124,21 @@ const Navigation = () => {
                     </a>
                   );
                 }
-
+                
+                if (item.action) {
+                  return (
+                    <a
+                      key={item.path}
+                      href={item.path}
+                      onClick={(e) => handleNavItemClick(item, e)}
+                      className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors text-stone-600 hover:text-stone-900 hover:bg-stone-50"
+                    >
+                      {item.icon && <SafeIcon icon={item.icon} className="w-5 h-5" />}
+                      <span>{item.label}</span>
+                    </a>
+                  );
+                }
+                
                 return (
                   <Link
                     key={item.path}

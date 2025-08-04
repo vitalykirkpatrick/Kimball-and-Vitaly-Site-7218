@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Navigation from '../components/Navigation';
 import SafeIcon from '../common/SafeIcon';
 import SpamProtection from '../components/SpamProtection';
 import Footer from '../components/Footer';
@@ -10,18 +9,13 @@ import * as FiIcons from 'react-icons/fi';
 const { FiHeart, FiSend, FiUser, FiMail, FiImage, FiX, FiUsers, FiArrowRight } = FiIcons;
 
 const Messages = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    photos: []
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', photos: [] });
   const [submitted, setSubmitted] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value});
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (e) => {
@@ -58,12 +52,7 @@ const Messages = () => {
 
     console.log('Message submitted:', formData);
     setSubmitted(true);
-    setFormData({
-      name: '',
-      email: '',
-      message: '',
-      photos: []
-    });
+    setFormData({ name: '', email: '', message: '', photos: [] });
     setIsVerified(false);
   };
 
@@ -87,120 +76,6 @@ const Messages = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 relative overflow-hidden">
-      <Navigation />
-
-      {/* Decorative Elements */}
-      {heartColors.map((color, index) => (
-        <motion.div
-          key={`heart-${index}`}
-          className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-          animate={{
-            rotate: [0, 10, 0, -10, 0],
-            y: [0, -10, 0, 10, 0]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 15 + index * 2
-          }}
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
-          </svg>
-        </motion.div>
-      ))}
-
-      {/* Floating flowers */}
-      <motion.div
-        className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
-        animate={{
-          rotate: 360,
-          scale: [1, 1.1, 1, 0.9, 1]
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 30,
-          ease: "linear"
-        }}
-      >
-        <div className="text-4xl">🌸</div>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
-        animate={{
-          rotate: -360,
-          scale: [1, 1.1, 1, 0.9, 1]
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 25,
-          ease: "linear"
-        }}
-      >
-        <div className="text-4xl">🌺</div>
-      </motion.div>
-
-      {/* Rainbow balloons */}
-      <motion.div
-        className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
-        animate={{
-          y: [0, -15, 0, -5, 0],
-          rotate: [0, 5, 0, -5, 0]
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 20,
-          ease: "easeInOut"
-        }}
-      >
-        <div className="w-full h-full">
-          <svg viewBox="0 0 24 24" className="w-full h-full">
-            <defs>
-              <linearGradient id="rainbow-balloon-msg" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#FF0018" />
-                <stop offset="16%" stopColor="#FFA52C" />
-                <stop offset="32%" stopColor="#FFFF41" />
-                <stop offset="48%" stopColor="#008018" />
-                <stop offset="66%" stopColor="#0000F9" />
-                <stop offset="83%" stopColor="#86007D" />
-                <stop offset="100%" stopColor="#FF0018" />
-              </linearGradient>
-            </defs>
-            <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon-msg)" />
-          </svg>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-20 h-30 opacity-20"
-        animate={{
-          y: [0, -10, 0, -5, 0],
-          rotate: [0, 3, 0, -3, 0]
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 18,
-          ease: "easeInOut"
-        }}
-      >
-        <div className="w-full h-full">
-          <svg viewBox="0 0 24 24" className="w-full h-full">
-            <defs>
-              <linearGradient id="rainbow-balloon-msg2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#86007D" />
-                <stop offset="16%" stopColor="#0000F9" />
-                <stop offset="32%" stopColor="#008018" />
-                <stop offset="48%" stopColor="#FFFF41" />
-                <stop offset="66%" stopColor="#FFA52C" />
-                <stop offset="83%" stopColor="#FF0018" />
-                <stop offset="100%" stopColor="#86007D" />
-              </linearGradient>
-            </defs>
-            <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon-msg2)" />
-          </svg>
-        </div>
-      </motion.div>
-
       <div className="pt-28 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
@@ -214,7 +89,8 @@ const Messages = () => {
               Share Your <span className="text-indigo-600 italic">Story</span>
             </h1>
             <p className="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
-              Tell us how you found your home in love's echo. Your story matters, and we'd love to hear it. (Plus, we love a good story—especially if it involves embarrassing moments we can laugh about later.)
+              Tell us how you found your home in love's echo. Your story matters, and we'd love to hear it.
+              (Plus, we love a good story—especially if it involves embarrassing moments we can laugh about later.)
             </p>
           </motion.div>
 
@@ -344,7 +220,9 @@ const Messages = () => {
                           <p className="pl-1">or drag and drop</p>
                         </div>
                         <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                        <p className="text-xs text-gray-500">Share your favorite memories with us! (Embarrassing photos welcome)</p>
+                        <p className="text-xs text-gray-500">
+                          Share your favorite memories with us! (Embarrassing photos welcome)
+                        </p>
                       </div>
                     </div>
 
@@ -352,7 +230,11 @@ const Messages = () => {
                       <div className="mt-4 grid grid-cols-3 gap-2">
                         {formData.photos.map((photo, index) => (
                           <div key={index} className="relative">
-                            <img src={photo.preview} alt={`Preview ${index + 1}`} className="h-20 w-full object-cover rounded-md" />
+                            <img
+                              src={photo.preview}
+                              alt={`Preview ${index + 1}`}
+                              className="h-20 w-full object-cover rounded-md"
+                            />
                             <button
                               type="button"
                               className="absolute top-1 right-1 bg-black/50 rounded-full p-1"
@@ -393,11 +275,13 @@ const Messages = () => {
 
               <div
                 className="h-[600px] bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer"
-                onClick={() => openImageModal({
-                  src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
-                  title: "Kimball & Vitaly",
-                  description: "Our wedding rings - a symbol of our commitment and love."
-                })}
+                onClick={() =>
+                  openImageModal({
+                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
+                    title: "Kimball & Vitaly",
+                    description: "Our wedding rings - a symbol of our commitment and love."
+                  })
+                }
               >
                 <img
                   src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG"
@@ -414,7 +298,8 @@ const Messages = () => {
                 </div>
                 <p className="text-stone-600">
                   <strong>Want to share your story?</strong><br />
-                  Use the form to send us your thoughts, memories, and photos. We promise to read every single one (and probably cry happy tears).
+                  Use the form to send us your thoughts, memories, and photos. We promise to read every single one (and
+                  probably cry happy tears).
                 </p>
               </div>
             </motion.div>
@@ -433,16 +318,8 @@ const Messages = () => {
               {heartColors.map((color, index) => (
                 <motion.div
                   key={`cta-heart-${index}`}
-                  animate={{
-                    y: [0, -10, 0],
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 10, 0, -10, 0]
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 3,
-                    delay: index * 0.2
-                  }}
+                  animate={{ y: [0, -10, 0], scale: [1, 1.2, 1], rotate: [0, 10, 0, -10, 0] }}
+                  transition={{ repeat: Infinity, duration: 3, delay: index * 0.2 }}
                   className={`${color}`}
                 >
                   <SafeIcon icon={FiHeart} className="w-8 h-8" />
@@ -455,7 +332,12 @@ const Messages = () => {
               {/* Box 1 */}
               <div className="bg-white p-8 rounded-2xl border-2 border-indigo-100">
                 <p className="text-lg text-stone-700 italic leading-relaxed">
-                  <em>"Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)"</em>
+                  <em>
+                    "Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the
+                    shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the
+                    lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who
+                    know that sometimes love means pretending to enjoy your partner's experimental cooking.)"
+                  </em>
                 </p>
               </div>
 
@@ -465,28 +347,11 @@ const Messages = () => {
                   Every Love Story Matters
                 </h2>
                 <p className="text-stone-700 leading-relaxed">
-                  Whether your love story is just beginning or has been unfolding for decades, whether it's been easy or filled with obstacles—it matters. Thank you for being part of our extended family of love. (And for putting up with our terrible puns all these years.)
+                  Whether your love story is just beginning or has been unfolding for decades, whether it's been easy or
+                  filled with obstacles—it matters. Thank you for being part of our extended family of love. (And for
+                  putting up with our terrible puns all these years.)
                 </p>
               </div>
-            </div>
-
-            {/* Button centered below both boxes */}
-            <div className="flex justify-center mt-6">
-              <button
-                onClick={() => {
-                  const signupSection = document.getElementById('signup-section');
-                  if (signupSection) {
-                    signupSection.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    window.location.href = '/#signup-section';
-                  }
-                }}
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
-              >
-                <SafeIcon icon={FiUsers} className="w-5 h-5" />
-                <span className="font-medium">Join Our Celebration</span>
-                <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
-              </button>
             </div>
           </motion.section>
         </div>

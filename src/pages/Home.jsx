@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Navigation from '../components/Navigation';
 import SafeIcon from '../common/SafeIcon';
 import PoemDisplay from '../components/PoemDisplay';
 import CountdownTimer from '../components/CountdownTimer';
@@ -10,9 +9,9 @@ import ImageModal from '../components/ImageModal';
 import Footer from '../components/Footer';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiBook } = FiIcons;
+const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiImage } = FiIcons;
 
-const Home = () => {
+const Home = ({ openGalleryLightbox }) => {
   const [showSignup, setShowSignup] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -34,12 +33,15 @@ const Home = () => {
     });
   };
 
+  // Updated to open gallery in a new tab
+  const handleGalleryClick = (e) => {
+    e.preventDefault();
+    window.open("https://gallery.kimballandvitaly.com/", "_blank");
+  };
+
   return (
     <div className="min-h-screen">
-      <Navigation />
-
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div className="pt-32 pb-16 min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-yellow-50" />
         <div className="absolute inset-0 bg-[url('https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob')] bg-cover bg-center opacity-10" />
 
@@ -48,14 +50,8 @@ const Home = () => {
           <motion.div
             key={index}
             className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-            animate={{
-              rotate: [0, 10, 0, -10, 0],
-              y: [0, -10, 0, 10, 0]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 15 + index * 2
-            }}
+            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 15 + index * 2 }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -66,30 +62,16 @@ const Home = () => {
         {/* Floating flowers */}
         <motion.div
           className="absolute top-60 left-1/4 w-20 h-20 opacity-30"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 20,
-            ease: "linear"
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
 
         <motion.div
           className="absolute bottom-40 right-1/5 w-16 h-16 opacity-20"
-          animate={{
-            rotate: -360,
-            scale: [1, 0.9, 1, 1.1, 1]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 25,
-            ease: "linear"
-          }}
+          animate={{ rotate: -360, scale: [1, 0.9, 1, 1.1, 1] }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
           <div className="text-4xl">🌺</div>
         </motion.div>
@@ -97,15 +79,8 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute top-1/4 right-10 w-16 h-24 opacity-30"
-          animate={{
-            y: [0, -20, 0, -10, 0],
-            rotate: [0, 5, 0, -5, 0]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 15,
-            ease: "easeInOut"
-          }}
+          animate={{ y: [0, -20, 0, -10, 0], rotate: [0, 5, 0, -5, 0] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -127,15 +102,8 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-1/3 left-16 w-20 h-30 opacity-20"
-          animate={{
-            y: [0, -15, 0, -10, 0],
-            rotate: [0, 3, 0, -3, 0]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 20,
-            ease: "easeInOut"
-          }}
+          animate={{ y: [0, -15, 0, -10, 0], rotate: [0, 3, 0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -182,11 +150,7 @@ const Home = () => {
                   onClick={() => openImageModal("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png")}
                 >
                   <div className="w-32 h-32 flex items-center justify-center">
-                    <img
-                      src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png"
-                      alt="Kimball & Vitaly"
-                      className="w-full h-full object-contain"
-                    />
+                    <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png" alt="Kimball & Vitaly" className="w-full h-full object-contain" />
                   </div>
                 </motion.div>
                 <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
@@ -200,7 +164,9 @@ const Home = () => {
               className="max-w-3xl mx-auto"
             >
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed italic font-light">
-                <em>The low hum of the city beyond our window fades into the background as midnight settles over Salt Lake. I glance over my shoulder: the faint glow of Kimball's screen, our old wedding photo tacked to the fridge, and the kitchen filled with the scent of leftover borscht—a recipe from home, as battered and beloved as our story.</em>
+                <em>
+                  The low hum of the city beyond our window fades into the background as midnight settles over Salt Lake. I glance over my shoulder: the faint glow of Kimball's screen, our old wedding photo tacked to the fridge, and the kitchen filled with the scent of leftover borscht—a recipe from home, as battered and beloved as our story.
+                </em>
               </p>
             </motion.div>
 
@@ -216,15 +182,8 @@ const Home = () => {
                   loading="lazy"
                   title="Our Love Story"
                   src="https://play.gumlet.io/embed/6764e9935c9461e1db824f52"
-                  style={{
-                    border: 'none',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    height: '100%',
-                    width: '100%'
-                  }}
-                  allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+                  style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
                 ></iframe>
               </div>
             </motion.div>
@@ -248,19 +207,21 @@ const Home = () => {
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
-
-                <button
-                  onClick={() => setShowSignup(true)}
+                
+                <a
+                  href="https://gallery.kimballandvitaly.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 bg-white text-indigo-600 border-2 border-indigo-500 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors"
                 >
-                  <SafeIcon icon={FiUsers} className="w-5 h-5" />
-                  <span className="font-medium">Join Our Celebration</span>
-                </button>
+                  <SafeIcon icon={FiImage} className="w-5 h-5" />
+                  <span className="font-medium">View Our Gallery</span>
+                </a>
               </div>
             </motion.div>
           </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* Countdown Section */}
       <section className="py-16 bg-white">
@@ -276,14 +237,8 @@ const Home = () => {
           <motion.div
             key={`heart-${index}`}
             className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-            animate={{
-              rotate: [0, 10, 0, -10, 0],
-              y: [0, -10, 0, 10, 0]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 15 + index * 2
-            }}
+            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 15 + index * 2 }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -294,30 +249,16 @@ const Home = () => {
         {/* Floating flowers */}
         <motion.div
           className="absolute top-1/3 right-1/4 w-24 h-24 opacity-20"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 30,
-            ease: "linear"
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
 
         <motion.div
           className="absolute bottom-1/3 left-1/4 w-20 h-20 opacity-20"
-          animate={{
-            rotate: -360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 25,
-            ease: "linear"
-          }}
+          animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
           <div className="text-4xl">🌺</div>
         </motion.div>
@@ -325,15 +266,8 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute bottom-1/4 left-1/5 w-20 h-30 opacity-20"
-          animate={{
-            y: [0, -15, 0, -10, 0],
-            rotate: [0, 3, 0, -3, 0]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 20,
-            ease: "easeInOut"
-          }}
+          animate={{ y: [0, -15, 0, -10, 0], rotate: [0, 3, 0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -363,7 +297,7 @@ const Home = () => {
           >
             <div className="space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif text-stone-800">
-                <strong>Home Was Never a Place—</strong>
+                <strong>Home Was Never a Place—</strong>{' '}
                 <span className="block text-indigo-600 italic">It Was a Person</span>
               </h2>
               <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
@@ -387,7 +321,7 @@ const Home = () => {
                     <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
                       In the silent echoes of the orphanage, I learned that survival meant invisibility. But with Kimball, I discovered the courage to be seen. He celebrated my voice—first halting, then confident—and created space for the stories I'd never told anyone. Together we crafted a language of belonging that transcended words.
                     </p>
-                    <div 
+                    <div
                       className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
                       style={{ height: "160px", minHeight: "160px" }}
                       onClick={() => openImageModal({
@@ -422,7 +356,7 @@ const Home = () => {
                     <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
                       When we first met, I was still writing poems in Ukrainian and translating them awkwardly into English. Kimball would listen intently, finding beauty in my stumbling words. When I first said "Я тебя люблю" to him, he surprised me by saying it back in Russian. Now we share a vocabulary of inside jokes and half-sentences that need no translation.
                     </p>
-                    <div 
+                    <div
                       className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
                       style={{ height: "160px", minHeight: "160px" }}
                       onClick={() => openImageModal({
@@ -457,7 +391,7 @@ const Home = () => {
                     <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
                       There's a Ukrainian proverb: "When you're drowning, you'll clutch at a straw." But we never just clutched—we built. From fragile beginnings came something sturdy enough to shelter us through immigration battles, health crises, and the daily weight of being outsiders. Our love wasn't just salvation; it was creation.
                     </p>
-                    <div 
+                    <div
                       className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
                       style={{ height: "160px", minHeight: "160px" }}
                       onClick={() => openImageModal({
@@ -486,19 +420,31 @@ const Home = () => {
               className="bg-white p-8 rounded-2xl max-w-3xl mx-auto border-2 border-indigo-100"
             >
               <p className="text-lg text-stone-700 italic">
-                <em>What no one tells you: Victory isn't always loud. Sometimes it's just showing up, again, with open arms and a soft place to land. Sometimes it's enjoying each other's presence while having separate beds—and Vitaly's cheesy choice of booking hotel rooms with one king bed because he loves cuddles, while Kimball loves independence and quiet sleep without nighttime disturbances.</em>
+                <em>
+                  What no one tells you: Victory isn't always loud. Sometimes it's just showing up, again, with open arms and a soft place to land. Sometimes it's enjoying each other's presence while having separate beds—and Vitaly's cheesy choice of booking hotel rooms with one king bed because he loves cuddles, while Kimball loves independence and quiet sleep without nighttime disturbances.
+                </em>
               </p>
 
-              {/* New Read Our Book CTA button */}
-              <div className="mt-6">
+              {/* Action buttons */}
+              <div className="mt-6 flex flex-wrap justify-center gap-4">
                 <Link
-                  to="/book"
+                  to="/story"
                   className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
                 >
-                  <SafeIcon icon={FiBook} className="w-5 h-5" />
-                  <span className="font-medium">Read Our Book</span>
+                  <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
+                  <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
+                
+                <a
+                  href="https://gallery.kimballandvitaly.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
+                >
+                  <SafeIcon icon={FiImage} className="w-5 h-5" />
+                  <span className="font-medium">View Our Gallery</span>
+                </a>
               </div>
             </motion.div>
           </motion.div>
@@ -510,29 +456,16 @@ const Home = () => {
         {/* Decorative Elements */}
         <motion.div
           className="absolute top-20 right-20 w-20 h-20 opacity-20"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 20,
-            ease: "linear"
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
 
         <motion.div
           className="absolute bottom-10 left-1/4 w-16 h-16 opacity-30"
-          animate={{
-            rotate: [0, 10, 0, -10, 0],
-            y: [0, -10, 0, 10, 0]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 15
-          }}
+          animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 15 }}
         >
           <SafeIcon icon={FiHeart} className="w-full h-full text-green-500" />
         </motion.div>
@@ -540,15 +473,8 @@ const Home = () => {
         {/* Rainbow balloons */}
         <motion.div
           className="absolute top-1/4 left-20 w-16 h-24 opacity-20"
-          animate={{
-            y: [0, -15, 0, -5, 0],
-            rotate: [0, 5, 0, -5, 0]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 18,
-            ease: "easeInOut"
-          }}
+          animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
+          transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -578,7 +504,7 @@ const Home = () => {
           >
             <div className="text-center space-y-6">
               <h2 className="text-3xl md:text-4xl font-serif text-stone-800">
-                <strong>We Did Not Just Survive—</strong>
+                <strong>We Did Not Just Survive—</strong>{' '}
                 <span className="block text-indigo-600 italic">We Chose Each Other, Again and Again</span>
               </h2>
             </div>
@@ -639,7 +565,7 @@ const Home = () => {
                   </p>
                 </div>
 
-                <div 
+                <div
                   className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
                   style={{ height: "256px" }}
                   onClick={() => openImageModal({
@@ -671,14 +597,8 @@ const Home = () => {
           <motion.div
             key={`signup-heart-${index}`}
             className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-            animate={{
-              rotate: [0, 10, 0, -10, 0],
-              y: [0, -10, 0, 10, 0]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 15 + index * 2
-            }}
+            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 15 + index * 2 }}
           >
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
@@ -688,15 +608,8 @@ const Home = () => {
 
         <motion.div
           className="absolute bottom-20 right-20 w-20 h-20 opacity-20"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.1, 1, 0.9, 1]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 20,
-            ease: "linear"
-          }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
           <div className="text-4xl">🌸</div>
         </motion.div>
@@ -704,15 +617,8 @@ const Home = () => {
         {/* Rainbow balloon */}
         <motion.div
           className="absolute top-1/3 right-1/4 w-16 h-24 opacity-20"
-          animate={{
-            y: [0, -10, 0, -5, 0],
-            rotate: [0, 3, 0, -3, 0]
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 15,
-            ease: "easeInOut"
-          }}
+          animate={{ y: [0, -10, 0, -5, 0], rotate: [0, 3, 0, -3, 0] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
         >
           <div className="w-full h-full">
             <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -770,7 +676,9 @@ const Home = () => {
           >
             <div className="space-y-6">
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed italic">
-                <em>Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)</em>
+                <em>
+                  Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)
+                </em>
               </p>
               <h3 className="text-2xl md:text-3xl font-serif text-stone-800">
                 <strong>Join us in celebrating our journey of radical, resilient, ordinary love.</strong>
@@ -778,23 +686,25 @@ const Home = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <Link
-                to="/gallery"
+              <a 
+                href="https://gallery.kimballandvitaly.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="space-y-3">
-                  <SafeIcon icon={FiHeart} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
-                  <h4 className="font-semibold text-stone-800">Our Journey</h4>
+                  <SafeIcon icon={FiImage} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
+                  <h4 className="font-semibold text-stone-800">Our Gallery</h4>
                   <p className="text-sm text-stone-600">View our journey in photos, letters, and kitchen-table memories</p>
                 </div>
-              </Link>
+              </a>
 
               <Link
                 to="/story"
                 className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="space-y-3">
-                  <SafeIcon icon={FiArrowRight} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
+                  <SafeIcon icon={FiBookOpen} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
                   <h4 className="font-semibold text-stone-800">Read Our Story</h4>
                   <p className="text-sm text-stone-600">Dive deeper into our journey of love and resilience</p>
                 </div>
@@ -807,14 +717,10 @@ const Home = () => {
       <Footer />
 
       {/* Anniversary Signup Modal */}
-      {showSignup && (
-        <AnniversarySignup onClose={() => setShowSignup(false)} />
-      )}
+      {showSignup && <AnniversarySignup onClose={() => setShowSignup(false)} />}
 
       {/* Image Modal */}
-      {selectedImage && (
-        <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />
-      )}
+      {selectedImage && <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />}
     </div>
   );
 };
