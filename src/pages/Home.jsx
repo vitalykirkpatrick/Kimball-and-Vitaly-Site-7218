@@ -6,10 +6,11 @@ import PoemDisplay from '../components/PoemDisplay';
 import CountdownTimer from '../components/CountdownTimer';
 import AnniversarySignup from '../components/AnniversarySignup';
 import ImageModal from '../components/ImageModal';
+import ContentBoxes from '../components/ContentBoxes';
 import Footer from '../components/Footer';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiImage } = FiIcons;
+const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckCircle, FiImage, FiGift, FiRefreshCw } = FiIcons;
 
 const Home = ({ openGalleryLightbox }) => {
   const [showSignup, setShowSignup] = useState(false);
@@ -134,6 +135,7 @@ const Home = ({ openGalleryLightbox }) => {
               <h1 className="text-4xl md:text-6xl font-serif text-stone-800 leading-tight">
                 Finding Home in <span className="block text-indigo-600 italic">Love's Echo</span>
               </h1>
+
               <div className="flex items-center justify-center space-x-2 text-stone-600">
                 <SafeIcon icon={FiCalendar} className="w-5 h-5" />
                 <span className="text-lg">May 15, 2006 - Present</span>
@@ -165,7 +167,7 @@ const Home = ({ openGalleryLightbox }) => {
             >
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed italic font-light">
                 <em>
-                  The low hum of the city beyond our window fades into the background as midnight settles over Salt Lake. I glance over my shoulder: the faint glow of Kimball's screen, our old wedding photo tacked to the fridge, and the kitchen filled with the scent of leftover borscht—a recipe from home, as battered and beloved as our story.
+                  From a three-dollar start to a love that defied borders, closets, and Costco coupons—this is our wild, weird, wonderful story.
                 </em>
               </p>
             </motion.div>
@@ -195,7 +197,7 @@ const Home = ({ openGalleryLightbox }) => {
               className="space-y-6 mb-12"
             >
               <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-                Nearly 20 years ago, we met online and then went together to our first movie night—"She's the Man" at a $1 theater in Provo (because we were broke college students who knew how to budget for romance). We also attended Family Home Evening with Affirmation, a group for gay Mormon people navigating faith and identity. That connection on May 15, 2006 would become the foundation of our journey together.
+                From a three-dollar start to a love that dodges IKEA shelves, diets, and Costco temptations—it's been one weird, sweet, wonderful story.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -207,7 +209,6 @@ const Home = ({ openGalleryLightbox }) => {
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
-                
                 <a
                   href="https://gallery.kimballandvitaly.com/"
                   target="_blank"
@@ -226,11 +227,17 @@ const Home = ({ openGalleryLightbox }) => {
       {/* Countdown Section */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center mb-4">
+            <SafeIcon icon={FiGift} className="w-10 h-10 text-indigo-500 animate-bounce" />
+          </div>
+          <h3 className="text-xl md:text-2xl font-serif text-center text-stone-800 mb-6">
+            Celebrating 18 years of weird, wonderful love
+          </h3>
           <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
         </div>
       </section>
 
-      {/* Our Epic Ordinary Love Section - UPDATED with consistent image sizing */}
+      {/* Our Epic Ordinary Love Section */}
       <section className="py-20 bg-gradient-to-br from-blue-50 to-yellow-50 relative overflow-hidden">
         {/* Decorative Elements */}
         {heartColors.map((color, index) => (
@@ -298,119 +305,16 @@ const Home = ({ openGalleryLightbox }) => {
             <div className="space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif text-stone-800">
                 <strong>Home Was Never a Place—</strong>{' '}
-                <span className="block text-indigo-600 italic">It Was a Person</span>
+                <span className="block text-indigo-600 italic">It Was a Person (Who Eats All the Ice Cream)</span>
               </h2>
+
               <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
-                From a Ukrainian orphanage to the mountains of Utah, ours is a story of slow-building, everyday courage. Love, for us, was not an easy answer. It meant translating pain into poetry—sometimes in broken English, always from the heart. (And yes, we still argue about proper Ukrainian pronunciation.)
+                A Ukrainian orphan with one emergency potato. A BYU student fluent in Japanese and closet panic. From awkward movie nights to surviving IKEA shelves, this is the tale of how two very different men built something outrageously real. The whole story? You'll have to hear it to believe it.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {/* Card 1 - UPDATED with fixed height and consistent image sizing */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col overflow-hidden"
-                style={{ height: "500px" }}
-              >
-                <div className="p-6 flex flex-col flex-grow">
-                  <SafeIcon icon={FiHeart} className="w-8 h-8 text-red-500 mx-auto mb-4" />
-                  <div className="flex-grow flex flex-col justify-between">
-                    <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
-                      In the silent echoes of the orphanage, I learned that survival meant invisibility. But with Kimball, I discovered the courage to be seen. He celebrated my voice—first halting, then confident—and created space for the stories I'd never told anyone. Together we crafted a language of belonging that transcended words.
-                    </p>
-                    <div
-                      className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
-                      style={{ height: "160px", minHeight: "160px" }}
-                      onClick={() => openImageModal({
-                        src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg",
-                        title: "Finding Courage Together",
-                        description: "2008 - From strangers to soulmates, our journey has been anything but ordinary."
-                      })}
-                    >
-                      <img
-                        src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370695404-Kimball%20and%20Vitaly%20Engagement%202008_09.jpg"
-                        alt="Engagement photo"
-                        className="w-full h-full object-contain"
-                        style={{ maxWidth: "100%", maxHeight: "100%" }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Card 2 - UPDATED with fixed height and consistent image sizing */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col overflow-hidden"
-                style={{ height: "500px" }}
-              >
-                <div className="p-6 flex flex-col flex-grow">
-                  <SafeIcon icon={FiHome} className="w-8 h-8 text-yellow-500 mx-auto mb-4" />
-                  <div className="flex-grow flex flex-col justify-between">
-                    <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
-                      When we first met, I was still writing poems in Ukrainian and translating them awkwardly into English. Kimball would listen intently, finding beauty in my stumbling words. When I first said "Я тебя люблю" to him, he surprised me by saying it back in Russian. Now we share a vocabulary of inside jokes and half-sentences that need no translation.
-                    </p>
-                    <div
-                      className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
-                      style={{ height: "160px", minHeight: "160px" }}
-                      onClick={() => openImageModal({
-                        src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg",
-                        title: "Our Shared Language",
-                        description: "2008 - Building a vocabulary of love that transcends borders and languages."
-                      })}
-                    >
-                      <img
-                        src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370717696-Kimball%20and%20Vitaly%20Engagement%202008_28.jpg"
-                        alt="Engagement photo"
-                        className="w-full h-full object-contain"
-                        style={{ maxWidth: "100%", maxHeight: "100%" }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Card 3 - UPDATED with fixed height and consistent image sizing */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-md border-2 border-indigo-100 flex flex-col overflow-hidden"
-                style={{ height: "500px" }}
-              >
-                <div className="p-6 flex flex-col flex-grow">
-                  <SafeIcon icon={FiHeart} className="w-8 h-8 text-blue-500 mx-auto mb-4" />
-                  <div className="flex-grow flex flex-col justify-between">
-                    <p className="text-stone-700 italic text-center leading-relaxed text-sm mb-4">
-                      There's a Ukrainian proverb: "When you're drowning, you'll clutch at a straw." But we never just clutched—we built. From fragile beginnings came something sturdy enough to shelter us through immigration battles, health crises, and the daily weight of being outsiders. Our love wasn't just salvation; it was creation.
-                    </p>
-                    <div
-                      className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
-                      style={{ height: "160px", minHeight: "160px" }}
-                      onClick={() => openImageModal({
-                        src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg",
-                        title: "Building Together",
-                        description: "2008 - From fragile beginnings came something sturdy enough to shelter us through life's challenges."
-                      })}
-                    >
-                      <img
-                        src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370726823-Kimball%20and%20Vitaly%20Engagement%202008_34.jpg"
-                        alt="Engagement photo"
-                        className="w-full h-full object-contain"
-                        style={{ maxWidth: "100%", maxHeight: "100%" }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+            {/* Custom Content Boxes */}
+            <ContentBoxes />
 
             <motion.div
               initial={{ opacity: 0 }}
@@ -432,10 +336,9 @@ const Home = ({ openGalleryLightbox }) => {
                   className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
                 >
                   <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
-                  <span className="font-medium">Read Our Story</span>
+                  <span className="font-medium">Hear the Whole Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
-                
                 <a
                   href="https://gallery.kimballandvitaly.com/"
                   target="_blank"
@@ -451,8 +354,13 @@ const Home = ({ openGalleryLightbox }) => {
         </div>
       </section>
 
-      {/* Resilience Section - UPDATED with consistent image sizing */}
-      <section className="py-20 bg-white relative overflow-hidden">
+      {/* Resilience Section - UPDATED WITH ENGAGEMENT PHOTO */}
+      <section className="py-20 relative overflow-hidden">
+        {/* Background image - RESTORED ORIGINAL IMAGE */}
+        <div className="absolute inset-0 bg-[url('https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1754443092851-20060518-Kimball-Vitaly.jpg')] bg-cover bg-center opacity-20"></div>
+        {/* Overlay for better text contrast */}
+        <div className="absolute inset-0 bg-white/80"></div>
+
         {/* Decorative Elements */}
         <motion.div
           className="absolute top-20 right-20 w-20 h-20 opacity-20"
@@ -494,7 +402,7 @@ const Home = ({ openGalleryLightbox }) => {
           </div>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -504,8 +412,8 @@ const Home = ({ openGalleryLightbox }) => {
           >
             <div className="text-center space-y-6">
               <h2 className="text-3xl md:text-4xl font-serif text-stone-800">
-                <strong>We Did Not Just Survive—</strong>{' '}
-                <span className="block text-indigo-600 italic">We Chose Each Other, Again and Again</span>
+                <strong>We Didn't Just Survive—We Made It Weird</strong>{' '}
+                <span className="block text-indigo-600 italic">Choosing each other, over and over, through chaos, glitter, and the occasional therapy bill.</span>
               </h2>
             </div>
 
@@ -518,35 +426,32 @@ const Home = ({ openGalleryLightbox }) => {
                 className="space-y-6"
               >
                 <p className="text-lg text-stone-700 leading-relaxed">
-                  The world tried to define us by its politics and paperwork. We were the couple whose love was once illegal, then invisible, then unstoppable. We became experts at explaining ourselves—though we still haven't figured out how to explain why Kimball would choose pizza for every meal if he could, and how he uses guilt to convince me to make his favorite thick-crust pizzas loaded with pepperoni and mushrooms.
+                  They tried to define us by paperwork and politics. We defined ourselves by late-night pancakes, mismatched furniture, and a shared talent for turning disaster into dinner. We never promised to be perfect—only to keep choosing each other, no matter how bizarre the road got.
                 </p>
 
-                <div className="space-y-4">
+                <div className="space-y-4 text-lg">
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-purple-500 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-stone-600 italic">
-                      The family that learned to dance between languages, holidays, and heartbreak, choosing authenticity over acceptance every time. Always looking for new reasons to vacation together at least twice a year—maybe on a cruise and then a city retreat.
+                      The family that learned to dance between cultures, birthdays, and heartbreak—sometimes literally, in the kitchen, wearing socks.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-stone-600 italic">
-                      Wounded, and then stronger—weathering surgeries, betrayals, bankruptcies, and the creeping loneliness that comes with living in translation. We survived financial disasters that would make Dave Ramsey weep.
+                      Survived financial disasters that would make Dave Ramsey lie down with a cold compress.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-stone-600 italic">
-                      Once Vitaly mastered English, his quick wit and clever jokes brought vibrant life to Kimball's world. There's a reason Kimball calls him "Witty" or "Wisey" (a name that stuck after a misread MBA nametag led to the question: "What does Wisey mean?")
+                      Accidentally built a life where every inside joke could be used in court against us.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="w-2 h-2 bg-pink-500 rounded-full mt-3 flex-shrink-0" />
                     <p className="text-stone-600 italic">
-                      We became the safe harbor for friends and family navigating their own storms, proving that broken people can still build beautiful things together. In bed before I fall asleep, while Kimball cuddles me like a baby until I'm in deep sleep, we share our deepest stories and make life decisions together.
+                      Became proof that broken people can still build something absurdly beautiful together.
                     </p>
                   </div>
                 </div>
@@ -559,27 +464,39 @@ const Home = ({ openGalleryLightbox }) => {
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-purple-100">
-                  <p className="text-lg text-stone-700 leading-relaxed">
-                    Our greatest milestones were not always victory parades. Sometimes they were therapy sessions, forgiveness over cold leftovers, and hands clasped tight in hospital waiting rooms—celebrating that we still had each other. We learned that "for better or worse" sometimes means "for better or for when Vitaly decides to stay up all night at the computer while Kimball goes to bed at 10pm sharp with his library book."
-                  </p>
-                </div>
-
-                <div
-                  className="rounded-lg overflow-hidden cursor-pointer bg-gray-100 flex items-center justify-center"
-                  style={{ height: "256px" }}
+                {/* Updated engagement photo with decorative frame */}
+                <div 
+                  className="cursor-pointer"
                   onClick={() => openImageModal({
                     src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
-                    title: "Everyday Victories",
-                    description: "2008 - Our greatest milestones were not always victory parades, but the quiet moments of choosing each other again and again."
+                    title: "Engagement photo",
+                    description: "2008 - One of our favorite shots from the engagement session, capturing our connection."
                   })}
                 >
-                  <img
-                    src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg"
-                    alt="Engagement photo"
-                    className="w-full h-full object-contain"
-                    style={{ maxWidth: "100%", maxHeight: "100%" }}
-                  />
+                  <div className="p-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
+                    <div className="p-1 bg-white rounded-md">
+                      <div className="overflow-hidden rounded-md bg-white flex items-center justify-center" style={{ height: "260px" }}>
+                        <img 
+                          src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg" 
+                          alt="Engagement photo" 
+                          className="w-full h-full object-cover" 
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-center mt-2">
+                      <div className="flex space-x-1">
+                        {heartColors.slice(0, 5).map((color, i) => (
+                          <SafeIcon key={i} icon={FiHeart} className={`w-4 h-4 ${color}`} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg border-2 border-purple-100">
+                  <p className="text-lg text-stone-700 leading-relaxed">
+                    Our milestones weren't champagne toasts—they were therapy sessions, whispered apologies over cold leftovers, and hand squeezes in hospital waiting rooms. "For better or worse" sometimes just means "you make tea while I doom-scroll" or "you fall asleep, I finish the cookies."
+                  </p>
                 </div>
               </motion.div>
             </div>
@@ -590,8 +507,13 @@ const Home = ({ openGalleryLightbox }) => {
       {/* Our Poem Section */}
       <PoemDisplay />
 
-      {/* Anniversary Signup */}
-      <section id="signup-section" className="py-20 bg-gradient-to-br from-blue-50 to-yellow-50 relative overflow-hidden">
+      {/* Anniversary Signup - UPDATED with wedding background */}
+      <section id="signup-section" className="py-20 relative overflow-hidden">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80')] bg-cover bg-center">
+          <div className="absolute inset-0 bg-black/60"></div> {/* Dark overlay for text readability */}
+        </div>
+
         {/* Decorative Elements */}
         {heartColors.map((color, index) => (
           <motion.div
@@ -638,7 +560,7 @@ const Home = ({ openGalleryLightbox }) => {
           </div>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -646,12 +568,13 @@ const Home = ({ openGalleryLightbox }) => {
             viewport={{ once: true }}
             className="text-center space-y-8"
           >
-            <h2 className="text-3xl md:text-4xl font-serif text-stone-800">
-              <span className="text-indigo-600 italic">Join Our Celebration</span>
+            <h2 className="text-3xl md:text-4xl font-serif text-white">
+              <span className="text-white italic">Join Our Celebration</span>
             </h2>
-            <p className="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
               We're celebrating our 18th wedding anniversary on August 15, 2026. We'd love for you to join us! (Warning: There will be Ukrainian food, terrible dad jokes, and probably someone crying happy tears.)
             </p>
+
             <button
               onClick={() => setShowSignup(true)}
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
@@ -686,7 +609,7 @@ const Home = ({ openGalleryLightbox }) => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <a 
+              <a
                 href="https://gallery.kimballandvitaly.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -698,7 +621,6 @@ const Home = ({ openGalleryLightbox }) => {
                   <p className="text-sm text-stone-600">View our journey in photos, letters, and kitchen-table memories</p>
                 </div>
               </a>
-
               <Link
                 to="/story"
                 className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"

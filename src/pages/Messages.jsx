@@ -9,13 +9,18 @@ import * as FiIcons from 'react-icons/fi';
 const { FiHeart, FiSend, FiUser, FiMail, FiImage, FiX, FiUsers, FiArrowRight } = FiIcons;
 
 const Messages = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '', photos: [] });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    photos: []
+  });
   const [submitted, setSubmitted] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({...formData, [e.target.name]: e.target.value});
   };
 
   const handleFileChange = (e) => {
@@ -24,12 +29,12 @@ const Messages = () => {
       alert('Maximum 5 photos allowed (we only have so much server space!)');
       return;
     }
-
+    
     const newPhotos = files.map(file => ({
       file,
       preview: URL.createObjectURL(file)
     }));
-
+    
     setFormData(prevData => ({
       ...prevData,
       photos: [...prevData.photos, ...newPhotos]
@@ -49,10 +54,10 @@ const Messages = () => {
       alert('Please complete the verification first!');
       return;
     }
-
+    
     console.log('Message submitted:', formData);
     setSubmitted(true);
-    setFormData({ name: '', email: '', message: '', photos: [] });
+    setFormData({name: '', email: '', message: '', photos: []});
     setIsVerified(false);
   };
 
@@ -89,8 +94,7 @@ const Messages = () => {
               Share Your <span className="text-indigo-600 italic">Story</span>
             </h1>
             <p className="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
-              Tell us how you found your home in love's echo. Your story matters, and we'd love to hear it.
-              (Plus, we love a good story—especially if it involves embarrassing moments we can laugh about later.)
+              Tell us how you found your home in love's echo. Your story matters, and we'd love to hear it. (Plus, we love a good story—especially if it involves embarrassing moments we can laugh about later.)
             </p>
           </motion.div>
 
@@ -157,7 +161,6 @@ const Messages = () => {
                         />
                       </div>
                     </div>
-
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-2">
                         Email (optional)
@@ -262,26 +265,20 @@ const Messages = () => {
               </div>
             </motion.div>
 
-            {/* Gallery Section */}
+            {/* Gallery Section - REMOVED HEADING */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <h2 className="text-2xl font-serif text-stone-800 mb-6">
-                Photo Gallery
-              </h2>
-
               <div
                 className="h-[600px] bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer"
-                onClick={() =>
-                  openImageModal({
-                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
-                    title: "Kimball & Vitaly",
-                    description: "Our wedding rings - a symbol of our commitment and love."
-                  })
-                }
+                onClick={() => openImageModal({
+                  src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
+                  title: "Kimball & Vitaly",
+                  description: "Our wedding rings - a symbol of our commitment and love."
+                })}
               >
                 <img
                   src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG"
@@ -298,14 +295,13 @@ const Messages = () => {
                 </div>
                 <p className="text-stone-600">
                   <strong>Want to share your story?</strong><br />
-                  Use the form to send us your thoughts, memories, and photos. We promise to read every single one (and
-                  probably cry happy tears).
+                  Use the form to send us your thoughts, memories, and photos. We promise to read every single one (and probably cry happy tears).
                 </p>
               </div>
             </motion.div>
           </div>
 
-          {/* Call to Action - UPDATED: Now side by side with animated hearts above */}
+          {/* Call to Action - UPDATED: Now side by side with animated hearts above, quotes removed */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -333,10 +329,7 @@ const Messages = () => {
               <div className="bg-white p-8 rounded-2xl border-2 border-indigo-100">
                 <p className="text-lg text-stone-700 italic leading-relaxed">
                   <em>
-                    "Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the
-                    shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the
-                    lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who
-                    know that sometimes love means pretending to enjoy your partner's experimental cooking.)"
+                    Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)
                   </em>
                 </p>
               </div>
@@ -347,9 +340,7 @@ const Messages = () => {
                   Every Love Story Matters
                 </h2>
                 <p className="text-stone-700 leading-relaxed">
-                  Whether your love story is just beginning or has been unfolding for decades, whether it's been easy or
-                  filled with obstacles—it matters. Thank you for being part of our extended family of love. (And for
-                  putting up with our terrible puns all these years.)
+                  Whether your love story is just beginning or has been unfolding for decades, whether it's been easy or filled with obstacles—it matters. Thank you for being part of our extended family of love. (And for putting up with our terrible puns all these years.)
                 </p>
               </div>
             </div>

@@ -80,3 +80,34 @@ img {
   justify-content: center;
   z-index: 1;
 }
+
+/* Animation for SVG elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.confetti-group circle, 
+.confetti-group rect {
+  animation: float 4s ease-in-out infinite;
+}
+
+.floating-circles circle,
+.floating-shapes circle,
+.floating-shapes rect,
+.floating-elements circle {
+  animation: float 6s ease-in-out infinite;
+}
+
+.flowing-ribbons path {
+  animation: wave 10s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.wave-group path {
+  animation: wave 8s ease-in-out infinite;
+}
