@@ -167,7 +167,7 @@ const Home = ({ openGalleryLightbox }) => {
             >
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed italic font-light">
                 <em>
-                  From a three-dollar start to a love that defied borders, closets, and Costco coupons—this is our wild, weird, wonderful story.
+                  From a $3 first date to visas, vows, and way too many road trips—this is how two stubborn hearts built one address.
                 </em>
               </p>
             </motion.div>
@@ -197,7 +197,7 @@ const Home = ({ openGalleryLightbox }) => {
               className="space-y-6 mb-12"
             >
               <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-                From a three-dollar start to a love that dodges IKEA shelves, diets, and Costco temptations—it's been one weird, sweet, wonderful story.
+                Inside you'll find the quiet stuff that mattered—visa stamps, late-night edits, sunrise gym runs, kitchen dances, holiday mashups, and a thousand little Tuesdays where we kept choosing each other.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -209,6 +209,7 @@ const Home = ({ openGalleryLightbox }) => {
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
+
                 <a
                   href="https://gallery.kimballandvitaly.com/"
                   target="_blank"
@@ -233,7 +234,11 @@ const Home = ({ openGalleryLightbox }) => {
           <h3 className="text-xl md:text-2xl font-serif text-center text-stone-800 mb-6">
             Celebrating 18 years of weird, wonderful love
           </h3>
-          <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
+          <CountdownTimer
+            targetDate="August 15, 2026"
+            title="Celebrating Our 18th Wedding Anniversary"
+            showCta={true}
+          />
         </div>
       </section>
 
@@ -339,6 +344,7 @@ const Home = ({ openGalleryLightbox }) => {
                   <span className="font-medium">Hear the Whole Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
+
                 <a
                   href="https://gallery.kimballandvitaly.com/"
                   target="_blank"
@@ -354,10 +360,10 @@ const Home = ({ openGalleryLightbox }) => {
         </div>
       </section>
 
-      {/* Resilience Section - UPDATED WITH ENGAGEMENT PHOTO */}
+      {/* Resilience Section - UPDATED WITH MARRIAGE PHOTO */}
       <section className="py-20 relative overflow-hidden">
-        {/* Background image - RESTORED ORIGINAL IMAGE */}
-        <div className="absolute inset-0 bg-[url('https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1754443092851-20060518-Kimball-Vitaly.jpg')] bg-cover bg-center opacity-20"></div>
+        {/* Background image - UPDATED TO NEW MARRIAGE PHOTO */}
+        <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg')] bg-cover bg-top opacity-20"></div>
         {/* Overlay for better text contrast */}
         <div className="absolute inset-0 bg-white/80"></div>
 
@@ -431,25 +437,28 @@ const Home = ({ openGalleryLightbox }) => {
 
                 <div className="space-y-4 text-lg">
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-3 flex-shrink-0" />
+                    <div className="text-2xl flex-shrink-0">💃</div>
                     <p className="text-stone-600 italic">
                       The family that learned to dance between cultures, birthdays, and heartbreak—sometimes literally, in the kitchen, wearing socks.
                     </p>
                   </div>
+
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-3 flex-shrink-0" />
+                    <div className="text-2xl flex-shrink-0">💸</div>
                     <p className="text-stone-600 italic">
                       Survived financial disasters that would make Dave Ramsey lie down with a cold compress.
                     </p>
                   </div>
+
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-3 flex-shrink-0" />
+                    <div className="text-2xl flex-shrink-0">🤣</div>
                     <p className="text-stone-600 italic">
                       Accidentally built a life where every inside joke could be used in court against us.
                     </p>
                   </div>
+
                   <div className="flex items-start space-x-3">
-                    <div className="w-2 h-2 bg-pink-500 rounded-full mt-3 flex-shrink-0" />
+                    <div className="text-2xl flex-shrink-0">💖</div>
                     <p className="text-stone-600 italic">
                       Became proof that broken people can still build something absurdly beautiful together.
                     </p>
@@ -465,21 +474,21 @@ const Home = ({ openGalleryLightbox }) => {
                 className="space-y-6"
               >
                 {/* Updated engagement photo with decorative frame */}
-                <div 
+                <div
                   className="cursor-pointer"
                   onClick={() => openImageModal({
-                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg",
-                    title: "Engagement photo",
-                    description: "2008 - One of our favorite shots from the engagement session, capturing our connection."
+                    src: "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg",
+                    title: "Our wedding",
+                    description: "August 2008 - Our wedding ceremony in San Diego."
                   })}
                 >
                   <div className="p-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
                     <div className="p-1 bg-white rounded-md">
                       <div className="overflow-hidden rounded-md bg-white flex items-center justify-center" style={{ height: "260px" }}>
-                        <img 
-                          src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753370742843-Kimball%20and%20Vitaly%20Engagement%202008_36.jpg" 
-                          alt="Engagement photo" 
-                          className="w-full h-full object-cover" 
+                        <img
+                          src="https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg"
+                          alt="Our wedding ceremony"
+                          className="w-full h-full object-cover"
                         />
                       </div>
                     </div>
@@ -507,83 +516,37 @@ const Home = ({ openGalleryLightbox }) => {
       {/* Our Poem Section */}
       <PoemDisplay />
 
-      {/* Anniversary Signup - UPDATED with wedding background */}
-      <section id="signup-section" className="py-20 relative overflow-hidden">
-        {/* Background image with overlay */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-black/60"></div> {/* Dark overlay for text readability */}
-        </div>
-
-        {/* Decorative Elements */}
-        {heartColors.map((color, index) => (
-          <motion.div
-            key={`signup-heart-${index}`}
-            className={`absolute ${index % 2 === 0 ? 'top-1/4' : 'bottom-1/4'} ${index < 3 ? 'left-1/' + (index + 2) : 'right-1/' + (7 - index)} w-16 h-16 ${color} opacity-20`}
-            animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 15 + index * 2 }}
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
-            </svg>
-          </motion.div>
-        ))}
-
-        <motion.div
-          className="absolute bottom-20 right-20 w-20 h-20 opacity-20"
-          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-        >
-          <div className="text-4xl">🌸</div>
-        </motion.div>
-
-        {/* Rainbow balloon */}
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-16 h-24 opacity-20"
-          animate={{ y: [0, -10, 0, -5, 0], rotate: [0, 3, 0, -3, 0] }}
-          transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
-        >
-          <div className="w-full h-full">
-            <svg viewBox="0 0 24 24" className="w-full h-full">
-              <defs>
-                <linearGradient id="rainbow-balloon5" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FF0018" />
-                  <stop offset="16%" stopColor="#FFA52C" />
-                  <stop offset="32%" stopColor="#FFFF41" />
-                  <stop offset="48%" stopColor="#008018" />
-                  <stop offset="66%" stopColor="#0000F9" />
-                  <stop offset="83%" stopColor="#86007D" />
-                  <stop offset="100%" stopColor="#FF0018" />
-                </linearGradient>
-              </defs>
-              <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon5)" />
-            </svg>
-          </div>
-        </motion.div>
+      {/* Anniversary Signup - UPDATED with full-width wedding background */}
+      <section id="signup-section" className="py-20 relative overflow-hidden w-full">
+        {/* Full-width background image */}
+        <div className="absolute inset-0 w-full bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_09.jpg')] bg-cover bg-top"></div>
+        {/* Semi-transparent overlay for text readability across the full width */}
+        <div className="absolute inset-0 bg-black/40"></div>
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center space-y-8"
-          >
-            <h2 className="text-3xl md:text-4xl font-serif text-white">
-              <span className="text-white italic">Join Our Celebration</span>
-            </h2>
-            <p className="text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
-              We're celebrating our 18th wedding anniversary on August 15, 2026. We'd love for you to join us! (Warning: There will be Ukrainian food, terrible dad jokes, and probably someone crying happy tears.)
-            </p>
+          {/* Content container with proper width */}
+          <div className="relative rounded-2xl overflow-hidden text-center">
+            <div className="p-8 md:p-12">
+              <SafeIcon icon={FiHeart} className="w-16 h-16 text-white mx-auto mb-6" />
+              <h2 className="text-2xl md:text-3xl font-serif mb-6 text-white">
+                Join Our Celebration
+              </h2>
+              <p className="text-lg leading-relaxed max-w-3xl mx-auto text-white">
+                We're celebrating our 18th wedding anniversary on August 15, 2026. We'd love for you to join us! (Warning: There will be Ukrainian food, terrible dad jokes, and probably someone crying happy tears.)
+              </p>
 
-            <button
-              onClick={() => setShowSignup(true)}
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
-            >
-              <SafeIcon icon={FiUsers} className="w-5 h-5" />
-              <span className="font-medium">Sign Up for Our Guest List</span>
-              <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
-            </button>
-          </motion.div>
+              <div className="mt-8">
+                <button
+                  onClick={() => setShowSignup(true)}
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
+                >
+                  <SafeIcon icon={FiUsers} className="w-5 h-5" />
+                  <span className="font-medium">Join Our Celebration</span>
+                  <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -603,6 +566,7 @@ const Home = ({ openGalleryLightbox }) => {
                   Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)
                 </em>
               </p>
+
               <h3 className="text-2xl md:text-3xl font-serif text-stone-800">
                 <strong>Join us in celebrating our journey of radical, resilient, ordinary love.</strong>
               </h3>
@@ -621,6 +585,7 @@ const Home = ({ openGalleryLightbox }) => {
                   <p className="text-sm text-stone-600">View our journey in photos, letters, and kitchen-table memories</p>
                 </div>
               </a>
+
               <Link
                 to="/story"
                 className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"

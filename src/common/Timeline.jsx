@@ -63,11 +63,11 @@ const Timeline = () => {
       <h2 className="text-3xl font-serif text-center text-stone-800 mb-12">
         Our <span className="text-rose-600 italic">Timeline</span>
       </h2>
-      
+
       <div className="relative">
         {/* Center line */}
         <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-rose-400 via-blue-400 to-purple-500 rounded-full"></div>
-        
+
         <div className="space-y-12">
           {events.map((event, index) => (
             <motion.div
@@ -85,13 +85,13 @@ const Timeline = () => {
                   <p className="text-stone-700">{event.description}</p>
                 </div>
               </div>
-              
+
               <div className="z-10 flex items-center justify-center">
                 <div className={`w-12 h-12 rounded-full bg-gradient-to-br from-${event.color}-400 to-${event.color}-600 flex items-center justify-center shadow-lg`}>
                   <SafeIcon icon={event.icon} className="w-6 h-6 text-white" />
                 </div>
               </div>
-              
+
               <div className="w-1/2"></div>
             </motion.div>
           ))}

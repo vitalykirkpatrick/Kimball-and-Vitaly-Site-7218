@@ -83,19 +83,19 @@ img {
 
 /* Animation for SVG elements */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.confetti-group circle, 
-.confetti-group rect {
+.confetti-group circle, .confetti-group rect {
   animation: float 4s ease-in-out infinite;
 }
 
-.floating-circles circle,
-.floating-shapes circle,
-.floating-shapes rect,
-.floating-elements circle {
+.floating-circles circle, .floating-shapes circle, .floating-shapes rect, .floating-elements circle {
   animation: float 6s ease-in-out infinite;
 }
 
@@ -104,10 +104,84 @@ img {
 }
 
 @keyframes wave {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
 .wave-group path {
   animation: wave 8s ease-in-out infinite;
+}
+
+/* Custom range input styling for volume control */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+/* Music control animation */
+@keyframes pulse-music {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.music-control-pulse {
+  animation: pulse-music 2s infinite;
+}
+
+/* 3D Card Flip Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Text shadow for better readability on image backgrounds */
+.text-shadow-lg {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide scrollbar for timeline but allow scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
 }

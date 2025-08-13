@@ -7,9 +7,33 @@ import Footer from '../components/Footer';
 import AnniversarySignup from '../components/AnniversarySignup';
 import ImageModal from '../components/ImageModal';
 import CustomAudioPlayer from '../components/CustomAudioPlayer';
+import Slideshow from '../components/Slideshow';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiHeart, FiGlobe, FiHome, FiStar, FiCalendar, FiMapPin, FiX, FiArrowDown, FiUsers, FiArrowRight, FiAward, FiBookOpen, FiRefreshCw, FiExternalLink, FiVolume2, FiChevronLeft, FiChevronRight, FiGift } = FiIcons;
+const {
+  FiHeart,
+  FiGlobe,
+  FiHome,
+  FiStar,
+  FiCalendar,
+  FiMapPin,
+  FiX,
+  FiArrowDown,
+  FiUsers,
+  FiArrowRight,
+  FiAward,
+  FiBookOpen,
+  FiRefreshCw,
+  FiExternalLink,
+  FiVolume2,
+  FiChevronLeft,
+  FiChevronRight,
+  FiGift,
+  FiVolumeX,
+  FiMusic,
+  FiPlay,
+  FiPause
+} = FiIcons;
 
 const Story = () => {
   const [showSignup, setShowSignup] = useState(false);
@@ -19,48 +43,27 @@ const Story = () => {
   const [bookError, setBookError] = useState(false);
   const [bookCoverLoaded, setBookCoverLoaded] = useState(false);
   const [bookCoverError, setBookCoverError] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
 
-  // ElevenLabs player refs and state
-  const elevenLabsPlayerRef = useRef(null);
-  const [playerLoaded, setPlayerLoaded] = useState(false);
+  // Background music player state
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [isMusicMuted, setIsMusicMuted] = useState(false);
+  const [musicVolume, setMusicVolume] = useState(0.15); // Starting at lower volume (15%)
+  const [showMusicControls, setShowMusicControls] = useState(false);
+  const [musicLoaded, setMusicLoaded] = useState(false);
+  const [musicError, setMusicError] = useState(false);
+  const [audioLoading, setAudioLoading] = useState(true);
+  const [previousMusicVolume, setPreviousMusicVolume] = useState(0.15); // Remember volume before narration
+  const backgroundMusicRef = useRef(null);
 
-  // Audio source URL - using direct audio URL instead of Google Drive
-  const audioSrc = "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/story-audio.mp3";
+  // Audio player ref and state for narration
+  const [showNarration, setShowNarration] = useState(false);
+  const [narrationHeight, setNarrationHeight] = useState(0);
 
-  // Carousel content
-  const carouselSlides = [
-    {
-      title: "The Case of the Exploding Paint Can 🎨",
-      content: "We wanted a \"quick\" home makeover. Ten hours, three arguments, and one paint explosion later, our living room looked like a Jackson Pollock crime scene. Somewhere in the chaos, we learned love isn't always pretty—but it is washable.",
-      color: "bg-gradient-to-br from-amber-100 to-amber-200",
-      emoji: "🎨"
-    },
-    {
-      title: "Immigration Paperwork & Emotional Damage 📑",
-      content: "If bureaucracy were an Olympic sport, we'd have gold. Forms, signatures, interviews where I couldn't tell if I was being tested on my marriage or my memory. And yet, we made it through—with coffee, sarcasm, and a shared hatred for staplers.",
-      color: "bg-gradient-to-br from-blue-100 to-blue-200",
-      emoji: "📑"
-    },
-    {
-      title: "The Day the Disco Ball Died 💃",
-      content: "It was supposed to be a theme night. It ended with me in sequins, Kimball questioning all his life choices, and the disco ball giving up halfway through \"Stayin' Alive.\" Sometimes love is just two people laughing while the ceiling cries glitter.",
-      color: "bg-gradient-to-br from-purple-100 to-purple-200",
-      emoji: "💃"
-    },
-    {
-      title: "The Great Protein Powder Pyramid Scheme 🥤",
-      content: "I thought it was an \"investment opportunity.\" Turns out, it was just a garage full of vanilla-flavored regret. Kimball made me promise never to get financial advice from anyone wearing a tank top indoors again.",
-      color: "bg-gradient-to-br from-green-100 to-green-200",
-      emoji: "🥤"
-    },
-    {
-      title: "Midnight IKEA Despair 🛠️",
-      content: "We opened the first box with hope. By the third, we were speaking only in Allen wrench noises. By the fifth, we questioned our vows. But when we sat on the finished couch—at 3 a.m.—it felt like victory.",
-      color: "bg-gradient-to-br from-rose-100 to-rose-200",
-      emoji: "🛠️"
-    }
-  ];
+  // Audio source URL - using direct S3 audio URL
+  const audioSrc = "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Book+Narration/ElevenLabs_Kimball_and_Vitaly_Anniversary_Story.mp3";
+
+  // Background music URL - using the provided S3 URL
+  const backgroundMusicSrc = "https://vitalybook.s3.us-west-1.amazonaws.com/13-A-Lifetime-of-Love-FULL-SM372.mp3";
 
   const heartColors = [
     'text-red-500',
@@ -78,15 +81,6 @@ const Story = () => {
       title: "Our Journey",
       description: "A special moment in our journey together"
     });
-  };
-
-  // Navigate carousel slides
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? carouselSlides.length - 1 : prev - 1));
   };
 
   // Book iframe handling with improved loading detection
@@ -128,77 +122,149 @@ const Story = () => {
     // Try to load from S3 backup URL
     const bookCoverImg = document.getElementById('book-cover-img');
     if (bookCoverImg) {
-      bookCoverImg.src = "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753956868394-book-cover-kimball-vitaly.jpg";
+      bookCoverImg.src = "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpg";
     }
   };
 
-  // Open book in modal
-  const openBookModal = () => {
+  // Handle music loading events
+  const handleMusicLoaded = () => {
+    console.log("Background music loaded successfully");
+    setMusicLoaded(true);
+    setMusicError(false);
+    setAudioLoading(false);
+    // Set initial volume
+    if (backgroundMusicRef.current) {
+      backgroundMusicRef.current.volume = musicVolume;
+    }
+  };
+
+  const handleMusicError = (error) => {
+    console.error("Error loading background music:", error);
+    setMusicError(true);
+    setMusicLoaded(false);
+    setAudioLoading(false);
+  };
+
+  // Toggle narration visibility - UPDATED to lower music volume instead of pausing
+  const toggleNarration = () => {
+    if (!showNarration) {
+      // When enabling narration, lower music volume but don't pause
+      if (backgroundMusicRef.current && isMusicPlaying) {
+        // Remember current volume before lowering it
+        setPreviousMusicVolume(backgroundMusicRef.current.volume);
+        // Lower the volume for narration
+        backgroundMusicRef.current.volume = 0.15;
+        setMusicVolume(0.15);
+      }
+      setShowNarration(true);
+      setNarrationHeight(140);
+    } else {
+      // When disabling narration, restore previous music volume
+      if (backgroundMusicRef.current && isMusicPlaying) {
+        backgroundMusicRef.current.volume = previousMusicVolume;
+        setMusicVolume(previousMusicVolume);
+      }
+      setShowNarration(false);
+      setNarrationHeight(0);
+    }
+  };
+
+  // Open book in modal and start background music - UPDATED to show narration by default when coming from link
+  const openBookModal = (showNarrationOnOpen = false) => {
     setShowBookModal(true);
     setBookLoading(true);
     setBookError(false);
-    setPlayerLoaded(false);
+    setAudioLoading(true);
+
+    // Set narration state based on parameter
+    if (showNarrationOnOpen) {
+      setShowNarration(true);
+      setNarrationHeight(140);
+    } else {
+      setShowNarration(false);
+      setNarrationHeight(0);
+    }
+
+    // Create a new audio element each time to avoid stale state
+    if (backgroundMusicRef.current) {
+      backgroundMusicRef.current.pause();
+      backgroundMusicRef.current = null;
+    }
+
+    const audioElement = new Audio(backgroundMusicSrc);
+    audioElement.volume = musicVolume;
+    audioElement.loop = true;
+    audioElement.preload = "auto";
+
+    // Add event listeners
+    audioElement.addEventListener('loadeddata', handleMusicLoaded);
+    audioElement.addEventListener('error', handleMusicError);
+    audioElement.addEventListener('canplaythrough', () => {
+      setAudioLoading(false);
+      audioElement.play()
+        .then(() => {
+          setIsMusicPlaying(true);
+          setMusicError(false);
+        })
+        .catch(err => {
+          console.error("Error playing background music:", err);
+          setMusicError(true);
+        });
+    });
+
+    // Store the new audio element
+    backgroundMusicRef.current = audioElement;
   };
 
-  // Close book modal
+  // Close book modal and stop background music
   const closeBookModal = () => {
     setShowBookModal(false);
+    // Stop background music when modal closes
+    if (backgroundMusicRef.current) {
+      backgroundMusicRef.current.pause();
+      backgroundMusicRef.current = null;
+      setIsMusicPlaying(false);
+    }
   };
 
-  // Initialize and load the ElevenLabs player when modal is shown
-  useEffect(() => {
-    if (showBookModal) {
-      // Function to load the ElevenLabs script
-      const loadElevenLabsScript = () => {
-        // Check if script already exists
-        const existingScript = document.getElementById('elevenlabs-script');
-        if (existingScript) {
-          existingScript.remove();
-        }
-
-        // Create and load the script
-        const script = document.createElement('script');
-        script.id = 'elevenlabs-script';
-        script.src = 'https://elevenlabs.io/player/audioNativeHelper.js';
-        script.type = 'text/javascript';
-        script.async = true;
-        script.onload = () => {
-          console.log("ElevenLabs script loaded successfully");
-          setPlayerLoaded(true);
-        };
-        script.onerror = (error) => {
-          console.error("Error loading ElevenLabs script:", error);
-        };
-
-        // Append the script to the document
-        document.body.appendChild(script);
-      };
-
-      // Reset the container and load the script
-      const playerContainer = elevenLabsPlayerRef.current;
-      if (playerContainer) {
-        playerContainer.innerHTML = '';
-
-        // Create the player element
-        const playerElement = document.createElement('div');
-        playerElement.id = 'elevenlabs-audionative-widget';
-        playerElement.setAttribute('data-height', '90');
-        playerElement.setAttribute('data-width', '100%');
-        playerElement.setAttribute('data-frameborder', 'no');
-        playerElement.setAttribute('data-scrolling', 'no');
-        playerElement.setAttribute('data-publicuserid', '63d9bf0e513981988600d7ed35c2494fde5f239a520b229fbd16d4378cf0ff6d');
-        playerElement.setAttribute('data-playerurl', 'https://elevenlabs.io/player/index.html');
-        playerElement.setAttribute('data-projectid', '5dWlJj3A1ENJJltZfNP8');
-        playerElement.textContent = 'Loading the AudioNative Player...';
-
-        // Append the player element to the container
-        playerContainer.appendChild(playerElement);
-
-        // Load the script after creating the element
-        loadElevenLabsScript();
+  // Toggle background music play/pause
+  const toggleBackgroundMusic = () => {
+    if (backgroundMusicRef.current) {
+      if (isMusicPlaying) {
+        backgroundMusicRef.current.pause();
+        setIsMusicPlaying(false);
+      } else {
+        backgroundMusicRef.current.play()
+          .then(() => {
+            setIsMusicPlaying(true);
+            setMusicError(false);
+          })
+          .catch(err => {
+            console.error("Error playing background music:", err);
+            setMusicError(true);
+          });
       }
     }
-  }, [showBookModal]);
+  };
+
+  // Toggle background music mute
+  const toggleMusicMute = () => {
+    if (backgroundMusicRef.current) {
+      backgroundMusicRef.current.muted = !isMusicMuted;
+      setIsMusicMuted(!isMusicMuted);
+    }
+  };
+
+  // Handle volume change
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setMusicVolume(newVolume);
+    setPreviousMusicVolume(newVolume);
+    if (backgroundMusicRef.current) {
+      backgroundMusicRef.current.volume = newVolume;
+      setIsMusicMuted(newVolume === 0);
+    }
+  };
 
   // Set a timeout to check if loading takes too long
   useEffect(() => {
@@ -225,12 +291,14 @@ const Story = () => {
     };
   }, [showBookModal]);
 
-  // Auto-advance carousel every 6 seconds
+  // Cleanup function for audio element
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 6000);
-    return () => clearInterval(interval);
+    return () => {
+      if (backgroundMusicRef.current) {
+        backgroundMusicRef.current.pause();
+        backgroundMusicRef.current = null;
+      }
+    };
   }, []);
 
   return (
@@ -268,6 +336,67 @@ const Story = () => {
         <div className="text-4xl">🌺</div>
       </motion.div>
 
+      {/* ADDED MORE DECORATIVE ELEMENTS */}
+      {/* Wedding rings */}
+      <motion.div
+        className="absolute top-1/6 right-1/6 w-16 h-16 opacity-20"
+        animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
+        transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+      >
+        <div className="text-5xl">💍</div>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-1/6 left-1/6 w-16 h-16 opacity-20"
+        animate={{ y: [0, -10, 0, -15, 0], rotate: [0, -5, 0, 5, 0] }}
+        transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+      >
+        <div className="text-5xl">💍</div>
+      </motion.div>
+
+      {/* Wedding bells */}
+      <motion.div
+        className="absolute top-1/2 left-10 w-16 h-16 opacity-20"
+        animate={{ y: [0, -8, 0, -12, 0], rotate: [0, 10, 0, -10, 0] }}
+        transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
+      >
+        <div className="text-5xl">🔔</div>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-1/4 right-10 w-16 h-16 opacity-20"
+        animate={{ y: [0, -12, 0, -8, 0], rotate: [0, -10, 0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 16, ease: "easeInOut" }}
+      >
+        <div className="text-5xl">🔔</div>
+      </motion.div>
+
+      {/* Floating flowers - ADDED MORE */}
+      {[1, 2, 3, 4].map((i) => (
+        <motion.div
+          key={`flower-${i}`}
+          className="absolute opacity-30"
+          style={{ top: `${10 + i * 20}%`, left: `${10 + i * 18}%`, width: '30px', height: '30px' }}
+          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
+          transition={{ repeat: Infinity, duration: 20 + i * 5, ease: "linear" }}
+        >
+          <div className="text-4xl">{i % 2 === 0 ? '🌸' : '🌺'}</div>
+        </motion.div>
+      ))}
+
+      {[1, 2, 3, 4].map((i) => (
+        <motion.div
+          key={`flower-${i + 4}`}
+          className="absolute opacity-30"
+          style={{ bottom: `${10 + i * 20}%`, right: `${10 + i * 18}%`, width: '30px', height: '30px' }}
+          animate={{ rotate: -360, scale: [1, 0.9, 1, 1.1, 1] }}
+          transition={{ repeat: Infinity, duration: 25 + i * 3, ease: "linear" }}
+        >
+          <div className="text-4xl">{i % 2 === 0 ? '🌺' : '🌸'}</div>
+        </motion.div>
+      ))}
+
+      {/* Rainbow balloon */}
       <motion.div
         className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
         animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
@@ -276,13 +405,7 @@ const Story = () => {
         <div className="w-full h-full">
           <svg viewBox="0 0 24 24" className="w-full h-full">
             <defs>
-              <linearGradient
-                id="rainbow-balloon-story"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
+              <linearGradient id="rainbow-balloon-story" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#FF0018" />
                 <stop offset="16%" stopColor="#FFA52C" />
                 <stop offset="32%" stopColor="#FFFF41" />
@@ -293,6 +416,30 @@ const Story = () => {
               </linearGradient>
             </defs>
             <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon-story)" />
+          </svg>
+        </div>
+      </motion.div>
+
+      {/* Second rainbow balloon - ADDED NEW */}
+      <motion.div
+        className="absolute top-1/3 left-1/5 w-16 h-24 opacity-20"
+        animate={{ y: [0, -10, 0, -15, 0], rotate: [0, -5, 0, 5, 0] }}
+        transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
+      >
+        <div className="w-full h-full">
+          <svg viewBox="0 0 24 24" className="w-full h-full">
+            <defs>
+              <linearGradient id="rainbow-balloon-story-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#86007D" />
+                <stop offset="16%" stopColor="#0000F9" />
+                <stop offset="32%" stopColor="#008018" />
+                <stop offset="48%" stopColor="#FFFF41" />
+                <stop offset="66%" stopColor="#FFA52C" />
+                <stop offset="83%" stopColor="#FF0018" />
+                <stop offset="100%" stopColor="#86007D" />
+              </linearGradient>
+            </defs>
+            <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon-story-2)" />
           </svg>
         </div>
       </motion.div>
@@ -338,25 +485,22 @@ const Story = () => {
               <h2 className="text-2xl md:text-3xl font-serif text-stone-800 mb-6">
                 From Different Worlds to One Home
               </h2>
-
               <div className="space-y-6 text-lg text-stone-700 leading-relaxed">
                 <p className="italic">
                   <em>
                     Tonight, as the soft glow from Kimball's reading lamp spills across our Salt Lake City living room, I'm reminded of how far we've come. From orphanage to citizenship, from strangers to soulmates, our journey has been anything but ordinary. As Kimball turns another page of his library book—always in bed by 10pm—I smile at our comfortable rhythms, even as I prepare for another late night at my computer.
                   </em>
                 </p>
-
                 <p>
                   It started on May 15, 2006. Not the dramatic, movie-script kind of love story, but something quieter, more persistent. A Ukrainian orphan immigrant and returned missionary meeting a BYU student Japanese linguist and returned missionary, connecting online and then going together to our first movie night—"She's the Man" at a $1 theater in Provo, and then to Family Home Evening with Affirmation, finding unexpected connection.
                 </p>
-
                 <p>
                   <strong>Love, for us, was not an easy answer.</strong> It meant translating pain into poetry—sometimes in broken English, always from the heart. It meant building a family in the spaces where we were told none could exist.
                 </p>
               </div>
             </motion.section>
 
-            {/* NEW: Story Carousel */}
+            {/* REPLACED: Timeline section with Slideshow */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -364,95 +508,20 @@ const Story = () => {
               viewport={{ once: true }}
               className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg border-2 border-indigo-100 relative z-40"
             >
-              <h2 className="text-2xl md:text-3xl font-serif text-stone-800 mb-6 text-center">
-                Moments That Made Us
-              </h2>
-
-              <div className="relative">
-                {/* Carousel container */}
-                <div className="overflow-hidden">
-                  <div className="relative">
-                    {/* Slides */}
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={currentSlide}
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -50 }}
-                        transition={{ duration: 0.5 }}
-                        className={`${carouselSlides[currentSlide].color} p-8 rounded-xl shadow-md`}
-                      >
-                        <div className="flex flex-col md:flex-row items-center gap-6">
-                          <div className="text-6xl md:text-8xl flex-shrink-0 mx-auto md:mx-0">
-                            {carouselSlides[currentSlide].emoji}
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="text-xl md:text-2xl font-bold mb-3 text-stone-800">
-                              {carouselSlides[currentSlide].title}
-                            </h3>
-                            <p className="text-stone-700">
-                              {carouselSlides[currentSlide].content}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
-
-                {/* Navigation arrows */}
-                <button
-                  onClick={prevSlide}
-                  className="absolute top-1/2 -left-2 md:left-2 -translate-y-1/2 bg-white/70 hover:bg-white/90 p-2 rounded-full shadow-md z-10"
-                  aria-label="Previous slide"
-                >
-                  <SafeIcon icon={FiChevronLeft} className="w-6 h-6 text-stone-700" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute top-1/2 -right-2 md:right-2 -translate-y-1/2 bg-white/70 hover:bg-white/90 p-2 rounded-full shadow-md z-10"
-                  aria-label="Next slide"
-                >
-                  <SafeIcon icon={FiChevronRight} className="w-6 h-6 text-stone-700" />
-                </button>
-              </div>
-
-              {/* Indicators */}
-              <div className="flex justify-center space-x-2 mt-6">
-                {carouselSlides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${currentSlide === index ? 'bg-indigo-500' : 'bg-gray-300'}`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  ></button>
-                ))}
-              </div>
-
-              {/* NEW: CTA Buttons */}
-              <div className="mt-10 flex flex-col md:flex-row justify-center gap-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={openBookModal}
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
-                >
-                  <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
-                  <span className="font-medium">Read the Full Story</span>
-                </motion.button>
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  href={audioSrc}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
-                >
-                  <SafeIcon icon={FiVolume2} className="w-5 h-5" />
-                  <span className="font-medium">Listen to Audio Version</span>
-                </motion.a>
-              </div>
+              <h2 className="text-2xl md:text-3xl font-serif text-stone-800 mb-6 text-center">Moments That Made Us</h2>
+              <Slideshow />
             </motion.section>
+
+            {/* KV Logo separator - ADDED NEW SEPARATOR HERE */}
+            <div className="flex items-center justify-center my-8 px-4">
+              <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
+              <div className="mx-4">
+                <div className="w-32 h-32 flex items-center justify-center">
+                  <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" alt="Kimball & Vitaly Logo" className="w-full h-full object-contain" />
+                </div>
+              </div>
+              <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
+            </div>
 
             {/* Our Book Section - IMPROVED WITH EMBEDDED IFRAME PREVIEW */}
             <section className="space-y-8 relative bg-gradient-to-br from-indigo-50/90 to-purple-50/90 backdrop-blur-sm p-8 rounded-2xl z-40">
@@ -465,7 +534,6 @@ const Story = () => {
               >
                 Our Book
               </motion.h2>
-
               <p className="text-lg text-stone-700 text-center">
                 "The Misadventures of Vitaly & Kimball" is a fun, illustrated storybook capturing our journey together - from first meeting to building a life together, complete with all the quirks, challenges, and joys along the way.
               </p>
@@ -480,7 +548,7 @@ const Story = () => {
                 {/* Book Cover with embedded preview iframe */}
                 <div
                   className="bg-white p-4 rounded-2xl shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-                  onClick={openBookModal}
+                  onClick={() => openBookModal(false)}
                 >
                   <div className="relative overflow-hidden rounded-xl">
                     {/* Loading indicator for book cover */}
@@ -489,7 +557,7 @@ const Story = () => {
                         <div className="animate-spin h-10 w-10 border-4 border-indigo-500 border-t-transparent rounded-full"></div>
                       </div>
                     )}
-
+                    
                     {/* Embedded book preview iframe */}
                     <div className="w-full" style={{ height: "400px", position: "relative" }}>
                       <iframe
@@ -509,12 +577,12 @@ const Story = () => {
                       <div className="w-full" style={{ height: "400px" }}>
                         <img
                           id="book-cover-img"
-                          src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753956868394-book-cover-kimball-vitaly.jpg"
+                          src="https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpg"
                           alt="The Misadventures of Vitaly and Kimball - Book Cover"
                           className="w-full h-full object-contain"
                           onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753956868394-book-cover-kimball-vitaly.jpg";
+                            e.target.src = "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpg";
                           }}
                         />
                       </div>
@@ -530,14 +598,14 @@ const Story = () => {
                 <div className="mt-8 text-center">
                   <div className="mt-6 flex flex-wrap justify-center gap-4">
                     <button
-                      onClick={openBookModal}
+                      onClick={() => openBookModal(false)}
                       className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-6 py-3 rounded-full hover:opacity-90 transition-colors shadow-lg"
                     >
                       <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
                       <span className="font-medium">Read Our Storybook</span>
                     </button>
                     <button
-                      onClick={openBookModal}
+                      onClick={() => openBookModal(true)} // Open with narration enabled
                       className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-full hover:opacity-90 transition-colors shadow-lg"
                     >
                       <SafeIcon icon={FiVolume2} className="w-5 h-5" />
@@ -568,12 +636,16 @@ const Story = () => {
                   <h3 className="text-xl md:text-2xl font-serif text-center text-stone-800 mb-6">
                     Celebrating 18 years of weird, wonderful love
                   </h3>
-                  <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
+                  <CountdownTimer
+                    targetDate="August 15, 2026"
+                    title="Celebrating Our 18th Wedding Anniversary"
+                    showCta={true}
+                  />
                 </div>
               </div>
             </section>
 
-            {/* Closing Reflection - UPDATED with beach background image */}
+            {/* Closing Reflection - UPDATED with engagement photo background and top alignment */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -581,26 +653,23 @@ const Story = () => {
               viewport={{ once: true }}
               className="relative rounded-2xl overflow-hidden text-center z-40"
             >
-              {/* Background image */}
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1173&q=80')] bg-cover bg-center"></div>
-
+              {/* Background image - UPDATED to engagement photo with top alignment */}
+              <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_09.jpg')] bg-cover bg-top"></div>
+              
               {/* Semi-transparent overlay for text readability */}
               <div className="absolute inset-0 bg-black/40"></div>
-
+              
               {/* Content with proper padding and spacing */}
               <div className="relative z-10 p-8 md:p-12">
                 <SafeIcon icon={FiHeart} className="w-16 h-16 text-white mx-auto mb-6" />
-
                 <h2 className="text-2xl md:text-3xl font-serif mb-6 text-white">
                   To Twenty Years & Beyond
                 </h2>
-
                 <p className="text-lg leading-relaxed max-w-3xl mx-auto text-white">
                   <em>
                     As we celebrate our journey together, we look back with gratitude for every moment—the joyful celebrations, the quiet evenings, and even the challenges that made us stronger. Our story continues to unfold, written day by day in the language of love that transcends borders, barriers, and time itself.
                   </em>
                 </p>
-
                 <div className="mt-8">
                   <button
                     onClick={() => setShowSignup(true)}
@@ -625,7 +694,7 @@ const Story = () => {
       {/* Image Modal */}
       {selectedImage && <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />}
 
-      {/* Book Modal with ElevenLabs Player */}
+      {/* Book Modal with CustomAudioPlayer */}
       <AnimatePresence>
         {showBookModal && (
           <div className="fixed inset-0 bg-black z-50 overflow-hidden">
@@ -637,6 +706,87 @@ const Story = () => {
             >
               <SafeIcon icon={FiX} className="w-6 h-6" />
             </button>
+
+            {/* Music control button - new addition */}
+            <div className="absolute top-4 left-4 z-[60] flex items-center">
+              <button
+                onClick={() => setShowMusicControls(!showMusicControls)}
+                className="bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors"
+                aria-label="Music controls"
+              >
+                <SafeIcon icon={FiMusic} className="w-6 h-6" />
+              </button>
+
+              {/* Expanded music controls */}
+              {showMusicControls && (
+                <motion.div
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: 'auto' }}
+                  exit={{ opacity: 0, width: 0 }}
+                  className="flex items-center bg-black/50 ml-2 p-2 rounded-full"
+                >
+                  <button
+                    onClick={toggleBackgroundMusic}
+                    className="text-white p-2 hover:bg-white/10 rounded-full"
+                    aria-label={isMusicPlaying ? "Pause music" : "Play music"}
+                  >
+                    <SafeIcon icon={isMusicPlaying ? FiPause : FiPlay} className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={toggleMusicMute}
+                    className="text-white p-2 hover:bg-white/10 rounded-full ml-1"
+                    aria-label={isMusicMuted ? "Unmute music" : "Mute music"}
+                  >
+                    <SafeIcon icon={isMusicMuted ? FiVolumeX : FiVolume2} className="w-5 h-5" />
+                  </button>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={musicVolume}
+                    onChange={handleVolumeChange}
+                    className="w-20 h-1.5 bg-white/20 rounded-full overflow-hidden ml-2"
+                    style={{
+                      background: `linear-gradient(to right, white 0%, white ${musicVolume * 100}%, rgba(255,255,255,0.2) ${musicVolume * 100}%, rgba(255,255,255,0.2) 100%)`
+                    }}
+                  />
+                </motion.div>
+              )}
+
+              {/* Loading indicator */}
+              {audioLoading && !musicError && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="ml-2 bg-blue-800/50 px-2 py-1 rounded text-xs text-white"
+                >
+                  Loading music...
+                </motion.div>
+              )}
+
+              {/* Music error message */}
+              {musicError && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="ml-2 bg-red-800/50 px-2 py-1 rounded text-xs text-white"
+                >
+                  Music error
+                </motion.div>
+              )}
+            </div>
+
+            {/* Toggle narration button */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[60]">
+              <button
+                onClick={toggleNarration}
+                className="flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-full hover:opacity-90 transition-colors"
+              >
+                <SafeIcon icon={FiVolume2} className="w-5 h-5" />
+                <span className="font-medium">{showNarration ? "Hide Narration" : "Listen to Narration"}</span>
+              </button>
+            </div>
 
             {/* Loading overlay - only shows during initial loading */}
             {bookLoading && (
@@ -681,7 +831,7 @@ const Story = () => {
 
             <div className="flex flex-col h-full">
               {/* The book iframe */}
-              <div className="flex-grow" style={{ height: "calc(100% - 90px)" }}>
+              <div className="flex-grow" style={{ height: `calc(100% - ${narrationHeight}px)` }}>
                 <iframe
                   id="book-iframe-modal"
                   src="https://book.kimballandvitaly.com/vk-misadventures"
@@ -691,28 +841,29 @@ const Story = () => {
                   onError={handleBookIframeError}
                   className="w-full h-full"
                   style={{ zIndex: 50 }}
-                  allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                 ></iframe>
               </div>
 
-              {/* ElevenLabs Audio Player - Properly implemented with React */}
-              <div
-                ref={elevenLabsPlayerRef}
-                className="z-[60] bg-[#1f1f1f]"
-                style={{ height: "90px" }}
-              >
-                {/* The player element will be created dynamically in useEffect */}
-              </div>
-
-              {/* Hidden audio player for future use */}
-              <div style={{ display: "none" }}>
-                <CustomAudioPlayer
-                  audioSrc={audioSrc}
-                  title="The Misadventures of Kimball & Vitaly"
-                  subtitle="Narrated by Vitaly"
-                />
-              </div>
+              {/* Custom Audio Player - Appears when narration is toggled */}
+              <AnimatePresence>
+                {showNarration && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="z-[60] bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900"
+                  >
+                    <CustomAudioPlayer
+                      audioSrc={audioSrc}
+                      title="The Misadventures of Kimball & Vitaly"
+                      subtitle="Narrated by Vitaly"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         )}
