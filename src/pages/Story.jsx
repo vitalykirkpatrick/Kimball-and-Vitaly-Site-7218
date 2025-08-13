@@ -10,30 +10,7 @@ import CustomAudioPlayer from '../components/CustomAudioPlayer';
 import Slideshow from '../components/Slideshow';
 import * as FiIcons from 'react-icons/fi';
 
-const {
-  FiHeart,
-  FiGlobe,
-  FiHome,
-  FiStar,
-  FiCalendar,
-  FiMapPin,
-  FiX,
-  FiArrowDown,
-  FiUsers,
-  FiArrowRight,
-  FiAward,
-  FiBookOpen,
-  FiRefreshCw,
-  FiExternalLink,
-  FiVolume2,
-  FiChevronLeft,
-  FiChevronRight,
-  FiGift,
-  FiVolumeX,
-  FiMusic,
-  FiPlay,
-  FiPause
-} = FiIcons;
+const { FiHeart, FiGlobe, FiHome, FiStar, FiCalendar, FiMapPin, FiX, FiArrowDown, FiUsers, FiArrowRight, FiAward, FiBookOpen, FiRefreshCw, FiExternalLink, FiVolume2, FiChevronLeft, FiChevronRight, FiGift, FiVolumeX, FiMusic, FiPlay, FiPause } = FiIcons;
 
 const Story = () => {
   const [showSignup, setShowSignup] = useState(false);
@@ -320,16 +297,14 @@ const Story = () => {
       ))}
 
       {/* Additional decorative elements */}
-      <motion.div
-        className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
+      <motion.div className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
         animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
         transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
       >
         <div className="text-4xl">🌸</div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
+      <motion.div className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
         animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
         transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
       >
@@ -338,16 +313,14 @@ const Story = () => {
 
       {/* ADDED MORE DECORATIVE ELEMENTS */}
       {/* Wedding rings */}
-      <motion.div
-        className="absolute top-1/6 right-1/6 w-16 h-16 opacity-20"
+      <motion.div className="absolute top-1/6 right-1/6 w-16 h-16 opacity-20"
         animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
         transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
       >
         <div className="text-5xl">💍</div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-1/6 left-1/6 w-16 h-16 opacity-20"
+      <motion.div className="absolute bottom-1/6 left-1/6 w-16 h-16 opacity-20"
         animate={{ y: [0, -10, 0, -15, 0], rotate: [0, -5, 0, 5, 0] }}
         transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
       >
@@ -355,16 +328,14 @@ const Story = () => {
       </motion.div>
 
       {/* Wedding bells */}
-      <motion.div
-        className="absolute top-1/2 left-10 w-16 h-16 opacity-20"
+      <motion.div className="absolute top-1/2 left-10 w-16 h-16 opacity-20"
         animate={{ y: [0, -8, 0, -12, 0], rotate: [0, 10, 0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
       >
         <div className="text-5xl">🔔</div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-1/4 right-10 w-16 h-16 opacity-20"
+      <motion.div className="absolute bottom-1/4 right-10 w-16 h-16 opacity-20"
         animate={{ y: [0, -12, 0, -8, 0], rotate: [0, -10, 0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 16, ease: "easeInOut" }}
       >
@@ -397,8 +368,7 @@ const Story = () => {
       ))}
 
       {/* Rainbow balloon */}
-      <motion.div
-        className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
+      <motion.div className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
         animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
         transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
       >
@@ -421,8 +391,7 @@ const Story = () => {
       </motion.div>
 
       {/* Second rainbow balloon - ADDED NEW */}
-      <motion.div
-        className="absolute top-1/3 left-1/5 w-16 h-24 opacity-20"
+      <motion.div className="absolute top-1/3 left-1/5 w-16 h-24 opacity-20"
         animate={{ y: [0, -10, 0, -15, 0], rotate: [0, -5, 0, 5, 0] }}
         transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
       >
@@ -508,7 +477,6 @@ const Story = () => {
               viewport={{ once: true }}
               className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg border-2 border-indigo-100 relative z-40"
             >
-              <h2 className="text-2xl md:text-3xl font-serif text-stone-800 mb-6 text-center">Moments That Made Us</h2>
               <Slideshow />
             </motion.section>
 
@@ -534,6 +502,7 @@ const Story = () => {
               >
                 Our Book
               </motion.h2>
+
               <p className="text-lg text-stone-700 text-center">
                 "The Misadventures of Vitaly & Kimball" is a fun, illustrated storybook capturing our journey together - from first meeting to building a life together, complete with all the quirks, challenges, and joys along the way.
               </p>
@@ -557,7 +526,7 @@ const Story = () => {
                         <div className="animate-spin h-10 w-10 border-4 border-indigo-500 border-t-transparent rounded-full"></div>
                       </div>
                     )}
-                    
+
                     {/* Embedded book preview iframe */}
                     <div className="w-full" style={{ height: "400px", position: "relative" }}>
                       <iframe
@@ -655,10 +624,10 @@ const Story = () => {
             >
               {/* Background image - UPDATED to engagement photo with top alignment */}
               <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_09.jpg')] bg-cover bg-top"></div>
-              
+
               {/* Semi-transparent overlay for text readability */}
               <div className="absolute inset-0 bg-black/40"></div>
-              
+
               {/* Content with proper padding and spacing */}
               <div className="relative z-10 p-8 md:p-12">
                 <SafeIcon icon={FiHeart} className="w-16 h-16 text-white mx-auto mb-6" />
@@ -732,6 +701,7 @@ const Story = () => {
                   >
                     <SafeIcon icon={isMusicPlaying ? FiPause : FiPlay} className="w-5 h-5" />
                   </button>
+
                   <button
                     onClick={toggleMusicMute}
                     className="text-white p-2 hover:bg-white/10 rounded-full ml-1"
@@ -739,6 +709,7 @@ const Story = () => {
                   >
                     <SafeIcon icon={isMusicMuted ? FiVolumeX : FiVolume2} className="w-5 h-5" />
                   </button>
+
                   <input
                     type="range"
                     min="0"
@@ -748,7 +719,9 @@ const Story = () => {
                     onChange={handleVolumeChange}
                     className="w-20 h-1.5 bg-white/20 rounded-full overflow-hidden ml-2"
                     style={{
-                      background: `linear-gradient(to right, white 0%, white ${musicVolume * 100}%, rgba(255,255,255,0.2) ${musicVolume * 100}%, rgba(255,255,255,0.2) 100%)`
+                      background: `linear-gradient(to right, white 0%, white ${musicVolume * 100}%, rgba(255,255,255,0.2) ${
+                        musicVolume * 100
+                      }%, rgba(255,255,255,0.2) 100%)`
                     }}
                   />
                 </motion.div>
@@ -841,7 +814,7 @@ const Story = () => {
                   onError={handleBookIframeError}
                   className="w-full h-full"
                   style={{ zIndex: 50 }}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                 ></iframe>
               </div>

@@ -246,13 +246,21 @@ const Slideshow = () => {
     {
       id: 18,
       date: "May 2015",
+      title: "Career Jump: MOXTEK → FOSS",
+      description: "Nine years into MOXTEK, I got recruited into FOSS and basically did a Minnesota audition with a 'first 100 days' homework packet. I swapped x-ray components for capital equipment—NIR/FT-IR analyzers—and a bigger map (hi, Portland… also Alaska and Hawaii). First day: May 18, 2015. Biggest upgrade since discovering espresso: new industry, bigger tickets, and proof I wasn't the \"kid\" at MOXTEK anymore—just a very caffeinated Regional Sales Manager.",
+      image: "https://vitalybook.s3.us-west-1.amazonaws.com/Our+Story+Page+Slideshow/May_2015_Career_Change_MOXTEK_to_FOSS.jpg",
+      year: 2015
+    },
+    {
+      id: 19,
+      date: "May 2015",
       title: "Tokyo & Kyoto",
       description: "We navigated by Suica beep, ate heroic noodles, and saluted the world's politest toilets. Shinkansen to Kyoto for bamboo and torii, then back to Shinjuku's Robot Restaurant for neon dinosaurs—thanks to Kary, our fairy godparent, for making it all magic.",
       image: "https://vitalybook.s3.us-west-1.amazonaws.com/Our+Story+Page+Slideshow/May_2015_Tokyo_and_Kyoto.jpg",
       year: 2015
     },
     {
-      id: 19,
+      id: 20,
       date: "June 26, 2015",
       title: "Marriage Equality Nationwide",
       description: "Obergefell made it official coast-to-coast—our California \"I do\" now spoke fluent federal. We celebrated with cake and excessive screenshotting of the headline.",
@@ -260,7 +268,7 @@ const Slideshow = () => {
       year: 2015
     },
     {
-      id: 20,
+      id: 21,
       date: "October 2015",
       title: "Pacific Northwest Loop",
       description: "Portland fed us Voodoo Doughnuts and pho by the river, plus a romantic park seesaw and hotel ice-cream-in-bed (five-star = two spoons). Bend gave us a brewery tour where we tried to sample \"responsibly\" (we failed adorably). Seattle wrapped it up with Pike Place fish gawking, the Great Wheel, and Space Needle selfies—proof we can thrive on caffeine, carbs, and clouds.",
@@ -268,7 +276,7 @@ const Slideshow = () => {
       year: 2015
     },
     {
-      id: 21,
+      id: 22,
       date: "April 2016",
       title: "First Startup Pitch — Get Seeded at the U",
       description: "Three minutes, zero animations, and a Q&A that felt like speed-dating with judges. We left with seed money pending, a newborn prototype, and—by September—an invite to show at CES 2017. Turns out \"scrappy and caffeinated\" plays well in Vegas.",
@@ -276,7 +284,7 @@ const Slideshow = () => {
       year: 2016
     },
     {
-      id: 22,
+      id: 23,
       date: "September 2017",
       title: "Denmark — Copenhagen & Roskilde",
       description: "Canal cruise past the Black Diamond and Opera House, street-food feasts, a calf-burning spiral climb up Our Saviour's Church, Viking ships in Roskilde, and \"research-grade\" ice cream at Frederiksborg.",
@@ -284,7 +292,7 @@ const Slideshow = () => {
       year: 2017
     },
     {
-      id: 23,
+      id: 24,
       date: "January 2018",
       title: "CES — CloviFi's Big Vegas Glow-Up",
       description: "We hauled our tiny Wi-Fi TV-audio puck to Vegas, took victory selfies in the Innovation Awards Showcase, and left as CES 2018 Innovation Awards Honorees in High-Performance Home A/V (aka: stream TV sound to your phone without bugging the room).",
@@ -292,7 +300,7 @@ const Slideshow = () => {
       year: 2018
     },
     {
-      id: 24,
+      id: 25,
       date: "Dec 29, 2018 – Jan 5, 2019",
       title: "First Carnival Cruise (NYE on the Vista)",
       description: "Sailed from New Orleans and rang in 2019 at a shoulder-to-shoulder deck party under confetti and fireworks. Ports of call: Roatán's West Bay (macaws on arms, cheeky monkeys, kayak selfies), Belize (tender in, river ride and climb on Mayan ruins—leg day, delivered), and Cozumel (infinity-pool day pass, snorkel splashes, taquitos as recovery fuel). Between stops we collected sunrises, soft-serve, and memories.",
@@ -300,7 +308,7 @@ const Slideshow = () => {
       year: 2019
     },
     {
-      id: 25,
+      id: 26,
       date: "March 2019",
       title: "Mexico \"Work\" Trip (San José del Cabo)",
       description: "We flew south for an off-site that suspiciously looked like vacation: slide decks, budget-achiever certificates, and approximately one billion tacos. Days = strategy and presentations; nights = pool-table playoffs, karaoke diplomacy, and dance-floor networking. We squeezed in beach football and wave sprints, called the oceanfront \"Conference Room B,\" and tried to expense SPF. Productivity: high. Tan lines: measurable.",
@@ -308,7 +316,7 @@ const Slideshow = () => {
       year: 2019
     },
     {
-      id: 26,
+      id: 27,
       date: "June 15, 2019",
       title: "NPC SLC Men's Physique",
       description: "Walked onstage with nothing but a spray-tan, board shorts, and a posing routine taught by my bathroom mirror—and still landed hardware: Masters 35+ 3rd, True Novice 5th, Novice A 8th. (first show, no coach!) Why it worked: stubborn consistency, clean prep, and learning to flare lats on command. Proof you don't need a guru—just grit, practice, and a smile that can hold a front-pose.",
@@ -316,7 +324,7 @@ const Slideshow = () => {
       year: 2019
     },
     {
-      id: 27,
+      id: 28,
       date: "Nov 2019",
       title: "Baja California (Catalina + Ensenada)",
       description: "Sailed from Long Beach; Avalon for sun and harbor struts with surfboards we didn't surf. Ensenada = tacos, glittery ship shows, and a flaming-dessert moment. Wrapped at the Long Beach Aquarium—high-fived rays, eyeballed sharks, got side-eye from an octopus; sunsets, snacks, and ~400 selfies.",
@@ -324,7 +332,7 @@ const Slideshow = () => {
       year: 2019
     },
     {
-      id: 28,
+      id: 29,
       date: "March 2020",
       title: "Hard Reset",
       description: "Filed the police report after a $47K \"job\" con—$27K wired Jan 15 + $20K in bitcoin; the $30K \"refund\" check bounced. Takeaway: always check the reply-to, and never let my 401(k) be the ATM again.",
@@ -332,7 +340,7 @@ const Slideshow = () => {
       year: 2020
     },
     {
-      id: 29,
+      id: 30,
       date: "May 2020",
       title: "PerkinElmer Era Begins",
       description: "Joined PerkinElmer as a Senior Technical Sales Specialist (remote, Pacific Northwest), selling analytical instruments + cloud services to food/ag and public-sector labs—topped $1M in year one. The fridge stopped hiding behind the kale.",
@@ -340,7 +348,7 @@ const Slideshow = () => {
       year: 2020
     },
     {
-      id: 30,
+      id: 31,
       date: "February 11, 2022",
       title: "First Memoir Published",
       description: "VITALY hit paperback—my first book! Huge thanks to my friend Linda Forrest for co-piloting and taming my commas; the printer exhaled and so did I.",
@@ -348,7 +356,7 @@ const Slideshow = () => {
       year: 2022
     },
     {
-      id: 31,
+      id: 32,
       date: "Summer 2022",
       title: "The $70.7k \"No Withdrawals\" Caper",
       description: "A Facebook \"pro trader\" lured me into a sketchy BYBIT app; deposits flew in, withdrawals didn't, and \"support\" (via Gmail, of course) demanded a mysterious \"bond\"—translation: my money took a vacation without me, and I came home with a sharper scam radar.",
@@ -356,7 +364,7 @@ const Slideshow = () => {
       year: 2022
     },
     {
-      id: 32,
+      id: 33,
       date: "Oct 2022",
       title: "Wasatch \"Survival Skills\"",
       description: "Kimball: \"No matches needed—I'll start it without fire… with a torch and a sling.\" Two hours of smoky mime later, Vitaly spots a lighter under the cooler and has flames in 47 seconds. Moral: the tool you need is usually right in front of your face. I kept my eyes open—and my s'mores ready.",
@@ -364,7 +372,7 @@ const Slideshow = () => {
       year: 2022
     },
     {
-      id: 33,
+      id: 34,
       date: "Jan 2023",
       title: "Dominican Republic Family Visit",
       description: "Santiago → Jarabacoa → Sosúa with Lee, Rosa, and crew: pools, vistas, a million cousins, and horses that only took pesos. Highlight (or lowlight): I (Vitaly) hit an ATV \"dip\" at rally speed, launched us, and gave Kimball and me matching bruise souvenirs. Cured with chinola juice, ocean swims, and family hugs. Next time: slower throttle, bigger helmet.",
@@ -372,7 +380,7 @@ const Slideshow = () => {
       year: 2023
     },
     {
-      id: 34,
+      id: 35,
       date: "June 2023",
       title: "Denver Pride (Road-Trip Edition)",
       description: "UT → Billings, MT → Sheridan, WY → Denver: sunrise drives, diner fuel, sunset skies, and dashboard karaoke. Pride day = kilt + rainbow scarf, flexing for selfies, dancing along the parade, handing out/hoarding street treats, hugging friends, and photobombing floats. Four states, three playlists, zero shame—maximum glitter.",
@@ -380,7 +388,7 @@ const Slideshow = () => {
       year: 2023
     },
     {
-      id: 35,
+      id: 36,
       date: "2023",
       title: "The Great Animal Scam (Attempts, Plural)",
       description: "Every \"free\" pet turned out to cost a small fortune. We settled for stuffed animals and sanity.",
@@ -388,7 +396,7 @@ const Slideshow = () => {
       year: 2023
     },
     {
-      id: 36,
+      id: 37,
       date: "January 2024",
       title: "Virgin Islands Cruise",
       description: "St. Thomas served up cable-car views at Paradise Point, deck workouts, and hibachi theatrics that singed our eyebrows (in a good way). We danced through glow-parties, posed on every rail with that blue-on-blue backdrop, and tendered to Great Stirrup Cay for beach naps and brag-worthy selfies. Returned sun-kissed, salt-cured, and proudly powered by soft-serve.",
@@ -396,7 +404,7 @@ const Slideshow = () => {
       year: 2024
     },
     {
-      id: 37,
+      id: 38,
       date: "Oct 2024",
       title: "NPC Utah Classic Physique",
       description: "After a two-month turbo prep (brief help from a nutrition coach, then I built my own diet), plus a two-week posing bootcamp, I walked onstage and left with 1st in Classic Physique Novice, 1st in Classic Physique Masters 35+, and 2nd in the Open class—a glow-up from last time's 3rd and 5th in Men's Physique. Turns out winning is a recipe: eat like a scientist, train like a mule, pose like a peacock, sleep like a cat, and save the donuts for the trophy photos.",
@@ -404,7 +412,7 @@ const Slideshow = () => {
       year: 2024
     },
     {
-      id: 38,
+      id: 39,
       date: "Nov–Dec 2024",
       title: "Birthday Bash & West Coast Holiday Loop",
       description: "November: Vegas for my birthday—Kimball treated me to the Sphere and a stack of shows; best gift, zero wrapping. December: I flipped the script and bankrolled a 12-day joyride—Vegas → San Diego → L.A. → Palm Springs → back to Vegas → Utah. He got Christmas, I got airline miles, and we both got legends.",
@@ -412,7 +420,7 @@ const Slideshow = () => {
       year: 2024
     },
     {
-      id: 39,
+      id: 40,
       date: "May 15 & Aug 15, 2026",
       title: "20 Years Together; 18 Married",
       description: "Two milestones, one love story: we started May 15, 2006, and made it official Aug 15, 2008. In 2026 we celebrate both—twenty years of choosing each other and eighteen of paperwork. Double cake, double toasts, same two weirdos still building the coziest home in each other.",
