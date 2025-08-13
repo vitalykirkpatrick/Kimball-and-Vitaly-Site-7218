@@ -26,10 +26,8 @@ const Slideshow = () => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
-    
     return () => {
       window.removeEventListener('resize', checkIfMobile);
     };
@@ -44,34 +42,22 @@ const Slideshow = () => {
     if (slide.image.toLowerCase().endsWith('.jpg')) {
       // Try with uppercase extension
       const newImage = slide.image.slice(0, -4) + '.JPG';
-      
       // Update the slide's image URL
-      const updatedSlides = slides.map(s => 
-        s.id === slideId ? { ...s, image: newImage } : s
-      );
-      
+      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s );
       // Update slides array
       setSlides(updatedSlides);
     } else if (slide.image.toLowerCase().endsWith('.jpeg')) {
       // Try with jpg extension
       const newImage = slide.image.slice(0, -5) + '.jpg';
-      
       // Update the slide's image URL
-      const updatedSlides = slides.map(s => 
-        s.id === slideId ? { ...s, image: newImage } : s
-      );
-      
+      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s );
       // Update slides array
       setSlides(updatedSlides);
     } else if (slide.image.toLowerCase().endsWith('.png')) {
       // Try with jpg extension
       const newImage = slide.image.slice(0, -4) + '.jpg';
-      
       // Update the slide's image URL
-      const updatedSlides = slides.map(s => 
-        s.id === slideId ? { ...s, image: newImage } : s
-      );
-      
+      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s );
       // Update slides array
       setSlides(updatedSlides);
     }
@@ -79,14 +65,13 @@ const Slideshow = () => {
 
   // Function to handle image load success
   const handleImageLoad = (slideId) => {
-    setImagesLoaded(prev => ({...prev, [slideId]: true}));
+    setImagesLoaded(prev => ({ ...prev, [slideId]: true }));
   };
 
   // Preload images for faster rendering
   useEffect(() => {
     const preloadImages = () => {
       setIsLoading(true);
-      
       // Create an array to track loaded images
       const imagePromises = slides.map(slide => {
         return new Promise((resolve) => {
@@ -113,7 +98,7 @@ const Slideshow = () => {
     preloadImages();
   }, []);
 
-  // Updated slideshow items with fixed image extensions
+  // Updated slideshow items with fixed image extensions and added citizenship slide
   const [slides, setSlides] = useState([
     {
       id: 2,
@@ -167,7 +152,7 @@ const Slideshow = () => {
       id: 8,
       date: "May 2009",
       title: "Universal Orlando, SeaWorld & Cocoa Beach",
-      description: "Full Florida mode: Men in Black laser duels (Kimball's suspiciously elite aim), Jurassic Park–soaked, and peak orca selfies. Cocoa Beach added Vitaly's cartwheels, my towel-burrito look, and \"training\" in matching yellow shirts—synchronized curls = love.",
+      description: "Full Florida mode: Men in Black laser duels (Kimball's suspiciously elite aim), Jurassic Park–soaked, and peak orca selfies. Cocoa Beach added Vitaly's cartwheels, my towel-burrito look, and \"training\" in matching yellow shirts—synchronized curls=love.",
       image: "https://vitalybook.s3.us-west-1.amazonaws.com/Our+Story+Page+Slideshow/May_2009_Universal_Orlando_SeaWorld_and_Cocoa_Beach.JPG",
       year: 2009
     },
@@ -271,7 +256,7 @@ const Slideshow = () => {
       id: 21,
       date: "October 2015",
       title: "Pacific Northwest Loop",
-      description: "Portland fed us Voodoo Doughnuts and pho by the river, plus a romantic park seesaw and hotel ice-cream-in-bed (five-star = two spoons). Bend gave us a brewery tour where we tried to sample \"responsibly\" (we failed adorably). Seattle wrapped it up with Pike Place fish gawking, the Great Wheel, and Space Needle selfies—proof we can thrive on caffeine, carbs, and clouds.",
+      description: "Portland fed us Voodoo Doughnuts and pho by the river, plus a romantic park seesaw and hotel ice-cream-in-bed (five-star=two spoons). Bend gave us a brewery tour where we tried to sample \"responsibly\" (we failed adorably). Seattle wrapped it up with Pike Place fish gawking, the Great Wheel, and Space Needle selfies—proof we can thrive on caffeine, carbs, and clouds.",
       image: "https://vitalybook.s3.us-west-1.amazonaws.com/Our+Story+Page+Slideshow/October_2015_Pacific_Northwest_Loop.jpg",
       year: 2015
     },
@@ -285,6 +270,14 @@ const Slideshow = () => {
     },
     {
       id: 23,
+      date: "October 2017",
+      title: "U.S. Citizenship Day",
+      description: "After years of forms thicker than Tolstoy, I raised a tiny flag like it could pick up Wi-Fi, swore the oath, and officially became a U.S. citizen. I grinned so hard the certificate tried to curl, practiced my new powers—voting, correcting people that it's \"Ukraine,\" not \"the Ukraine,\" and saying \"y'all\" at TSA—and learned citizenship comes with two bonus features: jury-duty invitations and unlimited Costco samples. Green card retired; swagger upgraded.",
+      image: "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/October_2017_Vitaly_Received_Citizenship.jpg",
+      year: 2017
+    },
+    {
+      id: 24,
       date: "September 2017",
       title: "Denmark — Copenhagen & Roskilde",
       description: "Canal cruise past the Black Diamond and Opera House, street-food feasts, a calf-burning spiral climb up Our Saviour's Church, Viking ships in Roskilde, and \"research-grade\" ice cream at Frederiksborg.",
@@ -292,7 +285,7 @@ const Slideshow = () => {
       year: 2017
     },
     {
-      id: 24,
+      id: 25,
       date: "January 2018",
       title: "CES — CloviFi's Big Vegas Glow-Up",
       description: "We hauled our tiny Wi-Fi TV-audio puck to Vegas, took victory selfies in the Innovation Awards Showcase, and left as CES 2018 Innovation Awards Honorees in High-Performance Home A/V (aka: stream TV sound to your phone without bugging the room).",
@@ -300,7 +293,7 @@ const Slideshow = () => {
       year: 2018
     },
     {
-      id: 25,
+      id: 26,
       date: "Dec 29, 2018 – Jan 5, 2019",
       title: "First Carnival Cruise (NYE on the Vista)",
       description: "Sailed from New Orleans and rang in 2019 at a shoulder-to-shoulder deck party under confetti and fireworks. Ports of call: Roatán's West Bay (macaws on arms, cheeky monkeys, kayak selfies), Belize (tender in, river ride and climb on Mayan ruins—leg day, delivered), and Cozumel (infinity-pool day pass, snorkel splashes, taquitos as recovery fuel). Between stops we collected sunrises, soft-serve, and memories.",
@@ -308,15 +301,15 @@ const Slideshow = () => {
       year: 2019
     },
     {
-      id: 26,
+      id: 27,
       date: "March 2019",
       title: "Mexico \"Work\" Trip (San José del Cabo)",
-      description: "We flew south for an off-site that suspiciously looked like vacation: slide decks, budget-achiever certificates, and approximately one billion tacos. Days = strategy and presentations; nights = pool-table playoffs, karaoke diplomacy, and dance-floor networking. We squeezed in beach football and wave sprints, called the oceanfront \"Conference Room B,\" and tried to expense SPF. Productivity: high. Tan lines: measurable.",
+      description: "We flew south for an off-site that suspiciously looked like vacation: slide decks, budget-achiever certificates, and approximately one billion tacos. Days=strategy and presentations; nights=pool-table playoffs, karaoke diplomacy, and dance-floor networking. We squeezed in beach football and wave sprints, called the oceanfront \"Conference Room B,\" and tried to expense SPF. Productivity: high. Tan lines: measurable.",
       image: "https://vitalybook.s3.us-west-1.amazonaws.com/Our+Story+Page+Slideshow/March_2019_Mexico_Work_Trip_San_Jose_del_Cabo.jpg",
       year: 2019
     },
     {
-      id: 27,
+      id: 28,
       date: "June 15, 2019",
       title: "NPC SLC Men's Physique",
       description: "Walked onstage with nothing but a spray-tan, board shorts, and a posing routine taught by my bathroom mirror—and still landed hardware: Masters 35+ 3rd, True Novice 5th, Novice A 8th. (first show, no coach!) Why it worked: stubborn consistency, clean prep, and learning to flare lats on command. Proof you don't need a guru—just grit, practice, and a smile that can hold a front-pose.",
@@ -324,15 +317,15 @@ const Slideshow = () => {
       year: 2019
     },
     {
-      id: 28,
+      id: 29,
       date: "Nov 2019",
       title: "Baja California (Catalina + Ensenada)",
-      description: "Sailed from Long Beach; Avalon for sun and harbor struts with surfboards we didn't surf. Ensenada = tacos, glittery ship shows, and a flaming-dessert moment. Wrapped at the Long Beach Aquarium—high-fived rays, eyeballed sharks, got side-eye from an octopus; sunsets, snacks, and ~400 selfies.",
+      description: "Sailed from Long Beach; Avalon for sun and harbor struts with surfboards we didn't surf. Ensenada=tacos, glittery ship shows, and a flaming-dessert moment. Wrapped at the Long Beach Aquarium—high-fived rays, eyeballed sharks, got side-eye from an octopus; sunsets, snacks, and ~400 selfies.",
       image: "https://vitalybook.s3.us-west-1.amazonaws.com/Our+Story+Page+Slideshow/Nov_2019_Baja_California_Catalina_and_Ensenada.jpg",
       year: 2019
     },
     {
-      id: 29,
+      id: 30,
       date: "March 2020",
       title: "Hard Reset",
       description: "Filed the police report after a $47K \"job\" con—$27K wired Jan 15 + $20K in bitcoin; the $30K \"refund\" check bounced. Takeaway: always check the reply-to, and never let my 401(k) be the ATM again.",
@@ -340,7 +333,7 @@ const Slideshow = () => {
       year: 2020
     },
     {
-      id: 30,
+      id: 31,
       date: "May 2020",
       title: "PerkinElmer Era Begins",
       description: "Joined PerkinElmer as a Senior Technical Sales Specialist (remote, Pacific Northwest), selling analytical instruments + cloud services to food/ag and public-sector labs—topped $1M in year one. The fridge stopped hiding behind the kale.",
@@ -348,7 +341,7 @@ const Slideshow = () => {
       year: 2020
     },
     {
-      id: 31,
+      id: 32,
       date: "February 11, 2022",
       title: "First Memoir Published",
       description: "VITALY hit paperback—my first book! Huge thanks to my friend Linda Forrest for co-piloting and taming my commas; the printer exhaled and so did I.",
@@ -356,7 +349,7 @@ const Slideshow = () => {
       year: 2022
     },
     {
-      id: 32,
+      id: 33,
       date: "Summer 2022",
       title: "The $70.7k \"No Withdrawals\" Caper",
       description: "A Facebook \"pro trader\" lured me into a sketchy BYBIT app; deposits flew in, withdrawals didn't, and \"support\" (via Gmail, of course) demanded a mysterious \"bond\"—translation: my money took a vacation without me, and I came home with a sharper scam radar.",
@@ -364,7 +357,7 @@ const Slideshow = () => {
       year: 2022
     },
     {
-      id: 33,
+      id: 34,
       date: "Oct 2022",
       title: "Wasatch \"Survival Skills\"",
       description: "Kimball: \"No matches needed—I'll start it without fire… with a torch and a sling.\" Two hours of smoky mime later, Vitaly spots a lighter under the cooler and has flames in 47 seconds. Moral: the tool you need is usually right in front of your face. I kept my eyes open—and my s'mores ready.",
@@ -372,7 +365,7 @@ const Slideshow = () => {
       year: 2022
     },
     {
-      id: 34,
+      id: 35,
       date: "Jan 2023",
       title: "Dominican Republic Family Visit",
       description: "Santiago → Jarabacoa → Sosúa with Lee, Rosa, and crew: pools, vistas, a million cousins, and horses that only took pesos. Highlight (or lowlight): I (Vitaly) hit an ATV \"dip\" at rally speed, launched us, and gave Kimball and me matching bruise souvenirs. Cured with chinola juice, ocean swims, and family hugs. Next time: slower throttle, bigger helmet.",
@@ -380,15 +373,15 @@ const Slideshow = () => {
       year: 2023
     },
     {
-      id: 35,
+      id: 36,
       date: "June 2023",
       title: "Denver Pride (Road-Trip Edition)",
-      description: "UT → Billings, MT → Sheridan, WY → Denver: sunrise drives, diner fuel, sunset skies, and dashboard karaoke. Pride day = kilt + rainbow scarf, flexing for selfies, dancing along the parade, handing out/hoarding street treats, hugging friends, and photobombing floats. Four states, three playlists, zero shame—maximum glitter.",
+      description: "UT → Billings, MT → Sheridan, WY → Denver: sunrise drives, diner fuel, sunset skies, and dashboard karaoke. Pride day=kilt + rainbow scarf, flexing for selfies, dancing along the parade, handing out/hoarding street treats, hugging friends, and photobombing floats. Four states, three playlists, zero shame—maximum glitter.",
       image: "https://vitalybook.s3.us-west-1.amazonaws.com/Our+Story+Page+Slideshow/June_2023_Denver_Pride_Road_Trip_Edition.jpg",
       year: 2023
     },
     {
-      id: 36,
+      id: 37,
       date: "2023",
       title: "The Great Animal Scam (Attempts, Plural)",
       description: "Every \"free\" pet turned out to cost a small fortune. We settled for stuffed animals and sanity.",
@@ -396,7 +389,7 @@ const Slideshow = () => {
       year: 2023
     },
     {
-      id: 37,
+      id: 38,
       date: "January 2024",
       title: "Virgin Islands Cruise",
       description: "St. Thomas served up cable-car views at Paradise Point, deck workouts, and hibachi theatrics that singed our eyebrows (in a good way). We danced through glow-parties, posed on every rail with that blue-on-blue backdrop, and tendered to Great Stirrup Cay for beach naps and brag-worthy selfies. Returned sun-kissed, salt-cured, and proudly powered by soft-serve.",
@@ -404,7 +397,7 @@ const Slideshow = () => {
       year: 2024
     },
     {
-      id: 38,
+      id: 39,
       date: "Oct 2024",
       title: "NPC Utah Classic Physique",
       description: "After a two-month turbo prep (brief help from a nutrition coach, then I built my own diet), plus a two-week posing bootcamp, I walked onstage and left with 1st in Classic Physique Novice, 1st in Classic Physique Masters 35+, and 2nd in the Open class—a glow-up from last time's 3rd and 5th in Men's Physique. Turns out winning is a recipe: eat like a scientist, train like a mule, pose like a peacock, sleep like a cat, and save the donuts for the trophy photos.",
@@ -412,7 +405,7 @@ const Slideshow = () => {
       year: 2024
     },
     {
-      id: 39,
+      id: 40,
       date: "Nov–Dec 2024",
       title: "Birthday Bash & West Coast Holiday Loop",
       description: "November: Vegas for my birthday—Kimball treated me to the Sphere and a stack of shows; best gift, zero wrapping. December: I flipped the script and bankrolled a 12-day joyride—Vegas → San Diego → L.A. → Palm Springs → back to Vegas → Utah. He got Christmas, I got airline miles, and we both got legends.",
@@ -420,7 +413,7 @@ const Slideshow = () => {
       year: 2024
     },
     {
-      id: 40,
+      id: 41,
       date: "May 15 & Aug 15, 2026",
       title: "20 Years Together; 18 Married",
       description: "Two milestones, one love story: we started May 15, 2006, and made it official Aug 15, 2008. In 2026 we celebrate both—twenty years of choosing each other and eighteen of paperwork. Double cake, double toasts, same two weirdos still building the coziest home in each other.",
@@ -435,16 +428,15 @@ const Slideshow = () => {
     if (a.year !== b.year) {
       return a.year - b.year;
     }
-    
+
     // If years are the same, try to sort by month if available
     const aMonth = a.date.match(/Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/i);
     const bMonth = b.date.match(/Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/i);
-    
     const months = {
       'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
       'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12
     };
-    
+
     if (aMonth && bMonth) {
       const aMonthNum = months[aMonth[0].toLowerCase()];
       const bMonthNum = months[bMonth[0].toLowerCase()];
@@ -452,7 +444,7 @@ const Slideshow = () => {
         return aMonthNum - bMonthNum;
       }
     }
-    
+
     // If we can't determine by month, use the original order
     return a.id - b.id;
   });
@@ -473,14 +465,12 @@ const Slideshow = () => {
   // Autoplay functionality
   useEffect(() => {
     let interval;
-    
     if (autoplay && !isHovered && !isDragging) {
       interval = setInterval(() => {
         setDirection(1);
         setCurrentSlide((prevSlide) => (prevSlide + 1) % sortedSlides.length);
       }, 5000); // Change slide every 5 seconds
     }
-    
     return () => clearInterval(interval);
   }, [autoplay, isHovered, isDragging, sortedSlides.length]);
 
@@ -501,14 +491,14 @@ const Slideshow = () => {
   const handleTimelineChange = (e) => {
     const value = parseFloat(e.target.value);
     setSliderValue(value);
-    
+
     // Calculate which slide to show based on the slider position
     const targetYear = Math.round((value / 100) * yearRange) + minYear;
-    
+
     // Find the closest slide to the target year
     let closestSlideIndex = 0;
     let closestDistance = Math.abs(sortedSlides[0].year - targetYear);
-    
+
     sortedSlides.forEach((slide, index) => {
       const distance = Math.abs(slide.year - targetYear);
       if (distance < closestDistance) {
@@ -516,7 +506,7 @@ const Slideshow = () => {
         closestSlideIndex = index;
       }
     });
-    
+
     // Set direction based on the new target slide
     setDirection(closestSlideIndex > currentSlide ? 1 : -1);
     setCurrentSlide(closestSlideIndex);
@@ -569,21 +559,21 @@ const Slideshow = () => {
 
   // Generate timeline markers - UPDATED to only show years with content
   const timelineMarkers = [];
-  
+
   // Get unique years that have content
   const yearsWithContent = [...new Set(sortedSlides.map(slide => slide.year))].sort((a, b) => a - b);
-  
+
   // Create markers only for years that have content
   yearsWithContent.forEach(year => {
     // Calculate position as percentage based on the full range
     const position = ((year - minYear) / yearRange) * 100;
-    
+
     timelineMarkers.push(
-      <div 
+      <div
         id={`year-marker-${year}`}
         key={year}
         className={`flex-shrink-0 flex flex-col items-center mr-8 last:mr-0 ${year === sortedSlides[currentSlide].year ? 'scale-110' : ''}`}
-        style={isMobile ? {} : { position: 'absolute', left: `${position}%`, transform: 'translateX(-50%)' }}
+        style={isMobile ? {} : {position: 'absolute', left: `${position}%`, transform: 'translateX(-50%)'}}
         onClick={() => {
           // Find first slide with this year
           const slideIndex = sortedSlides.findIndex(slide => slide.year === year);
@@ -594,10 +584,14 @@ const Slideshow = () => {
           }
         }}
       >
-        <div 
+        <div
           className={`w-3 h-3 rounded-full ${year === sortedSlides[currentSlide].year ? 'bg-indigo-600 shadow-glow' : 'bg-gray-300'} mb-1 transition-all duration-300`}
         ></div>
-        <span className={`text-xs ${year === sortedSlides[currentSlide].year ? 'text-indigo-600 font-bold' : 'text-gray-600'} whitespace-nowrap transition-all duration-300`}>{year}</span>
+        <span
+          className={`text-xs ${year === sortedSlides[currentSlide].year ? 'text-indigo-600 font-bold' : 'text-gray-600'} whitespace-nowrap transition-all duration-300`}
+        >
+          {year}
+        </span>
       </div>
     );
   });
@@ -605,53 +599,53 @@ const Slideshow = () => {
   // Enhanced decorative elements for animation - MORE VARIETY
   const decorativeElements = [
     // Hearts
-    { type: "heart", color: "text-red-400", top: "5%", left: "5%", animation: "float-slow" },
-    { type: "heart", color: "text-blue-400", top: "10%", right: "8%", animation: "float-medium" },
-    { type: "heart", color: "text-purple-400", bottom: "15%", left: "12%", animation: "float-fast" },
-    { type: "heart", color: "text-pink-400", bottom: "8%", right: "5%", animation: "float-medium" },
-    { type: "heart", color: "text-green-400", top: "22%", left: "25%", animation: "float-medium" },
-    { type: "heart", color: "text-yellow-400", bottom: "22%", right: "25%", animation: "float-fast" },
-    
+    {type: "heart", color: "text-red-400", top: "5%", left: "5%", animation: "float-slow"},
+    {type: "heart", color: "text-blue-400", top: "10%", right: "8%", animation: "float-medium"},
+    {type: "heart", color: "text-purple-400", bottom: "15%", left: "12%", animation: "float-fast"},
+    {type: "heart", color: "text-pink-400", bottom: "8%", right: "5%", animation: "float-medium"},
+    {type: "heart", color: "text-green-400", top: "22%", left: "25%", animation: "float-medium"},
+    {type: "heart", color: "text-yellow-400", bottom: "22%", right: "25%", animation: "float-fast"},
+
     // Circles
-    { type: "circle", color: "bg-yellow-200", top: "15%", right: "15%", animation: "float-slow" },
-    { type: "circle", color: "bg-green-200", bottom: "20%", left: "20%", animation: "float-medium" },
-    { type: "circle", color: "bg-blue-200", top: "30%", left: "30%", animation: "float-fast" },
-    { type: "circle", color: "bg-purple-200", bottom: "35%", right: "25%", animation: "float-slow" },
-    
+    {type: "circle", color: "bg-yellow-200", top: "15%", right: "15%", animation: "float-slow"},
+    {type: "circle", color: "bg-green-200", bottom: "20%", left: "20%", animation: "float-medium"},
+    {type: "circle", color: "bg-blue-200", top: "30%", left: "30%", animation: "float-fast"},
+    {type: "circle", color: "bg-purple-200", bottom: "35%", right: "25%", animation: "float-slow"},
+
     // Stars
-    { type: "star", color: "text-amber-400", top: "25%", left: "25%", animation: "float-fast" },
-    { type: "star", color: "text-indigo-400", bottom: "25%", right: "25%", animation: "float-medium" },
-    { type: "star", color: "text-emerald-400", top: "40%", right: "10%", animation: "float-slow" },
-    { type: "star", color: "text-rose-400", bottom: "40%", left: "10%", animation: "float-medium" },
-    
+    {type: "star", color: "text-amber-400", top: "25%", left: "25%", animation: "float-fast"},
+    {type: "star", color: "text-indigo-400", bottom: "25%", right: "25%", animation: "float-medium"},
+    {type: "star", color: "text-emerald-400", top: "40%", right: "10%", animation: "float-slow"},
+    {type: "star", color: "text-rose-400", bottom: "40%", left: "10%", animation: "float-medium"},
+
     // Confetti
-    { type: "confetti", color: "bg-orange-300", top: "30%", right: "30%", animation: "float-slow" },
-    { type: "confetti", color: "bg-teal-300", bottom: "30%", left: "30%", animation: "float-fast" },
-    { type: "confetti", color: "bg-pink-300", top: "50%", left: "15%", animation: "float-medium" },
-    { type: "confetti", color: "bg-indigo-300", bottom: "10%", right: "35%", animation: "float-slow" },
-    
+    {type: "confetti", color: "bg-orange-300", top: "30%", right: "30%", animation: "float-slow"},
+    {type: "confetti", color: "bg-teal-300", bottom: "30%", left: "30%", animation: "float-fast"},
+    {type: "confetti", color: "bg-pink-300", top: "50%", left: "15%", animation: "float-medium"},
+    {type: "confetti", color: "bg-indigo-300", bottom: "10%", right: "35%", animation: "float-slow"},
+
     // Rings
-    { type: "ring", color: "border-gold", top: "20%", left: "40%", animation: "float-slow" },
-    { type: "ring", color: "border-silver", bottom: "20%", right: "40%", animation: "float-medium" },
-    { type: "ring", color: "border-gold", top: "60%", right: "15%", animation: "float-medium" },
-    { type: "ring", color: "border-silver", bottom: "60%", left: "15%", animation: "float-slow" },
-    
+    {type: "ring", color: "border-gold", top: "20%", left: "40%", animation: "float-slow"},
+    {type: "ring", color: "border-silver", bottom: "20%", right: "40%", animation: "float-medium"},
+    {type: "ring", color: "border-gold", top: "60%", right: "15%", animation: "float-medium"},
+    {type: "ring", color: "border-silver", bottom: "60%", left: "15%", animation: "float-slow"},
+
     // Flowers
-    { type: "flower", emoji: "🌸", top: "45%", left: "5%", animation: "float-slow" },
-    { type: "flower", emoji: "🌺", top: "15%", right: "45%", animation: "float-medium" },
-    { type: "flower", emoji: "🌷", bottom: "45%", right: "5%", animation: "float-fast" },
-    { type: "flower", emoji: "🌹", top: "55%", right: "55%", animation: "float-slow" },
-    { type: "flower", emoji: "💐", bottom: "15%", left: "45%", animation: "float-medium" },
-    
+    {type: "flower", emoji: "🌸", top: "45%", left: "5%", animation: "float-slow"},
+    {type: "flower", emoji: "🌺", top: "15%", right: "45%", animation: "float-medium"},
+    {type: "flower", emoji: "🌷", bottom: "45%", right: "5%", animation: "float-fast"},
+    {type: "flower", emoji: "🌹", top: "55%", right: "55%", animation: "float-slow"},
+    {type: "flower", emoji: "💐", bottom: "15%", left: "45%", animation: "float-medium"},
+
     // Wedding symbols
-    { type: "wedding", emoji: "💍", top: "35%", right: "20%", animation: "float-medium" },
-    { type: "wedding", emoji: "🎂", bottom: "35%", left: "20%", animation: "float-slow" },
-    { type: "wedding", emoji: "🔔", top: "65%", left: "35%", animation: "float-fast" },
-    { type: "wedding", emoji: "✨", bottom: "65%", right: "35%", animation: "float-medium" },
-    
+    {type: "wedding", emoji: "💍", top: "35%", right: "20%", animation: "float-medium"},
+    {type: "wedding", emoji: "🎂", bottom: "35%", left: "20%", animation: "float-slow"},
+    {type: "wedding", emoji: "🔔", top: "65%", left: "35%", animation: "float-fast"},
+    {type: "wedding", emoji: "✨", bottom: "65%", right: "35%", animation: "float-medium"},
+
     // Balloons
-    { type: "balloon", gradient: "rainbow1", bottom: "5%", left: "45%", animation: "float-slow" },
-    { type: "balloon", gradient: "rainbow2", top: "5%", left: "75%", animation: "float-medium" },
+    {type: "balloon", gradient: "rainbow1", bottom: "5%", left: "45%", animation: "float-slow"},
+    {type: "balloon", gradient: "rainbow2", top: "5%", left: "75%", animation: "float-medium"},
   ];
 
   // Function to open image in modal
@@ -696,18 +690,18 @@ const Slideshow = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 relative overflow-hidden p-8 md:p-12 rounded-2xl" style={{ width: "100%" }}>
+    <div className="bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 relative overflow-hidden p-8 md:p-12 rounded-2xl">
       {/* Rainbow gradient strip at top */}
       <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500"></div>
-      
+
       {/* Rainbow gradient strip at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500"></div>
-      
+
       {/* Animated decorative elements */}
       {decorativeElements.map((element, index) => {
         // Render different shapes based on type
         let elementContent;
-        
+
         if (element.type === "heart") {
           elementContent = (
             <div className={`${element.color}`}>
@@ -768,28 +762,27 @@ const Slideshow = () => {
             </div>
           );
         }
-        
+
         return (
-          <motion.div 
+          <motion.div
             key={`decor-${index}`}
             className={`absolute opacity-40`}
-            style={{ 
-              top: element.top, 
-              left: element.left, 
-              right: element.right, 
+            style={{
+              top: element.top,
+              left: element.left,
+              right: element.right,
               bottom: element.bottom,
-              zIndex: 0 
+              zIndex: 0
             }}
-            animate={{ 
-              y: [0, -10, 0, -5, 0], 
+            animate={{
+              y: [0, -10, 0, -5, 0],
               rotate: [0, 5, 0, -5, 0],
-              scale: [1, 1.1, 1, 0.9, 1] 
+              scale: [1, 1.1, 1, 0.9, 1]
             }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: element.animation === "float-slow" ? 8 : 
-                       element.animation === "float-medium" ? 6 : 4, 
-              ease: "easeInOut" 
+            transition={{
+              repeat: Infinity,
+              duration: element.animation === "float-slow" ? 8 : element.animation === "float-medium" ? 6 : 4,
+              ease: "easeInOut"
             }}
           >
             {elementContent}
@@ -815,7 +808,10 @@ const Slideshow = () => {
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Main slideshow */}
-          <div className="relative h-[500px] md:h-[550px] rounded-xl overflow-hidden shadow-lg z-10 mb-8 cursor-pointer" onClick={openImageModal}>
+          <div 
+            className="relative h-[500px] md:h-[550px] rounded-xl overflow-hidden shadow-lg z-10 mb-8 cursor-pointer" 
+            onClick={openImageModal}
+          >
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={currentSlide}
@@ -834,7 +830,7 @@ const Slideshow = () => {
                   ></div>
                   <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent to-black/50"></div>
                 </div>
-                
+
                 {/* Content side */}
                 <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white/80 backdrop-blur-sm p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
                   {/* Date and title wrapper */}
@@ -847,7 +843,6 @@ const Slideshow = () => {
                       {sortedSlides[currentSlide].title}
                     </h3>
                   </div>
-                  
                   <div className="overflow-y-auto flex-grow">
                     <p className="text-stone-600 leading-relaxed">
                       {sortedSlides[currentSlide].description}
@@ -859,26 +854,20 @@ const Slideshow = () => {
 
             {/* Navigation buttons */}
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevSlide();
-              }}
+              onClick={(e) => { e.stopPropagation(); prevSlide(); }}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 text-stone-800 p-2 rounded-full shadow-lg transition-colors z-10"
               aria-label="Previous slide"
             >
               <SafeIcon icon={FiChevronLeft} className="w-6 h-6" />
             </button>
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextSlide();
-              }}
+              onClick={(e) => { e.stopPropagation(); nextSlide(); }}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 text-stone-800 p-2 rounded-full shadow-lg transition-colors z-10"
               aria-label="Next slide"
             >
               <SafeIcon icon={FiChevronRight} className="w-6 h-6" />
             </button>
-            
+
             {/* Click to view hint */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/70 text-stone-800 px-3 py-1 rounded-full text-sm font-medium z-10 flex items-center space-x-1 animate-pulse">
               <SafeIcon icon={FiBookOpen} className="w-4 h-4" />
@@ -886,7 +875,7 @@ const Slideshow = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Timeline slider - desktop version */}
         {!isMobile && (
           <div className="relative px-4 hidden md:block">
@@ -895,15 +884,15 @@ const Slideshow = () => {
               <div className="absolute top-0 left-0 right-0 h-10">
                 {timelineMarkers}
               </div>
-              
+
               {/* Timeline slider track */}
               <div className="absolute bottom-0 left-0 right-0 h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" 
+                <div
+                  className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
                   style={{ width: `${sliderValue}%` }}
                 ></div>
               </div>
-              
+
               {/* Slider thumb */}
               <input
                 ref={sliderRef}
@@ -918,13 +907,13 @@ const Slideshow = () => {
                 onTouchEnd={() => setIsDragging(false)}
                 className="absolute bottom-0 left-0 w-full h-2 opacity-0 cursor-pointer z-20"
               />
-              <div 
+              <div
                 className="absolute bottom-0 w-6 h-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-md transform -translate-x-1/2 -translate-y-1/3 pointer-events-none"
                 style={{ left: `${sliderValue}%` }}
               ></div>
-              
+
               {/* Current year indicator */}
-              <div 
+              <div
                 className="absolute bottom-8 transform -translate-x-1/2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg"
                 style={{ left: `${sliderValue}%` }}
               >
@@ -937,7 +926,7 @@ const Slideshow = () => {
         {/* Timeline scrollable - mobile version */}
         {isMobile && (
           <div className="px-4 relative block md:hidden">
-            <div 
+            <div
               ref={timelineRef}
               className="overflow-x-auto pb-4 flex items-start no-scrollbar"
               style={{ scrollBehavior: 'smooth' }}
@@ -955,9 +944,9 @@ const Slideshow = () => {
 
       {/* Enhanced Image Modal with navigation */}
       {selectedImage && (
-        <ImageModal 
-          image={selectedImage} 
-          onClose={closeImageModal} 
+        <ImageModal
+          image={selectedImage}
+          onClose={closeImageModal}
           onNext={nextSlideInModal}
           onPrevious={prevSlideInModal}
           hasNavigation={true}
@@ -967,7 +956,7 @@ const Slideshow = () => {
       {/* CSS for shadow glow effect */}
       <style jsx="true">{`
         .shadow-glow {
-          box-shadow: 0 0 8px 2px rgba(79, 70, 229, 0.6);
+          box-shadow: 0 0 8px 2px rgba(79,70,229,0.6);
         }
       `}</style>
     </div>

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
 import SpamProtection from './SpamProtection';
 import * as FiIcons from 'react-icons/fi';
+import supabase from '../lib/supabase';
 
 const { FiX, FiUser, FiMail, FiCalendar, FiMessageSquare, FiCheck, FiUsers, FiPlus, FiMinus, FiImage } = FiIcons;
 
@@ -17,6 +18,8 @@ const AnniversarySignup = ({ onClose }) => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,12 +35,12 @@ const AnniversarySignup = ({ onClose }) => {
       alert('Maximum 5 photos allowed (we only have so much server space!)');
       return;
     }
-    
+
     const newPhotos = files.map(file => ({
       file,
       preview: URL.createObjectURL(file)
     }));
-    
+
     setFormData(prevData => ({
       ...prevData,
       photos: [...prevData.photos, ...newPhotos]
@@ -58,20 +61,60 @@ const AnniversarySignup = ({ onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!isVerified) {
       alert('Please verify you are human');
       return;
     }
-    
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    
-    setTimeout(() => {
-      onClose();
-    }, 3000);
+
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      // Save to Supabase
+      const { data, error: supabaseError } = await supabase
+        .from('anniversary_signups')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            will_attend: formData.willAttend,
+            message: formData.message,
+            additional_guests: formData.additionalGuests
+          }
+        ]);
+
+      if (supabaseError) throw supabaseError;
+
+      // Send notification email to the admin
+      const emailParams = {
+        to: 'info@kimballandvitaly.com',
+        subject: `New Anniversary RSVP from ${formData.name}`,
+        body: `
+          Name: ${formData.name}
+          Email: ${formData.email}
+          Attending: ${formData.willAttend}
+          Additional Guests: ${formData.additionalGuests}
+          Message: ${formData.message}
+        `
+      };
+
+      // Use your preferred email service here
+      // This is just a placeholder - in real implementation you would call an email service
+      console.log('Would send email:', emailParams);
+
+      setSubmitted(true);
+      
+      setTimeout(() => {
+        onClose();
+      }, 3000);
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setError('There was an error submitting your form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -308,12 +351,28 @@ const AnniversarySignup = ({ onClose }) => {
 
               <SpamProtection onVerify={setIsVerified} isVerified={isVerified} />
 
+              {error && (
+                <div className="text-red-500 text-sm py-2 px-3 bg-red-50 rounded-md">
+                  {error}
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={!isVerified}
-                className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-3 rounded-lg hover:opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={!isVerified || isSubmitting}
+                className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-3 rounded-lg hover:opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                Join Our Celebration
+                {isSubmitting ? (
+                  <span className="flex items-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </span>
+                ) : (
+                  'Join Our Celebration'
+                )}
               </button>
             </form>
           )}

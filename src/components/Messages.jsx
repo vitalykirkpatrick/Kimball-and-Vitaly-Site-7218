@@ -37,6 +37,7 @@ const Messages = () => {
       file,
       preview: URL.createObjectURL(file)
     }));
+
     setFormData(prevData => ({
       ...prevData,
       photos: [...prevData.photos, ...newPhotos]
@@ -88,10 +89,15 @@ const Messages = () => {
       // Use your preferred email service here
       // This is just a placeholder - in real implementation you would call an email service
       console.log('Would send email:', emailParams);
-      console.log('Message submitted:', formData);
 
+      console.log('Message submitted:', formData);
       setSubmitted(true);
-      setFormData({ name: '', email: '', message: '', photos: [] });
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+        photos: []
+      });
       setIsVerified(false);
     } catch (err) {
       console.error('Error submitting form:', err);
@@ -138,7 +144,7 @@ const Messages = () => {
             </p>
           </motion.div>
 
-          {/* Rings image with decorative lines - UPDATED WITH CONSISTENT DIVIDER */}
+          {/* Rings image with decorative lines */}
           <div className="flex items-center justify-center my-8 px-4">
             <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
             <div className="mx-4">
@@ -269,7 +275,11 @@ const Messages = () => {
                       <div className="mt-4 grid grid-cols-3 gap-2">
                         {formData.photos.map((photo, index) => (
                           <div key={index} className="relative">
-                            <img src={photo.preview} alt={`Preview ${index + 1}`} className="h-20 w-full object-cover rounded-md" />
+                            <img
+                              src={photo.preview}
+                              alt={`Preview ${index + 1}`}
+                              className="h-20 w-full object-cover rounded-md"
+                            />
                             <button
                               type="button"
                               className="absolute top-1 right-1 bg-black/50 rounded-full p-1"
@@ -324,11 +334,13 @@ const Messages = () => {
             >
               <div
                 className="h-[600px] bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer"
-                onClick={() => openImageModal({
-                  src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
-                  title: "Kimball & Vitaly",
-                  description: "Our wedding rings - a symbol of our commitment and love."
-                })}
+                onClick={() =>
+                  openImageModal({
+                    src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
+                    title: "Kimball & Vitaly",
+                    description: "Our wedding rings - a symbol of our commitment and love."
+                  })
+                }
               >
                 <img
                   src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG"
@@ -344,8 +356,8 @@ const Messages = () => {
                   ))}
                 </div>
                 <p className="text-stone-600">
-                  <strong>Want to share your story?</strong><br />
-                  Use the form to send us your thoughts, memories, and photos. We promise to read every single one (and probably cry happy tears).
+                  <strong>Want to share your story?</strong>
+                  <br /> Use the form to send us your thoughts, memories, and photos. We promise to read every single one (and probably cry happy tears).
                 </p>
               </div>
             </motion.div>

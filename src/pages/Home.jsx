@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
@@ -15,7 +15,8 @@ const { FiArrowRight, FiHeart, FiHome, FiCalendar, FiUsers, FiBookOpen, FiCheckC
 const Home = ({ openGalleryLightbox }) => {
   const [showSignup, setShowSignup] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [videoLoading, setVideoLoading] = useState(true); // State for video loading
+  
   const heartColors = [
     'text-red-500',
     'text-orange-500',
@@ -39,6 +40,32 @@ const Home = ({ openGalleryLightbox }) => {
     e.preventDefault();
     window.open("https://gallery.kimballandvitaly.com/", "_blank");
   };
+
+  // Function to handle video loaded event
+  const handleVideoLoaded = () => {
+    setVideoLoading(false);
+  };
+
+  // Listen for message from iframe when video is loaded
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data === 'video-loaded') {
+        setVideoLoading(false);
+      }
+    };
+    
+    window.addEventListener('message', handleMessage);
+    
+    // Set a timeout to hide the loader after a certain time in case the event isn't fired
+    const timeoutId = setTimeout(() => {
+      setVideoLoading(false);
+    }, 10000); // 10 seconds timeout
+    
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -135,7 +162,6 @@ const Home = ({ openGalleryLightbox }) => {
               <h1 className="text-4xl md:text-6xl font-serif text-stone-800 leading-tight">
                 Finding Home in <span className="block text-indigo-600 italic">Love's Echo</span>
               </h1>
-
               <div className="flex items-center justify-center space-x-2 text-stone-600">
                 <SafeIcon icon={FiCalendar} className="w-5 h-5" />
                 <span className="text-lg">May 15, 2006 - Present</span>
@@ -172,7 +198,7 @@ const Home = ({ openGalleryLightbox }) => {
               </p>
             </motion.div>
 
-            {/* Video Section */}
+            {/* Video Section with Loading Indicator */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -180,12 +206,29 @@ const Home = ({ openGalleryLightbox }) => {
               className="relative aspect-w-16 aspect-h-9 max-w-3xl mx-auto rounded-xl overflow-hidden shadow-xl"
             >
               <div style={{ position: 'relative', aspectRatio: '16/9' }}>
+                {/* Loading indicator overlay */}
+                {videoLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-10">
+                    <div className="text-center">
+                      <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-indigo-500 border-t-transparent mb-4"></div>
+                      <p className="text-indigo-700 font-medium">Loading our love story...</p>
+                    </div>
+                  </div>
+                )}
                 <iframe
                   loading="lazy"
                   title="Our Love Story"
                   src="https://play.gumlet.io/embed/6764e9935c9461e1db824f52"
-                  style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
+                  style={{
+                    border: 'none',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    height: '100%',
+                    width: '100%'
+                  }}
                   allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
+                  onLoad={handleVideoLoaded}
                 ></iframe>
               </div>
             </motion.div>
@@ -199,23 +242,13 @@ const Home = ({ openGalleryLightbox }) => {
               <p className="text-lg text-stone-600 max-w-2xl mx-auto">
                 Inside you'll find the quiet stuff that mattered—visa stamps, late-night edits, sunrise gym runs, kitchen dances, holiday mashups, and a thousand little Tuesdays where we kept choosing each other.
               </p>
-
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  to="/story"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
-                >
+                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors">
                   <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
-
-                <a
-                  href="https://gallery.kimballandvitaly.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-white text-indigo-600 border-2 border-indigo-500 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors"
-                >
+                <a href="https://gallery.kimballandvitaly.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-white text-indigo-600 border-2 border-indigo-500 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors">
                   <SafeIcon icon={FiImage} className="w-5 h-5" />
                   <span className="font-medium">View Our Gallery</span>
                 </a>
@@ -234,11 +267,7 @@ const Home = ({ openGalleryLightbox }) => {
           <h3 className="text-xl md:text-2xl font-serif text-center text-stone-800 mb-6">
             Celebrating 18 years of weird, wonderful love
           </h3>
-          <CountdownTimer
-            targetDate="August 15, 2026"
-            title="Celebrating Our 18th Wedding Anniversary"
-            showCta={true}
-          />
+          <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
         </div>
       </section>
 
@@ -312,7 +341,6 @@ const Home = ({ openGalleryLightbox }) => {
                 <strong>Home Was Never a Place—</strong>{' '}
                 <span className="block text-indigo-600 italic">It Was a Person (Who Eats All the Ice Cream)</span>
               </h2>
-
               <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
                 A Ukrainian orphan with one emergency potato. A BYU student fluent in Japanese and closet panic. From awkward movie nights to surviving IKEA shelves, this is the tale of how two very different men built something outrageously real. The whole story? You'll have to hear it to believe it.
               </p>
@@ -336,21 +364,12 @@ const Home = ({ openGalleryLightbox }) => {
 
               {/* Action buttons */}
               <div className="mt-6 flex flex-wrap justify-center gap-4">
-                <Link
-                  to="/story"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
-                >
+                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
                   <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
                   <span className="font-medium">Hear the Whole Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
-
-                <a
-                  href="https://gallery.kimballandvitaly.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
-                >
+                <a href="https://gallery.kimballandvitaly.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
                   <SafeIcon icon={FiImage} className="w-5 h-5" />
                   <span className="font-medium">View Our Gallery</span>
                 </a>
@@ -442,21 +461,18 @@ const Home = ({ openGalleryLightbox }) => {
                       The family that learned to dance between cultures, birthdays, and heartbreak—sometimes literally, in the kitchen, wearing socks.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="text-2xl flex-shrink-0">💸</div>
                     <p className="text-stone-600 italic">
                       Survived financial disasters that would make Dave Ramsey lie down with a cold compress.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="text-2xl flex-shrink-0">🤣</div>
                     <p className="text-stone-600 italic">
                       Accidentally built a life where every inside joke could be used in court against us.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="text-2xl flex-shrink-0">💖</div>
                     <p className="text-stone-600 italic">
@@ -474,22 +490,15 @@ const Home = ({ openGalleryLightbox }) => {
                 className="space-y-6"
               >
                 {/* Updated engagement photo with decorative frame */}
-                <div
-                  className="cursor-pointer"
-                  onClick={() => openImageModal({
-                    src: "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg",
-                    title: "Our wedding",
-                    description: "August 2008 - Our wedding ceremony in San Diego."
-                  })}
-                >
+                <div className="cursor-pointer" onClick={() => openImageModal({
+                  src: "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg",
+                  title: "Our wedding",
+                  description: "August 2008 - Our wedding ceremony in San Diego."
+                })}>
                   <div className="p-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
                     <div className="p-1 bg-white rounded-md">
                       <div className="overflow-hidden rounded-md bg-white flex items-center justify-center" style={{ height: "260px" }}>
-                        <img
-                          src="https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg"
-                          alt="Our wedding ceremony"
-                          className="w-full h-full object-cover"
-                        />
+                        <img src="https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg" alt="Our wedding ceremony" className="w-full h-full object-cover" />
                       </div>
                     </div>
                     <div className="flex justify-center mt-2">
@@ -516,13 +525,89 @@ const Home = ({ openGalleryLightbox }) => {
       {/* Our Poem Section */}
       <PoemDisplay />
 
-      {/* Anniversary Signup - UPDATED with full-width wedding background */}
+      {/* Anniversary Signup - UPDATED with new background image and responsive behavior */}
       <section id="signup-section" className="py-20 relative overflow-hidden w-full">
-        {/* Full-width background image */}
-        <div className="absolute inset-0 w-full bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_09.jpg')] bg-cover bg-top"></div>
-        {/* Semi-transparent overlay for text readability across the full width */}
-        <div className="absolute inset-0 bg-black/40"></div>
-
+        {/* Desktop background image - UPDATED with new image */}
+        <div className="absolute inset-0 hidden md:block">
+          <div className="absolute inset-0 w-full h-full bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Dec_2024_Vitaly_Birthday_Celebration.jpg')] bg-cover bg-center"></div>
+        </div>
+        
+        {/* Mobile gradient background with decorative elements */}
+        <div className="absolute inset-0 block md:hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"></div>
+          
+          {/* Decorative elements for mobile */}
+          {heartColors.map((color, index) => (
+            <motion.div
+              key={`mobile-heart-${index}`}
+              className={`absolute opacity-30`}
+              style={{
+                top: `${10 + index * 15}%`,
+                left: `${5 + (index * 12) % 80}%`,
+                width: '24px',
+                height: '24px'
+              }}
+              animate={{ 
+                rotate: [0, 10, 0, -10, 0], 
+                y: [0, -10, 0, 5, 0],
+                scale: [1, 1.1, 1, 0.9, 1]
+              }}
+              transition={{ repeat: Infinity, duration: 4 + index }}
+            >
+              <svg viewBox="0 0 24 24" className={`w-full h-full ${heartColors[index % heartColors.length]}`} fill="currentColor">
+                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+              </svg>
+            </motion.div>
+          ))}
+          
+          {/* Floating flowers for mobile */}
+          {[1, 2, 3].map((i) => (
+            <motion.div
+              key={`mobile-flower-${i}`}
+              className="absolute text-white opacity-30"
+              style={{
+                top: `${20 + i * 25}%`,
+                left: `${15 + i * 20}%`,
+                fontSize: '2rem'
+              }}
+              animate={{
+                y: [0, -10, 0],
+                rotate: [0, 10, 0, -10, 0]
+              }}
+              transition={{ repeat: Infinity, duration: 3 + i }}
+            >
+              {i % 2 === 0 ? '🌸' : '🌺'}
+            </motion.div>
+          ))}
+          
+          {/* Rainbow balloon for mobile */}
+          <motion.div
+            className="absolute bottom-10 right-10 w-16 h-24 opacity-30"
+            animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
+            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          >
+            <div className="w-full h-full">
+              <svg viewBox="0 0 24 24" className="w-full h-full">
+                <defs>
+                  <linearGradient id="rainbow-balloon-mobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FF0018" />
+                    <stop offset="16%" stopColor="#FFA52C" />
+                    <stop offset="32%" stopColor="#FFFF41" />
+                    <stop offset="48%" stopColor="#008018" />
+                    <stop offset="66%" stopColor="#0000F9" />
+                    <stop offset="83%" stopColor="#86007D" />
+                    <stop offset="100%" stopColor="#FF0018" />
+                  </linearGradient>
+                </defs>
+                <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon-mobile)" />
+              </svg>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Semi-transparent overlay for text readability */}
+        <div className="absolute inset-0 md:bg-black/40"></div>
+        
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Content container with proper width */}
           <div className="relative rounded-2xl overflow-hidden text-center">
@@ -534,7 +619,6 @@ const Home = ({ openGalleryLightbox }) => {
               <p className="text-lg leading-relaxed max-w-3xl mx-auto text-white">
                 We're celebrating our 18th wedding anniversary on August 15, 2026. We'd love for you to join us! (Warning: There will be Ukrainian food, terrible dad jokes, and probably someone crying happy tears.)
               </p>
-
               <div className="mt-8">
                 <button
                   onClick={() => setShowSignup(true)}
@@ -580,7 +664,10 @@ const Home = ({ openGalleryLightbox }) => {
                 className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="space-y-3">
-                  <SafeIcon icon={FiImage} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
+                  <SafeIcon
+                    icon={FiImage}
+                    className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform"
+                  />
                   <h4 className="font-semibold text-stone-800">Our Gallery</h4>
                   <p className="text-sm text-stone-600">View our journey in photos, letters, and kitchen-table memories</p>
                 </div>
@@ -591,7 +678,10 @@ const Home = ({ openGalleryLightbox }) => {
                 className="group p-6 bg-white rounded-2xl border-2 border-indigo-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="space-y-3">
-                  <SafeIcon icon={FiBookOpen} className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform" />
+                  <SafeIcon
+                    icon={FiBookOpen}
+                    className="w-8 h-8 text-indigo-500 mx-auto group-hover:scale-110 transition-transform"
+                  />
                   <h4 className="font-semibold text-stone-800">Read Our Story</h4>
                   <p className="text-sm text-stone-600">Dive deeper into our journey of love and resilience</p>
                 </div>

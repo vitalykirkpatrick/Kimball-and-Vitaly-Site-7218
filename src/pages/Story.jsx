@@ -430,7 +430,7 @@ const Story = () => {
             </p>
           </motion.div>
 
-          {/* Rings image with decorative lines */}
+          {/* Rings image with decorative lines - UPDATED WITH CONSISTENT DIVIDER */}
           <div className="flex items-center justify-center my-8 px-4">
             <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
             <div className="mx-4">
@@ -469,7 +469,7 @@ const Story = () => {
               </div>
             </motion.section>
 
-            {/* REPLACED: Timeline section with Slideshow */}
+            {/* Moments That Made Us section with Slideshow */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -477,6 +477,9 @@ const Story = () => {
               viewport={{ once: true }}
               className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-2xl shadow-lg border-2 border-indigo-100 relative z-40"
             >
+              <h2 className="text-2xl md:text-3xl font-serif text-stone-800 mb-6 text-center">
+                Moments That Made Us
+              </h2>
               <Slideshow />
             </motion.section>
 
@@ -614,7 +617,7 @@ const Story = () => {
               </div>
             </section>
 
-            {/* Closing Reflection - UPDATED with engagement photo background and top alignment */}
+            {/* Closing Reflection - UPDATED with new engagement photo and responsive design */}
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -622,12 +625,87 @@ const Story = () => {
               viewport={{ once: true }}
               className="relative rounded-2xl overflow-hidden text-center z-40"
             >
-              {/* Background image - UPDATED to engagement photo with top alignment */}
-              <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_09.jpg')] bg-cover bg-top"></div>
+              {/* Desktop background image - UPDATED with new image */}
+              <div className="absolute inset-0 hidden md:block">
+                <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_29.jpg')] bg-cover bg-center"></div>
+              </div>
+              
+              {/* Mobile gradient background with decorative elements */}
+              <div className="absolute inset-0 block md:hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"></div>
+                
+                {/* Decorative elements for mobile */}
+                {heartColors.map((color, index) => (
+                  <motion.div
+                    key={`mobile-heart-story-${index}`}
+                    className={`absolute opacity-30`}
+                    style={{
+                      top: `${10 + index * 15}%`,
+                      left: `${5 + (index * 12) % 80}%`,
+                      width: '24px',
+                      height: '24px'
+                    }}
+                    animate={{ 
+                      rotate: [0, 10, 0, -10, 0], 
+                      y: [0, -10, 0, 5, 0],
+                      scale: [1, 1.1, 1, 0.9, 1]
+                    }}
+                    transition={{ repeat: Infinity, duration: 4 + index }}
+                  >
+                    <svg viewBox="0 0 24 24" className={`w-full h-full ${heartColors[index % heartColors.length]}`} fill="currentColor">
+                      <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                    </svg>
+                  </motion.div>
+                ))}
+                
+                {/* Floating flowers for mobile */}
+                {[1, 2, 3].map((i) => (
+                  <motion.div
+                    key={`mobile-flower-story-${i}`}
+                    className="absolute text-white opacity-30"
+                    style={{
+                      top: `${20 + i * 25}%`,
+                      left: `${15 + i * 20}%`,
+                      fontSize: '2rem'
+                    }}
+                    animate={{
+                      y: [0, -10, 0],
+                      rotate: [0, 10, 0, -10, 0]
+                    }}
+                    transition={{ repeat: Infinity, duration: 3 + i }}
+                  >
+                    {i % 2 === 0 ? '🌸' : '🌺'}
+                  </motion.div>
+                ))}
+                
+                {/* Rainbow balloon for mobile */}
+                <motion.div
+                  className="absolute bottom-10 right-10 w-16 h-24 opacity-30"
+                  animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                >
+                  <div className="w-full h-full">
+                    <svg viewBox="0 0 24 24" className="w-full h-full">
+                      <defs>
+                        <linearGradient id="rainbow-balloon-story-mobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#FF0018" />
+                          <stop offset="16%" stopColor="#FFA52C" />
+                          <stop offset="32%" stopColor="#FFFF41" />
+                          <stop offset="48%" stopColor="#008018" />
+                          <stop offset="66%" stopColor="#0000F9" />
+                          <stop offset="83%" stopColor="#86007D" />
+                          <stop offset="100%" stopColor="#FF0018" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon-story-mobile)" />
+                    </svg>
+                  </div>
+                </motion.div>
+              </div>
 
               {/* Semi-transparent overlay for text readability */}
-              <div className="absolute inset-0 bg-black/40"></div>
-
+              <div className="absolute inset-0 md:bg-black/40"></div>
+              
               {/* Content with proper padding and spacing */}
               <div className="relative z-10 p-8 md:p-12">
                 <SafeIcon icon={FiHeart} className="w-16 h-16 text-white mx-auto mb-6" />
@@ -814,7 +892,7 @@ const Story = () => {
                   onError={handleBookIframeError}
                   className="w-full h-full"
                   style={{ zIndex: 50 }}
-                  allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                 ></iframe>
               </div>
