@@ -4,7 +4,7 @@ import SafeIcon from '../common/SafeIcon';
 import ImageModal from './ImageModal';
 import * as FiIcons from 'react-icons/fi';
 
-const { FiChevronLeft, FiChevronRight, FiCalendar, FiBookOpen, FiVolume2 } = FiIcons;
+const { FiChevronLeft, FiChevronRight, FiCalendar, FiBookOpen, FiVolume2, FiList, FiGrid, FiInfo, FiX, FiArrowRight } = FiIcons;
 
 const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -20,6 +20,11 @@ const Slideshow = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [mobileViewMode, setMobileViewMode] = useState('card'); // 'card', 'grid', or 'list'
+  const [showMobileDetail, setShowMobileDetail] = useState(false);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
+  const slideContentRef = useRef(null);
 
   // Check if device is mobile
   useEffect(() => {
@@ -43,21 +48,21 @@ const Slideshow = () => {
       // Try with uppercase extension
       const newImage = slide.image.slice(0, -4) + '.JPG';
       // Update the slide's image URL
-      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s );
+      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s);
       // Update slides array
       setSlides(updatedSlides);
     } else if (slide.image.toLowerCase().endsWith('.jpeg')) {
       // Try with jpg extension
       const newImage = slide.image.slice(0, -5) + '.jpg';
       // Update the slide's image URL
-      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s );
+      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s);
       // Update slides array
       setSlides(updatedSlides);
     } else if (slide.image.toLowerCase().endsWith('.png')) {
       // Try with jpg extension
       const newImage = slide.image.slice(0, -4) + '.jpg';
       // Update the slide's image URL
-      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s );
+      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s);
       // Update slides array
       setSlides(updatedSlides);
     }
@@ -479,12 +484,14 @@ const Slideshow = () => {
     setAutoplay(false); // Disable autoplay when manually navigating
     setDirection(1);
     setCurrentSlide((prevSlide) => (prevSlide + 1) % sortedSlides.length);
+    setShowMobileDetail(false); // Reset mobile detail view on navigation
   };
 
   const prevSlide = () => {
     setAutoplay(false); // Disable autoplay when manually navigating
     setDirection(-1);
     setCurrentSlide((prevSlide) => (prevSlide - 1 + sortedSlides.length) % sortedSlides.length);
+    setShowMobileDetail(false); // Reset mobile detail view on navigation
   };
 
   // Handle timeline slider change
@@ -510,6 +517,7 @@ const Slideshow = () => {
     // Set direction based on the new target slide
     setDirection(closestSlideIndex > currentSlide ? 1 : -1);
     setCurrentSlide(closestSlideIndex);
+    setShowMobileDetail(false); // Reset mobile detail view on timeline change
   };
 
   // Scroll to year in timeline (for mobile)
@@ -581,6 +589,7 @@ const Slideshow = () => {
             setDirection(slideIndex > currentSlide ? 1 : -1);
             setCurrentSlide(slideIndex);
             setAutoplay(false);
+            setShowMobileDetail(false); // Reset mobile detail view when changing year
           }
         }}
       >
@@ -687,6 +696,34 @@ const Slideshow = () => {
       description: sortedSlides[prevIndex].description,
       date: sortedSlides[prevIndex].date
     });
+  };
+
+  // Mobile touch handlers for swiping
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+    
+    const difference = touchStartX - touchEndX;
+    const threshold = 50; // minimum distance to be considered a swipe
+    
+    if (difference > threshold) {
+      // Swipe left - go to next slide
+      nextSlide();
+    } else if (difference < -threshold) {
+      // Swipe right - go to previous slide
+      prevSlide();
+    }
+    
+    // Reset values
+    setTouchStartX(0);
+    setTouchEndX(0);
   };
 
   return (
@@ -801,144 +838,327 @@ const Slideshow = () => {
       )}
 
       <div className="max-w-7xl mx-auto px-4">
-        {/* Main slideshow container */}
-        <div 
-          className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {/* Main slideshow */}
-          <div 
-            className="relative h-[500px] md:h-[550px] rounded-xl overflow-hidden shadow-lg z-10 mb-8 cursor-pointer" 
-            onClick={openImageModal}
-          >
-            <AnimatePresence initial={false} custom={direction}>
-              <motion.div
-                key={currentSlide}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="absolute inset-0 flex flex-col md:flex-row"
-              >
-                {/* Image side */}
-                <div className="w-full md:w-1/2 h-1/2 md:h-full relative">
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 hover:scale-105"
-                    style={{ backgroundImage: `url(${sortedSlides[currentSlide].image})` }}
-                  ></div>
-                  <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent to-black/50"></div>
-                </div>
-
-                {/* Content side */}
-                <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white/80 backdrop-blur-sm p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
-                  {/* Date and title wrapper */}
-                  <div className="mb-4">
-                    <div className="flex items-center space-x-2 text-indigo-500 mb-2">
-                      <SafeIcon icon={FiCalendar} className="w-4 h-4 flex-shrink-0" />
-                      <span className="text-sm font-medium truncate">{sortedSlides[currentSlide].date}</span>
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-serif text-stone-800">
-                      {sortedSlides[currentSlide].title}
-                    </h3>
-                  </div>
-                  <div className="overflow-y-auto flex-grow">
-                    <p className="text-stone-600 leading-relaxed">
-                      {sortedSlides[currentSlide].description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Navigation buttons */}
-            <button
-              onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 text-stone-800 p-2 rounded-full shadow-lg transition-colors z-10"
-              aria-label="Previous slide"
-            >
-              <SafeIcon icon={FiChevronLeft} className="w-6 h-6" />
-            </button>
-            <button
-              onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 text-stone-800 p-2 rounded-full shadow-lg transition-colors z-10"
-              aria-label="Next slide"
-            >
-              <SafeIcon icon={FiChevronRight} className="w-6 h-6" />
-            </button>
-
-            {/* Click to view hint */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/70 text-stone-800 px-3 py-1 rounded-full text-sm font-medium z-10 flex items-center space-x-1 animate-pulse">
-              <SafeIcon icon={FiBookOpen} className="w-4 h-4" />
-              <span>Click to view full image</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Timeline slider - desktop version */}
+        {/* DESKTOP VIEW */}
         {!isMobile && (
-          <div className="relative px-4 hidden md:block">
-            <div className="relative h-16">
-              {/* Timeline markers */}
-              <div className="absolute top-0 left-0 right-0 h-10">
-                {timelineMarkers}
-              </div>
-
-              {/* Timeline slider track */}
-              <div className="absolute bottom-0 left-0 right-0 h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-                  style={{ width: `${sliderValue}%` }}
-                ></div>
-              </div>
-
-              {/* Slider thumb */}
-              <input
-                ref={sliderRef}
-                type="range"
-                min="0"
-                max="100"
-                value={sliderValue}
-                onChange={handleTimelineChange}
-                onMouseDown={() => setIsDragging(true)}
-                onMouseUp={() => setIsDragging(false)}
-                onTouchStart={() => setIsDragging(true)}
-                onTouchEnd={() => setIsDragging(false)}
-                className="absolute bottom-0 left-0 w-full h-2 opacity-0 cursor-pointer z-20"
-              />
-              <div
-                className="absolute bottom-0 w-6 h-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-md transform -translate-x-1/2 -translate-y-1/3 pointer-events-none"
-                style={{ left: `${sliderValue}%` }}
-              ></div>
-
-              {/* Current year indicator */}
-              <div
-                className="absolute bottom-8 transform -translate-x-1/2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg"
-                style={{ left: `${sliderValue}%` }}
+          <>
+            {/* Main slideshow container */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {/* Main slideshow */}
+              <div 
+                className="relative h-[500px] md:h-[550px] rounded-xl overflow-hidden shadow-lg z-10 mb-8 cursor-pointer" 
+                onClick={openImageModal}
               >
-                {sortedSlides[currentSlide].year}
+                <AnimatePresence initial={false} custom={direction}>
+                  <motion.div
+                    key={currentSlide}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    className="absolute inset-0 flex flex-col md:flex-row"
+                  >
+                    {/* Image side */}
+                    <div className="w-full md:w-1/2 h-1/2 md:h-full relative">
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 hover:scale-105"
+                        style={{ backgroundImage: `url(${sortedSlides[currentSlide].image})` }}
+                      ></div>
+                      <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent to-black/50"></div>
+                    </div>
+
+                    {/* Content side */}
+                    <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white/80 backdrop-blur-sm p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+                      {/* Date and title wrapper */}
+                      <div className="mb-4">
+                        <div className="flex items-center space-x-2 text-indigo-500 mb-2">
+                          <SafeIcon icon={FiCalendar} className="w-4 h-4 flex-shrink-0" />
+                          <span className="text-sm font-medium truncate">{sortedSlides[currentSlide].date}</span>
+                        </div>
+                        <h3 className="text-2xl md:text-3xl font-serif text-stone-800">
+                          {sortedSlides[currentSlide].title}
+                        </h3>
+                      </div>
+                      <div className="overflow-y-auto flex-grow">
+                        <p className="text-stone-600 leading-relaxed">
+                          {sortedSlides[currentSlide].description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Navigation buttons */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 text-stone-800 p-2 rounded-full shadow-lg transition-colors z-10"
+                  aria-label="Previous slide"
+                >
+                  <SafeIcon icon={FiChevronLeft} className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 text-stone-800 p-2 rounded-full shadow-lg transition-colors z-10"
+                  aria-label="Next slide"
+                >
+                  <SafeIcon icon={FiChevronRight} className="w-6 h-6" />
+                </button>
+
+                {/* Click to view hint */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/70 text-stone-800 px-3 py-1 rounded-full text-sm font-medium z-10 flex items-center space-x-1 animate-pulse">
+                  <SafeIcon icon={FiBookOpen} className="w-4 h-4" />
+                  <span>Click to view full image</span>
+                </div>
               </div>
             </div>
-          </div>
+
+            {/* Timeline slider - desktop version */}
+            <div className="relative px-4 hidden md:block">
+              <div className="relative h-16">
+                {/* Timeline markers */}
+                <div className="absolute top-0 left-0 right-0 h-10">
+                  {timelineMarkers}
+                </div>
+
+                {/* Timeline slider track */}
+                <div className="absolute bottom-0 left-0 right-0 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+                    style={{ width: `${sliderValue}%` }}
+                  ></div>
+                </div>
+
+                {/* Slider thumb */}
+                <input
+                  ref={sliderRef}
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={sliderValue}
+                  onChange={handleTimelineChange}
+                  onMouseDown={() => setIsDragging(true)}
+                  onMouseUp={() => setIsDragging(false)}
+                  onTouchStart={() => setIsDragging(true)}
+                  onTouchEnd={() => setIsDragging(false)}
+                  className="absolute bottom-0 left-0 w-full h-2 opacity-0 cursor-pointer z-20"
+                />
+                <div
+                  className="absolute bottom-0 w-6 h-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-md transform -translate-x-1/2 -translate-y-1/3 pointer-events-none"
+                  style={{ left: `${sliderValue}%` }}
+                ></div>
+
+                {/* Current year indicator */}
+                <div
+                  className="absolute bottom-8 transform -translate-x-1/2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg"
+                  style={{ left: `${sliderValue}%` }}
+                >
+                  {sortedSlides[currentSlide].year}
+                </div>
+              </div>
+            </div>
+          </>
         )}
 
-        {/* Timeline scrollable - mobile version */}
+        {/* MOBILE VIEW - COMPLETELY REDESIGNED */}
         {isMobile && (
-          <div className="px-4 relative block md:hidden">
-            <div
-              ref={timelineRef}
-              className="overflow-x-auto pb-4 flex items-start no-scrollbar"
-              style={{ scrollBehavior: 'smooth' }}
-            >
-              <div className="flex items-center space-x-2">
-                {timelineMarkers}
+          <>
+            {/* Mobile view mode toggle buttons */}
+            <div className="flex justify-center space-x-2 mb-4">
+              <button 
+                onClick={() => setMobileViewMode('card')}
+                className={`px-3 py-1 rounded-full text-sm font-medium flex items-center ${mobileViewMode === 'card' ? 'bg-indigo-600 text-white' : 'bg-white text-indigo-600'}`}
+              >
+                <SafeIcon icon={FiCalendar} className="w-4 h-4 mr-1" />
+                <span>Card</span>
+              </button>
+              <button 
+                onClick={() => setMobileViewMode('grid')}
+                className={`px-3 py-1 rounded-full text-sm font-medium flex items-center ${mobileViewMode === 'grid' ? 'bg-indigo-600 text-white' : 'bg-white text-indigo-600'}`}
+              >
+                <SafeIcon icon={FiGrid} className="w-4 h-4 mr-1" />
+                <span>Grid</span>
+              </button>
+              <button 
+                onClick={() => setMobileViewMode('list')}
+                className={`px-3 py-1 rounded-full text-sm font-medium flex items-center ${mobileViewMode === 'list' ? 'bg-indigo-600 text-white' : 'bg-white text-indigo-600'}`}
+              >
+                <SafeIcon icon={FiList} className="w-4 h-4 mr-1" />
+                <span>List</span>
+              </button>
+            </div>
+
+            {/* NEW STORYBOOK-STYLE MOBILE VIEW */}
+            {mobileViewMode === 'card' && (
+              <div 
+                className="relative h-[400px] overflow-hidden rounded-xl shadow-lg cursor-pointer"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                onClick={openImageModal}
+              >
+                <AnimatePresence initial={false} custom={direction}>
+                  <motion.div
+                    key={currentSlide}
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    className="absolute inset-0"
+                  >
+                    {/* Full image background */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${sortedSlides[currentSlide].image})` }}
+                    ></div>
+                    
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
+                    
+                    {/* Date badge */}
+                    <div className="absolute top-3 left-3 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                      {sortedSlides[currentSlide].date}
+                    </div>
+                    
+                    {/* Title and "Click to open" at the bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 text-center">
+                      <h3 className="text-xl font-bold text-white mb-2 text-shadow-lg">
+                        {sortedSlides[currentSlide].title}
+                      </h3>
+                      <div className="bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-medium inline-flex items-center space-x-1 animate-pulse">
+                        <SafeIcon icon={FiBookOpen} className="w-4 h-4" />
+                        <span>Click to open full image</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+                
+                {/* Navigation buttons */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-sm hover:bg-white/50 text-white p-2 rounded-full shadow-lg transition-colors z-10"
+                  aria-label="Previous slide"
+                >
+                  <SafeIcon icon={FiChevronLeft} className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-sm hover:bg-white/50 text-white p-2 rounded-full shadow-lg transition-colors z-10"
+                  aria-label="Next slide"
+                >
+                  <SafeIcon icon={FiChevronRight} className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+
+            {/* Grid View - Visual grid of all slides */}
+            {mobileViewMode === 'grid' && (
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="p-3 max-h-[500px] overflow-y-auto">
+                  <div className="grid grid-cols-2 gap-3">
+                    {sortedSlides.map((slide, index) => (
+                      <div 
+                        key={index}
+                        className={`relative rounded-lg overflow-hidden cursor-pointer ${currentSlide === index ? 'ring-2 ring-indigo-600' : ''}`}
+                        onClick={() => {
+                          setCurrentSlide(index);
+                          setDirection(index > currentSlide ? 1 : -1);
+                          setMobileViewMode('card');
+                        }}
+                      >
+                        <div className="aspect-w-4 aspect-h-3">
+                          <img 
+                            src={slide.image} 
+                            alt={slide.title} 
+                            className="object-cover w-full h-full"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                          <div className="absolute bottom-0 left-0 right-0 p-2 text-white">
+                            <div className="text-xs opacity-80 mb-1">{slide.date}</div>
+                            <h4 className="font-medium text-sm line-clamp-1">{slide.title}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="p-3 border-t border-gray-200 text-center">
+                  <button 
+                    onClick={() => setMobileViewMode('card')}
+                    className="text-indigo-600 text-sm font-medium flex items-center justify-center mx-auto"
+                  >
+                    <SafeIcon icon={FiArrowRight} className="mr-1 w-4 h-4" />
+                    <span>Return to current slide</span>
+                  </button>
+                </div>
+              </div>
+            )}
+            
+            {/* List View - Compact list of all slides */}
+            {mobileViewMode === 'list' && (
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="max-h-[500px] overflow-y-auto">
+                  {sortedSlides.map((slide, index) => (
+                    <div 
+                      key={index}
+                      className={`flex items-center p-3 border-b border-gray-100 cursor-pointer ${currentSlide === index ? 'bg-indigo-50' : ''}`}
+                      onClick={() => {
+                        setCurrentSlide(index);
+                        setDirection(index > currentSlide ? 1 : -1);
+                        setMobileViewMode('card');
+                      }}
+                    >
+                      <div className="w-16 h-16 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
+                        <img 
+                          src={slide.image} 
+                          alt={slide.title} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="ml-3 flex-grow overflow-hidden">
+                        <div className="text-xs text-indigo-600 mb-1">{slide.date}</div>
+                        <h4 className="font-medium text-stone-800 truncate">{slide.title}</h4>
+                      </div>
+                      <SafeIcon 
+                        icon={FiChevronRight} 
+                        className={`w-4 h-4 text-gray-400 ml-2 ${currentSlide === index ? 'text-indigo-600' : ''}`}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="p-3 border-t border-gray-200 text-center">
+                  <button 
+                    onClick={() => setMobileViewMode('card')}
+                    className="text-indigo-600 text-sm font-medium flex items-center justify-center mx-auto"
+                  >
+                    <SafeIcon icon={FiArrowRight} className="mr-1 w-4 h-4" />
+                    <span>Return to current slide</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Timeline scrollable - mobile version */}
+            <div className="px-4 relative mt-6">
+              <h4 className="text-sm font-medium text-stone-700 mb-2 text-center">Timeline</h4>
+              <div
+                ref={timelineRef}
+                className="overflow-x-auto pb-4 flex items-start no-scrollbar"
+                style={{ scrollBehavior: 'smooth' }}
+              >
+                <div className="flex items-center space-x-2">
+                  {timelineMarkers}
+                </div>
+              </div>
+              <div className="text-center mt-1">
+                <span className="text-xs text-gray-600">Scroll to navigate through years</span>
               </div>
             </div>
-            <div className="text-center mt-2">
-              <span className="text-sm text-gray-600">Scroll to navigate through years</span>
-            </div>
-          </div>
+          </>
         )}
       </div>
 
@@ -957,6 +1177,10 @@ const Slideshow = () => {
       <style jsx="true">{`
         .shadow-glow {
           box-shadow: 0 0 8px 2px rgba(79,70,229,0.6);
+        }
+        
+        .text-shadow-lg {
+          text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
       `}</style>
     </div>
