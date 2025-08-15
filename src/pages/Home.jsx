@@ -16,7 +16,7 @@ const Home = ({ openGalleryLightbox }) => {
   const [showSignup, setShowSignup] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [videoLoading, setVideoLoading] = useState(true); // State for video loading
-
+  
   const heartColors = [
     'text-red-500',
     'text-orange-500',
@@ -28,15 +28,6 @@ const Home = ({ openGalleryLightbox }) => {
   ];
 
   const openImageModal = (image) => {
-    // Check if this is a wedding ring splitter image
-    if (typeof image === 'string' && 
-       (image.includes('Wedding-Rings') || 
-        image.includes('Wedding%20rings'))) {
-      // Don't open modal for wedding ring splitters
-      return;
-    }
-    
-    // For all other images, open the modal
     setSelectedImage({
       src: image.src || image,
       title: image.title || "Our Journey",
@@ -62,13 +53,14 @@ const Home = ({ openGalleryLightbox }) => {
         setVideoLoading(false);
       }
     };
+    
     window.addEventListener('message', handleMessage);
-
+    
     // Set a timeout to hide the loader after a certain time in case the event isn't fired
     const timeoutId = setTimeout(() => {
       setVideoLoading(false);
     }, 10000); // 10 seconds timeout
-
+    
     return () => {
       window.removeEventListener('message', handleMessage);
       clearTimeout(timeoutId);
@@ -79,7 +71,7 @@ const Home = ({ openGalleryLightbox }) => {
     <div className="min-h-screen">
       <div className="pt-32 pb-16 min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-yellow-50" />
-        <div className="absolute inset-0 bg-[url('https://cdn.kimballandvitaly.com/placeholder-image.jpeg')] bg-cover bg-center opacity-10" />
+        <div className="absolute inset-0 bg-[url('https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753369491076-blob')] bg-cover bg-center opacity-10" />
 
         {/* Decorative Elements */}
         {heartColors.map((color, index) => (
@@ -182,18 +174,11 @@ const Home = ({ openGalleryLightbox }) => {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-                  className="mx-4"
+                  className="mx-4 cursor-pointer"
+                  onClick={() => openImageModal("https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png")}
                 >
                   <div className="w-32 h-32 flex items-center justify-center">
-                    <picture>
-                      <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.webp" type="image/webp" />
-                      <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.jpeg" type="image/jpeg" />
-                      <img 
-                        src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.jpeg" 
-                        alt="Kimball & Vitaly" 
-                        className="w-full h-full object-contain" 
-                      />
-                    </picture>
+                    <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png" alt="Kimball & Vitaly" className="w-full h-full object-contain" />
                   </div>
                 </motion.div>
                 <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
@@ -230,13 +215,19 @@ const Home = ({ openGalleryLightbox }) => {
                     </div>
                   </div>
                 )}
-
                 <iframe
                   loading="lazy"
                   title="Our Love Story"
                   src="https://play.gumlet.io/embed/6764e9935c9461e1db824f52"
-                  style={{ border: 'none', position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}
-                  allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+                  style={{
+                    border: 'none',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
                   onLoad={handleVideoLoaded}
                 ></iframe>
               </div>
@@ -251,23 +242,13 @@ const Home = ({ openGalleryLightbox }) => {
               <p className="text-lg text-stone-600 max-w-2xl mx-auto">
                 Inside you'll find the quiet stuff that mattered—visa stamps, late-night edits, sunrise gym runs, kitchen dances, holiday mashups, and a thousand little Tuesdays where we kept choosing each other.
               </p>
-
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link
-                  to="/story"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors"
-                >
+                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors">
                   <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
                   <span className="font-medium">Read Our Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
-
-                <a
-                  href="https://gallery.kimballandvitaly.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-white text-indigo-600 border-2 border-indigo-500 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors"
-                >
+                <a href="https://gallery.kimballandvitaly.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-white text-indigo-600 border-2 border-indigo-500 px-8 py-4 rounded-full hover:bg-indigo-50 transition-colors">
                   <SafeIcon icon={FiImage} className="w-5 h-5" />
                   <span className="font-medium">View Our Gallery</span>
                 </a>
@@ -323,7 +304,7 @@ const Home = ({ openGalleryLightbox }) => {
           <div className="text-4xl">🌺</div>
         </motion.div>
 
-        {/* Rainbow balloon */}
+        {/* Rainbow balloons */}
         <motion.div
           className="absolute bottom-1/4 left-1/5 w-20 h-30 opacity-20"
           animate={{ y: [0, -15, 0, -10, 0], rotate: [0, 3, 0, -3, 0] }}
@@ -383,21 +364,12 @@ const Home = ({ openGalleryLightbox }) => {
 
               {/* Action buttons */}
               <div className="mt-6 flex flex-wrap justify-center gap-4">
-                <Link
-                  to="/story"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
-                >
+                <Link to="/story" className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
                   <SafeIcon icon={FiBookOpen} className="w-5 h-5" />
                   <span className="font-medium">Hear the Whole Story</span>
                   <SafeIcon icon={FiArrowRight} className="w-5 h-5" />
                 </Link>
-
-                <a
-                  href="https://gallery.kimballandvitaly.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg"
-                >
+                <a href="https://gallery.kimballandvitaly.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full hover:opacity-90 transition-colors shadow-lg">
                   <SafeIcon icon={FiImage} className="w-5 h-5" />
                   <span className="font-medium">View Our Gallery</span>
                 </a>
@@ -410,18 +382,7 @@ const Home = ({ openGalleryLightbox }) => {
       {/* Resilience Section - UPDATED WITH MARRIAGE PHOTO */}
       <section className="py-20 relative overflow-hidden">
         {/* Background image - UPDATED TO NEW MARRIAGE PHOTO */}
-        <div className="absolute inset-0">
-          <picture>
-            <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.webp" type="image/webp" />
-            <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpeg" type="image/jpeg" />
-            <img 
-              src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpeg" 
-              alt="Marriage August 2008"
-              className="w-full h-full object-cover opacity-20" 
-            />
-          </picture>
-        </div>
-
+        <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg')] bg-cover bg-top opacity-20"></div>
         {/* Overlay for better text contrast */}
         <div className="absolute inset-0 bg-white/80"></div>
 
@@ -500,21 +461,18 @@ const Home = ({ openGalleryLightbox }) => {
                       The family that learned to dance between cultures, birthdays, and heartbreak—sometimes literally, in the kitchen, wearing socks.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="text-2xl flex-shrink-0">💸</div>
                     <p className="text-stone-600 italic">
                       Survived financial disasters that would make Dave Ramsey lie down with a cold compress.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="text-2xl flex-shrink-0">🤣</div>
                     <p className="text-stone-600 italic">
                       Accidentally built a life where every inside joke could be used in court against us.
                     </p>
                   </div>
-
                   <div className="flex items-start space-x-3">
                     <div className="text-2xl flex-shrink-0">💖</div>
                     <p className="text-stone-600 italic">
@@ -533,25 +491,14 @@ const Home = ({ openGalleryLightbox }) => {
               >
                 {/* Updated engagement photo with decorative frame */}
                 <div className="cursor-pointer" onClick={() => openImageModal({
-                  src: {
-                    webp: "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.webp",
-                    jpeg: "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpeg"
-                  },
+                  src: "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg",
                   title: "Our wedding",
                   description: "August 2008 - Our wedding ceremony in San Diego."
                 })}>
                   <div className="p-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
                     <div className="p-1 bg-white rounded-md">
                       <div className="overflow-hidden rounded-md bg-white flex items-center justify-center" style={{ height: "260px" }}>
-                        <picture>
-                          <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.webp" type="image/webp" />
-                          <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpeg" type="image/jpeg" />
-                          <img 
-                            src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpeg" 
-                            alt="Our wedding ceremony"
-                            className="w-full h-full object-cover" 
-                          />
-                        </picture>
+                        <img src="https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Marriage+August+2008.jpg" alt="Our wedding ceremony" className="w-full h-full object-cover" />
                       </div>
                     </div>
                     <div className="flex justify-center mt-2">
@@ -582,38 +529,28 @@ const Home = ({ openGalleryLightbox }) => {
       <section id="signup-section" className="py-20 relative overflow-hidden w-full">
         {/* Desktop background image - UPDATED with new image */}
         <div className="absolute inset-0 hidden md:block">
-          <div className="absolute inset-0 w-full h-full">
-            <picture>
-              <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Dec_2024_Vitaly_Birthday_Celebration.webp" type="image/webp" />
-              <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Dec_2024_Vitaly_Birthday_Celebration.jpeg" type="image/jpeg" />
-              <img 
-                src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Dec_2024_Vitaly_Birthday_Celebration.jpeg" 
-                alt="Vitaly Birthday Celebration"
-                className="w-full h-full object-cover" 
-              />
-            </picture>
-          </div>
+          <div className="absolute inset-0 w-full h-full bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Dec_2024_Vitaly_Birthday_Celebration.jpg')] bg-cover bg-center"></div>
         </div>
-
+        
         {/* Mobile gradient background with decorative elements */}
         <div className="absolute inset-0 block md:hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"></div>
-
+          
           {/* Decorative elements for mobile */}
           {heartColors.map((color, index) => (
             <motion.div
               key={`mobile-heart-${index}`}
               className={`absolute opacity-30`}
-              style={{ 
-                top: `${10 + index * 15}%`, 
-                left: `${5 + (index * 12) % 80}%`, 
-                width: '24px', 
-                height: '24px' 
+              style={{
+                top: `${10 + index * 15}%`,
+                left: `${5 + (index * 12) % 80}%`,
+                width: '24px',
+                height: '24px'
               }}
               animate={{ 
-                y: [0, -10, 0, 5, 0], 
                 rotate: [0, 10, 0, -10, 0], 
-                scale: [1, 1.1, 1, 0.9, 1] 
+                y: [0, -10, 0, 5, 0],
+                scale: [1, 1.1, 1, 0.9, 1]
               }}
               transition={{ repeat: Infinity, duration: 4 + index }}
             >
@@ -622,24 +559,27 @@ const Home = ({ openGalleryLightbox }) => {
               </svg>
             </motion.div>
           ))}
-
+          
           {/* Floating flowers for mobile */}
           {[1, 2, 3].map((i) => (
             <motion.div
               key={`mobile-flower-${i}`}
               className="absolute text-white opacity-30"
-              style={{ 
-                top: `${20 + i * 25}%`, 
-                left: `${15 + i * 20}%`, 
-                fontSize: '2rem' 
+              style={{
+                top: `${20 + i * 25}%`,
+                left: `${15 + i * 20}%`,
+                fontSize: '2rem'
               }}
-              animate={{ y: [0, -10, 0], rotate: [0, 10, 0, -10, 0] }}
+              animate={{
+                y: [0, -10, 0],
+                rotate: [0, 10, 0, -10, 0]
+              }}
               transition={{ repeat: Infinity, duration: 3 + i }}
             >
               {i % 2 === 0 ? '🌸' : '🌺'}
             </motion.div>
           ))}
-
+          
           {/* Rainbow balloon for mobile */}
           <motion.div
             className="absolute bottom-10 right-10 w-16 h-24 opacity-30"
@@ -664,24 +604,21 @@ const Home = ({ openGalleryLightbox }) => {
             </div>
           </motion.div>
         </div>
-
+        
         {/* Semi-transparent overlay for text readability */}
         <div className="absolute inset-0 md:bg-black/40"></div>
-
+        
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Content container with proper width */}
           <div className="relative rounded-2xl overflow-hidden text-center">
             <div className="p-8 md:p-12">
               <SafeIcon icon={FiHeart} className="w-16 h-16 text-white mx-auto mb-6" />
-
               <h2 className="text-2xl md:text-3xl font-serif mb-6 text-white">
                 Join Our Celebration
               </h2>
-
               <p className="text-lg leading-relaxed max-w-3xl mx-auto text-white">
                 We're celebrating our 18th wedding anniversary on August 15, 2026. We'd love for you to join us! (Warning: There will be Ukrainian food, terrible dad jokes, and probably someone crying happy tears.)
               </p>
-
               <div className="mt-8">
                 <button
                   onClick={() => setShowSignup(true)}
@@ -713,6 +650,7 @@ const Home = ({ openGalleryLightbox }) => {
                   Maybe you, too, have searched for home in unfamiliar places. Maybe you've loved someone in the shadows, or built something beautiful on broken foundations. Our story is for you—the wanderers, the lovers, the ones still learning that home is what you build when you dare to stay. (And the ones who know that sometimes love means pretending to enjoy your partner's experimental cooking.)
                 </em>
               </p>
+
               <h3 className="text-2xl md:text-3xl font-serif text-stone-800">
                 <strong>Join us in celebrating our journey of radical, resilient, ordinary love.</strong>
               </h3>

@@ -36,11 +36,11 @@ const Story = () => {
   const [showNarration, setShowNarration] = useState(false);
   const [narrationHeight, setNarrationHeight] = useState(0);
 
-  // Audio source URL - using direct CDN audio URL
-  const audioSrc = "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/ElevenLabs_Kimball_and_Vitaly_Anniversary_Story.mp3";
-  
-  // Background music URL - using the provided CDN URL
-  const backgroundMusicSrc = "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/13-A-Lifetime-of-Love-FULL-SM372.mp3";
+  // Audio source URL - using direct S3 audio URL
+  const audioSrc = "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Book+Narration/ElevenLabs_Kimball_and_Vitaly_Anniversary_Story.mp3";
+
+  // Background music URL - using the provided S3 URL
+  const backgroundMusicSrc = "https://vitalybook.s3.us-west-1.amazonaws.com/13-A-Lifetime-of-Love-FULL-SM372.mp3";
 
   const heartColors = [
     'text-red-500',
@@ -96,10 +96,10 @@ const Story = () => {
 
   const handleBookCoverError = () => {
     setBookCoverError(true);
-    // Try to load from CDN backup URL
+    // Try to load from S3 backup URL
     const bookCoverImg = document.getElementById('book-cover-img');
     if (bookCoverImg) {
-      bookCoverImg.src = "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpeg";
+      bookCoverImg.src = "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpg";
     }
   };
 
@@ -263,7 +263,6 @@ const Story = () => {
     } else {
       document.body.style.overflow = '';
     }
-    
     return () => {
       document.body.style.overflow = '';
     };
@@ -298,16 +297,14 @@ const Story = () => {
       ))}
 
       {/* Additional decorative elements */}
-      <motion.div
-        className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
+      <motion.div className="absolute top-1/3 left-20 w-24 h-24 opacity-20"
         animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
         transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
       >
         <div className="text-4xl">🌸</div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
+      <motion.div className="absolute bottom-1/3 right-20 w-20 h-20 opacity-20"
         animate={{ rotate: -360, scale: [1, 1.1, 1, 0.9, 1] }}
         transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
       >
@@ -316,16 +313,14 @@ const Story = () => {
 
       {/* ADDED MORE DECORATIVE ELEMENTS */}
       {/* Wedding rings */}
-      <motion.div
-        className="absolute top-1/6 right-1/6 w-16 h-16 opacity-20"
+      <motion.div className="absolute top-1/6 right-1/6 w-16 h-16 opacity-20"
         animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
         transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
       >
         <div className="text-5xl">💍</div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-1/6 left-1/6 w-16 h-16 opacity-20"
+      <motion.div className="absolute bottom-1/6 left-1/6 w-16 h-16 opacity-20"
         animate={{ y: [0, -10, 0, -15, 0], rotate: [0, -5, 0, 5, 0] }}
         transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
       >
@@ -333,16 +328,14 @@ const Story = () => {
       </motion.div>
 
       {/* Wedding bells */}
-      <motion.div
-        className="absolute top-1/2 left-10 w-16 h-16 opacity-20"
+      <motion.div className="absolute top-1/2 left-10 w-16 h-16 opacity-20"
         animate={{ y: [0, -8, 0, -12, 0], rotate: [0, 10, 0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
       >
         <div className="text-5xl">🔔</div>
       </motion.div>
 
-      <motion.div
-        className="absolute bottom-1/4 right-10 w-16 h-16 opacity-20"
+      <motion.div className="absolute bottom-1/4 right-10 w-16 h-16 opacity-20"
         animate={{ y: [0, -12, 0, -8, 0], rotate: [0, -10, 0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 16, ease: "easeInOut" }}
       >
@@ -375,8 +368,7 @@ const Story = () => {
       ))}
 
       {/* Rainbow balloon */}
-      <motion.div
-        className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
+      <motion.div className="absolute bottom-1/4 right-20 w-16 h-24 opacity-20"
         animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
         transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
       >
@@ -399,8 +391,7 @@ const Story = () => {
       </motion.div>
 
       {/* Second rainbow balloon - ADDED NEW */}
-      <motion.div
-        className="absolute top-1/3 left-1/5 w-16 h-24 opacity-20"
+      <motion.div className="absolute top-1/3 left-1/5 w-16 h-24 opacity-20"
         animate={{ y: [0, -10, 0, -15, 0], rotate: [0, -5, 0, 5, 0] }}
         transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
       >
@@ -444,15 +435,7 @@ const Story = () => {
             <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
             <div className="mx-4">
               <div className="w-32 h-32 flex items-center justify-center">
-                <picture>
-                  <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.webp" type="image/webp" />
-                  <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.jpeg" type="image/jpeg" />
-                  <img 
-                    src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.jpeg"
-                    alt="Kimball & Vitaly" 
-                    className="w-full h-full object-contain" 
-                  />
-                </picture>
+                <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png" alt="Kimball & Vitaly" className="w-full h-full object-contain" />
               </div>
             </div>
             <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
@@ -477,11 +460,9 @@ const Story = () => {
                     Tonight, as the soft glow from Kimball's reading lamp spills across our Salt Lake City living room, I'm reminded of how far we've come. From orphanage to citizenship, from strangers to soulmates, our journey has been anything but ordinary. As Kimball turns another page of his library book—always in bed by 10pm—I smile at our comfortable rhythms, even as I prepare for another late night at my computer.
                   </em>
                 </p>
-
                 <p>
                   It started on May 15, 2006. Not the dramatic, movie-script kind of love story, but something quieter, more persistent. A Ukrainian orphan immigrant and returned missionary meeting a BYU student Japanese linguist and returned missionary, connecting online and then going together to our first movie night—"She's the Man" at a $1 theater in Provo, and then to Family Home Evening with Affirmation, finding unexpected connection.
                 </p>
-
                 <p>
                   <strong>Love, for us, was not an easy answer.</strong> It meant translating pain into poetry—sometimes in broken English, always from the heart. It meant building a family in the spaces where we were told none could exist.
                 </p>
@@ -513,7 +494,7 @@ const Story = () => {
               <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
             </div>
 
-            {/* Our Book Section - IMPROVED WITH EMBEDDED IFRAME PREVIEW AND UPDATED BOOK COVER URL */}
+            {/* Our Book Section - IMPROVED WITH EMBEDDED IFRAME PREVIEW */}
             <section className="space-y-8 relative bg-gradient-to-br from-indigo-50/90 to-purple-50/90 backdrop-blur-sm p-8 rounded-2xl z-40">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -524,6 +505,7 @@ const Story = () => {
               >
                 Our Book
               </motion.h2>
+
               <p className="text-lg text-stone-700 text-center">
                 "The Misadventures of Vitaly & Kimball" is a fun, illustrated storybook capturing our journey together - from first meeting to building a life together, complete with all the quirks, challenges, and joys along the way.
               </p>
@@ -562,23 +544,19 @@ const Story = () => {
                       ></iframe>
                     </div>
 
-                    {/* Fallback if iframe fails to load - UPDATED WITH CDN URL */}
+                    {/* Fallback if iframe fails to load */}
                     {bookCoverError && (
                       <div className="w-full" style={{ height: "400px" }}>
-                        <picture>
-                          <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Book+Cover.webp" type="image/webp" />
-                          <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpeg" type="image/jpeg" />
-                          <img
-                            id="book-cover-img"
-                            src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpeg"
-                            alt="The Misadventures of Vitaly and Kimball - Book Cover"
-                            className="w-full h-full object-contain"
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/placeholder-image.jpg";
-                            }}
-                          />
-                        </picture>
+                        <img
+                          id="book-cover-img"
+                          src="https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpg"
+                          alt="The Misadventures of Vitaly and Kimball - Book Cover"
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Book+Cover.jpg";
+                          }}
+                        />
                       </div>
                     )}
 
@@ -611,7 +589,10 @@ const Story = () => {
 
               {/* Arrow pointing to countdown */}
               <div className="flex justify-center mt-8">
-                <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                >
                   <SafeIcon icon={FiArrowDown} className="w-10 h-10 text-indigo-500" />
                 </motion.div>
               </div>
@@ -627,7 +608,11 @@ const Story = () => {
                   <h3 className="text-xl md:text-2xl font-serif text-center text-stone-800 mb-6">
                     Celebrating 18 years of weird, wonderful love
                   </h3>
-                  <CountdownTimer targetDate="August 15, 2026" title="Celebrating Our 18th Wedding Anniversary" showCta={true} />
+                  <CountdownTimer
+                    targetDate="August 15, 2026"
+                    title="Celebrating Our 18th Wedding Anniversary"
+                    showCta={true}
+                  />
                 </div>
               </div>
             </section>
@@ -642,20 +627,29 @@ const Story = () => {
             >
               {/* Desktop background image - UPDATED with new image */}
               <div className="absolute inset-0 hidden md:block">
-                <div className="absolute inset-0 bg-[url('https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_29.jpeg')] bg-cover bg-center"></div>
+                <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_29.jpg')] bg-cover bg-center"></div>
               </div>
-
+              
               {/* Mobile gradient background with decorative elements */}
               <div className="absolute inset-0 block md:hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"></div>
-
+                
                 {/* Decorative elements for mobile */}
                 {heartColors.map((color, index) => (
                   <motion.div
                     key={`mobile-heart-story-${index}`}
                     className={`absolute opacity-30`}
-                    style={{ top: `${10 + index * 15}%`, left: `${5 + (index * 12) % 80}%`, width: '24px', height: '24px' }}
-                    animate={{ rotate: [0, 10, 0, -10, 0], y: [0, -10, 0, 5, 0], scale: [1, 1.1, 1, 0.9, 1] }}
+                    style={{
+                      top: `${10 + index * 15}%`,
+                      left: `${5 + (index * 12) % 80}%`,
+                      width: '24px',
+                      height: '24px'
+                    }}
+                    animate={{ 
+                      rotate: [0, 10, 0, -10, 0], 
+                      y: [0, -10, 0, 5, 0],
+                      scale: [1, 1.1, 1, 0.9, 1]
+                    }}
                     transition={{ repeat: Infinity, duration: 4 + index }}
                   >
                     <svg viewBox="0 0 24 24" className={`w-full h-full ${heartColors[index % heartColors.length]}`} fill="currentColor">
@@ -663,20 +657,27 @@ const Story = () => {
                     </svg>
                   </motion.div>
                 ))}
-
+                
                 {/* Floating flowers for mobile */}
                 {[1, 2, 3].map((i) => (
                   <motion.div
                     key={`mobile-flower-story-${i}`}
                     className="absolute text-white opacity-30"
-                    style={{ top: `${20 + i * 25}%`, left: `${15 + i * 20}%`, fontSize: '2rem' }}
-                    animate={{ y: [0, -10, 0], rotate: [0, 10, 0, -10, 0] }}
+                    style={{
+                      top: `${20 + i * 25}%`,
+                      left: `${15 + i * 20}%`,
+                      fontSize: '2rem'
+                    }}
+                    animate={{
+                      y: [0, -10, 0],
+                      rotate: [0, 10, 0, -10, 0]
+                    }}
                     transition={{ repeat: Infinity, duration: 3 + i }}
                   >
                     {i % 2 === 0 ? '🌸' : '🌺'}
                   </motion.div>
                 ))}
-
+                
                 {/* Rainbow balloon for mobile */}
                 <motion.div
                   className="absolute bottom-10 right-10 w-16 h-24 opacity-30"
@@ -704,7 +705,7 @@ const Story = () => {
 
               {/* Semi-transparent overlay for text readability */}
               <div className="absolute inset-0 md:bg-black/40"></div>
-
+              
               {/* Content with proper padding and spacing */}
               <div className="relative z-10 p-8 md:p-12">
                 <SafeIcon icon={FiHeart} className="w-16 h-16 text-white mx-auto mb-6" />
@@ -778,6 +779,7 @@ const Story = () => {
                   >
                     <SafeIcon icon={isMusicPlaying ? FiPause : FiPlay} className="w-5 h-5" />
                   </button>
+
                   <button
                     onClick={toggleMusicMute}
                     className="text-white p-2 hover:bg-white/10 rounded-full ml-1"
@@ -785,6 +787,7 @@ const Story = () => {
                   >
                     <SafeIcon icon={isMusicMuted ? FiVolumeX : FiVolume2} className="w-5 h-5" />
                   </button>
+
                   <input
                     type="range"
                     min="0"
@@ -793,7 +796,11 @@ const Story = () => {
                     value={musicVolume}
                     onChange={handleVolumeChange}
                     className="w-20 h-1.5 bg-white/20 rounded-full overflow-hidden ml-2"
-                    style={{ background: `linear-gradient(to right, white 0%, white ${musicVolume * 100}%, rgba(255,255,255,0.2) ${musicVolume * 100}%, rgba(255,255,255,0.2) 100%)` }}
+                    style={{
+                      background: `linear-gradient(to right, white 0%, white ${musicVolume * 100}%, rgba(255,255,255,0.2) ${
+                        musicVolume * 100
+                      }%, rgba(255,255,255,0.2) 100%)`
+                    }}
                   />
                 </motion.div>
               )}
@@ -885,7 +892,7 @@ const Story = () => {
                   onError={handleBookIframeError}
                   className="w-full h-full"
                   style={{ zIndex: 50 }}
-                  allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                 ></iframe>
               </div>

@@ -10,7 +10,12 @@ import supabase from '../lib/supabase';
 const { FiHeart, FiSend, FiUser, FiMail, FiImage, FiX, FiUsers, FiArrowRight } = FiIcons;
 
 const Messages = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '', photos: [] });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    photos: []
+  });
   const [submitted, setSubmitted] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -27,12 +32,11 @@ const Messages = () => {
       alert('Maximum 5 photos allowed (we only have so much server space!)');
       return;
     }
-    
+
     const newPhotos = files.map(file => ({
       file,
       preview: URL.createObjectURL(file)
     }));
-    
     setFormData(prevData => ({
       ...prevData,
       photos: [...prevData.photos, ...newPhotos]
@@ -52,20 +56,24 @@ const Messages = () => {
       alert('Please complete the verification first!');
       return;
     }
-    
+
     setIsSubmitting(true);
     setError(null);
-    
+
     try {
       // Save to Supabase
       const { data, error: supabaseError } = await supabase
         .from('messages')
         .insert([
-          { name: formData.name, email: formData.email, message: formData.message }
+          {
+            name: formData.name,
+            email: formData.email,
+            message: formData.message
+          }
         ]);
-      
+
       if (supabaseError) throw supabaseError;
-      
+
       // Send notification email to the admin
       const emailParams = {
         to: 'info@kimballandvitaly.com',
@@ -76,12 +84,12 @@ const Messages = () => {
           Message: ${formData.message}
         `
       };
-      
+
       // Use your preferred email service here
       // This is just a placeholder - in real implementation you would call an email service
       console.log('Would send email:', emailParams);
       console.log('Message submitted:', formData);
-      
+
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '', photos: [] });
       setIsVerified(false);
@@ -135,15 +143,7 @@ const Messages = () => {
             <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent max-w-xs"></div>
             <div className="mx-4">
               <div className="w-32 h-32 flex items-center justify-center">
-                <picture>
-                  <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.webp" type="image/webp" />
-                  <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.jpeg" type="image/jpeg" />
-                  <img 
-                    src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Wedding-Rings.jpeg"
-                    alt="Kimball & Vitaly" 
-                    className="w-full h-full object-contain" 
-                  />
-                </picture>
+                <img src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png" alt="Kimball & Vitaly" className="w-full h-full object-contain" />
               </div>
             </div>
             <div className="flex-grow h-px bg-gradient-to-r from-gray-300 via-gray-300 to-transparent max-w-xs"></div>
@@ -264,15 +264,12 @@ const Messages = () => {
                         </p>
                       </div>
                     </div>
+
                     {formData.photos.length > 0 && (
                       <div className="mt-4 grid grid-cols-3 gap-2">
                         {formData.photos.map((photo, index) => (
                           <div key={index} className="relative">
-                            <img
-                              src={photo.preview}
-                              alt={`Preview ${index + 1}`}
-                              className="h-20 w-full object-cover rounded-md"
-                            />
+                            <img src={photo.preview} alt={`Preview ${index + 1}`} className="h-20 w-full object-cover rounded-md" />
                             <button
                               type="button"
                               className="absolute top-1 right-1 bg-black/50 rounded-full p-1"
@@ -318,33 +315,26 @@ const Messages = () => {
               </div>
             </motion.div>
 
-            {/* Gallery Section - UPDATED with new marriage image URL */}
+            {/* Gallery Section - REMOVED HEADING */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <div 
-                className="h-[600px] bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer" 
+              <div
+                className="h-[600px] bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden cursor-pointer"
                 onClick={() => openImageModal({
-                  src: {
-                    webp: "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+Trip+Aug+15+to+Aug+20+2008_34.webp",
-                    jpeg: "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+Trip+Aug+15+to+Aug+20+2008_34.jpeg"
-                  },
+                  src: "https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG",
                   title: "Kimball & Vitaly",
-                  description: "Our wedding ceremony in San Diego - A special moment in our journey together."
+                  description: "Our wedding rings - a symbol of our commitment and love."
                 })}
               >
-                <picture>
-                  <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+Trip+Aug+15+to+Aug+20+2008_34.webp" type="image/webp" />
-                  <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+Trip+Aug+15+to+Aug+20+2008_34.jpeg" type="image/jpeg" />
-                  <img 
-                    src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Marriage+Trip+Aug+15+to+Aug+20+2008_34.jpeg" 
-                    alt="Kimball and Vitaly's Wedding" 
-                    className="w-full h-full object-cover"
-                  />
-                </picture>
+                <img
+                  src="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753385005494-Wedding.JPG"
+                  alt="Kimball and Vitaly's Wedding Rings"
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               <div className="bg-white p-6 rounded-2xl text-center border-2 border-indigo-100">

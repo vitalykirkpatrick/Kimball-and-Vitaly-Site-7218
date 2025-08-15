@@ -17,8 +17,8 @@ const PoemDisplay = () => {
     'text-violet-500'
   ];
 
-  // S3 audio URL for the poem - UPDATED with CDN URL
-  const poemAudioUrl = "https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/It+was+Love+Audio+Music.mp3";
+  // S3 audio URL for the poem
+  const poemAudioUrl = "https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/It+was+Love+Audio+Music.mp3";
 
   return (
     <motion.div
@@ -47,9 +47,21 @@ const PoemDisplay = () => {
         <motion.div
           key={i}
           className="absolute opacity-30"
-          style={{ top: `${10 + i * 15}%`, left: `${5 + i * 18}%`, width: '30px', height: '30px' }}
-          animate={{ rotate: 360, scale: [1, 1.1, 1, 0.9, 1] }}
-          transition={{ repeat: Infinity, duration: 20 + i * 5, ease: "linear" }}
+          style={{
+            top: `${10 + i * 15}%`,
+            left: `${5 + i * 18}%`,
+            width: '30px',
+            height: '30px'
+          }}
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1, 0.9, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 20 + i * 5,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">{i % 2 === 0 ? '🌸' : '🌺'}</div>
         </motion.div>
@@ -59,9 +71,21 @@ const PoemDisplay = () => {
         <motion.div
           key={i + 5}
           className="absolute opacity-30"
-          style={{ bottom: `${10 + i * 15}%`, right: `${5 + i * 16}%`, width: '30px', height: '30px' }}
-          animate={{ rotate: -360, scale: [1, 0.9, 1, 1.1, 1] }}
-          transition={{ repeat: Infinity, duration: 25 + i * 3, ease: "linear" }}
+          style={{
+            bottom: `${10 + i * 15}%`,
+            right: `${5 + i * 16}%`,
+            width: '30px',
+            height: '30px'
+          }}
+          animate={{
+            rotate: -360,
+            scale: [1, 0.9, 1, 1.1, 1]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 25 + i * 3,
+            ease: "linear"
+          }}
         >
           <div className="text-4xl">{i % 2 === 0 ? '🌺' : '🌸'}</div>
         </motion.div>
@@ -70,16 +94,30 @@ const PoemDisplay = () => {
       {/* Wedding rings - ADDED NEW */}
       <motion.div
         className="absolute top-1/4 right-1/4 w-16 h-16 opacity-20"
-        animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
-        transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+        animate={{
+          y: [0, -15, 0, -5, 0],
+          rotate: [0, 5, 0, -5, 0]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 12,
+          ease: "easeInOut"
+        }}
       >
         <div className="text-5xl">💍</div>
       </motion.div>
 
       <motion.div
         className="absolute bottom-1/3 left-1/5 w-16 h-16 opacity-20"
-        animate={{ y: [0, -10, 0, -15, 0], rotate: [0, -5, 0, 5, 0] }}
-        transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+        animate={{
+          y: [0, -10, 0, -15, 0],
+          rotate: [0, -5, 0, 5, 0]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 15,
+          ease: "easeInOut"
+        }}
       >
         <div className="text-5xl">💍</div>
       </motion.div>
@@ -87,16 +125,30 @@ const PoemDisplay = () => {
       {/* Wedding bells - ADDED NEW */}
       <motion.div
         className="absolute top-1/2 left-1/4 w-16 h-16 opacity-20"
-        animate={{ y: [0, -8, 0, -12, 0], rotate: [0, 10, 0, -10, 0] }}
-        transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
+        animate={{
+          y: [0, -8, 0, -12, 0],
+          rotate: [0, 10, 0, -10, 0]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 18,
+          ease: "easeInOut"
+        }}
       >
         <div className="text-5xl">🔔</div>
       </motion.div>
 
       <motion.div
         className="absolute bottom-1/4 right-1/3 w-16 h-16 opacity-20"
-        animate={{ y: [0, -12, 0, -8, 0], rotate: [0, -10, 0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 16, ease: "easeInOut" }}
+        animate={{
+          y: [0, -12, 0, -8, 0],
+          rotate: [0, -10, 0, 10, 0]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 16,
+          ease: "easeInOut"
+        }}
       >
         <div className="text-5xl">🔔</div>
       </motion.div>
@@ -104,8 +156,15 @@ const PoemDisplay = () => {
       {/* Rainbow balloon */}
       <motion.div
         className="absolute top-1/3 right-1/4 w-24 h-24 opacity-30"
-        animate={{ y: [0, -15, 0, -5, 0], rotate: [0, 5, 0, -5, 0] }}
-        transition={{ repeat: Infinity, duration: 20, ease: "easeInOut" }}
+        animate={{
+          y: [0, -15, 0, -5, 0],
+          rotate: [0, 5, 0, -5, 0]
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 20,
+          ease: "easeInOut"
+        }}
       >
         <div className="w-full h-full">
           <svg viewBox="0 0 24 24" className="w-full h-full">
@@ -120,7 +179,10 @@ const PoemDisplay = () => {
                 <stop offset="100%" stopColor="#FF0018" />
               </linearGradient>
             </defs>
-            <path d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z" fill="url(#rainbow-balloon)" />
+            <path
+              d="M12,2C8.13,2 5,5.13 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9C19,5.13 15.87,2 12,2Z"
+              fill="url(#rainbow-balloon)"
+            />
           </svg>
         </div>
       </motion.div>
@@ -146,17 +208,7 @@ const PoemDisplay = () => {
         {/* Poem text with background image - UPDATED: Made consistent width with audio player */}
         <div className="bg-white/90 p-8 rounded-2xl shadow-lg relative overflow-hidden max-w-2xl mx-auto">
           {/* Background image contained within the poem box */}
-          <div className="absolute inset-0">
-            <picture>
-              <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_21.webp" type="image/webp" />
-              <source srcSet="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_21.jpeg" type="image/jpeg" />
-              <img 
-                src="https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_21.jpeg" 
-                alt="Kimball and Vitaly Engagement"
-                className="w-full h-full object-cover opacity-20" 
-              />
-            </picture>
-          </div>
+          <div className="absolute inset-0 bg-[url('https://vitalybook.s3.us-west-1.amazonaws.com/Kimball+and+Vitaly+Website+Content/Kimball+and+Vitaly+Engagement+2008_21.jpg')] bg-cover bg-center opacity-20"></div>
 
           <div className="prose prose-lg mx-auto text-center text-stone-700 italic relative z-10">
             <p>
@@ -204,12 +256,16 @@ const PoemDisplay = () => {
           </div>
         </div>
 
-        {/* Updated audio player with CDN URL */}
+        {/* Updated audio player with S3 URL */}
         <div className="mt-8 max-w-2xl mx-auto">
           <div className="bg-white p-6 rounded-xl shadow-lg border-2 border-indigo-200">
             <h3 className="font-semibold text-stone-800 mb-4">It Was Love - Musical Version</h3>
-            {/* Custom Audio Player component with CDN URL */}
-            <CustomAudioPlayer audioSrc={poemAudioUrl} title="It Was Love" subtitle="Poem by Vitaly, 2008" />
+            {/* Custom Audio Player component with S3 URL */}
+            <CustomAudioPlayer
+              audioSrc={poemAudioUrl}
+              title="It Was Love"
+              subtitle="Poem by Vitaly, 2008"
+            />
           </div>
         </div>
       </div>
