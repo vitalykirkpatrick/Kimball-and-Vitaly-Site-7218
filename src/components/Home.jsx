@@ -79,7 +79,7 @@ const Home = ({ openGalleryLightbox }) => {
     <div className="min-h-screen">
       <div className="pt-32 pb-16 min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-yellow-50" />
-        <div className="absolute inset-0 bg-[url('https://cdn.kimballandvitaly.com/placeholder-image.jpeg')] bg-cover bg-center opacity-10" />
+        <div className="absolute inset-0 bg-[url('https://cdn.kimballandvitaly.com/Kimball+and+Vitaly+Website+Content/placeholder-image.jpg')] bg-cover bg-center opacity-10" />
 
         {/* Decorative Elements */}
         {heartColors.map((color, index) => (

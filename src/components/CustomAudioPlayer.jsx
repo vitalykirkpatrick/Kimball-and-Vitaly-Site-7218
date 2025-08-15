@@ -32,7 +32,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   // Toggle play/pause
   const togglePlay = async () => {
     if (!audioRef.current) return;
-
+    
     try {
       if (isPlaying) {
         audioRef.current.pause();
@@ -73,9 +73,11 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   // Handle progress bar click/drag
   const handleProgressChange = (e) => {
     if (!audioRef.current || duration === 0) return;
+    
     const rect = progressBarRef.current.getBoundingClientRect();
     const position = (e.clientX - rect.left) / rect.width;
     const newTime = position * duration;
+    
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
     setProgress(position * 100);
@@ -84,9 +86,11 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   // Handle volume bar click/drag
   const handleVolumeBarClick = (e) => {
     if (!volumeBarRef.current) return;
+    
     const rect = volumeBarRef.current.getBoundingClientRect();
     const position = (e.clientX - rect.left) / rect.width;
     const newVolume = Math.max(0, Math.min(1, position));
+    
     setVolume(newVolume);
     if (audioRef.current) {
       audioRef.current.volume = newVolume;
@@ -142,6 +146,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
     if (audioRef.current) {
       const current = audioRef.current.currentTime;
       const total = audioRef.current.duration;
+      
       if (!isNaN(current) && !isNaN(total)) {
         setCurrentTime(current);
         setDuration(total);
@@ -153,10 +158,11 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   // Event handlers for audio element
   useEffect(() => {
     const audio = audioRef.current;
+    
     if (audio) {
       // Set src dynamically to ensure it loads correctly
       audio.src = audioSrc;
-
+      
       // Event listeners
       audio.addEventListener('loadeddata', () => {
         console.log("Audio loaded successfully");
@@ -164,28 +170,33 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
         setDuration(audio.duration);
         setError(null);
       });
+      
       audio.addEventListener('timeupdate', updateProgress);
+      
       audio.addEventListener('ended', () => {
         setIsPlaying(false);
         setCurrentTime(0);
         setProgress(0);
       });
+      
       audio.addEventListener('error', (e) => {
         console.error('Audio error:', e);
         setError('Failed to load audio file. Please try again later or use the download button.');
         setIsLoading(false);
         setIsPlaying(false);
       });
+      
       audio.addEventListener('waiting', () => {
         setIsLoading(true);
       });
+      
       audio.addEventListener('playing', () => {
         setIsLoading(false);
       });
-
+      
       // Set initial volume
       audio.volume = volume;
-
+      
       // Clean up
       return () => {
         audio.removeEventListener('loadeddata', () => {});
@@ -264,6 +275,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
               >
                 <SafeIcon icon={isMuted || volume === 0 ? FiVolumeX : FiVolume2} className="w-5 h-5" />
               </button>
+              
               <div
                 ref={volumeBarRef}
                 className="hidden sm:block w-16 h-1.5 bg-white/20 rounded-full overflow-hidden ml-1 cursor-pointer"
@@ -274,6 +286,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
                   style={{ width: `${volume * 100}%` }}
                 />
               </div>
+              
               <input
                 type="range"
                 min="0"
@@ -282,9 +295,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
                 value={volume}
                 onChange={handleVolumeChange}
                 className="sm:hidden w-16 h-1.5 appearance-none bg-white/20 rounded-full overflow-hidden ml-1"
-                style={{
-                  background: `linear-gradient(to right, white 0%, white ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`
-                }}
+                style={{ background: `linear-gradient(to right, white 0%, white ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)` }}
               />
             </div>
 

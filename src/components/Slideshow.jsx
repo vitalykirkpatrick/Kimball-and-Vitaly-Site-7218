@@ -38,34 +38,51 @@ const Slideshow = () => {
     };
   }, []);
 
+  // Function to generate optimized image URLs with webp and fallback
+  const getOptimizedImageUrl = (originalUrl) => {
+    // Replace the base URL
+    let newUrl = originalUrl.replace('https://vitalybook.s3.us-west-1.amazonaws.com/', 'https://cdn.kimballandvitaly.com/');
+    
+    // Replace the folder path for slideshow images
+    if (newUrl.includes('Our+Story+Page+Slideshow/')) {
+      newUrl = newUrl.replace('Our+Story+Page+Slideshow/', 'Slideshow-Converted-Images/');
+      
+      // Replace the extension (remove .JPG, .jpg, etc.)
+      newUrl = newUrl.replace(/\.(jpg|jpeg|JPG|JPEG|png|PNG)$/, '');
+      
+      // Return an object with both webp and jpeg URLs
+      return {
+        webp: `${newUrl}.webp`,
+        jpeg: `${newUrl}.jpeg`,
+        original: originalUrl // Keep original as fallback
+      };
+    }
+    
+    return {
+      webp: newUrl,
+      jpeg: newUrl,
+      original: originalUrl // Keep original as fallback
+    };
+  };
+
   // Function to handle image load errors and fix file extensions if needed
   const handleImageError = (slideId) => {
     const slide = slides.find(s => s.id === slideId);
     if (!slide) return;
 
-    // Try to fix the extension by toggling between jpg and JPG
-    if (slide.image.toLowerCase().endsWith('.jpg')) {
-      // Try with uppercase extension
-      const newImage = slide.image.slice(0, -4) + '.JPG';
-      // Update the slide's image URL
-      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s);
-      // Update slides array
-      setSlides(updatedSlides);
-    } else if (slide.image.toLowerCase().endsWith('.jpeg')) {
-      // Try with jpg extension
-      const newImage = slide.image.slice(0, -5) + '.jpg';
-      // Update the slide's image URL
-      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s);
-      // Update slides array
-      setSlides(updatedSlides);
-    } else if (slide.image.toLowerCase().endsWith('.png')) {
-      // Try with jpg extension
-      const newImage = slide.image.slice(0, -4) + '.jpg';
-      // Update the slide's image URL
-      const updatedSlides = slides.map(s => s.id === slideId ? { ...s, image: newImage } : s);
-      // Update slides array
-      setSlides(updatedSlides);
-    }
+    // Try falling back to the original image URL if optimized URLs fail
+    const updatedSlides = slides.map(s => {
+      if (s.id === slideId) {
+        return {
+          ...s,
+          usingFallback: true
+        };
+      }
+      return s;
+    });
+
+    // Update slides array
+    setSlides(updatedSlides);
   };
 
   // Function to handle image load success
@@ -80,16 +97,28 @@ const Slideshow = () => {
       // Create an array to track loaded images
       const imagePromises = slides.map(slide => {
         return new Promise((resolve) => {
+          const optimizedUrls = getOptimizedImageUrl(slide.image);
+          
+          // Try to load WebP first
           const img = new Image();
-          img.src = slide.image;
+          img.src = optimizedUrls.webp;
           img.onload = () => {
             handleImageLoad(slide.id);
             resolve();
           };
           img.onerror = () => {
-            handleImageError(slide.id);
-            // Still resolve so we don't block the loading process
-            resolve();
+            // If WebP fails, try JPEG
+            const jpgImg = new Image();
+            jpgImg.src = optimizedUrls.jpeg;
+            jpgImg.onload = () => {
+              handleImageLoad(slide.id);
+              resolve();
+            };
+            jpgImg.onerror = () => {
+              // If both fail, try original
+              handleImageError(slide.id);
+              resolve();
+            };
           };
         });
       });
@@ -661,7 +690,7 @@ const Slideshow = () => {
   const openImageModal = () => {
     const currentSlideData = sortedSlides[currentSlide];
     setSelectedImage({
-      src: currentSlideData.image,
+      src: getOptimizedImageUrl(currentSlideData.image),
       title: currentSlideData.title,
       description: currentSlideData.description,
       date: currentSlideData.date
@@ -679,7 +708,7 @@ const Slideshow = () => {
     const nextIndex = (modalSlideIndex + 1) % sortedSlides.length;
     setModalSlideIndex(nextIndex);
     setSelectedImage({
-      src: sortedSlides[nextIndex].image,
+      src: getOptimizedImageUrl(sortedSlides[nextIndex].image),
       title: sortedSlides[nextIndex].title,
       description: sortedSlides[nextIndex].description,
       date: sortedSlides[nextIndex].date
@@ -691,7 +720,7 @@ const Slideshow = () => {
     const prevIndex = (modalSlideIndex - 1 + sortedSlides.length) % sortedSlides.length;
     setModalSlideIndex(prevIndex);
     setSelectedImage({
-      src: sortedSlides[prevIndex].image,
+      src: getOptimizedImageUrl(sortedSlides[prevIndex].image),
       title: sortedSlides[prevIndex].title,
       description: sortedSlides[prevIndex].description,
       date: sortedSlides[prevIndex].date
@@ -724,6 +753,23 @@ const Slideshow = () => {
     // Reset values
     setTouchStartX(0);
     setTouchEndX(0);
+  };
+
+  // Function to render the optimized image with webp and fallback support
+  const renderOptimizedImage = (imageUrl) => {
+    const optimizedUrls = getOptimizedImageUrl(imageUrl);
+    
+    return (
+      <picture>
+        <source srcSet={optimizedUrls.webp} type="image/webp" />
+        <source srcSet={optimizedUrls.jpeg} type="image/jpeg" />
+        <img 
+          src={optimizedUrls.jpeg} 
+          alt={sortedSlides[currentSlide].title}
+          className="w-full h-full object-cover"
+        />
+      </picture>
+    );
   };
 
   return (
@@ -866,8 +912,9 @@ const Slideshow = () => {
                     <div className="w-full md:w-1/2 h-1/2 md:h-full relative">
                       <div 
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 hover:scale-105"
-                        style={{ backgroundImage: `url(${sortedSlides[currentSlide].image})` }}
-                      ></div>
+                      >
+                        {renderOptimizedImage(sortedSlides[currentSlide].image)}
+                      </div>
                       <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent to-black/50"></div>
                     </div>
 
@@ -1011,10 +1058,9 @@ const Slideshow = () => {
                     className="absolute inset-0"
                   >
                     {/* Full image background */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center"
-                      style={{ backgroundImage: `url(${sortedSlides[currentSlide].image})` }}
-                    ></div>
+                    <div className="absolute inset-0 bg-cover bg-center">
+                      {renderOptimizedImage(sortedSlides[currentSlide].image)}
+                    </div>
                     
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
@@ -1071,11 +1117,16 @@ const Slideshow = () => {
                         }}
                       >
                         <div className="aspect-w-4 aspect-h-3">
-                          <img 
-                            src={slide.image} 
-                            alt={slide.title} 
-                            className="object-cover w-full h-full"
-                          />
+                          {/* Optimized image */}
+                          <picture>
+                            <source srcSet={getOptimizedImageUrl(slide.image).webp} type="image/webp" />
+                            <source srcSet={getOptimizedImageUrl(slide.image).jpeg} type="image/jpeg" />
+                            <img 
+                              src={getOptimizedImageUrl(slide.image).jpeg} 
+                              alt={slide.title}
+                              className="object-cover w-full h-full"
+                            />
+                          </picture>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                           <div className="absolute bottom-0 left-0 right-0 p-2 text-white">
                             <div className="text-xs opacity-80 mb-1">{slide.date}</div>
@@ -1113,11 +1164,15 @@ const Slideshow = () => {
                       }}
                     >
                       <div className="w-16 h-16 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
-                        <img 
-                          src={slide.image} 
-                          alt={slide.title} 
-                          className="w-full h-full object-cover"
-                        />
+                        <picture>
+                          <source srcSet={getOptimizedImageUrl(slide.image).webp} type="image/webp" />
+                          <source srcSet={getOptimizedImageUrl(slide.image).jpeg} type="image/jpeg" />
+                          <img 
+                            src={getOptimizedImageUrl(slide.image).jpeg}
+                            alt={slide.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </picture>
                       </div>
                       <div className="ml-3 flex-grow overflow-hidden">
                         <div className="text-xs text-indigo-600 mb-1">{slide.date}</div>

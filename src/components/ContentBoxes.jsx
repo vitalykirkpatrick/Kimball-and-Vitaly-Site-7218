@@ -17,7 +17,7 @@ const ContentBoxes = () => {
         content: "A Ukrainian orphan with one emergency potato. A BYU student fluent in Japanese and modesty rules. From awkward movie nights to surviving IKEA meltdowns, this is the story of how two very different men learned that something outrageously real is the whole story. You'll have to hear it to believe it.",
         color: "red",
         emoji: "🍳",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/When+All+You+Have+is+an+Emergency+Potato.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/When+All+You+Have+is+an+Emergency+Potato"
       },
       {
         icon: "🛏️",
@@ -25,7 +25,7 @@ const ContentBoxes = () => {
         content: "Love is not candlelit dinners—it's surviving the smoke alarm at midnight and living with the consequences of that one trip to Costco. It's finding someone whose weird matches yours and who laughs with you in the middle of the mess.",
         color: "yellow",
         emoji: "🛏️",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/Love%2C+Flatulence%2C+and+Other+Escape+Plans.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/Love%2C+Flatulence%2C+and+Other+Escape+Plans"
       },
       {
         icon: "📉",
@@ -33,7 +33,7 @@ const ContentBoxes = () => {
         content: "We've had our share of bad investments—crypto, cats, and a timeshare presentation that felt like a hostage situation. But we've also learned that love can pay dividends that no bank could match. The punchline? We're still laughing.",
         color: "blue",
         emoji: "📉",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/How+to+Lose+Six+Figures+and+Still+Get+a+Lift.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/How+to+Lose+Six+Figures+and+Still+Get+a+Lift"
       }
     ],
     // Set 2 - "Quiet Chaos, Loud Love"
@@ -44,7 +44,7 @@ const ContentBoxes = () => {
         content: "It began with one suspicious potato, a suitcase that barely closed, and two stubborn men trying to share a life without killing each other. We didn't know if we were building a love story or a crime scene. Somehow, we ended up with both—and neither of us will admit who started it.",
         color: "red",
         emoji: "🥔",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/The+Potato+That+Started+a+War.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/The+Potato+That+Started+a+War"
       },
       {
         icon: "🎾",
@@ -52,7 +52,7 @@ const ContentBoxes = () => {
         content: "Every serve became a test of endurance—emotional, physical, and marital. Kimball claimed \"love\" on the scoreboard; I called it psychological warfare. By the end, we'd invented our own version of tennis, complete with sabotage, snacks, and a loser who always ends up doing the dishes.",
         color: "yellow",
         emoji: "🎾",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/Marriage%2C+Murder%2C+and+the+Tennis+Score.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/Marriage%2C+Murder%2C+and+the+Tennis+Score"
       },
       {
         icon: "🧾",
@@ -60,7 +60,7 @@ const ContentBoxes = () => {
         content: "We flirted with bankruptcy, wrestled bad investments, and tested the limits of credit card companies' patience. Somewhere in the chaos, we learned financial ruin is survivable—if your partner brings snacks, laughter, and just enough denial to make it feel like an adventure instead of a disaster.",
         color: "blue",
         emoji: "🧾",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/Turning+Debt+Into+a+Love+Story.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/Turning+Debt+Into+a+Love+Story"
       }
     ],
     // Set 3 - "Emotions in Disguise"
@@ -71,7 +71,7 @@ const ContentBoxes = () => {
         content: "Fifty pounds of chaos, an \"emergency\" potato, and a bandura that could double as medieval weaponry—that's how my fresh start began. Between luggage fees, awkward stares, and cultural whiplash, I learned that survival means traveling light… but also never letting go of the one thing that makes you feel at home.",
         color: "red",
         emoji: "📦",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/The+Suitcase+That+Nearly+Killed+Me.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/The+Suitcase+That+Nearly+Killed+Me"
       },
       {
         icon: "🥞",
@@ -79,7 +79,7 @@ const ContentBoxes = () => {
         content: "We've survived couples therapy, suspicious mattress purchases, and breakfast food sabotage. In our house, the real war isn't over bills—it's over the last pancake. Whoever wins gets bragging rights, whoever loses gets the syrup… and sometimes, the syrup is the real trophy.",
         color: "yellow",
         emoji: "🥞",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/Pancakes%2C+Therapy%2C+and+Other+Weapons.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/Pancakes%2C+Therapy%2C+and+Other+Weapons"
       },
       {
         icon: "💸",
@@ -87,7 +87,7 @@ const ContentBoxes = () => {
         content: "We lost six figures, gained a collection of inside jokes, and somehow didn't kill each other. Some call it financial disaster. We call it Tuesday. And the only thing better than surviving it once… is realizing you'll probably survive it again.",
         color: "blue",
         emoji: "💸",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/How+to+Fail+Big+and+Stay+Married.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/How+to+Fail+Big+and+Stay+Married"
       }
     ],
     // Set 4 - "The Wild & The Weird"
@@ -98,7 +98,7 @@ const ContentBoxes = () => {
         content: "From borrowed couches to mortgage paperwork nightmares, we built a home out of the least romantic ingredients possible. It wasn't always pretty, but somewhere between IKEA despair and mismatched paint samples, we found something that sparkled—mostly because glitter is impossible to clean up.",
         color: "red",
         emoji: "🚪",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/Finding+Home+in+Strange+Places.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/Finding+Home+in+Strange+Places"
       },
       {
         icon: "🐈",
@@ -106,7 +106,7 @@ const ContentBoxes = () => {
         content: "We never kept a cat, but we kept the snack wars going strong. Love, it turns out, is knowing your partner's hiding spot and raiding it anyway. Midnight treaties were signed in cookies, and peace was broken over ice cream—every single time.",
         color: "yellow",
         emoji: "🐈",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/Cats%2C+Snacks%2C+and+Midnight+Treaties.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/Cats%2C+Snacks%2C+and+Midnight+Treaties"
       },
       {
         icon: "💌",
@@ -114,7 +114,7 @@ const ContentBoxes = () => {
         content: "Some words are too ridiculous, too sweet, or too incriminating to send. Lucky for you, we kept them all—scribbled on receipts, takeout menus, and the backs of grocery lists. They're proof that sometimes the funniest, rawest truths are the ones that never leave your kitchen drawer.",
         color: "blue",
         emoji: "💌",
-        image: "https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/Love+Notes+We+Never+Delivered.png"
+        image: "https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/Love+Notes+We+Never+Delivered"
       }
     ]
   ];
@@ -123,7 +123,7 @@ const ContentBoxes = () => {
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [isRotatingAll, setIsRotatingAll] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  
+
   // Choose a random content set on initial load
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * contentSets.length);
@@ -142,7 +142,10 @@ const ContentBoxes = () => {
   // Function to open image in modal
   const openImageModal = (item) => {
     setSelectedImage({
-      src: item.image,
+      src: {
+        webp: `${item.image}.webp`,
+        jpeg: `${item.image}.jpeg`
+      },
       title: item.title,
       description: item.content
     });
@@ -174,10 +177,24 @@ const ContentBoxes = () => {
               onClick={() => openImageModal(item)}
             >
               {/* Background image */}
-              <div 
-                className="absolute inset-0 z-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${item.image})` }}
-              />
+              <div className="absolute inset-0 z-0">
+                <picture>
+                  <source srcSet={`${item.image}.webp`} type="image/webp" />
+                  <source srcSet={`${item.image}.jpeg`} type="image/jpeg" />
+                  <img 
+                    src={`${item.image}.jpeg`} 
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      // Fallback to original URL if optimized images fail
+                      const originalUrl = item.image.replace('https://cdn.kimballandvitaly.com/KV-Book-Stories-Images-Optimized/', 
+                        'https://vitalybook.s3.us-west-1.amazonaws.com/KV+Book+Stories+Images/');
+                      e.target.src = `${originalUrl}.jpg`;
+                    }}
+                  />
+                </picture>
+              </div>
 
               {/* Card content with more transparent overlay */}
               <div className="p-6 flex flex-col flex-grow relative z-10 items-center justify-center h-full">
@@ -213,8 +230,8 @@ const ContentBoxes = () => {
 
       {/* Image Modal */}
       {selectedImage && (
-        <ImageModal 
-          image={selectedImage} 
+        <ImageModal
+          image={selectedImage}
           onClose={closeImageModal}
         />
       )}
