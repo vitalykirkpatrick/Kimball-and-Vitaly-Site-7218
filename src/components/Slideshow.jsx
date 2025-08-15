@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
 import ImageModal from './ImageModal';
@@ -25,9 +25,6 @@ const Slideshow = () => {
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
   const slideContentRef = useRef(null);
-  const [visibleSlideIds, setVisibleSlideIds] = useState(new Set());
-  const [initialSlidesLoaded, setInitialSlidesLoaded] = useState(false);
-  const observerRef = useRef(null);
 
   // Check if device is mobile
   useEffect(() => {
@@ -76,84 +73,35 @@ const Slideshow = () => {
     setImagesLoaded(prev => ({ ...prev, [slideId]: true }));
   };
 
-  // Implement Intersection Observer for lazy loading
+  // Preload images for faster rendering
   useEffect(() => {
-    // Load only the current slide and a few adjacent slides initially
-    const initialVisibleIds = new Set();
-    for (let i = Math.max(0, currentSlide - 2); i <= Math.min(slides.length - 1, currentSlide + 2); i++) {
-      initialVisibleIds.add(slides[i].id);
-    }
-    setVisibleSlideIds(initialVisibleIds);
-    setInitialSlidesLoaded(true);
-    
-    // Setup observer for lazy loading other images as user scrolls/navigates
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const slideId = parseInt(entry.target.dataset.slideId);
-            if (slideId) {
-              setVisibleSlideIds(prev => new Set([...prev, slideId]));
-            }
-          }
-        });
-      },
-      { rootMargin: '100px' }
-    );
-
-    // Observe all slide containers
-    document.querySelectorAll('.slide-container').forEach(el => {
-      if (observerRef.current) {
-        observerRef.current.observe(el);
-      }
-    });
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, [currentSlide, slides.length]);
-
-  // Load necessary images when visible slides change
-  useEffect(() => {
-    if (!initialSlidesLoaded) return;
-
-    const loadVisibleImages = () => {
+    const preloadImages = () => {
       setIsLoading(true);
-      
-      // Create promises only for visible slides
-      const imagePromises = slides
-        .filter(slide => visibleSlideIds.has(slide.id))
-        .map(slide => {
-          return new Promise((resolve) => {
-            // If already loaded, resolve immediately
-            if (imagesLoaded[slide.id]) {
-              resolve();
-              return;
-            }
-
-            const img = new Image();
-            img.src = slide.image;
-            img.onload = () => {
-              handleImageLoad(slide.id);
-              resolve();
-            };
-            img.onerror = () => {
-              handleImageError(slide.id);
-              resolve();
-            };
-          });
+      // Create an array to track loaded images
+      const imagePromises = slides.map(slide => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = slide.image;
+          img.onload = () => {
+            handleImageLoad(slide.id);
+            resolve();
+          };
+          img.onerror = () => {
+            handleImageError(slide.id);
+            // Still resolve so we don't block the loading process
+            resolve();
+          };
         });
+      });
       
-      // When all visible images are loaded
+      // When all images are loaded or have attempted to load
       Promise.all(imagePromises).then(() => {
         setIsLoading(false);
       });
     };
     
-    loadVisibleImages();
-  }, [visibleSlideIds, initialSlidesLoaded, imagesLoaded]);
+    preloadImages();
+  }, []);
 
   // Updated slideshow items with fixed image extensions and added citizenship slide
   const [slides, setSlides] = useState([
@@ -519,51 +467,32 @@ const Slideshow = () => {
     }
   }, [currentSlide, isDragging, minYear, yearRange, sortedSlides]);
 
-  // Autoplay functionality with requestAnimationFrame for better performance
+  // Autoplay functionality
   useEffect(() => {
-    let animationFrameId;
-    let lastTime = 0;
-    const interval = 5000; // 5 seconds between slides
-
-    const animate = (timestamp) => {
-      if (!lastTime) lastTime = timestamp;
-      
-      const elapsed = timestamp - lastTime;
-      
-      if (elapsed >= interval && autoplay && !isHovered && !isDragging) {
+    let interval;
+    if (autoplay && !isHovered && !isDragging) {
+      interval = setInterval(() => {
         setDirection(1);
         setCurrentSlide((prevSlide) => (prevSlide + 1) % sortedSlides.length);
-        lastTime = timestamp;
-      }
-      
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    if (autoplay && !isHovered && !isDragging) {
-      animationFrameId = requestAnimationFrame(animate);
+      }, 5000); // Change slide every 5 seconds
     }
-
-    return () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
+    return () => clearInterval(interval);
   }, [autoplay, isHovered, isDragging, sortedSlides.length]);
 
   // Navigation functions
-  const nextSlide = useCallback(() => {
+  const nextSlide = () => {
     setAutoplay(false); // Disable autoplay when manually navigating
     setDirection(1);
     setCurrentSlide((prevSlide) => (prevSlide + 1) % sortedSlides.length);
     setShowMobileDetail(false); // Reset mobile detail view on navigation
-  }, [sortedSlides.length]);
+  };
 
-  const prevSlide = useCallback(() => {
+  const prevSlide = () => {
     setAutoplay(false); // Disable autoplay when manually navigating
     setDirection(-1);
     setCurrentSlide((prevSlide) => (prevSlide - 1 + sortedSlides.length) % sortedSlides.length);
     setShowMobileDetail(false); // Reset mobile detail view on navigation
-  }, [sortedSlides.length]);
+  };
 
   // Handle timeline slider change
   const handleTimelineChange = (e) => {
@@ -591,8 +520,8 @@ const Slideshow = () => {
     setShowMobileDetail(false); // Reset mobile detail view on timeline change
   };
 
-  // Memoized function for scrolling to year in timeline (for mobile)
-  const scrollToYear = useCallback((year) => {
+  // Scroll to year in timeline (for mobile)
+  const scrollToYear = (year) => {
     if (timelineRef.current && isMobile) {
       const yearElement = document.getElementById(`year-marker-${year}`);
       if (yearElement) {
@@ -603,14 +532,14 @@ const Slideshow = () => {
         });
       }
     }
-  }, [isMobile]);
+  };
 
   // When current slide changes, scroll to that year in the mobile timeline
   useEffect(() => {
     if (isMobile) {
       scrollToYear(sortedSlides[currentSlide].year);
     }
-  }, [currentSlide, isMobile, sortedSlides, scrollToYear]);
+  }, [currentSlide, isMobile, sortedSlides]);
 
   // Animation variants for slide transitions
   const slideVariants = {
@@ -676,23 +605,60 @@ const Slideshow = () => {
     );
   });
 
-  // Enhanced decorative elements for animation - Reduced number for performance
+  // Enhanced decorative elements for animation - MORE VARIETY
   const decorativeElements = [
     // Hearts
     {type: "heart", color: "text-red-400", top: "5%", left: "5%", animation: "float-slow"},
     {type: "heart", color: "text-blue-400", top: "10%", right: "8%", animation: "float-medium"},
     {type: "heart", color: "text-purple-400", bottom: "15%", left: "12%", animation: "float-fast"},
-    // Reduced number of decorative elements for better performance
+    {type: "heart", color: "text-pink-400", bottom: "8%", right: "5%", animation: "float-medium"},
+    {type: "heart", color: "text-green-400", top: "22%", left: "25%", animation: "float-medium"},
+    {type: "heart", color: "text-yellow-400", bottom: "22%", right: "25%", animation: "float-fast"},
+
+    // Circles
     {type: "circle", color: "bg-yellow-200", top: "15%", right: "15%", animation: "float-slow"},
+    {type: "circle", color: "bg-green-200", bottom: "20%", left: "20%", animation: "float-medium"},
+    {type: "circle", color: "bg-blue-200", top: "30%", left: "30%", animation: "float-fast"},
+    {type: "circle", color: "bg-purple-200", bottom: "35%", right: "25%", animation: "float-slow"},
+
+    // Stars
     {type: "star", color: "text-amber-400", top: "25%", left: "25%", animation: "float-fast"},
+    {type: "star", color: "text-indigo-400", bottom: "25%", right: "25%", animation: "float-medium"},
+    {type: "star", color: "text-emerald-400", top: "40%", right: "10%", animation: "float-slow"},
+    {type: "star", color: "text-rose-400", bottom: "40%", left: "10%", animation: "float-medium"},
+
+    // Confetti
     {type: "confetti", color: "bg-orange-300", top: "30%", right: "30%", animation: "float-slow"},
+    {type: "confetti", color: "bg-teal-300", bottom: "30%", left: "30%", animation: "float-fast"},
+    {type: "confetti", color: "bg-pink-300", top: "50%", left: "15%", animation: "float-medium"},
+    {type: "confetti", color: "bg-indigo-300", bottom: "10%", right: "35%", animation: "float-slow"},
+
+    // Rings
     {type: "ring", color: "border-gold", top: "20%", left: "40%", animation: "float-slow"},
+    {type: "ring", color: "border-silver", bottom: "20%", right: "40%", animation: "float-medium"},
+    {type: "ring", color: "border-gold", top: "60%", right: "15%", animation: "float-medium"},
+    {type: "ring", color: "border-silver", bottom: "60%", left: "15%", animation: "float-slow"},
+
+    // Flowers
     {type: "flower", emoji: "🌸", top: "45%", left: "5%", animation: "float-slow"},
+    {type: "flower", emoji: "🌺", top: "15%", right: "45%", animation: "float-medium"},
+    {type: "flower", emoji: "🌷", bottom: "45%", right: "5%", animation: "float-fast"},
+    {type: "flower", emoji: "🌹", top: "55%", right: "55%", animation: "float-slow"},
+    {type: "flower", emoji: "💐", bottom: "15%", left: "45%", animation: "float-medium"},
+
+    // Wedding symbols
+    {type: "wedding", emoji: "💍", top: "35%", right: "20%", animation: "float-medium"},
+    {type: "wedding", emoji: "🎂", bottom: "35%", left: "20%", animation: "float-slow"},
+    {type: "wedding", emoji: "🔔", top: "65%", left: "35%", animation: "float-fast"},
+    {type: "wedding", emoji: "✨", bottom: "65%", right: "35%", animation: "float-medium"},
+
+    // Balloons
     {type: "balloon", gradient: "rainbow1", bottom: "5%", left: "45%", animation: "float-slow"},
+    {type: "balloon", gradient: "rainbow2", top: "5%", left: "75%", animation: "float-medium"},
   ];
 
   // Function to open image in modal
-  const openImageModal = useCallback(() => {
+  const openImageModal = () => {
     const currentSlideData = sortedSlides[currentSlide];
     setSelectedImage({
       src: currentSlideData.image,
@@ -701,15 +667,15 @@ const Slideshow = () => {
       date: currentSlideData.date
     });
     setModalSlideIndex(currentSlide);
-  }, [currentSlide, sortedSlides]);
+  };
 
   // Function to close image modal
-  const closeImageModal = useCallback(() => {
+  const closeImageModal = () => {
     setSelectedImage(null);
-  }, []);
+  };
 
   // Function to navigate to next slide in modal
-  const nextSlideInModal = useCallback(() => {
+  const nextSlideInModal = () => {
     const nextIndex = (modalSlideIndex + 1) % sortedSlides.length;
     setModalSlideIndex(nextIndex);
     setSelectedImage({
@@ -718,10 +684,10 @@ const Slideshow = () => {
       description: sortedSlides[nextIndex].description,
       date: sortedSlides[nextIndex].date
     });
-  }, [modalSlideIndex, sortedSlides]);
+  };
 
   // Function to navigate to previous slide in modal
-  const prevSlideInModal = useCallback(() => {
+  const prevSlideInModal = () => {
     const prevIndex = (modalSlideIndex - 1 + sortedSlides.length) % sortedSlides.length;
     setModalSlideIndex(prevIndex);
     setSelectedImage({
@@ -730,7 +696,7 @@ const Slideshow = () => {
       description: sortedSlides[prevIndex].description,
       date: sortedSlides[prevIndex].date
     });
-  }, [modalSlideIndex, sortedSlides]);
+  };
 
   // Mobile touch handlers for swiping
   const handleTouchStart = (e) => {
@@ -741,7 +707,7 @@ const Slideshow = () => {
     setTouchEndX(e.touches[0].clientX);
   };
 
-  const handleTouchEnd = useCallback(() => {
+  const handleTouchEnd = () => {
     if (!touchStartX || !touchEndX) return;
     
     const difference = touchStartX - touchEndX;
@@ -758,25 +724,6 @@ const Slideshow = () => {
     // Reset values
     setTouchStartX(0);
     setTouchEndX(0);
-  }, [touchStartX, touchEndX, nextSlide, prevSlide]);
-
-  // Function to render image based on visibility
-  const renderSlideImage = (slide) => {
-    if (!visibleSlideIds.has(slide.id)) {
-      return (
-        <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-          <div className="w-12 h-12 rounded-full border-4 border-indigo-300 border-t-transparent animate-spin"></div>
-        </div>
-      );
-    }
-    
-    return (
-      <div 
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 hover:scale-105"
-        style={{ backgroundImage: `url(${slide.image})` }}
-        data-slide-id={slide.id}
-      ></div>
-    );
   };
 
   return (
@@ -787,7 +734,7 @@ const Slideshow = () => {
       {/* Rainbow gradient strip at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500"></div>
 
-      {/* Animated decorative elements - Reduced number for performance */}
+      {/* Animated decorative elements */}
       {decorativeElements.map((element, index) => {
         // Render different shapes based on type
         let elementContent;
@@ -902,9 +849,8 @@ const Slideshow = () => {
             >
               {/* Main slideshow */}
               <div 
-                className="relative h-[500px] md:h-[550px] rounded-xl overflow-hidden shadow-lg z-10 mb-8 cursor-pointer slide-container" 
+                className="relative h-[500px] md:h-[550px] rounded-xl overflow-hidden shadow-lg z-10 mb-8 cursor-pointer" 
                 onClick={openImageModal}
-                data-slide-id={sortedSlides[currentSlide].id}
               >
                 <AnimatePresence initial={false} custom={direction}>
                   <motion.div
@@ -918,7 +864,10 @@ const Slideshow = () => {
                   >
                     {/* Image side */}
                     <div className="w-full md:w-1/2 h-1/2 md:h-full relative">
-                      {renderSlideImage(sortedSlides[currentSlide])}
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 hover:scale-105"
+                        style={{ backgroundImage: `url(${sortedSlides[currentSlide].image})` }}
+                      ></div>
                       <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-transparent to-black/50"></div>
                     </div>
 
@@ -1045,12 +994,11 @@ const Slideshow = () => {
             {/* NEW STORYBOOK-STYLE MOBILE VIEW */}
             {mobileViewMode === 'card' && (
               <div 
-                className="relative h-[400px] overflow-hidden rounded-xl shadow-lg cursor-pointer slide-container"
+                className="relative h-[400px] overflow-hidden rounded-xl shadow-lg cursor-pointer"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
                 onClick={openImageModal}
-                data-slide-id={sortedSlides[currentSlide].id}
               >
                 <AnimatePresence initial={false} custom={direction}>
                   <motion.div
@@ -1063,7 +1011,10 @@ const Slideshow = () => {
                     className="absolute inset-0"
                   >
                     {/* Full image background */}
-                    {renderSlideImage(sortedSlides[currentSlide])}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${sortedSlides[currentSlide].image})` }}
+                    ></div>
                     
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
@@ -1112,27 +1063,19 @@ const Slideshow = () => {
                     {sortedSlides.map((slide, index) => (
                       <div 
                         key={index}
-                        className={`relative rounded-lg overflow-hidden cursor-pointer slide-container ${currentSlide === index ? 'ring-2 ring-indigo-600' : ''}`}
+                        className={`relative rounded-lg overflow-hidden cursor-pointer ${currentSlide === index ? 'ring-2 ring-indigo-600' : ''}`}
                         onClick={() => {
                           setCurrentSlide(index);
                           setDirection(index > currentSlide ? 1 : -1);
                           setMobileViewMode('card');
                         }}
-                        data-slide-id={slide.id}
                       >
                         <div className="aspect-w-4 aspect-h-3">
-                          {visibleSlideIds.has(slide.id) ? (
-                            <img 
-                              src={slide.image} 
-                              alt={slide.title} 
-                              className="object-cover w-full h-full"
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                              <div className="w-8 h-8 border-2 border-indigo-300 border-t-transparent rounded-full animate-spin"></div>
-                            </div>
-                          )}
+                          <img 
+                            src={slide.image} 
+                            alt={slide.title} 
+                            className="object-cover w-full h-full"
+                          />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                           <div className="absolute bottom-0 left-0 right-0 p-2 text-white">
                             <div className="text-xs opacity-80 mb-1">{slide.date}</div>
@@ -1169,19 +1112,12 @@ const Slideshow = () => {
                         setMobileViewMode('card');
                       }}
                     >
-                      <div className="w-16 h-16 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden slide-container" data-slide-id={slide.id}>
-                        {visibleSlideIds.has(slide.id) ? (
-                          <img 
-                            src={slide.image} 
-                            alt={slide.title} 
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <div className="w-6 h-6 border-2 border-indigo-300 border-t-transparent rounded-full animate-spin"></div>
-                          </div>
-                        )}
+                      <div className="w-16 h-16 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
+                        <img 
+                          src={slide.image} 
+                          alt={slide.title} 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="ml-3 flex-grow overflow-hidden">
                         <div className="text-xs text-indigo-600 mb-1">{slide.date}</div>
