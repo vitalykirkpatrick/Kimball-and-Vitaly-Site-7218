@@ -1,51 +1,61 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-  <meta charset="UTF-8" /> 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> 
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" /> 
-  <title>Kimball & Vitaly - Celebrating 20 Years</title> 
-  <meta name="description" content="Celebrating 20 years of love,resilience,and finding home in each other. Join Kimball & Vitaly as they commemorate their journey from May 16,2006 to August 15,2025."> 
-  <!-- Google Fonts for cursive and comic fonts --> 
-  <link rel="preconnect" href="https://fonts.googleapis.com"> 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&family=Comic+Neue:wght@400;700&family=Baloo+2:wght@400;700&family=Chewy&family=Fredoka+One&family=Luckiest+Guy&family=Bangers&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kimball & Vitaly - Celebrating 20 Years</title>
+  <meta name="description" content="Celebrating 20 years of love, resilience, and finding home in each other. Join Kimball & Vitaly as they commemorate their journey from May 16, 2006 to August 15, 2025.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&family=Comic+Neue:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet"></noscript>
+  
   <style>
-    /* Text shadow utility classes for better readability on transparent backgrounds */
-    .text-shadow-sm {
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    /* Critical CSS */
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;}
+    .text-shadow-sm {text-shadow: 1px 1px 2px rgba(0,0,0,0.1);}
+    .text-shadow-md {text-shadow: 2px 2px 4px rgba(0,0,0,0.2);}
+    .text-shadow-lg {text-shadow: 0 0 6px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.3);}
+    
+    /* Add a simple loading state */
+    .app-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(135deg, #EEF2FF, #F5F3FF);
     }
-    .text-shadow-md {
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    
+    .app-loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #cbd5e1;
+      border-top-color: #4f46e5;
+      border-radius: 50%;
+      animation: spinner 1s linear infinite;
     }
-    .text-shadow-lg {
-      text-shadow: 0 0 6px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.3);
-    }
-    /* Default comic font for the entire book */
-    .book-content {
-      font-family: 'Comic Neue', 'Comic Sans MS', cursive !important;
-    }
-    /* Responsive font sizing */
-    @media (min-width: 768px) {
-      .book-text {
-        font-size: 1.125rem;
-      }
-      .book-heading {
-        font-size: 1.75rem;
-      }
-    }
-    @media (min-width: 1024px) {
-      .book-text {
-        font-size: 1.25rem;
-      }
-      .book-heading {
-        font-size: 2rem;
-      }
+    
+    @keyframes spinner {
+      to {transform: rotate(360deg);}
     }
   </style>
-</head> 
-<body> 
-  <div id="root"></div> 
-  <script type="module" src="/src/main.jsx"></script> 
-</body> 
+  
+  <!-- Preload important images -->
+  <link rel="preload" href="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753646796996-Wedding%20rings%20%281%29.png" as="image" type="image/png">
+  <link rel="preload" href="https://quest-media-storage-bucket.s3.us-east-2.amazonaws.com/1753573661471-blob" as="image">
+  
+  <!-- Add browser color theme -->
+  <meta name="theme-color" content="#4F46E5">
+</head>
+<body>
+  <div id="root">
+    <div class="app-loading">
+      <div class="app-loading-spinner"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>

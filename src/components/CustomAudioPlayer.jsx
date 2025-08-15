@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -20,6 +20,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   const audioRef = useRef(null);
   const progressBarRef = useRef(null);
   const volumeBarRef = useRef(null);
+  const animationFrameId = useRef(null);
 
   // Format time (convert seconds to MM:SS format)
   const formatTime = (time) => {
@@ -32,7 +33,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   // Toggle play/pause
   const togglePlay = async () => {
     if (!audioRef.current) return;
-
+    
     try {
       if (isPlaying) {
         audioRef.current.pause();
@@ -73,9 +74,11 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   // Handle progress bar click/drag
   const handleProgressChange = (e) => {
     if (!audioRef.current || duration === 0) return;
+    
     const rect = progressBarRef.current.getBoundingClientRect();
     const position = (e.clientX - rect.left) / rect.width;
     const newTime = position * duration;
+    
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
     setProgress(position * 100);
@@ -84,9 +87,11 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
   // Handle volume bar click/drag
   const handleVolumeBarClick = (e) => {
     if (!volumeBarRef.current) return;
+    
     const rect = volumeBarRef.current.getBoundingClientRect();
     const position = (e.clientX - rect.left) / rect.width;
     const newVolume = Math.max(0, Math.min(1, position));
+    
     setVolume(newVolume);
     if (audioRef.current) {
       audioRef.current.volume = newVolume;
@@ -137,63 +142,93 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
     xhr.send();
   };
 
-  // Update audio progress
-  const updateProgress = () => {
-    if (audioRef.current) {
-      const current = audioRef.current.currentTime;
-      const total = audioRef.current.duration;
-      if (!isNaN(current) && !isNaN(total)) {
-        setCurrentTime(current);
-        setDuration(total);
-        setProgress((current / total) * 100);
-      }
+  // Update audio progress using requestAnimationFrame for better performance
+  const updateProgress = useCallback(() => {
+    if (!audioRef.current) return;
+    
+    const current = audioRef.current.currentTime;
+    const total = audioRef.current.duration;
+    
+    if (!isNaN(current) && !isNaN(total)) {
+      setCurrentTime(current);
+      setDuration(total);
+      setProgress((current / total) * 100);
     }
-  };
+    
+    animationFrameId.current = requestAnimationFrame(updateProgress);
+  }, []);
+
+  // Start/stop the animation frame based on playing state
+  useEffect(() => {
+    if (isPlaying) {
+      animationFrameId.current = requestAnimationFrame(updateProgress);
+    } else if (animationFrameId.current) {
+      cancelAnimationFrame(animationFrameId.current);
+    }
+    
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, [isPlaying, updateProgress]);
 
   // Event handlers for audio element
   useEffect(() => {
     const audio = audioRef.current;
+    
     if (audio) {
       // Set src dynamically to ensure it loads correctly
       audio.src = audioSrc;
-
+      
       // Event listeners
-      audio.addEventListener('loadeddata', () => {
+      const handleLoadedData = () => {
         console.log("Audio loaded successfully");
         setIsLoading(false);
         setDuration(audio.duration);
         setError(null);
-      });
-      audio.addEventListener('timeupdate', updateProgress);
-      audio.addEventListener('ended', () => {
+      };
+      
+      const handleEnded = () => {
         setIsPlaying(false);
         setCurrentTime(0);
         setProgress(0);
-      });
-      audio.addEventListener('error', (e) => {
+      };
+      
+      const handleError = (e) => {
         console.error('Audio error:', e);
         setError('Failed to load audio file. Please try again later or use the download button.');
         setIsLoading(false);
         setIsPlaying(false);
-      });
-      audio.addEventListener('waiting', () => {
+      };
+      
+      const handleWaiting = () => {
         setIsLoading(true);
-      });
-      audio.addEventListener('playing', () => {
+      };
+      
+      const handlePlaying = () => {
         setIsLoading(false);
-      });
-
+      };
+      
+      audio.addEventListener('loadeddata', handleLoadedData);
+      audio.addEventListener('ended', handleEnded);
+      audio.addEventListener('error', handleError);
+      audio.addEventListener('waiting', handleWaiting);
+      audio.addEventListener('playing', handlePlaying);
+      
       // Set initial volume
       audio.volume = volume;
-
+      
+      // Preload audio
+      audio.preload = "metadata";
+      
       // Clean up
       return () => {
-        audio.removeEventListener('loadeddata', () => {});
-        audio.removeEventListener('timeupdate', updateProgress);
-        audio.removeEventListener('ended', () => {});
-        audio.removeEventListener('error', () => {});
-        audio.removeEventListener('waiting', () => {});
-        audio.removeEventListener('playing', () => {});
+        audio.removeEventListener('loadeddata', handleLoadedData);
+        audio.removeEventListener('ended', handleEnded);
+        audio.removeEventListener('error', handleError);
+        audio.removeEventListener('waiting', handleWaiting);
+        audio.removeEventListener('playing', handlePlaying);
       };
     }
   }, [audioSrc]);
@@ -203,13 +238,13 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
       <div className="max-w-6xl mx-auto">
         {/* Audio element */}
         <audio ref={audioRef} preload="metadata" className="hidden" />
-
+        
         {/* Player UI */}
         <div className="flex flex-col sm:flex-row items-center gap-4">
           {/* Play/Pause button */}
           <div className="flex-shrink-0">
-            <button
-              onClick={togglePlay}
+            <button 
+              onClick={togglePlay} 
               disabled={isLoading || error}
               className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label={isPlaying ? "Pause" : "Play"}
@@ -223,7 +258,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
               )}
             </button>
           </div>
-
+          
           {/* Title and progress */}
           <div className="flex-grow">
             <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between mb-1">
@@ -236,14 +271,14 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
                 <span>{formatTime(currentTime)} / {formatTime(duration)}</span>
               </div>
             </div>
-
+            
             {/* Progress bar */}
-            <div
+            <div 
               ref={progressBarRef}
-              className="h-2 bg-white/20 rounded-full overflow-hidden cursor-pointer"
+              className="h-2 bg-white/20 rounded-full overflow-hidden cursor-pointer" 
               onClick={handleProgressChange}
             >
-              <motion.div
+              <motion.div 
                 className="h-full bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400"
                 style={{ width: `${progress}%` }}
                 initial={{ width: "0%" }}
@@ -252,44 +287,44 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
               />
             </div>
           </div>
-
+          
           {/* Volume and download controls */}
           <div className="flex items-center space-x-3">
             {/* Volume control */}
             <div className="flex items-center">
-              <button
+              <button 
                 onClick={toggleMute}
                 className="p-1 hover:text-indigo-300 transition-colors"
                 aria-label={isMuted ? "Unmute" : "Mute"}
               >
                 <SafeIcon icon={isMuted || volume === 0 ? FiVolumeX : FiVolume2} className="w-5 h-5" />
               </button>
-              <div
+              
+              <div 
                 ref={volumeBarRef}
                 className="hidden sm:block w-16 h-1.5 bg-white/20 rounded-full overflow-hidden ml-1 cursor-pointer"
                 onClick={handleVolumeBarClick}
               >
-                <div
-                  className="h-full bg-white/70"
+                <div 
+                  className="h-full bg-white/70" 
                   style={{ width: `${volume * 100}%` }}
                 />
               </div>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
+              
+              <input 
+                type="range" 
+                min="0" 
+                max="1" 
+                step="0.01" 
                 value={volume}
                 onChange={handleVolumeChange}
                 className="sm:hidden w-16 h-1.5 appearance-none bg-white/20 rounded-full overflow-hidden ml-1"
-                style={{
-                  background: `linear-gradient(to right, white 0%, white ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)`
-                }}
+                style={{ background: `linear-gradient(to right, white 0%, white ${volume * 100}%, rgba(255,255,255,0.2) ${volume * 100}%, rgba(255,255,255,0.2) 100%)` }}
               />
             </div>
-
+            
             {/* Download button */}
-            <button
+            <button 
               onClick={downloadAudio}
               className="p-1 hover:text-indigo-300 transition-colors"
               aria-label="Download audio"
@@ -298,7 +333,7 @@ const CustomAudioPlayer = ({ audioSrc, title, subtitle }) => {
             </button>
           </div>
         </div>
-
+        
         {/* Error message */}
         {error && (
           <div className="text-xs text-pink-300 mt-1">

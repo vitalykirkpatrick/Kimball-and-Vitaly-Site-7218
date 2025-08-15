@@ -1,10 +1,18 @@
-import { StrictMode } from 'react';
+import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
 import './index.css';
 
+// Use lazy loading for the App component
+const App = lazy(() => import('./App.jsx'));
+
 createRoot(document.getElementById('root')).render(
-<StrictMode>
-    <App />
-</StrictMode>
+  <StrictMode>
+    <Suspense fallback={
+      <div className="app-loading">
+        <div className="app-loading-spinner"></div>
+      </div>
+    }>
+      <App />
+    </Suspense>
+  </StrictMode>
 );
